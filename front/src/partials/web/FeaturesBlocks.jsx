@@ -22,7 +22,6 @@ function FeaturesBlocks() {
           </div>
           <div className="justify-center">
           <Team/>
-
           </div>
         </div>
       </div>
