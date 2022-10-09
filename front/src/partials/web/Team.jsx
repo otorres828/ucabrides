@@ -1,6 +1,9 @@
 import React from "react";
 import Oliver from "../../images/team/oliver.jpg";
+import Luis from "../../images/team/luis.jpeg";
 import Wladimir from "../../images/team/wladimir.jpg";
+import Fady from "../../images/team/fady.jpg";
+import Lorenzo from "../../images/team/lorenzo.jpg";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -37,40 +40,13 @@ function Team() {
       >
         <SwiperSlide>
           <div className="relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
-            <svg
-              className="w-16 h-16 p-1 -mt-1 mb-2"
-              viewBox="0 0 64 64"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fillRule="evenodd">
-                <rect
-                  className="fill-current text-blue-600"
-                  width="64"
-                  height="64"
-                  rx="32"
-                />
-                <g strokeWidth="2">
-                  <path
-                    className="stroke-current text-blue-300"
-                    d="M34.514 35.429l2.057 2.285h8M20.571 26.286h5.715l2.057 2.285"
-                  />
-                  <path
-                    className="stroke-current text-white"
-                    d="M20.571 37.714h5.715L36.57 26.286h8"
-                  />
-                  <path
-                    className="stroke-current text-blue-300"
-                    strokeLinecap="square"
-                    d="M41.143 34.286l3.428 3.428-3.428 3.429"
-                  />
-                  <path
-                    className="stroke-current text-white"
-                    strokeLinecap="square"
-                    d="M41.143 29.714l3.428-3.428-3.428-3.429"
-                  />
-                </g>
-              </g>
-            </svg>
+          <img
+              className="rounded-full"
+              src={Luis}
+              width="96"
+              height="96"
+              alt="Testimonial 01"
+            />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Luis C. Somoza
             </h4>
@@ -179,30 +155,13 @@ function Team() {
         </SwiperSlide>
         <SwiperSlide>
           <div className=" relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
-            <svg
-              className="w-16 h-16 p-1 -mt-1 mb-2"
-              viewBox="0 0 64 64"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fillRule="evenodd">
-                <rect
-                  className="fill-current text-blue-600"
-                  width="64"
-                  height="64"
-                  rx="32"
-                />
-                <g strokeLinecap="square" strokeWidth="2">
-                  <path
-                    className="stroke-current text-white"
-                    d="M20.571 20.571h13.714v17.143H20.571z"
-                  />
-                  <path
-                    className="stroke-current text-blue-300"
-                    d="M38.858 26.993l6.397 1.73-4.473 16.549-13.24-3.58"
-                  />
-                </g>
-              </g>
-            </svg>
+          <img
+              className="rounded-full"
+              src={Lorenzo}
+              width="96"
+              height="96"
+              alt="Testimonial 01"
+            />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Cesar Lorenzo
             </h4>
@@ -227,39 +186,13 @@ function Team() {
         </SwiperSlide>
         <SwiperSlide>
           <div className=" relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
-            <svg
-              className="w-16 h-16 p-1 -mt-1 mb-2"
-              viewBox="0 0 64 64"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fillRule="evenodd">
-                <rect
-                  className="fill-current text-blue-600"
-                  width="64"
-                  height="64"
-                  rx="32"
-                />
-                <g strokeWidth="2">
-                  <path
-                    className="stroke-current text-white"
-                    d="M32 37.714A5.714 5.714 0 0037.714 32a5.714 5.714 0 005.715 5.714"
-                  />
-                  <path
-                    className="stroke-current text-white"
-                    d="M32 37.714a5.714 5.714 0 015.714 5.715 5.714 5.714 0 015.715-5.715M20.571 26.286a5.714 5.714 0 005.715-5.715A5.714 5.714 0 0032 26.286"
-                  />
-                  <path
-                    className="stroke-current text-white"
-                    d="M20.571 26.286A5.714 5.714 0 0126.286 32 5.714 5.714 0 0132 26.286"
-                  />
-                  <path
-                    className="stroke-current text-blue-300"
-                    d="M21.714 40h4.572M24 37.714v4.572M37.714 24h4.572M40 21.714v4.572"
-                    strokeLinecap="square"
-                  />
-                </g>
-              </g>
-            </svg>
+          <img
+              className="rounded-full"
+              src={Fady}
+              width="96"
+              height="96"
+              alt="Testimonial 01"
+            />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Fady George
             </h4>

@@ -18,7 +18,6 @@ function Login() {
   }, []);
 
   const enviarFormularioLogin = async (e) => {
-    console.log()
     e.preventDefault();
     try {
        axios.post('login',
