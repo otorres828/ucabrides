@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('avatar')->nullable();
             $table->string('external_id')->nullable();
-            $table->string('external_author')->nullable();
+          
             $table->rememberToken();
         });
     }

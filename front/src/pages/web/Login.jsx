@@ -1,14 +1,58 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import Header from "../../partials/web/Header";
-import { GoogleLogin } from "react-google-login";
+import axios from "../../api/axios";
+import { useSnackbar } from "notistack";
+// import { GoogleLogin } from "react-google-login";
+// import AuthUser from "../../hooks/AuthUser";
 
 function Login() {
-  const responseGoogle = (response) => {
-    console.log(response);
+  const emailRef = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
+  // const {http,setToken} = AuthUser();
 
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  const enviarFormularioLogin = async (e) => {
+    console.log()
+    e.preventDefault();
+    try {
+       axios.post('login',
+       {email:email,password:password},
+        {
+          headers: { 
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+         },
+        }
+      )
+      .then((res)=>{
+        if(res?.data?.error)
+          enqueueSnackbar(res?.data?.error, { variant: "error" });
+        else{
+          enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
+          sessionStorage.setItem('access_token',JSON.stringify(res?.data?.access_token));
+          sessionStorage.setItem('user',JSON.stringify(res?.data?.user));
+        }
+          // console.log(res?.data);
+      })
+
+    } catch (error) {
+      enqueueSnackbar("Error de conexion al servidor", { variant: "error" });
+    }
   };
+  
+  // const responseGoogleSuccess = (response) => {
+  //   console.log(response);
+  // };
+  // const responseGoogleFailed = (response) => {
+  //   console.log(response);
+  // };
+  
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/*  Site header */}
@@ -30,7 +74,7 @@ function Login() {
 
               {/* Form */}
               <div className="max-w-sm mx-auto">
-                <form>
+                <form onSubmit={enviarFormularioLogin}>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label
@@ -41,6 +85,10 @@ function Login() {
                       </label>
                       <input
                         id="email"
+                        ref={emailRef}
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        autoComplete="off"
                         type="email"
                         className="form-input w-full text-gray-800"
                         placeholder="usuario@est.ucab.edu.ve"
@@ -65,10 +113,13 @@ function Login() {
                         </Link>
                       </div>
                       <input
-                        id="password"
                         type="password"
                         className="form-input w-full text-gray-800"
-                        placeholder="****************"
+                        id="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        autoComplete="off"
+                        placeholder="*********"
                         required
                       />
                     </div>
@@ -96,22 +147,21 @@ function Login() {
                 <div className="flex items-center my-2"></div>
                 <div className="flex flex-wrap -mx-3">
                   <div className="w-full px-3">
-                    <GoogleLogin
-                      clientId="315854245557-i0cjaqcqjmkd3lf61gdmup5hnh3qbroa.apps.googleusercontent.com"
+                    {/* <GoogleLogin
+                      clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
                       render={(renderProps) => (
                         <button
-                        className="btn px-0 text-white bg-red-500 hover:bg-red-700 w-full relative flex items-center"                          
+                          className="btn px-0 text-white bg-red-500 hover:bg-red-700 w-full relative flex items-center"
                           onClick={renderProps.onClick}
                           disabled={renderProps.disabled}
                         >
                           Continuar con Correo Ucab
                         </button>
                       )}
-                    
-                      onSuccess={responseGoogle}
-                      onFailure={responseGoogle}
+                      onSuccess={responseGoogleSuccess}
+                      onFailure={responseGoogleFailed}
                       cookiePolicy={"single_host_origin"}
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>

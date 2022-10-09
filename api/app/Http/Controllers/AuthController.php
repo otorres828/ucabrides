@@ -22,24 +22,27 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
-
+        //  $user = new User();
+        // $user->name= $request['name'];
+        // $user->email= $request['email'];
+        // $user->password=Hash::make($request['password']);
+        // $user->save();
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
-            'password' => Hash::make('password'),
+            'password' => Hash::make($request['password']),
         ]);
         return response()->json(['message' => 'Usuario creado con exito'],200);
 
 
     }
+    
     public function login()
-    {
-        $credentials = request(['email', 'password']);
+    { 
+      $credentials = request(['email', 'password']);
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Usuario no Authorizado'], 401);
+            return response()->json(['error' => 'Credenciales Incorrectas',401]);
         }
-      
-
         return $this->respondWithToken($token);
     }
 
@@ -63,7 +66,6 @@ class AuthController extends Controller
 
     protected function respondWithToken($token)
     {
-        setcookie('access_token',$token,time()+(60*60*24),'/');
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',

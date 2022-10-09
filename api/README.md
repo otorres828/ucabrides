@@ -1,66 +1,110 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# UCAB RIDES - API🚗
+  _aplicacion web, basada en un sistema de "colas" para la poblacion ucabista, ubicada en Venezuela, Proyecto de Formulas Innovadoras_
+## Construido con 🛠️
+  **Backend**
+* [PHP 8.0](https://www.php.net/downloads.php)
+* [Laravel 9.5.1](https://laravel.com/docs/9.x)
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Comenzando 🚀
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+  
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+  
 
-## Learning Laravel
+### Pre-requisitos 📋
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+  
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+_Que cosas necesitas para instalar el software y como instalarlas (backend)_ 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* [PHP 8.x.x](https://www.php.net/downloads.php) - lenguaje de programacion
 
-## Laravel Sponsors
+* [Apache2](https://httpd.apache.org/download.cgi) - HTTP servidor web
+* [Mongodb](https://www.mongodb.com/) - Base de Datos
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+_Es posible/recomendado instalar un paquete como "[XAMPP](https://www.apachefriends.org/es/index.html)" que ya incluye ambos elementos, Necesario PHP 8.^ y Apache 2.^_
 
-### Premium Partners
+  
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+* [Composer](https://getcomposer.org/) - Manejador de dependencias
 
-## Contributing
+* [Laravel 9.x](https://laravel.com/docs/9.x) - Framework web utilizado
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+  
+### Preparacion del a Base de Datos (back) 🔧
+1. Ir a la carpeta del [Drive](https://drive.google.com/drive/folders/1J8FqD1h-fkRdf3w8orDQRqO6pWsz0vmx?usp=sharing) y copiar los archivos de "**php_mongodb.dll**" y "**php_mongodb.pdb**", 
+2. Pegarlos los archivos en la ruta de xampp: C:\xampp\php\ext
+3. Ir al **php_ini** de xampp que se encuentra en la ruta C:\xampp\php y agregar la extension **extension=php_mongodb.dll**
+4. Reiniciar xampp.
+### Instalación de la API (back) 🔧
 
-## Code of Conduct
+  _Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutándose_
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Una vez teniendo instalado XAMPP.
 
-## Security Vulnerabilities
+  1. Clonamos el repositorio en la carpeta "C:\xampp\htdocs"
+2. Preparamos el archivo .env con nuestras credenciales, codigos smtp, etc
+3. Creamos la base de datos en nuestro gestor de BDD de preferencia
+4. El archivo .**env.example** lo modificamos a **.env** y  configuramos la variables de entorno de conexión a la base de datos
+```
+DB_URI= # AÑADE LA URI DE TU CONEXION 
+```
+6. Ejecutamos los siguientes comandos
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+composer install
+php artisan storage:link
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan jwt:generate
+```
+Y levantamos el servidor de **laravel**
+```bash
+php artisan serve
+```
+_Recomendamos crear un dominio local para el proyecto [Tutorial:Como crear un dominio local](https://www.youtube.com/watch?v=HzygRlPmYQc)_
 
-## License
+  ### Otras Bases de Datos (back) 🔧
+_En caso de que quieras usar otro entorno de base de datos, en el archivo **.env** des comenta las siguientes variables de entorno_
+```
+#DB_CONNECTION=mysql
+#DB_HOST=127.0.0.1
+#DB_PORT=3306
+#DB_DATABASE=
+#DB_USERNAME=root
+#DB_PASSWORD=
+```
+Luego ve al archivo **config/database.php** y cambia la conexion a mysql o el gestor de tu preferencia en la linea 19
+```
+'default' => env('DB_CONNECTION', 'mysql'),
+```
+Por ultimo, ve al **app/Models/User** y descomenta el Illiminate Autenticable
+```
+use Illuminate\Foundation\Auth\User  as Authenticatable;
+```
+luego cambia el extends por **Authenticatable** y remueve el implements **AuthenticatableContract**
+```
+class  User  extends  Authenticatable  implements  JWTSubject
+{
+}
+```
+Como ultimo paso comenta los protected de mongodb
+```
+protected  $connection = 'mongodb';
+protected  $collection = 'users';
+```
+Ahora solo debes de volver a ejecutar las migraciones
+```
+php artisan migrate:fresh
+```
+## Autores ✒️
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+ Por definir
+  
+
+## Objetivo del proyecto 📄
+
+Este es un proyecto realizado sin fines de lucro para la comunidad Ucabista

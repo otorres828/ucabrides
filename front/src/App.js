@@ -1,38 +1,37 @@
-import React, { useEffect } from 'react';
-import {
-  Routes,
-  Route,
-  useLocation
-} from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 
-import './css/style.css';
+import "./css/style.css";
 
-
-import Home from './pages/web/Home';
-import Login from './pages/web/Login';
-import SignUp from './pages/web/SignUp';
-import ResetPassword from './pages/web/ResetPassword';
-import AOS from 'aos';
+import Home from "./pages/web/Home";
+import Login from "./pages/web/Login";
+import SignUp from "./pages/web/SignUp";
+import ResetPassword from "./pages/web/ResetPassword";
+import AOS from "aos";
+import { useSnackbar } from "notistack";
+import useNetwork from "./hooks/useNetwork";
 
 function App() {
-
+  const { enqueueSnackbar } = useSnackbar();
+  const status=useNetwork();
+  if(!status){
+      enqueueSnackbar("Se ha perdido la conexion a internet!", {variant: "error",})
+  }
   const location = useLocation();
-
   useEffect(() => {
     AOS.init({
       once: true,
-      disable: 'phone',
+      disable: "phone",
       duration: 700,
-      easing: 'ease-out-cubic',
+      easing: "ease-out-cubic",
     });
   });
 
   useEffect(() => {
-    document.querySelector('html').style.scrollBehavior = 'auto'
-    window.scroll({ top: 0 })
-    document.querySelector('html').style.scrollBehavior = ''
+    document.querySelector("html").style.scrollBehavior = "auto";
+    window.scroll({ top: 0 });
+    document.querySelector("html").style.scrollBehavior = "";
   }, [location.pathname]); // triggered on route change
-
 
   return (
     <>
