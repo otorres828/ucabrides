@@ -10,6 +10,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('register', [AuthController::class,'register']);
+Route::post('register/gmail', [AuthController::class,'register_gmail']);
 Route::post('login', [AuthController::class,'login']);
 
 Route::group(['middleware'=>'api'],function(){

@@ -80,7 +80,7 @@ function SignUp() {
                   </div>
                 </form>
                 <div className="text-gray-600 text-center mt-6">
-                  Already using Simple? <Link to="/signin" className="text-blue-600 hover:underline transition duration-150 ease-in-out">Iniciar Sesion</Link>
+                  Already using Simple? <Link to="/login" className="text-blue-600 hover:underline transition duration-150 ease-in-out">Iniciar Sesion</Link>
                 </div>
               </div>
 

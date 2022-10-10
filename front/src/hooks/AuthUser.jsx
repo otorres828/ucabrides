@@ -32,12 +32,12 @@ export default function AuthUser(){
         setToken(token);
         setUser(user);
         enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
-        navigate('/signin');
+        navigate('/login');
     }
 
     const logout = () => {
         sessionStorage.clear();
-        navigate('/signin');
+        navigate('/logni');
     }
 
     const http = axios.create({

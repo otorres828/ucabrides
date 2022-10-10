@@ -14,7 +14,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login','register','register_gmail']]);
     }
 
     public function register(Request $request){
@@ -22,11 +22,7 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
-        //  $user = new User();
-        // $user->name= $request['name'];
-        // $user->email= $request['email'];
-        // $user->password=Hash::make($request['password']);
-        // $user->save();
+    
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -34,6 +30,37 @@ class AuthController extends Controller
         ]);
         return response()->json(['message' => 'Usuario creado con exito'],200);
 
+
+    }
+    
+    public function register_gmail(Request $request){
+     
+       $user= User::where('email',$request['email'])->first();
+       if(!$user){
+        
+        $correo=$request['email'];
+        $sub='.ucab.edu.ve';
+
+        if (strpos($correo, $sub)) {
+            $user=User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'external_id' => $request['external_id'],
+            ]);
+        }else{
+            return response()->json(['error' => 'Credenciales Incorrectas',401]);
+        }
+       }else{
+        
+        $user->update($request->all());
+       }
+        $token= Auth::login($user);
+        return response()->json(['message' => 'Exito al iniciar sesion',
+        'access_token' => $token,
+        'token_type' => 'bearer',
+        'expires_in' => auth('api')->factory()->getTTL() * 60,
+        'user'=>auth()->user()
+     ],200);
 
     }
     
