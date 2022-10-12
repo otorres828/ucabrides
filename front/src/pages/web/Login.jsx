@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import Header from "../../components/web/Header";
 import axios from "../../api/axios";
 import { useSnackbar } from "notistack";
@@ -12,7 +12,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const { enqueueSnackbar } = useSnackbar();
 
-  useEffect(() => {    
+  useEffect(() => {  
     emailRef.current.focus();
   },[]);
 

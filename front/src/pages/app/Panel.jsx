@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../../components/web/Header";
 import { useNavigate } from 'react-router-dom';
 
 function Panel() {
@@ -12,7 +11,6 @@ function Panel() {
   }
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
-      {/*  Site header */}
 
       {/*  Page content */}
       <main className="flex-grow">
@@ -28,12 +26,12 @@ function Panel() {
                 </h1>
               <div className="container mx-auto">
                 <div>
-                  <a onClick={cerrar_sesion}
+                  <div onClick={cerrar_sesion} style={{ cursor:'pointer' }}
                     className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0"
-                    href="#"
+                    
                   >
                     Cerrar Sesion
-                  </a>
+                  </div>
                 </div>
               </div>
               </div>

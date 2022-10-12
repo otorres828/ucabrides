@@ -11,13 +11,17 @@ import Panel from "./pages/app/Panel";
 import AOS from "aos";
 import { useSnackbar } from "notistack";
 import useNetwork from "./hooks/useNetwork";
+import { RedirectLogin, RedirectPanel } from "./components/ProtectedRoute";
 
 function App() {
+  const user = sessionStorage.getItem("access_token");
   const { enqueueSnackbar } = useSnackbar();
-  const status=useNetwork();
-  if(!status){
-    console.log('ejecutando')
-      enqueueSnackbar("Se ha perdido la conexion a internet!", {variant: "error",})
+  const status = useNetwork();
+  if (!status) {
+    console.log("ejecutando");
+    enqueueSnackbar("Se ha perdido la conexion a internet!", {
+      variant: "error",
+    });
   }
   const location = useLocation();
   useEffect(() => {
@@ -38,11 +42,17 @@ function App() {
   return (
     <>
       <Routes>
-      <Route exact path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route exact path="/panel" element={<Panel />} />
+        <Route exact path="/" element={<Home />} />
+        {/* REDIRIGE AL PANEL DE CONTROL SI HAY UN USUARIO LOGUEADO */}
+        <Route element={<RedirectPanel user={user}/>}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        </Route>
+        {/* PARA ACCEDER DEBE DE EXISTIR UN UNSUARIO LOGUEADO */}
+        <Route element={<RedirectLogin user={user} />}>
+          <Route path="/panel" element={<Panel />} />
+        </Route>
       </Routes>
     </>
   );
