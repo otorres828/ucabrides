@@ -45,14 +45,13 @@ _Es posible/recomendado instalar un paquete como "[XAMPP](https://www.apachefrie
 
 Una vez teniendo instalado XAMPP.
 
-  1. Clonamos el repositorio en la carpeta "C:\xampp\htdocs"
-2. Preparamos el archivo .env con nuestras credenciales, codigos smtp, etc
-3. Creamos la base de datos en nuestro gestor de BDD de preferencia
-4. El archivo .**env.example** lo modificamos a **.env** y  configuramos la variables de entorno de conexión a la base de datos
+1. Clonamos el repositorio en la carpeta "C:\xampp\htdocs"
+2. Creamos la base de datos en el gestor **MongoDBCompass**
+3. El archivo .**env.example** lo modificamos a **.env** y  configuramos la variables de entorno de conexión a la base de datos
 ```
 DB_URI= # AÑADE LA URI DE TU CONEXION 
 ```
-6. Ejecutamos los siguientes comandos
+4. Ejecutamos los siguientes comandos
 
 ```bash
 composer install

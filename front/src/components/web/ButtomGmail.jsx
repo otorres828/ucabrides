@@ -50,15 +50,15 @@ function ButtomGmail() {
     console.log("error de conexion");
   };
 
-  // useEffect(() => {
-  //   const initClient = () => {
-  //     gapi.client.init({
-  //       clientId: clientId,
-  //       scope: "",
-  //     });
-  //   };
-  //   gapi.load("client:auth2", initClient);
-  // });
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    };
+    gapi.load("client:auth2", initClient);
+  },[]);
   return (
     <>
       <GoogleLogin
