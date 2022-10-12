@@ -3,12 +3,16 @@ import { useSnackbar } from "notistack";
 import axios from "../../api/axios";
 import { gapi } from "gapi-script";
 import { GoogleLogin } from "react-google-login";
+import { useNavigate } from 'react-router-dom';
+
 const clientId = '566475494260-fmfmpam1426a3r1f1bh02ap6u657hp83.apps.googleusercontent.com';
 
 function ButtomGmail() {
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
-  const responseGoogleSuccess = async (response) => {
+  const responseGoogleSuccess =  (response) => {
+    document.getElementById('email').innerText="";
     // console.log(response?.profileObj);
     const email = response?.profileObj.email;
     const external_id = response?.profileObj.googleId;
@@ -35,6 +39,7 @@ function ButtomGmail() {
               JSON.stringify(res?.data?.access_token)
             );
             sessionStorage.setItem("user", JSON.stringify(res?.data?.user));
+            navigate('/panel')
           }
           // console.log(res?.data);
         });
@@ -45,15 +50,15 @@ function ButtomGmail() {
     console.log("error de conexion");
   };
 
-  useEffect(() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    };
-    gapi.load("client:auth2", initClient);
-  }, []);
+  // useEffect(() => {
+  //   const initClient = () => {
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope: "",
+  //     });
+  //   };
+  //   gapi.load("client:auth2", initClient);
+  // });
   return (
     <>
       <GoogleLogin
@@ -67,7 +72,6 @@ function ButtomGmail() {
             Continuar con Correo Ucab
           </button>
         )}
-        isSignedIn={true}
         onSuccess={responseGoogleSuccess}
         onFailure={responseGoogleFailed}
       />

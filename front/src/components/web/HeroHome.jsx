@@ -34,9 +34,9 @@ function HeroHome() {
 
           {/* Section header */}
           <div className="text-center pb-12 md:pb-16">
-            <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4">Bienivenido a <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Ucab Rides</span></h1>
+            <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4">Bienvenido a <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Ucab Rides</span></h1>
             <div className="max-w-3xl mx-auto">
-              <p className="text-xl text-gray-600 mb-8" >Asistir a clases nuca fue tan facil, economico y seguro que con esta increible app. ¿Que esperas? Ven y asiste a clases con Ucab Rides</p>
+              <p className="text-xl text-gray-600 mb-8" >Asistir a clases nunca fue tan facil, economico y seguro que con esta increible app. ¿Que esperas? Ven y asiste a clases con Ucab Rides</p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
                 <div>
                   <a className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Descargar para Android</a>

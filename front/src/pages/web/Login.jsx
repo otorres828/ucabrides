@@ -1,19 +1,20 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Header from "../../partials/web/Header";
+import { Link, useNavigate } from "react-router-dom";
+import Header from "../../components/web/Header";
 import axios from "../../api/axios";
 import { useSnackbar } from "notistack";
-import ButtomGmail from "../../partials/web/ButtomGmail";
+import ButtomGmail from "../../components/web/ButtomGmail";
 
 function Login() {
+  const navigate = useNavigate();
   const emailRef = useRef();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { enqueueSnackbar } = useSnackbar();
 
-  useEffect(() => {
+  useEffect(() => {    
     emailRef.current.focus();
-  }, []);
+  },[]);
 
   const enviarFormularioLogin = async (e) => {
     e.preventDefault();
@@ -34,12 +35,16 @@ function Login() {
           enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
           sessionStorage.setItem('access_token',JSON.stringify(res?.data?.access_token));
           sessionStorage.setItem('user',JSON.stringify(res?.data?.user));
+          navigate('../panel');
         }
           // console.log(res?.data);
       })
+      .catch ((error)=> {
+        enqueueSnackbar("Error de conexion al servidor", { variant: "error" });
+      })
 
     } catch (error) {
-      enqueueSnackbar("Error de conexion al servidor", { variant: "error" });
+      enqueueSnackbar("Error de conexion", { variant: "error" });
     }
   };
   
@@ -71,7 +76,7 @@ function Login() {
                         className="block text-gray-800 text-sm font-medium mb-1"
                         htmlFor="email"
                       >
-                        Correo Ucab
+                        Usuario o Correo Ucab
                       </label>
                       <input
                         id="email"
@@ -79,9 +84,9 @@ function Login() {
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                         autoComplete="off"
-                        type="email"
+                        type="text"
                         className="form-input w-full text-gray-800"
-                        placeholder="usuario@est.ucab.edu.ve"
+                        placeholder="nombre de usuario"
                         required
                       />
                     </div>

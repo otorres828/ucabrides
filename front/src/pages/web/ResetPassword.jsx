@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from '../../partials/web/Header';
+import Header from '../../components/web/Header';
 
 function ResetPassword() {
   return (

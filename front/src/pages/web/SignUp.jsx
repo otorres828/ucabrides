@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Header from '../../partials/web/Header';
+import Header from '../../components/web/Header';
 
 function SignUp() {
   return (

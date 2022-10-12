@@ -22,11 +22,13 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
-    
+        $username = strstr($request['email'], '@', true);
+
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
+            'username'=>$username,
         ]);
         return response()->json(['message' => 'Usuario creado con exito'],200);
 
@@ -42,9 +44,12 @@ class AuthController extends Controller
         $sub='.ucab.edu.ve';
 
         if (strpos($correo, $sub)) {
+            $username = strstr($request['email'], '@', true);
+
             $user=User::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
+                'username' => $username,
                 'external_id' => $request['external_id'],
             ]);
         }else{
@@ -64,11 +69,14 @@ class AuthController extends Controller
 
     }
     
-    public function login()
+    public function login(Request $request)
     { 
-      $credentials = request(['email', 'password']);
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Credenciales Incorrectas',401]);
+        $credentials_username=  ['username'=> $request['email'], 'password'=>$request['password']];
+        $credentials_email = request(['email', 'password']);
+        if (! $token = auth()->attempt($credentials_username) ) {
+            if(! $token = auth()->attempt($credentials_email)){
+                return response()->json(['error' => 'Credenciales Incorrectas',401]);
+            }
         }
         return $this->respondWithToken($token);
     }
@@ -78,10 +86,8 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-
     public function logout()
     {
-        setcookie('access_token',"");
         auth()->logout();
         return response()->json(['message' => 'Ha cerrado sesion con exito']);
     }
