@@ -9,13 +9,13 @@ export default function AuthUser(){
     const navigate = useNavigate();
 
     const getToken = () =>{
-        const tokenString = sessionStorage.getItem('token');
+        const tokenString = localStorage.getItem('token');
         const userToken = JSON.parse(tokenString);
         return userToken;
     }
 
     const getUser = () =>{
-        const userString = sessionStorage.getItem('user');
+        const userString = localStorage.getItem('user');
         const user_detail = JSON.parse(userString);
         return user_detail;
     }
@@ -26,8 +26,8 @@ export default function AuthUser(){
     const [user,setUser] = useState(getUser());
 
     const saveToken = (user,token) =>{
-        sessionStorage.setItem('token',JSON.stringify(token));
-        sessionStorage.setItem('user',JSON.stringify(user));
+        localStorage.setItem('token',JSON.stringify(token));
+        localStorage.setItem('user',JSON.stringify(user));
 
         setToken(token);
         setUser(user);
@@ -36,7 +36,7 @@ export default function AuthUser(){
     }
 
     const logout = () => {
-        sessionStorage.clear();
+        localStorage.clear();
         navigate('/logni');
     }
 

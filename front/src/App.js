@@ -14,7 +14,9 @@ import useNetwork from "./hooks/useNetwork";
 import { RedirectLogin, RedirectPanel } from "./components/ProtectedRoute";
 
 function App() {
-  const user = sessionStorage.getItem("access_token");
+  const access_token = localStorage.getItem("access_token");
+  const user = localStorage.getItem("user");
+
   const { enqueueSnackbar } = useSnackbar();
   const status = useNetwork();
   if (!status) {
@@ -44,13 +46,13 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         {/* REDIRIGE AL PANEL DE CONTROL SI HAY UN USUARIO LOGUEADO */}
-        <Route element={<RedirectPanel user={user}/>}>
+        <Route element={<RedirectPanel user={user} access_token={access_token}/>}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
         {/* PARA ACCEDER DEBE DE EXISTIR UN UNSUARIO LOGUEADO */}
-        <Route element={<RedirectLogin user={user} />}>
+        <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
           <Route path="/panel" element={<Panel />} />
         </Route>
       </Routes>

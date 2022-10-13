@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  const user= sessionStorage.getItem("access_token");
+  const user= localStorage.getItem("access_token");
   const [top, setTop] = useState(true);
 
   // detect whether user has scrolled the page down by 10px 

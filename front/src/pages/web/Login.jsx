@@ -33,8 +33,8 @@ function Login() {
           enqueueSnackbar(res?.data?.error, { variant: "error" });
         else{
           enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
-          sessionStorage.setItem('access_token',JSON.stringify(res?.data?.access_token));
-          sessionStorage.setItem('user',JSON.stringify(res?.data?.user));
+          localStorage.setItem('access_token',JSON.stringify(res?.data?.access_token));
+          localStorage.setItem('user',JSON.stringify(res?.data?.user));
           navigate('../panel');
         }
           // console.log(res?.data);
@@ -133,7 +133,7 @@ function Login() {
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">
+                      <button  className="iniciar btn text-white bg-blue-600 hover:bg-blue-700 w-full">
                         Iniciar Sesion
                       </button>
                     </div>
