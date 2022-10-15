@@ -1,17 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 function CerrarSesion() {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   function cerrar_sesion() {
     sessionStorage.clear();
     localStorage.clear();
+    enqueueSnackbar("Ha cerrado sesion con exito", { variant: "success" });
+
     navigate("/login");
   }
   return (
     <>
-      <div className="relative pt-15" 
+      <div className="z-20 " 
       style={{transform:"traslateX(-50%)",margin:"auto"}}>
         {/* <h1 className="h1 text-center">Bienvenido a</h1>
         <h1 className="text-center pb-5 h1 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
@@ -21,7 +25,7 @@ function CerrarSesion() {
           <div
             onClick={cerrar_sesion}
             style={{ cursor: "pointer" }}
-            className=" btn text-white bg-blue-600 hover:bg-blue-700  mb-4 sm:mb-0"
+            className=" btn text-white bg-blue-600 hover:bg-blue-700"
           >
             Cerrar Sesion
           </div>

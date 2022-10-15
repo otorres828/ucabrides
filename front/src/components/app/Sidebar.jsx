@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCoffee,
@@ -24,15 +24,15 @@ function Sidebar() {
         <div className="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
           <ul className="flex-1 list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
             <li className="bg-gray-800 w-full  mr-0 sm:mr-3 flex-1 md:w-28">
-              <Link
-                to="/mapa"
-                className="block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
+              <NavLink
+                to="/mapa" 
+                className="block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
               >
               {location}
                 <span className="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
                   Mapa
                 </span>
-              </Link>
+              </NavLink>
             </li>
             <li className="bg-gray-800 w-full  mr-0 sm:mr-3 flex-1 md:w-28">
               <a

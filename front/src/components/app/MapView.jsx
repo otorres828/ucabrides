@@ -1,6 +1,5 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import CerrarSesion from "./CerrarSesion";
 import Sidebar from "./Sidebar";
 import logo from "../../logo.svg";
 
@@ -28,15 +27,13 @@ function MapView() {
         {/* Child components, such as markers, info windows, etc. */}
         <>
           <Marker position={center} animation={Animation} />
-          <CerrarSesion />
         </>
       </GoogleMap>
       <Sidebar />
-
     </>
   ) : (
     <>
-          <Sidebar />
+      <Sidebar />
 
       <img src={logo} className="App-logo" alt="logo" />
     </>

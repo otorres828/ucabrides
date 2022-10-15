@@ -48,6 +48,7 @@ class AuthController extends Controller
                     'email' => $request['email'],
                     'username' => $username,
                     'external_id' => $request['external_id'],
+                    'avatar' => $request['avatar'],
                 ]);
             }else{
                 return response()->json(['error' => 'Credenciales Incorrectas',401]);

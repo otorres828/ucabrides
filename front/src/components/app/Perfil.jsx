@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
+import CerrarSesion from "./CerrarSesion";
 
-function Perfi() {
+function Perfi({user}) {
+  user=(JSON.parse(user));
   return (
     <>
-      <div className="object-none object-bottom mx-auto my-60 vh-100">
+      <div className="mx-auto my-28 vh-100">
         <div className="bg-white relative shadow rounded-lg w-5/6 md:w-4/6  lg:w-3/6 xl:w-2/6 mx-auto">
           <div className="flex justify-center">
             <img
-              src="https://avatars0.githubusercontent.com/u/35900628?v=4"
+              src={user.avatar}
               alt=""
               className="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
             />
@@ -16,10 +18,10 @@ function Perfi() {
 
           <div className="mt-16">
             <h1 className="font-bold text-center text-3xl text-gray-900">
-              Pantazi Software
+            {user.name}
             </h1>
             <p className="text-center text-sm text-gray-400 font-medium">
-              UI Components Factory
+              {user.email}
             </p>
 
             <div className="my-5 px-6">
@@ -131,7 +133,9 @@ function Perfi() {
             </div>
           </div>
         </div>
+      <CerrarSesion />
       </div>
+
       <Sidebar />
     </>
   );
