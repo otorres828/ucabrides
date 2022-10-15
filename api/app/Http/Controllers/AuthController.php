@@ -35,38 +35,33 @@ class AuthController extends Controller
 
     }
     
-    public function register_gmail(Request $request){
-     
+    public function register_gmail(Request $request){ 
        $user= User::where('email',$request['email'])->first();
-       if(!$user){
-        
-        $correo=$request['email'];
-        $sub='.ucab.edu.ve';
+       if(!$user){     
+            $correo=$request['email'];
+            $sub='.ucab.edu.ve';
 
-        if (strpos($correo, $sub)) {
-            $username = strstr($request['email'], '@', true);
-
-            $user=User::create([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'username' => $username,
-                'external_id' => $request['external_id'],
-            ]);
-        }else{
-            return response()->json(['error' => 'Credenciales Incorrectas',401]);
-        }
+            if (strpos($correo, $sub)) {
+                $username = strstr($request['email'], '@', true);
+                $user=User::create([
+                    'name' => $request['name'],
+                    'email' => $request['email'],
+                    'username' => $username,
+                    'external_id' => $request['external_id'],
+                ]);
+            }else{
+                return response()->json(['error' => 'Credenciales Incorrectas',401]);
+            }
        }else{
-        
-        $user->update($request->all());
+            $user->update($request->all());
        }
         $token= Auth::login($user);
         return response()->json(['message' => 'Exito al iniciar sesion',
-        'access_token' => $token,
-        'token_type' => 'bearer',
-        'expires_in' => auth('api')->factory()->getTTL() * 60,
-        'user'=>auth()->user()
-     ],200);
-
+                                    'access_token' => $token,
+                                    'token_type' => 'bearer',
+                                    'expires_in' => auth('api')->factory()->getTTL() * 60,
+                                    'user'=>auth()->user()
+                                ],200);
     }
     
     public function login(Request $request)

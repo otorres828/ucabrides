@@ -7,11 +7,12 @@ import Home from "./pages/web/Home";
 import Login from "./pages/web/Login";
 import SignUp from "./pages/web/SignUp";
 import ResetPassword from "./pages/web/ResetPassword";
-import Panel from "./pages/app/Panel";
 import AOS from "aos";
 import { useSnackbar } from "notistack";
 import useNetwork from "./hooks/useNetwork";
 import { RedirectLogin, RedirectPanel } from "./components/ProtectedRoute";
+import Perfi from "./components/app/Perfil";
+import MapView from "./components/app/MapView";
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -53,7 +54,8 @@ function App() {
         </Route>
         {/* PARA ACCEDER DEBE DE EXISTIR UN UNSUARIO LOGUEADO */}
         <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
-          <Route path="/panel" element={<Panel />} />
+          <Route path="/mapa" element={<MapView />} />
+          <Route path="/perfil" element={<Perfi />} />
         </Route>
       </Routes>
     </>

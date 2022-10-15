@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate} from "react-router-dom";
 import Header from "../../components/web/Header";
 import axios from "../../api/axios";
@@ -11,10 +11,6 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { enqueueSnackbar } = useSnackbar();
-
-  useEffect(() => {  
-    emailRef.current.focus();
-  },[]);
 
   const enviarFormularioLogin = async (e) => {
     e.preventDefault();
@@ -35,7 +31,7 @@ function Login() {
           enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
           localStorage.setItem('access_token',JSON.stringify(res?.data?.access_token));
           localStorage.setItem('user',JSON.stringify(res?.data?.user));
-          navigate('../panel');
+          navigate('../mapa');
         }
           // console.log(res?.data);
       })

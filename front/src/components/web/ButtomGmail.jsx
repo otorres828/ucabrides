@@ -39,7 +39,7 @@ function ButtomGmail() {
               JSON.stringify(res?.data?.access_token)
             );
             localStorage.setItem("user", JSON.stringify(res?.data?.user));
-            navigate('/panel')
+            navigate('/mapa')
           }
           // console.log(res?.data);
         });
