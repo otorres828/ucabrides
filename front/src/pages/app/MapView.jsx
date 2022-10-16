@@ -1,6 +1,6 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import Sidebar from "./Sidebar";
+import Sidebar from "../../components/app/Sidebar";
 import logo from "../../logo.svg";
 
 const containerStyle = {

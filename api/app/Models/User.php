@@ -18,6 +18,7 @@ class User extends Eloquent implements JWTSubject, AuthenticatableContract
     use AuthenticableTrait;
     use HasApiTokens, HasFactory, Notifiable;
     public $timestamps = false;
+    protected $primarykey = "_id";
 
     protected $connection = 'mongodb';
 	protected $collection = 'users';
@@ -51,5 +52,10 @@ class User extends Eloquent implements JWTSubject, AuthenticatableContract
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function message()
+    {
+        return $this->hasMany(Message::class);
     }
 }

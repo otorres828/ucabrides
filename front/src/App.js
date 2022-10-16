@@ -11,8 +11,9 @@ import AOS from "aos";
 import { useSnackbar } from "notistack";
 import useNetwork from "./hooks/useNetwork";
 import { RedirectLogin, RedirectPanel } from "./components/ProtectedRoute";
-import Perfi from "./components/app/Perfil";
-import MapView from "./components/app/MapView";
+import Perfi from "./pages/app/Perfil";
+import Mensajes from "./pages/app/Mensajes";
+import MapView from "./pages/app/MapView";
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -56,6 +57,7 @@ function App() {
         <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
           <Route path="/mapa" element={<MapView />} />
           <Route path="/perfil"  element={<Perfi user={user} />} />
+          <Route path="/mensajes"  element={<Mensajes user={user} />} />
         </Route>
       </Routes>
     </>
