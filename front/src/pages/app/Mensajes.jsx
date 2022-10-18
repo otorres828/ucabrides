@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Sidebar from "../../components/app/Sidebar";
-import CerrarSesion from "../../components/app/CerrarSesion";
 import MensajesDarCola from "../../components/app/MensajesDarCola";
 import MensajesRecibirCola from "../../components/app/MensajesRecibirCola";
 
@@ -21,8 +20,6 @@ function Mensajes({user}) {
                 style={{ cursor: 'pointer' }}
                 onClick={() =>  setIsMensaje(true)}
                 className={` text-gray-500  hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3 ${isMensaje ? "border-blue-800 border-b-2" : ""}`}
-                
-                
               >
                 Dar cola
               </div>
@@ -38,9 +35,7 @@ function Mensajes({user}) {
 
           </div>
         </div>
-      <CerrarSesion />
       </div>
-
       <Sidebar />
     </>
   );

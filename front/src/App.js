@@ -14,6 +14,7 @@ import { RedirectLogin, RedirectPanel } from "./components/ProtectedRoute";
 import Perfi from "./pages/app/Perfil";
 import Mensajes from "./pages/app/Mensajes";
 import MapView from "./pages/app/MapView";
+import MensajeDetalle from "./components/app/MensajeDetalle";
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -22,7 +23,6 @@ function App() {
   const { enqueueSnackbar } = useSnackbar();
   const status = useNetwork();
   if (!status) {
-    console.log("ejecutando");
     enqueueSnackbar("Se ha perdido la conexion a internet!", {
       variant: "error",
     });
@@ -58,6 +58,7 @@ function App() {
           <Route path="/mapa" element={<MapView />} />
           <Route path="/perfil"  element={<Perfi user={user} />} />
           <Route path="/mensajes"  element={<Mensajes user={user} />} />
+          <Route path="/mensajes/detalles"  element={<MensajeDetalle user={user} />} />
         </Route>
       </Routes>
     </>

@@ -15,8 +15,10 @@ function CerrarSesion() {
   }
   return (
     <>
-      <div className="z-20 " 
-      style={{transform:"traslateX(-50%)",margin:"auto"}}>
+      <div
+        className="z-20 relative"
+        style={{ transform: "traslateX(-50%)", margin: "auto" }}
+      >
         {/* <h1 className="h1 text-center">Bienvenido a</h1>
         <h1 className="text-center pb-5 h1 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
           UCAB RIDES
