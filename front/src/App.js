@@ -55,7 +55,7 @@ function App() {
         </Route>
         {/* PARA ACCEDER DEBE DE EXISTIR UN UNSUARIO LOGUEADO */}
         <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
-          <Route exact path="/mapa" element={<MapView />} />
+          <Route path="/mapa" element={<MapView />} />
           <Route path="/perfil"  element={<Perfi user={user} />} />
           <Route path="/mensajes"  element={<Mensajes user={user} />} />
           <Route path="/mensajes/detalles"  element={<MensajeDetalle user={user} />} />

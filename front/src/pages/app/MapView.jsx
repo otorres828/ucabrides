@@ -10,10 +10,10 @@ import Sidebar from "../../components/app/Sidebar";
 import logo from "../../logo.svg";
 // import BotonMiUbicacion from "../../components/app/BotonMiUbicacion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
-
+import { faLocationCrosshairs,faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
+const clear = <FontAwesomeIcon icon={faTrash} />;
 
 const containerStyle = {
   width: "100%",
@@ -25,16 +25,29 @@ const center = {
   lng: -62.71150054759027,
 };
 
-
-
-
 const destino = {
   lat: 8.332488759816176,
   lng: -62.64138237986472,
 };
 
 function MapView() {
-  const [directionsResponse, setDirectionsResponse] = useState(null)
+  const [map, setMap] = useState(/** @type google.maps.Map */ (null))
+  const [directionsResponse, setDirectionsResponse] = useState('');
+  const [my_location, setMy_location] = useState(null);
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
+
+  function obtener_mi_ubicacion() {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        setMy_location({
+          lat:position.coords.latitude,
+          lng:position.coords.longitude
+        })
+        map.panTo(my_location)
+      });
+    }
 
   async function calculateRoute() {
     const google = window.google;
@@ -48,10 +61,12 @@ function MapView() {
 
   }
 
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
+  function limpiar_ruta() {
+    setDirectionsResponse(null)
+    setMy_location(null);
+    map.panTo(center)
+  }
+
 
   return isLoaded ? (
     <>
@@ -60,21 +75,22 @@ function MapView() {
         center={center}
         zoom={16}
         options={{
-          zoomControl: false,
-          streetViewControl: false,
-          mapTypeControl: false,
-          fullscreenControl: false,
-        }}
-       
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false,
+          }}
+          onLoad={map => setMap(map)}
       >
-        
-        <Marker position={center} />
+        <Marker position={center} onClick={calculateRoute}/>
+
+        {my_location && <Marker position={my_location} />}
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
         
       </GoogleMap>
-      <div onClick={calculateRoute}
+      <div onClick={obtener_mi_ubicacion}
         className="z-20  xl:w-96 mx-auto absolute right-2 bottom-20 mr-9  sm:justify-center flex"
         style={{ transform: "traslateX(-50%)", margin: "auto" }}
       >
@@ -87,6 +103,22 @@ function MapView() {
           </div>
         </div>
       </div>
+
+      {(directionsResponse || my_location) &&
+        <div onClick={limpiar_ruta}
+          className="z-20  xl:w-96 mx-auto absolute left-2 bottom-20 mr-9  sm:justify-center flex"
+          style={{ transform: "traslateX(-50%)", margin: "auto" }}
+        >
+          <div className="justify-center text-center mt-20">
+            <div
+              style={{ cursor: "pointer" }}
+              className="  bg-red-300 rounded-lg p-2"
+            >
+              {clear}
+            </div>
+          </div>
+        </div>
+      }
       <Sidebar />
     </>
   ) : (
