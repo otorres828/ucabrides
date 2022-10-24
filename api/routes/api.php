@@ -18,7 +18,5 @@ Route::post('message', [MessageController::class,'store']);
 
 Route::group(['middleware'=>'api'],function(){
     Route::post('refresh', [AuthController::class,'refresh']);
-    Route::get('me', [AuthController::class,'me']);
-    Route::get('logout', [AuthController::class,'logout']);
 });
 

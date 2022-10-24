@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../../components/app/Sidebar";
+import Rsidebar from "../../components/app/Rsidebar";
 import logo from "../../logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -41,13 +41,18 @@ function MapView() {
   });
 
   function obtener_mi_ubicacion() {
-    const google=window.google;
+    const google = window.google;
     navigator.geolocation.getCurrentPosition(function (position) {
       setMy_location({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       });
-      map.panTo(new google.maps.LatLng( position.coords.latitude,  position.coords.longitude) )
+      map.panTo(
+        new google.maps.LatLng(
+          position.coords.latitude,
+          position.coords.longitude
+        )
+      );
     });
   }
 
@@ -60,6 +65,10 @@ function MapView() {
       travelMode: google.maps.TravelMode.DRIVING,
     });
     setDirectionsResponse(results);
+    const direccion = directionsResponse.routes[0].overview_path;
+    console.log(direccion.length);
+    console.log('latitud 0: ' +direccion[0].lat());
+    console.log('longitud 0:' +direccion[0].lng());
   }
 
   function limpiar_ruta() {
@@ -82,9 +91,10 @@ function MapView() {
         }}
         onLoad={(map) => setMap(map)}
       >
-        <Marker position={center} onClick={calculateRoute} />
+        {my_location && <Marker  position={my_location} /> }
 
-        {my_location && <Marker position={my_location} />}
+        <Marker position={center} onClick={calculateRoute} />
+        {/* <Marker draggable={true} onDragEnd={(e)=>{console.log(e.latLng.lat())}} position={center} onClick={calculateRoute} /> */}
         {directionsResponse && (
           <DirectionsRenderer directions={directionsResponse} />
         )}
@@ -120,11 +130,11 @@ function MapView() {
           </div>
         </div>
       )}
-      <Sidebar />
+      <Rsidebar />
     </>
   ) : (
     <>
-      <Sidebar />
+      <Rsidebar />
       <img src={logo} className="App-logo" alt="logo" />
     </>
   );

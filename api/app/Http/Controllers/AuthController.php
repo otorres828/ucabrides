@@ -77,17 +77,6 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
-
-    public function logout()
-    {
-        auth()->logout();
-        return response()->json(['message' => 'Ha cerrado sesion con exito']);
-    }
-
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());

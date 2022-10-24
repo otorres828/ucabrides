@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "./Sidebar";
+import Rsidebar from "./Rsidebar";
 
 function MensajeDetalle({ user }) {
   user = JSON.parse(user);
@@ -11,11 +11,10 @@ function MensajeDetalle({ user }) {
             <h1 className="border-blue-800 border-b-2 block pt-5 pb-2 font-bold text-center text-3xl text-gray-900">
               Listado de Mensajes
             </h1>
-
           </div>
         </div>
       </div>
-      <Sidebar />
+      <Rsidebar />
     </>
   );
 }

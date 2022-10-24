@@ -32,7 +32,7 @@ function ButtomGmail() {
         )
         .then((res) => {
           if (res?.data?.error)
-            enqueueSnackbar("Correo no autorizado", { variant: "error" });
+            enqueueSnackbar("El correo seleccionado no es de la ucab", { variant: "error" });
           else {
             enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
             localStorage.setItem(
@@ -40,7 +40,7 @@ function ButtomGmail() {
               JSON.stringify(res?.data?.access_token)
             );
             localStorage.setItem("user", JSON.stringify(res?.data?.user));
-            navigate("/mapa");
+            navigate("/rol");
           }
           // console.log(res?.data);
         });

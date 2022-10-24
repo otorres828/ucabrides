@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Modal from '../../utils/Modal';
-
 import HeroImage from '../../images/hero-image.png';
 
 function HeroHome() {
@@ -34,10 +33,10 @@ function HeroHome() {
 
           {/* Section header */}
           <div className="text-center pb-12 md:pb-16">
-            <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4">Bienvenido a <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Ucab Rides</span></h1>
+            <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"  data-aos="zoom-y-out">Bienvenido a <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Ucab Rides</span></h1>
             <div className="max-w-3xl mx-auto">
-              <p className="text-xl text-gray-600 mb-8" >Asistir a clases nunca fue tan facil, economico y seguro que con esta increible app. ¿Que esperas? Ven y asiste a clases con Ucab Rides</p>
-              <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
+              <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">Asistir a clases nunca fue tan facil, economico y seguro que con esta increible app. ¿Que esperas? Ven y asiste a clases con Ucab Rides</p>
+              <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
                 <div>
                   <a className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Descargar para Android</a>
                 </div>
@@ -50,7 +49,7 @@ function HeroHome() {
 
           {/* Hero image */}
           <div>
-            <div className="relative flex justify-center mb-8">
+            <div className="relative flex justify-center mb-8" data-aos="zoom-y-out" data-aos-delay="450">
               <div className="flex flex-col justify-center">
                 <img className="mx-auto" src={HeroImage} width="768" height="432" alt="Hero" />
                 <svg className="absolute inset-0 max-w-full mx-auto md:max-w-none h-auto" width="768" height="432" viewBox="0 0 768 432" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">

@@ -7,14 +7,17 @@ import Home from "./pages/web/Home";
 import Login from "./pages/web/Login";
 import SignUp from "./pages/web/SignUp";
 import ResetPassword from "./pages/web/ResetPassword";
-import AOS from "aos";
+
+import 'aos/dist/aos.css';
+import AOS from 'aos';
+
 import { useSnackbar } from "notistack";
 import useNetwork from "./hooks/useNetwork";
 import { RedirectLogin, RedirectPanel } from "./components/ProtectedRoute";
 import Perfi from "./pages/app/Perfil";
-import Mensajes from "./pages/app/Mensajes";
 import MapView from "./pages/app/MapView";
-import MensajeDetalle from "./components/app/MensajeDetalle";
+import Rol from "./pages/app/Rol";
+import Rpanel from "./pages/app/Rpanel";
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -57,8 +60,9 @@ function App() {
         <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
           <Route path="/mapa" element={<MapView />} />
           <Route path="/perfil"  element={<Perfi user={user} />} />
-          <Route path="/mensajes"  element={<Mensajes user={user} />} />
-          <Route path="/mensajes/detalles"  element={<MensajeDetalle user={user} />} />
+          <Route path="/rol"  element={<Rol user={user} />} />
+          <Route path="/r/panel"  element={<Rpanel user={user} />} />
+          
         </Route>
       </Routes>
     </>

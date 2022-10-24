@@ -29,7 +29,7 @@ function Testimonials() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             <h2 className="h2 mb-4">Proyecto Nº2 de Formulas Innovadoras Ucab 2022-23</h2>
-            <p className="text-xl text-gray-600" >Arcu cursus vitae congue mauris rhoncus viverra nibh cras pulvinar mattis
+            <p className="text-xl text-gray-600" data-aos="zoom-y-out" >Arcu cursus vitae congue mauris rhoncus viverra nibh cras pulvinar mattis
                 blandit libero cursus mattis.</p>
           </div>
 
@@ -69,7 +69,7 @@ function Testimonials() {
           </div> */}
 
           {/* Testimonials */}
-          <div className="max-w-3xl mx-auto mt-20">
+          <div className="max-w-3xl mx-auto mt-20"  data-aos="zoom-y-out">
             <div className="relative flex items-start border-2 border-gray-200 rounded bg-white">
 
               {/* Testimonial */}
