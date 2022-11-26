@@ -1,29 +1,93 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Rsidebar from "../../components/app/Rsidebar";
-import Table from "../../components/app/Table";
+import logo from "../../logo.svg";
+import {
+  Marker,
+  GoogleMap,
+  useJsApiLoader,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
+
+import {
+  DistanciaMasCorta,
+  distancia_a_caminar,
+  listado_rutas_disponibles,
+  obtener_localizacion_direccion_usuario,
+} from "../../hooks/RutaMasCorta";
+import BasicTable from "../../components/app/Table";
+
+const ucab = {
+  lat: 8.297321035371798,
+  lng: -62.71149786538124,
+};
 
 function ListadoColas() {
-  return (
+  const [rutas, setRutas] = useState([]);
+  const [rutas_disponibles, setRutas_disponibles] = useState([]);
+  const [distancia, setDistancia] = useState();
+  const [localizacion_usuario, setLocalizacion_usuario] = useState({});
+  const [puntomascerca, setPuntomascerca] = useState();
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
+
+  function obtener_rutas_disponibles() {
+    listado_rutas_disponibles().then((result) => {
+      //LISTADO DE RUTAS DISPONIBLES
+      setRutas(result);
+    });
+    distancia_a_caminar().then((result) => {
+      // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
+      setDistancia(result);
+    });
+    obtener_localizacion_direccion_usuario().then((result) => {
+      //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+      setLocalizacion_usuario(result);
+    });
+    rutas.map((ruta) => {
+      verificar_distancia({ lat: ruta.lat, lng: ruta.lng });
+    });
+  }
+
+  useEffect(() => {
+    obtener_rutas_disponibles();
+  }, []);
+
+  async function verificar_distancia(destino) {
+    const ruta = {
+      lat: parseFloat(destino.lat),
+      lng: parseFloat(destino.lng),
+    };
+    const google = window.google;
+    const directionsService = new google.maps.DirectionsService();
+    const results = await directionsService.route({
+      origin: ucab,
+      destination: ruta,
+      travelMode: google.maps.TravelMode.DRIVING,
+    });
+    // setDirectionsResponse(results);
+    const direccion = results.routes[0].overview_path;
+    var punto = DistanciaMasCorta(direccion, localizacion_usuario);
+
+    setPuntomascerca({
+      lat: punto[1],
+      lng: punto[2],
+    });
+    if (distancia >= punto[0]) {
+      console.log([ruta, punto]); //COLOCAR ALGO PARA GUARDAR LA RUTA, EL PUNGO OPTIMO
+    }
+  }
+
+  return isLoaded ? (
     <>
-      <div className=" md:my-12 bg-gray-200 md:bg-white vh-100">
-        <div className="bg-gray-200  shadow rounded-lg  lg:w-3/6 xl:w-2/6 mx-auto">
-          <div className="text-center">
-          <NavLink to="/conductor/origen-o-destino">
-            <button className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Crear Ruta
-            </button>
-          </NavLink>
-            <h1 className="border-blue-800 border-b-2 block pt-5 pb-2 font-bold text-center text-3xl text-gray-900">
-              Listado de Rutas
-            </h1>
-            <div className="p-3 container mx-auto">
-            <Table/>
-            </div>
-          </div>
-        </div>
-      </div>
+      <BasicTable rutas={rutas} />
       <Rsidebar />
+    </>
+  ) : (
+    <>
+      <Rsidebar />
+      <img src={logo} className="App-logo" alt="logo" />
     </>
   );
 }

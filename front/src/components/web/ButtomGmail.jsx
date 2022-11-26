@@ -12,39 +12,40 @@ function ButtomGmail() {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
-  const responseGoogleSuccess = (response) => {
+  const responseGoogleSuccess = async (response) => {
     document.getElementById("email").innerText = "";
     const email = response?.profileObj.email;
     const external_id = response?.profileObj.googleId;
     const name = response?.profileObj.name;
     const avatar = response?.profileObj.imageUrl;
     try {
-      axios
-        .post(
-          "register/gmail",
-          { email: email, name: name, external_id: external_id,avatar:avatar },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          if (res?.data?.error)
-            enqueueSnackbar("El correo seleccionado no es de la ucab", { variant: "error" });
-          else {
-            enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
-            localStorage.setItem(
-              "access_token",
-              JSON.stringify(res?.data?.access_token)
-            );
-            localStorage.setItem("user", JSON.stringify(res?.data?.user));
-            navigate("/rol");
-          }
-          // console.log(res?.data);
+      const res = await axios.post(
+        "register/gmail",
+        { email: email, name: name, external_id: external_id, avatar: avatar },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+
+      if (res.data.error)
+        enqueueSnackbar("El correo seleccionado no es de la ucab", {
+          variant: "error",
         });
-    } catch (error) {}
+      else {
+        enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
+        localStorage.setItem(
+          "access_token",
+          JSON.stringify(res.data.access_token)
+        );
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        navigate("/rol");
+      }
+    } catch (error) {
+      enqueueSnackbar("Error de conexion", { variant: "error" });
+    }
   };
 
   const responseGoogleFailed = (response) => {

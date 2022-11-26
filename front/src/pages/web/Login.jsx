@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/web/Header";
 import axios from "../../api/axios";
 import { useSnackbar } from "notistack";
@@ -15,35 +15,26 @@ function Login() {
   const enviarFormularioLogin = async (e) => {
     e.preventDefault();
     try {
-       axios.post('login',
-       {email:email,password:password},
-        {
-          headers: { 
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-         },
-        }
-      )
-      .then((res)=>{
-        if(res?.data?.error)
-          enqueueSnackbar(res?.data?.error, { variant: "error" });
-        else{
-          enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
-          localStorage.setItem('access_token',JSON.stringify(res?.data?.access_token));
-          localStorage.setItem('user',JSON.stringify(res?.data?.user));
-          navigate('../rol');
-        }
-          // console.log(res?.data);
-      })
-      .catch ((error)=> {
-        enqueueSnackbar("Error de conexion al servidor", { variant: "error" });
-      })
+      const res = await axios.post("login", {
+        email: email,
+        password: password,
+      });
 
+      if (res.data.error) enqueueSnackbar(res.data.error, { variant: "error" });
+      else {
+        enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
+        localStorage.setItem(
+          "access_token",res.data.access_token
+        );
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        navigate("../rol");
+      }
+      // console.log(res?.data);
     } catch (error) {
       enqueueSnackbar("Error de conexion", { variant: "error" });
     }
   };
-  
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/*  Site header */}
@@ -129,7 +120,7 @@ function Login() {
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button  className="iniciar btn text-white bg-blue-600 hover:bg-blue-700 w-full">
+                      <button className="iniciar btn text-white bg-blue-600 hover:bg-blue-700 w-full">
                         Iniciar Sesion
                       </button>
                     </div>
@@ -138,7 +129,7 @@ function Login() {
                 <div className="flex items-center my-2"></div>
                 <div className="flex flex-wrap -mx-3">
                   <div className="w-full px-3">
-                    <ButtomGmail/>
+                    <ButtomGmail />
                   </div>
                 </div>
               </div>

@@ -19,7 +19,8 @@ const rows = [
   createData("Gingerbread", 356, 6.0, 49, 3.9),
 ];
 
-export default function BasicTable() {
+export default function BasicTable(props) {
+  console.log(props);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -27,9 +28,7 @@ export default function BasicTable() {
           <TableRow>
             <TableCell>Origen</TableCell>
             <TableCell align="left">Destino</TableCell>
-            <TableCell align="left">Puestos</TableCell>
-            <TableCell align="left">Disponibles</TableCell>
-            <TableCell align="left">Opciones</TableCell>
+           
           </TableRow>
         </TableHead>
         <TableBody>
@@ -40,11 +39,7 @@ export default function BasicTable() {
             >
               <TableCell component="th" scope="row">{row.name}</TableCell>
               <TableCell align="left">{row.name}</TableCell>
-              <TableCell align="left">{row.fat}</TableCell>
-              <TableCell align="left">{row.fat}</TableCell>
-              <TableCell align="left">
-              {row.fat}
-              </TableCell>
+            
             </TableRow>
           ))}
         </TableBody>
