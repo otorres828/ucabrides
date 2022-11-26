@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import Rsidebar from "../../components/app/Rsidebar";
 import logo from "../../logo.svg";
 import {
-  Marker,
-  GoogleMap,
   useJsApiLoader,
-  DirectionsRenderer,
 } from "@react-google-maps/api";
 
 import {
@@ -32,28 +29,27 @@ function ListadoColas() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
-  function obtener_rutas_disponibles() {
-    listado_rutas_disponibles().then((result) => {
-      //LISTADO DE RUTAS DISPONIBLES
-      setRutas(result);
-    });
-    distancia_a_caminar().then((result) => {
-      // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
-      setDistancia(result);
-    });
-    obtener_localizacion_direccion_usuario().then((result) => {
-      //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
-      setLocalizacion_usuario(result);
-    });
-    rutas.map((ruta) => {
-      verificar_distancia({ lat: ruta.lat, lng: ruta.lng });
-    });
-  }
-
+  
   useEffect(() => {
+    const obtener_rutas_disponibles=()=> {
+      listado_rutas_disponibles().then((result) => {
+        //LISTADO DE RUTAS DISPONIBLES
+        setRutas(result);
+      });
+      distancia_a_caminar().then((result) => {
+        // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
+        setDistancia(result);
+      });
+      obtener_localizacion_direccion_usuario().then((result) => {
+        //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+        setLocalizacion_usuario(result);
+      });
+      rutas.map((ruta) => {
+        return verificar_distancia({ lat: ruta.lat, lng: ruta.lng });
+      });
+    }
     obtener_rutas_disponibles();
   }, []);
-
   async function verificar_distancia(destino) {
     const ruta = {
       lat: parseFloat(destino.lat),
@@ -66,22 +62,22 @@ function ListadoColas() {
       destination: ruta,
       travelMode: google.maps.TravelMode.DRIVING,
     });
-    // setDirectionsResponse(results);
     const direccion = results.routes[0].overview_path;
     var punto = DistanciaMasCorta(direccion, localizacion_usuario);
 
     setPuntomascerca({
+      distancia:punto[0],
       lat: punto[1],
       lng: punto[2],
     });
     if (distancia >= punto[0]) {
-      console.log([ruta, punto]); //COLOCAR ALGO PARA GUARDAR LA RUTA, EL PUNGO OPTIMO
+      console.log(puntomascerca)
     }
   }
 
   return isLoaded ? (
     <>
-      <BasicTable rutas={rutas} />
+      <BasicTable rutas={rutas_disponibles} />
       <Rsidebar />
     </>
   ) : (

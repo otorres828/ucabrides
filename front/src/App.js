@@ -17,7 +17,6 @@ import { RedirectLogin, RedirectPanel } from "./components/ProtectedRoute";
 import Perfi from "./pages/app/Perfil";
 import MapView from "./pages/app/MapView";
 import Rol from "./pages/app/Rol";
-import Rpanel from "./pages/app/Rpanel";
 import ListadoColas from "./pages/app/ListadoColas";
 
 function App() {
