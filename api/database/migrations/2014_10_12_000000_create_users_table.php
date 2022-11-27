@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('avatar')->nullable();
             $table->string('external_id')->nullable();
-          
+            $table->enum('status',[1,2])->default(1);  //1: no disponible 2:disponible
+
             $table->rememberToken();
         });
     }

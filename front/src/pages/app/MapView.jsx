@@ -30,7 +30,6 @@ function MapView() {
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState("");
   const [rutas, setRutas] = useState([]);
-  const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [distancia, setDistancia] = useState();
   const [localizacion_usuario, setLocalizacion_usuario] = useState({});
   const [my_location, setMy_location] = useState({});
@@ -66,8 +65,9 @@ function MapView() {
     obtener_localizacion_direccion_usuario().then(result => { //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
       setLocalizacion_usuario(result)
     })     
+    console.log('ejecutando');
     rutas.map((ruta) => {
-     verificar_distancia({lat:ruta.lat,lng:ruta.lng});
+     return (verificar_distancia({lat:ruta.lat,lng:ruta.lng}));
     })
   }
 

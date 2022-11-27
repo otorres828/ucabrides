@@ -13,14 +13,12 @@ return new class extends Migration
            $table->id();
            $table->string('lat');
            $table->string('lng');
+           $table->unsignedBigInteger('user_id');
+
+           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('rutas');

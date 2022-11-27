@@ -56,6 +56,7 @@ export const DistanciaMasCorta = (direccion,localizacion_usuario) => {
       longitud = direccion.lng();
     }
   });
+  console.log(latitud);
   return [minimo.toFixed(0), latitud, longitud];
 };
 

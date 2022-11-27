@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,44 +6,82 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { DistanciaMasCorta } from "../../hooks/RutaMasCorta";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData("Frozen yoghurt", 159, 5, 2, 4.0),
-  createData("Ice cream sandwich", 237, 4, 37, 4),
-  createData("Eclair", 262, 6.0, 24, 6.0),
-  createData("Cupcake", 305, 3, 67, 4.3),
-  createData("Gingerbread", 356, 6.0, 49, 3.9),
-];
+function BasicTable({rutas,localizacion_usuario,distancia}) {
+  const [puntomascerca, setPuntomascerca] = useState();
+  const [rutas_disponibles, setRutas_disponibles] = useState([]);
+  const google = window.google;
+  const ucab = {
+    lat: 8.297321035371798,
+    lng: -62.71149786538124,
+  };
 
-function BasicTable(props) {
-  
-  useEffect(() => {
-    console.log(props);
-  }, []);
+  const verificar_distancia= async (destino) =>{
+    const ruta = {
+      id:destino.id,
+      lat: parseFloat(destino.lat),
+      lng: parseFloat(destino.lng),
+      
+    };
+    var directionsService =  new google.maps.DirectionsService();
+    
+    const results = await directionsService.route({
+      origin: ucab,
+      destination: ruta,
+      travelMode: google.maps.TravelMode.DRIVING,
+    });
+    const direccion = results.routes[0].overview_path;
+    var punto = DistanciaMasCorta(direccion, localizacion_usuario);
+
+    setPuntomascerca({
+      lat: punto[1],
+      lng: punto[2],
+    });
+    if (distancia >= punto[0]){
+      const obj = {
+        id:ruta.id,
+        lat:ruta.lat,
+        lng:ruta.lng,
+        distancia:punto[0],
+        puntomascerca:puntomascerca,
+      };
+      console.log(puntomascerca)
+      setRutas_disponibles([...rutas_disponibles, obj]);
+    }
+  }
+
+  useEffect(()=>{
+    function calcularRutas(){
+      rutas.forEach((ruta) =>{
+        verificar_distancia({lat:ruta.lat,lng:ruta.lng,id:ruta._id});
+      });
+    }
+    calcularRutas();
+  },[])
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Origen</TableCell>
-            <TableCell align="left">Destino</TableCell>
-           
+          <TableCell>id</TableCell>
+          <TableCell>latitud</TableCell>
+            <TableCell align="left">altitud</TableCell>
+            <TableCell align="left">distancia</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rutas_disponibles.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">{row.name}</TableCell>
-              <TableCell align="left">{row.name}</TableCell>
-            
+              <TableCell component="th" scope="row">{row.id}</TableCell>
+              <TableCell component="th" scope="row">{row.lat}</TableCell>
+              <TableCell align="left">{row.lng}</TableCell>
+              <TableCell align="left">{row.distancia}m</TableCell>
             </TableRow>
           ))}
         </TableBody>

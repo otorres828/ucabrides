@@ -17,7 +17,7 @@ function Rol() {
                   </div>
                 </div>
               </NavLink>
-              <NavLink to="/r/panel">
+              <NavLink to="/listado/colas">
                 <div className="content-center mt-4 bg-green-500 border-collapse border-gray-400   lg:border-gray-400 rounded-lg  p-4 leading-normal">
                   <div className="mb-8">
                     <div className="text-white font-bold  text-3xl mb-2 text-center ">

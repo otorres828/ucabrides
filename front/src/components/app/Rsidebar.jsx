@@ -21,7 +21,7 @@ function Rsidebar() {
           <ul className="flex-1 list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
             <li className="bg-gray-700 w-full  mr-0 sm:mr-3 flex-1 md:w-28">
               <NavLink
-                to="/r/panel"
+                to="/rol"
                 className={({ isActive }) =>
                   isActive
                     ? "border-b-4 border-red-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
