@@ -28,7 +28,6 @@ function ListadoColas() {
         //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
         setLocalizacion_usuario(result);
       });
-      console.log("listado de cola");
     }
     inicializar();
 
@@ -37,7 +36,7 @@ function ListadoColas() {
   return rutas.length > 0 && distancia > 0 && JSON.stringify(localizacion_usuario)!=='{}' ? (
     <>
       <div className="container mx-auto">
-        <div className="p-5 pt-12">
+        <div className="p-5 pt-12 mb-10">
           <h1 className="font-bold text-slate-600 text-xl">Bienvenido al listado de Colas Disponibles</h1>
           <BasicTable rutas={rutas} localizacion_usuario={localizacion_usuario} distancia={distancia} />
         </div>

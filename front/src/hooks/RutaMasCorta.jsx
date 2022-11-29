@@ -1,4 +1,6 @@
 import axios from "../api/axios";
+const access_token = localStorage.getItem("access_token");
+axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
 const gradosARadianes = (grados) => {
   return (grados * Math.PI) / 180;
@@ -21,8 +23,6 @@ const distancia = (lat1, lon1, lat2, lon2) => {
   let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return RADIO_TIERRA_EN_KILOMETROS * c * 1000;
 };
-
-const access_token = localStorage.getItem("access_token");
 
 export const obtener_localizacion_direccion_usuario = async () => {
     const localizacion=await axios.get("perfil_localizacion", {
@@ -70,6 +70,7 @@ export const listado_rutas_disponibles = async ()=>{
 }
 
 export const distancia_a_caminar = async ()=>{
+  
   const res = await axios.get("distancia_dispuesto_caminar", {
     headers: {
       Authorization: `Bearer ${access_token}`,

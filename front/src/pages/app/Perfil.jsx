@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Rsidebar from "../../components/app/Rsidebar";
 import CerrarSesion from "../../components/app/CerrarSesion";
+import Clave from "../../components/app/Clave";
+import DistanciaCaminar from "../../components/app/DistanciaCaminar";
 
 function Perfi({ user }) {
   user = JSON.parse(user);
+
   return (
     <>
       <div className="mx-auto my-28 vh-100">
@@ -83,32 +86,11 @@ function Perfi({ user }) {
 
             <div className="w-full">
               <h3 className="font-medium text-gray-50 text-center px-6">
-               CONFIGURACIONES
+                CONFIGURACIONES
               </h3>
               <div className="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
-                <a
-                  href="/"
-                  className=" border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150"
-                >
-                  <img
-                    src="https://avatars0.githubusercontent.com/u/35900628?v=4"
-                    alt=""
-                    className="rounded-full h-6 shadow-md inline-block mr-2"
-                  />
-                  Configuracion de clave
-                </a>
-
-                <a
-                  href="/"
-                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
-                >
-                  <img
-                    src="https://avatars0.githubusercontent.com/u/35900628?v=4"
-                    alt=""
-                    className="rounded-full h-6 shadow-md inline-block mr-2"
-                  />
-                  Zonas frecuentes
-                </a>
+              <Clave />
+              <DistanciaCaminar />
 
                 <a
                   href="/"

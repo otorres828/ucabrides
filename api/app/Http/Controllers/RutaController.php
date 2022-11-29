@@ -17,6 +17,12 @@ class RutaController extends Controller
     }
 
     public function distancia_dispuesto_caminar(){
-        return 8000;
+        return auth()->user()->distancia;
+    }
+
+    public function cambiar_distancia_caminar(Request $request){
+        $user = auth()->user();
+        $user->update(['distancia'=>$request->distancia]);
+        return response()->json(['exito'=>$request->distancia]);
     }
 }

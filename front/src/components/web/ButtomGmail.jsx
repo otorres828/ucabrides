@@ -37,8 +37,7 @@ function ButtomGmail() {
       else {
         enqueueSnackbar("Gracias por volver :D ", { variant: "success" });
         localStorage.setItem(
-          "access_token",
-          JSON.stringify(res.data.access_token)
+          "access_token",res.data.access_token
         );
         localStorage.setItem("user", JSON.stringify(res.data.user));
         navigate("/rol");

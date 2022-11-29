@@ -7,15 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login','register','register_gmail']]);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api', ['except' => ['login','register','register_gmail','cambiarclave']]);
+    // }
 
     public function register(Request $request){
         $request->validate( [
@@ -67,7 +66,7 @@ class AuthController extends Controller
     
     public function login(Request $request)
     { 
-        $credentials_username=  ['username'=> $request['email'], 'password'=>$request['password']];
+        $credentials_username=  ['username'=> strtolower($request['email']), 'password'=>$request['password']];
         $credentials_email = request(['email', 'password']);
         if (! $token = auth()->attempt($credentials_username) ) {
             if(! $token = auth()->attempt($credentials_email)){
@@ -92,5 +91,12 @@ class AuthController extends Controller
         ]);
     }
 
-  
+    public function cambiarclave(Request $request){
+        $user = auth()->user();
+        $nuevaclave=Hash::make($request->clave);
+        $user->update(['password'=>$nuevaclave]);
+
+       return response()->json(['exito'=>$nuevaclave,200]);
+    }
+
 }
