@@ -17,6 +17,6 @@ class RutaController extends Controller
     }
 
     public function distancia_dispuesto_caminar(){
-        return 2200;
+        return 8000;
     }
 }

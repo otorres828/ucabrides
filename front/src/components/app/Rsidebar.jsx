@@ -16,10 +16,10 @@ const mensajes = <FontAwesomeIcon icon={faMessage} />;
 function Rsidebar() {
   return (
     <>
-      <div className="bg-gray-700 vh-100  position  fixed bottom-0 mt-12 w-full  z-10 ">
-        <div className="md:mt-12 md:w-80 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
-          <ul className="flex-1 list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
-            <li className="bg-gray-700 w-full  mr-0 sm:mr-3 flex-1 md:w-28">
+      <div className="  fixed bottom-0 mt-12 w-full z-30 rounded-lg">
+        <div className="md:mt-12 md:w-flex-1 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
+          <ul className="m-3 rounded-lg bg-gradient-to-l from-blue-400 via-blue-500 to-blue-500 vh-100 flex flex-row md:flex-col pt-3 md:py-3  md:px-2 text-center md:text-left">
+            <li className=" w-full   sm:mr-3 flex-1 md:w-28">
               <NavLink
                 to="/rol"
                 className={({ isActive }) =>
@@ -34,7 +34,7 @@ function Rsidebar() {
                 </span>
               </NavLink>
             </li>
-            <li className="bg-gray-700 w-full  mr-0 sm:mr-3 flex-1 md:w-28">
+            <li className=" w-full  sm:mr-3 flex-1 md:w-28">
               <NavLink
                 to="/mensajes"
                 className={({ isActive }) =>
@@ -50,7 +50,7 @@ function Rsidebar() {
               </NavLink>
             </li>
         
-            <li className="bg-gray-700 w-full  mr-0 sm:mr-3 flex-1  md:w-28">
+            <li className=" w-full   sm:mr-3 flex-1  md:w-28">
               <NavLink
                 to="/tipo-de-cola"
                 className={({ isActive }) =>
@@ -65,7 +65,7 @@ function Rsidebar() {
                 </span>
               </NavLink>
             </li>
-            <li className="bg-gray-700  w-full  mr-0 sm:mr-3 flex-1 md:w-28">
+            <li className="  w-full  sm:mr-3 flex-1 md:w-28">
               <NavLink
                 className={({ isActive }) =>
                   isActive
@@ -79,7 +79,7 @@ function Rsidebar() {
                 </span>
               </NavLink>
             </li>
-            <li className="bg-gray-700  w-full mr-0 sm:mr-3 flex-1 md:w-28">
+            <li className="  w-full  sm:mr-3 flex-1 md:w-28">
               <NavLink
                 to="/perfil"
                 className={({ isActive }) =>

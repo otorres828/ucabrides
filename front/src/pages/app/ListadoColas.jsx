@@ -34,10 +34,11 @@ function ListadoColas() {
 
   }, []);
 
-  return rutas.length > 0 && distancia > 0 && JSON.stringify(localizacion_usuario)!='{}' ? (
+  return rutas.length > 0 && distancia > 0 && JSON.stringify(localizacion_usuario)!=='{}' ? (
     <>
       <div className="container mx-auto">
         <div className="p-5 pt-12">
+          <h1 className="font-bold text-slate-600 text-xl">Bienvenido al listado de Colas Disponibles</h1>
           <BasicTable rutas={rutas} localizacion_usuario={localizacion_usuario} distancia={distancia} />
         </div>
       </div>

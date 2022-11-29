@@ -7,7 +7,7 @@ function Perfi({ user }) {
   return (
     <>
       <div className="mx-auto my-28 vh-100">
-        <div className="bg-gray-50 relative shadow rounded-lg w-5/6 md:w-4/6  lg:w-3/6 xl:w-2/6 mx-auto">
+        <div className=" bg-gradient-to-r from-blue-400 via-blue-500 to-blue-500 relative shadow rounded-lg w-5/6 md:w-4/6  lg:w-3/6 xl:w-2/6 mx-auto">
           <div className="flex justify-center">
             <img
               src={user.avatar}
@@ -17,10 +17,10 @@ function Perfi({ user }) {
           </div>
 
           <div className="mt-16">
-            <h1 className="font-bold text-center text-3xl text-gray-900">
+            <h1 className="font-bold text-center text-3xl text-slate-50">
               {user.name}
             </h1>
-            <p className="text-center text-sm text-gray-400 font-medium pt-3">
+            <p className="text-center text-sm text-white font-medium pt-3">
               {user.email}
             </p>
 
@@ -28,7 +28,7 @@ function Perfi({ user }) {
               <div className="flex justify-between items-center px-6 ">
                 <div
                   href="/"
-                  className="text-gray-500 font-bold text-md md:text-2xl hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in text-center w-full py-3"
+                  className="text-gray-50 font-bold text-md md:text-2xl hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in text-center w-full py-3"
                 >
                   Puntos
                 </div>
@@ -82,13 +82,13 @@ function Perfi({ user }) {
             </div> */}
 
             <div className="w-full">
-              <h3 className="font-medium text-gray-900 text-left px-6">
-                Recent activites
+              <h3 className="font-medium text-gray-50 text-center px-6">
+               CONFIGURACIONES
               </h3>
               <div className="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
                 <a
                   href="/"
-                  className=" border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150"
+                  className=" border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150"
                 >
                   <img
                     src="https://avatars0.githubusercontent.com/u/35900628?v=4"
@@ -100,7 +100,7 @@ function Perfi({ user }) {
 
                 <a
                   href="/"
-                  className="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
+                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
                   <img
                     src="https://avatars0.githubusercontent.com/u/35900628?v=4"
@@ -112,7 +112,7 @@ function Perfi({ user }) {
 
                 <a
                   href="/"
-                  className="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
+                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
                   <img
                     src="https://avatars0.githubusercontent.com/u/35900628?v=4"
@@ -123,7 +123,7 @@ function Perfi({ user }) {
                 </a>
                 <a
                   href="/"
-                  className="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
+                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
                   <img
                     src="https://avatars0.githubusercontent.com/u/35900628?v=4"
@@ -134,7 +134,7 @@ function Perfi({ user }) {
                 </a>
                 <a
                   href="/"
-                  className="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
+                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
                   <img
                     src="https://avatars0.githubusercontent.com/u/35900628?v=4"
@@ -145,7 +145,7 @@ function Perfi({ user }) {
                 </a>
                 <a
                   href="/"
-                  className="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
+                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
                   <img
                     src="https://avatars0.githubusercontent.com/u/35900628?v=4"
@@ -156,7 +156,7 @@ function Perfi({ user }) {
                 </a>
                 <a
                   href="/"
-                  className="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
+                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
                   <img
                     src="https://avatars0.githubusercontent.com/u/35900628?v=4"
@@ -167,7 +167,7 @@ function Perfi({ user }) {
                 </a>
                 <a
                   href="/"
-                  className="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
+                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
                   <img
                     src="https://avatars0.githubusercontent.com/u/35900628?v=4"

@@ -27,7 +27,7 @@ function CerrarSesion() {
           <div
             onClick={cerrar_sesion}
             style={{ cursor: "pointer" }}
-            className=" btn text-white bg-blue-600 hover:bg-blue-700"
+            className=" btn text-white  bg-gradient-to-l from-blue-400 via-blue-500 to-blue-500 "
           >
             Cerrar Sesion
           </div>
