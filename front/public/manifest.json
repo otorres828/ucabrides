@@ -18,10 +18,10 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/mapa",
+  "start_url": "/rol",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color" : "#2271b3",
+  "theme_color": "#2271b3",
   "status_bar": "#2271b3"
 
 }
