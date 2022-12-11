@@ -22,3 +22,6 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('cambiarclave',[AuthController::class,'cambiarclave']);
 });
 
+Route::get('hola',function(){
+    return "hola mundo";
+});
