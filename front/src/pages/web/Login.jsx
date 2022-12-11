@@ -87,12 +87,6 @@ function Login() {
                         >
                           Clave
                         </label>
-                        <Link
-                          to="/reset-password"
-                          className="text-sm font-medium text-blue-600 hover:underline"
-                        >
-                          Olvidaste tu clave?
-                        </Link>
                       </div>
                       <input
                         type="password"
