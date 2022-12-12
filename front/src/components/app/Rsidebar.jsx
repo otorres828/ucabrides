@@ -25,7 +25,7 @@ function Rsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? " border-blue-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : "hover:border-b-4 hover:border-blue-500 block md:flex  text-white no-underline hover:text-white "
+                    : "py-1 md:py-3 block md:flex  text-white no-underline hover:text-white "
                 }
               >
                 {carro}
@@ -40,7 +40,7 @@ function Rsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? "border-b-4 border-blue-500 block md:flex   pl-1 align-middle text-white no-underline hover:text-white"
-                    : " hover:border-blue-500 block md:flex pl-1 align-middle text-white no-underline hover:text-white "
+                    : " hover:border-blue-500 block md:flex py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
                 }
               >
                 {mensajes}
@@ -56,7 +56,7 @@ function Rsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? "border-b-4 border-red-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " hover:border-blue-500 block md:flex  pl-1 align-middle text-white no-underline hover:text-white "
+                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
                 }
               >
                 {carro}
