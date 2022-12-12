@@ -37,10 +37,11 @@ function ConfirmarDistancia() {
       } catch (error) {
         enqueueSnackbar("Error de conexion", { variant: "error" });
       }
+      setOpen(false);
+
     } else {
-      enqueueSnackbar("Error de conexion", { variant: "error" });
+      enqueueSnackbar("La distancia a caminar debe de ser mayor a cero", { variant: "error" });
     }
-    setOpen(false);
   };
 
   const handleClose = () => {
