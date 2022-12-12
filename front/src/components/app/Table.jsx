@@ -77,7 +77,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
                 setOpen(true);
               }}
             >
-              te dejaran a {row.distancia} metros - 2 hacientos disponibles
+              te dejaran a {row.distancia} metros - 2 asientos disponibles
             </li>
           ))}
           <Dialog
