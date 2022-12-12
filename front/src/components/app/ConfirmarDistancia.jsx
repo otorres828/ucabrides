@@ -7,8 +7,8 @@ import { useSnackbar } from "notistack";
 import axios from "../../api/axios";
 import { distancia_a_caminar } from "../../hooks/RutaMasCorta";
 
-function DistanciaCaminar() {
-  const [open, setOpen] = useState(false);
+function ConfirmarDistancia() {
+  const [open, setOpen] = useState(true);
   const [distancia, setDistancia] = useState("");
   const [actual, setActual] = useState("");
   const { enqueueSnackbar } = useSnackbar();
@@ -40,6 +40,7 @@ function DistanciaCaminar() {
     } else {
       enqueueSnackbar("Error de conexion", { variant: "error" });
     }
+    setOpen(false);
   };
 
   const handleClose = () => {
@@ -59,19 +60,6 @@ function DistanciaCaminar() {
 
   return (
     <>
-      <div
-        onClick={() => {
-          setOpen(true);
-        }}
-        className="cursor-pointer w-full  border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
-      >
-        <img
-          src="https://avatars0.githubusercontent.com/u/35900628?v=4"
-          alt=""
-          className="rounded-full h-6 shadow-md inline-block mr-2"
-        />
-        Distancia dispuesto/a a caminar
-      </div>
       {open && (
         <Dialog
           open={open}
@@ -81,7 +69,7 @@ function DistanciaCaminar() {
         >
           <DialogTitle id="alert-dialog-title">
             <div className="text-2xl text-teal-900 font-bold text-center">
-             Su distancia actual es de {actual ? actual : "0 "} metros
+           Antes de continuar, agregue una distancia dispuesto/a a caminar
             </div>
           </DialogTitle>
           <DialogContent>
@@ -95,21 +83,19 @@ function DistanciaCaminar() {
               type="number"
               placeholder="Ingresar la distancia en metros"
             />
-           
+      
           </DialogContent>
           <DialogActions>
+          <div className="flex text-center justify-items-center">
             <div
               className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
               onClick={handlecambiar}
             >
               Cambiar
             </div>
-            <div
-              className="bg-green-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
-              onClick={handleClose}
-            >
-              Cerrar
-            </div>
+         
+
+          </div>
           </DialogActions>
         </Dialog>
       )}
@@ -117,4 +103,4 @@ function DistanciaCaminar() {
   );
 }
 
-export default DistanciaCaminar;
+export default ConfirmarDistancia;
