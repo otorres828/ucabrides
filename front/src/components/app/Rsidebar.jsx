@@ -39,8 +39,8 @@ function Rsidebar() {
                 to="/mensajes"
                 className={({ isActive }) =>
                   isActive
-                    ? "border-b-4 border-blue-500 block md:flex   pl-1 align-middle text-white no-underline hover:text-white"
-                    : " hover:border-blue-500 block md:flex py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
+                    ? "block md:flex py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
+                    : "block md:flex py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
                 }
               >
                 {mensajes}
@@ -85,7 +85,7 @@ function Rsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " block md:flex   pl-1 align-middle text-white no-underline hover:text-white "
+                    : " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
                 }
               >
                 {profle}

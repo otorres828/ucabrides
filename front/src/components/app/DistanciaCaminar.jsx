@@ -38,7 +38,7 @@ function DistanciaCaminar() {
         enqueueSnackbar("Error de conexion", { variant: "error" });
       }
     } else {
-      enqueueSnackbar("Error de conexion", { variant: "error" });
+      enqueueSnackbar("La distancia debe de ser superior a 0", { variant: "error" });
     }
   };
 
