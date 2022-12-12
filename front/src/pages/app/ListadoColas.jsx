@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Rsidebar from "../../components/app/Rsidebar";
-import logo from "../../logo.svg";
+import logo from "../../logo.png";
 import ConfirmarDistancia from "../../components/app/ConfirmarDistancia";
 
 import {

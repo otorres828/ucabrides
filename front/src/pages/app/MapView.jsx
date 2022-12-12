@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 import Rsidebar from "../../components/app/Rsidebar";
-import logo from "../../logo.svg";
+import logo from "../../logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Marker,
