@@ -4,7 +4,8 @@ import {
   GoogleMap,
   useJsApiLoader,
 } from "@react-google-maps/api";
-
+import house from "../../images/house_icon.png"
+import marcador from "../../images/marcador_icon.png"
 
 const containerStyle = {
   width: "100%",
@@ -40,8 +41,8 @@ function MapaReferencia({detalles,localizacion_usuario}) {
         }}
       
       >
-        <Marker  position={localizacion}/>
-        <Marker  position={ubicacion}/>
+        <Marker  position={localizacion} icon={marcador}/>
+        <Marker  position={ubicacion} icon={house}  />
      
       </GoogleMap>
   );
