@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Rsidebar from "../../components/app/Rsidebar";
 import logo from "../../logo.svg";
 import ConfirmarDistancia from "../../components/app/ConfirmarDistancia";
+import axios from "../../api/axios";
 
 import {
-  distancia_a_caminar,
   listado_rutas_disponibles,
   obtener_localizacion_direccion_usuario,
 } from "../../hooks/RutaMasCorta";
@@ -17,14 +17,21 @@ function ListadoColas() {
 
   useEffect(() => {
     function inicializar() {
+      const access_token = localStorage.getItem("access_token");
+
       listado_rutas_disponibles().then((result) => {
         //LISTADO DE RUTAS DISPONIBLES
         setRutas(result);
       });
-      distancia_a_caminar().then((result) => {
-        // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
-        setDistancia(result);
+      axios.get("distancia_dispuesto_caminar",{
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      }).then((response) => {
+        setDistancia(response.data);
       });
+     
       obtener_localizacion_direccion_usuario().then((result) => {
         //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
         setLocalizacion_usuario(result);
