@@ -47,10 +47,16 @@ function DistanciaCaminar() {
   };
 
   function obtener_distancia() {
-    distancia_a_caminar().then((result) => {
-      // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
-      setActual(result);
-    });
+    // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
+      const access_token = localStorage.getItem("access_token");
+      axios.get("distancia_dispuesto_caminar",{
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      }).then((response) => {
+        setDistancia(response.data);
+      });
   }
 
   useEffect(()=>{
