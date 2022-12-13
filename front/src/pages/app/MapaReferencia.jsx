@@ -41,8 +41,8 @@ function MapaReferencia({detalles,localizacion_usuario}) {
         }}
       
       >
-        <Marker  position={localizacion} icon={marcador}/>
-        <Marker  position={ubicacion} icon={house}  />
+        <Marker  position={ubicacion} icon={marcador}/>
+        <Marker  position={localizacion} icon={house}  />
      
       </GoogleMap>
   );
