@@ -62,7 +62,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
       });
     }
     calcularRutas();
-  }, []);
+  }, [rutas]);
 
   return (
     <>
