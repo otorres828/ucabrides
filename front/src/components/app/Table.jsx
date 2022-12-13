@@ -50,7 +50,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
       }); //SE AÑADE EL OBJETO FILTRADO A UN NUEVO ARRAY
     }
   };
-
+  
   useEffect(() => {
     function calcularRutas() {
       rutas.map((ruta) => {
