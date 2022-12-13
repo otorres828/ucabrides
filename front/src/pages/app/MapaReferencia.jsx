@@ -31,7 +31,7 @@ function MapaReferencia({detalles,localizacion_usuario}) {
   return (isLoaded &&
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={localizacion}
+        center={ubicacion}
         zoom={15}
         options={{
           zoomControl: false,
