@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Rsidebar from "../../components/app/Rsidebar";
+import Rsidebar from "./Rsidebar";
 import logo from "../../logo.svg";
-import ConfirmarDistancia from "../../components/app/ConfirmarDistancia";
+import ConfirmarDistancia from "./ConfirmarDistancia";
 import axios from "../../api/axios";
 
 import {
   listado_rutas_disponibles,
   obtener_localizacion_direccion_usuario,
 } from "../../hooks/RutaMasCorta";
-import BasicTable from "../../components/app/Table";
+import BasicTable from "./Table";
 
 function ListadoColas() {
   const [rutas, setRutas] = useState([]);
