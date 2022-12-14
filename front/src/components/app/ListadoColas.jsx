@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Rsidebar from "./Rsidebar";
-import logo from "../../logo.svg";
+import logo from "../../images/fondo_logo.png";
 import ConfirmarDistancia from "./ConfirmarDistancia";
 import axios from "../../api/axios";
 
@@ -56,8 +56,9 @@ function ListadoColas() {
         {distancia===0 && <ConfirmarDistancia/>}
 
       <Rsidebar />
-      <img src={logo} className="App-logo" alt="logo" />
-    </>
+      <div className="flex h-screen justify-center items-center  rounded-lg">
+          <img src={logo} className="App-logo" alt="logo" />
+      </div>    </>
   );
 }
 
