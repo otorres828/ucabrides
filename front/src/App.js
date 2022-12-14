@@ -18,6 +18,7 @@ import Perfi from "./pages/app/Perfil";
 import MapView from "./pages/app/MapView";
 import Rol from "./pages/app/Rol";
 import ListadoColas from "./components/app/ListadoColas";
+import Mensajes from "./pages/app/Mensajes";
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -62,7 +63,8 @@ function App() {
           <Route path="/perfil"  element={<Perfi user={user} />} />
           <Route path="/rol"  element={<Rol user={user} />} />
           <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
-          
+          <Route path="/mensajes"  element={<Mensajes user={user} />} />
+
         </Route>
       </Routes>
     </>

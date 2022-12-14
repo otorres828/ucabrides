@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../../components/app/Sidebar";
+import Rsidebar from "../../components/app/Rsidebar";
 import MensajesDarCola from "../../components/app/MensajesDarCola";
 import MensajesRecibirCola from "../../components/app/MensajesRecibirCola";
 
@@ -36,7 +36,7 @@ function Mensajes({user}) {
           </div>
         </div>
       </div>
-      <Sidebar />
+      <Rsidebar />
     </>
   );
 }
