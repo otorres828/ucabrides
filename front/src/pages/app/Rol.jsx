@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Rsidebar from "../../components/app/Rsidebar";
 
 function Rol() {
   return (
@@ -16,8 +17,8 @@ function Rol() {
             </div>
           </NavLink>
           <NavLink to="/listado/colas">
-            <div className="content-center mt-4 bg-red-500 border-collapse hover:bg-red-600 border-gray-400   lg:border-gray-400 rounded-lg  p-4 leading-normal">
-              <div className="">
+            <div className="content-center mt-4 bg-slate-500 border-collapse hover:bg-slate-600 border-gray-400   lg:border-gray-400 rounded-lg  p-4 leading-normal">
+              <div className="justify-center">
                 <div className="text-white font-bold  text-3xl mb-2 text-center ">
                   RECIBIR COLA
                 </div>
@@ -26,6 +27,7 @@ function Rol() {
           </NavLink>
         </div>
       </div>
+      <Rsidebar/>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Rsidebar from "./Rsidebar";
-import logo from "../../images/fondo_logo.png";
+import logo from "../../images/fondo_logos.png";
 import ConfirmarDistancia from "./ConfirmarDistancia";
 import axios from "../../api/axios";
 
