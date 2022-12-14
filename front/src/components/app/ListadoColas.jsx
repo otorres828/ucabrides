@@ -58,7 +58,8 @@ function ListadoColas() {
       <Rsidebar />
       <div className="flex h-screen justify-center items-center  rounded-lg">
           <img src={logo} className="App-logo" alt="logo" />
-      </div>    </>
+      </div>    
+    </>
   );
 }
 
