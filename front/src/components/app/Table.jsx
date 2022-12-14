@@ -50,7 +50,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
       }); //SE AÑADE EL OBJETO FILTRADO A UN NUEVO ARRAY
     }
   };
-  
+
   useEffect(() => {
     function calcularRutas() {
       rutas.map((ruta) => {
@@ -66,55 +66,60 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
 
   return (
     <>
+      <h1 className="font-bold text-slate-600 text-xl">
+        Bienvenido al listado de Colas Disponibles
+      </h1>
       {rutas_disponibles.length > 0 && (
-        <ul className="mb-6">
-          {rutas_disponibles.map((row) => (
-            <li
-              key={row.id}
-              className="rounded-lg bg-slate-200 p-3 font-semibold my-3 cursor-pointer"
-              onClick={() => {
-                setDetalles(row);
-                setOpen(true);
-              }}
+        <div>
+          <ul className="mb-6">
+            {rutas_disponibles.map((row) => (
+              <li
+                key={row.id}
+                className="rounded-lg bg-slate-200 p-3 font-semibold my-3 cursor-pointer"
+                onClick={() => {
+                  setDetalles(row);
+                  setOpen(true);
+                }}
+              >
+                te dejaran a {row.distancia} metros - 2 asientos disponibles
+              </li>
+            ))}
+            <Dialog
+              fullWidth={true}
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
             >
-              te dejaran a {row.distancia} metros - 2 asientos disponibles
-            </li>
-          ))}
-          <Dialog
-            fullWidth={true}
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">
-              <div className="text-2xl text-teal-900 font-bold text-center">
-                Detalles de la Cola
-              </div>
-            </DialogTitle>
-            <DialogContent>
-              {/* LLAMAMOS AL MODAL CON EL MAPA */}
-              <MapaReferencia
-                detalles={detalles}
-                localizacion_usuario={localizacion_usuario}
-              />
-            </DialogContent>
-            <DialogActions>
-              <div
-                className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
-                onClick={handleClose}
-              >
-                Continuar
-              </div>
-              <div
-                className="bg-green-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
-                onClick={handleClose}
-              >
-                Cerrar
-              </div>
-            </DialogActions>
-          </Dialog>
-        </ul>
+              <DialogTitle id="alert-dialog-title">
+                <div className="text-2xl text-teal-900 font-bold text-center">
+                  Detalles de la Cola
+                </div>
+              </DialogTitle>
+              <DialogContent>
+                {/* LLAMAMOS AL MODAL CON EL MAPA */}
+                <MapaReferencia
+                  detalles={detalles}
+                  localizacion_usuario={localizacion_usuario}
+                />
+              </DialogContent>
+              <DialogActions>
+                <div
+                  className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
+                  onClick={handleClose}
+                >
+                  Continuar
+                </div>
+                <div
+                  className="bg-green-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
+                  onClick={handleClose}
+                >
+                  Cerrar
+                </div>
+              </DialogActions>
+            </Dialog>
+          </ul>
+        </div>
       )}
     </>
   );
