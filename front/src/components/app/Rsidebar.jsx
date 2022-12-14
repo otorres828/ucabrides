@@ -29,7 +29,7 @@ function Rsidebar() {
                 }
               >
                 {carro}
-                <span className="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
+                <span className="pb-1 md:ml-2 font-bold md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
                   Panel
                 </span>
               </NavLink>
@@ -44,7 +44,7 @@ function Rsidebar() {
                 }
               >
                 {mensajes}
-                <span className="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
+                <span className="pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
                   Mensajes
                 </span>
               </NavLink>
@@ -60,7 +60,7 @@ function Rsidebar() {
                 }
               >
                 {carro}
-                <span className=" pb-1 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
+                <span className=" pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
                   Amigos
                 </span>
               </NavLink>
@@ -74,7 +74,7 @@ function Rsidebar() {
                 }
               >
                 {notificacion}
-                <span className="pb-1 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
+                <span className="pb-1  font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
                   Avisos
                 </span>
               </NavLink>
@@ -89,7 +89,7 @@ function Rsidebar() {
                 }
               >
                 {profle}
-                <span className="pb-1 font-bold md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
+                <span className="pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
                   Perfil
                 </span>
               </NavLink>
