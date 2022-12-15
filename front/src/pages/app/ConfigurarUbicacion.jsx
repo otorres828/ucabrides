@@ -8,13 +8,6 @@ const containerStyle = {
 };
 
 function ConfigurarUbicacion() {
-  let headers = new Headers();
-
-  headers.append("Content-Type", "application/json");
-  headers.append("Accept", "application/json");
-
-  headers.append("Access-Control-Allow-Origin", "http://localhost:3000");
-  headers.append("Access-Control-Allow-Credentials", "true");
   const claveapi = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -35,7 +28,13 @@ function ConfigurarUbicacion() {
   }, [lugar]);
 
   const getLugares = async()=>{
-    const response = await axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${lugar}&key=${claveapi}`)
+    const response = await axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${lugar}&key=AIzaSyBTL6mwVxZgbLAokpY6eIfqD35FKfRQhpo`,
+   { headers: {
+      'Access-Control-Allow-Origin': '*',
+      'origin':'x-requested-with',
+      'Access-Control-Allow-Headers': 'POST, GET, PUT, DELETE, OPTIONS, HEAD, Authorization, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin',
+      'Content-Type': 'application/json',
+  },})
     setLugar2(response.data)
   }
 
