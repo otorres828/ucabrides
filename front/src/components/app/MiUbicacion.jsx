@@ -41,10 +41,11 @@ function MiUbicacion() {
               CONFIGURAR UBICACION
             </div>
           </DialogTitle>
-          <DialogContent>
-
+          <div className="mx-2 z-30">
             <ConfigurarUbicacion />
-            </DialogContent>
+
+          </div>
+         
 
           <DialogActions>
             <div

@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
 
 export default function ConfigurarUbicacion() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBTL6mwVxZgbLAokpY6eIfqD35FKfRQhpo",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
   });
 
@@ -20,6 +25,7 @@ export default function ConfigurarUbicacion() {
 
 function Map() {
   const [selected, setSelected] = useState(null);
+  const [map, setMap] = useState(null);
 
   const containerStyle = {
     width: "100%",
@@ -29,17 +35,24 @@ function Map() {
     lat: 8.297321035371798,
     lng: -62.71149786538124,
   };
+
+  useEffect(() => {
+    function panto() {
+      const google = window.google;
+      navigator.geolocation.getCurrentPosition(function (position) {
+        map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
+      });
+    }
+    panto();
+  }, [selected]);
+
   return (
     <>
-      <div className="places-container">
-        <PlacesAutocomplete setSelected={setSelected} />
-      </div>
-
       <GoogleMap
+        onLoad={(map) => setMap(map)}
         mapContainerStyle={containerStyle}
         center={ucab}
         zoom={15}
-        mapContainerClassName="map-container"
         options={{
           zoomControl: false,
           streetViewControl: false,
@@ -47,7 +60,9 @@ function Map() {
           fullscreenControl: false,
         }}
       >
-        {selected && <Marker position={selected} />}
+        {selected && <Marker position={selected} draggable={true} />}
+
+        <PlacesAutocomplete setSelected={setSelected} />
       </GoogleMap>
     </>
   );
@@ -55,9 +70,10 @@ function Map() {
 
 const PlacesAutocomplete = ({ setSelected }) => {
   const {
-   
+    ready,
+    value,
     setValue,
-    suggestions: {  data },
+    suggestions: { status, data },
     clearSuggestions,
   } = usePlacesAutocomplete();
 
@@ -71,25 +87,23 @@ const PlacesAutocomplete = ({ setSelected }) => {
   };
 
   return (
-    <>
-   <Autocomplete
-        freeSolo
-        disableClearable
-        options={data.map((option) => option.description)}
-        renderInput={(params) => (
-          <TextField className="z-30"
-            onChange={(e) => setValue(e.target.value)}
-            {...params}
-            label="Buscar Zona"
-            InputProps={{
-              ...params.InputProps,
-              type: 'search',
-            }}
-          />
-        )}
+    <Combobox onSelect={handleSelect} className="relative z-auto">
+      <ComboboxInput
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        disabled={!ready}
+        placeholder="Escriba su direccion"
+        className="shadow-lg bg-blue-100 w-full p-3"
       />
 
-    </>
-      
+      {status === "OK" &&
+        data.map(({ place_id, description }) => (
+          <div className="bg-slate-50">
+            <ComboboxList>
+              <ComboboxOption key={place_id} value={description} />
+            </ComboboxList>
+          </div>
+        ))}
+    </Combobox>
   );
 };
