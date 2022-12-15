@@ -4,6 +4,7 @@ import CerrarSesion from "../../components/app/CerrarSesion";
 import Clave from "../../components/app/Clave";
 import DistanciaCaminar from "../../components/app/DistanciaCaminar";
 import MiUbicacion from "../../components/app/MiUbicacion";
+import ConfigurarUbicacion from "./ConfigurarUbicacion";
 
 function Perfi({ user }) {
   user = JSON.parse(user);
@@ -92,7 +93,9 @@ function Perfi({ user }) {
               </h3>
               <div className="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
               <Clave />
-              <MiUbicacion/>
+             <ConfigurarUbicacion/>
+
+              {/* <MiUbicacion/> */}
               <DistanciaCaminar />
 
                 <a

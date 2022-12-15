@@ -1,49 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import axios from "../../api/axios";
+import { useState, useMemo } from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
 
-const containerStyle = {
-  width: "100%",
-  height: "67vh",
-};
-
-function ConfigurarUbicacion() {
-  const claveapi = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: claveapi,
+export default function ConfigurarUbicacion() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey:  process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries: ["places"],
   });
 
-  const [lugar, setLugar] = useState();
-  const [lugar2, setLugar2] = useState({});
+  if (!isLoaded) return <div>Loading...</div>;
+  return <Map />;
+}
 
+function Map() {
+  const [selected, setSelected] = useState(null);
+
+  const containerStyle = {
+    width: "100%",
+    height: "100vh",
+  };
   const ucab = {
     lat: 8.297321035371798,
     lng: -62.71149786538124,
   };
-
-  useEffect(() => {
-    getLugares()
-    console.log(lugar2)
-  }, [lugar]);
-
-  const getLugares = async()=>{
-    const response = await axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${lugar}&key=AIzaSyBTL6mwVxZgbLAokpY6eIfqD35FKfRQhpo`,
-   { headers: {
-      'Access-Control-Allow-Origin': '*',
-      'origin':'x-requested-with',
-      'Access-Control-Allow-Headers': 'POST, GET, PUT, DELETE, OPTIONS, HEAD, Authorization, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin',
-      'Content-Type': 'application/json',
-  },})
-    setLugar2(response.data)
-  }
-
   return (
-    isLoaded && (
+    <>
+      <div className="places-container">
+        <PlacesAutocomplete setSelected={setSelected} />
+      </div>
+
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={ucab}
         zoom={15}
+        mapContainerClassName="map-container"
         options={{
           zoomControl: false,
           streetViewControl: false,
@@ -51,31 +52,48 @@ function ConfigurarUbicacion() {
           fullscreenControl: false,
         }}
       >
-        <input
-          onChange={(e) => {
-            setLugar(e.target.value);
-          }}
-          type="text"
-          className="shadow mt-3 mx-3"
-          placeholder="ingresa el lugar"
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            width: `240px`,
-            height: `32px`,
-            padding: `0 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `14px`,
-            outline: `none`,
-            textOverflow: `ellipses`,
-            position: "absolute",
-            left: "50%",
-            marginLeft: "-120px",
-          }}
-        />
+        {selected && <Marker position={selected} />}
       </GoogleMap>
-    )
+    </>
   );
 }
-export default ConfigurarUbicacion;
+
+const PlacesAutocomplete = ({ setSelected }) => {
+  const {
+    ready,
+    value,
+    setValue,
+    suggestions: { status, data },
+    clearSuggestions,
+  } = usePlacesAutocomplete();
+
+  const handleSelect = async (address) => {
+    setValue(address, false);
+    clearSuggestions();
+
+    const results = await getGeocode({ address });
+    const { lat, lng } = await getLatLng(results[0]);
+    setSelected({ lat, lng });
+  };
+
+  return (
+    <Combobox onSelect={handleSelect} className="z-40">
+    
+      <ComboboxInput
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        disabled={!ready}
+        placeholder="Escriba su direccion"
+        className="shadow w-96 border-spacing-0 p-2 justify-center z-30"
+      />
+      <ComboboxPopover className="z-40">
+        <ComboboxList className="z-40">
+          {status === "OK" &&
+            data.map(({ place_id, description }) => (
+              <ComboboxOption key={place_id} value={description} />
+            ))}
+        </ComboboxList>
+      </ComboboxPopover>
+    </Combobox>
+  );
+};

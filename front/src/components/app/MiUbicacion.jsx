@@ -42,8 +42,10 @@ function MiUbicacion() {
             </div>
           </DialogTitle>
           <DialogContent>
+
             <ConfigurarUbicacion />
-          </DialogContent>
+            </DialogContent>
+
           <DialogActions>
             <div
               className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
