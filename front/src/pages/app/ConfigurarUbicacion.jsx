@@ -30,11 +30,14 @@ function ConfigurarUbicacion() {
   };
 
   useEffect(() => {
-    fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${lugar}&key=${claveapi}`
-    )
-      .then((dog) => console.log(dog));
+    getLugares()
+    console.log(lugar2)
   }, [lugar]);
+
+  const getLugares = async()=>{
+    const response = await axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${lugar}&key=${claveapi}`)
+    setLugar2(response.data)
+  }
 
   return (
     isLoaded && (
