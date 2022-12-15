@@ -7,11 +7,12 @@ import usePlacesAutocomplete, {
 import {
   Combobox,
   ComboboxInput,
-  ComboboxPopover,
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import logo from "../../images/fondo_logos.png";
+
 
 export default function ConfigurarUbicacion() {
   const { isLoaded } = useLoadScript({
@@ -19,7 +20,10 @@ export default function ConfigurarUbicacion() {
     libraries: ["places"],
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return;
+  <div className="flex h-screen justify-center items-center  rounded-lg">
+    <img src={logo} className="App-logo" alt="logo" />
+  </div>;
   return <Map />;
 }
 

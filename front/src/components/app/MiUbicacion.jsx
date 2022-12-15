@@ -41,7 +41,7 @@ function MiUbicacion() {
               CONFIGURAR UBICACION
             </div>
           </DialogTitle>
-          <div className="mx-2 z-30">
+          <div className="mx-2">
             <ConfigurarUbicacion />
 
           </div>
@@ -52,7 +52,7 @@ function MiUbicacion() {
               className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
               onClick={handlecambiar}
             >
-              Cambiar
+              Guardar
             </div>
             <div
               className="bg-green-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
