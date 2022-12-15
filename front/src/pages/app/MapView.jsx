@@ -34,6 +34,7 @@ function MapView() {
   const [localizacion_usuario, setLocalizacion_usuario] = useState({});
   const [my_location, setMy_location] = useState({});
   const [puntomascerca, setPuntomascerca] = useState();
+  
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,

@@ -5,8 +5,7 @@ import { gapi } from "gapi-script";
 import { GoogleLogin } from "@leecheuk/react-google-login";
 import { useNavigate } from "react-router-dom";
 
-const clientId =
-  "566475494260-fmfmpam1426a3r1f1bh02ap6u657hp83.apps.googleusercontent.com";
+const clientId ="566475494260-fmfmpam1426a3r1f1bh02ap6u657hp83.apps.googleusercontent.com";
 
 function ButtomGmail() {
   const { enqueueSnackbar } = useSnackbar();
@@ -48,7 +47,7 @@ function ButtomGmail() {
   };
 
   const responseGoogleFailed = (response) => {
-    console.log("error de conexion");
+    console.log("error de conexion "+ response);
   };
 
   useEffect(() => {
