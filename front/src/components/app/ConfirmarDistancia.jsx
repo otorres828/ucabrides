@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -10,7 +10,6 @@ import { distancia_a_caminar } from "../../hooks/RutaMasCorta";
 function ConfirmarDistancia() {
   const [open, setOpen] = useState(true);
   const [distancia, setDistancia] = useState("");
-  const [actual, setActual] = useState("");
   const { enqueueSnackbar } = useSnackbar();
 
   const handlecambiar = async () => {
@@ -28,7 +27,6 @@ function ConfirmarDistancia() {
           enqueueSnackbar(res.data.error, { variant: "error" });
         else {
           setOpen(false)
-          obtener_distancia()
           enqueueSnackbar("Distancia cambiada exitosamente :D ", {
             variant: "success",
           });
@@ -47,17 +45,6 @@ function ConfirmarDistancia() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  function obtener_distancia() {
-    distancia_a_caminar().then((result) => {
-      // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
-      setActual(result);
-    });
-  }
-
-  useEffect(()=>{
-    obtener_distancia();
-  },[])
 
   return (
     <>
