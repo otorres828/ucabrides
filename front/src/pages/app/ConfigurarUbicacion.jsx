@@ -4,14 +4,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css";
+
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
@@ -62,10 +55,9 @@ function Map() {
 
 const PlacesAutocomplete = ({ setSelected }) => {
   const {
-    ready,
-    value,
+   
     setValue,
-    suggestions: { status, data },
+    suggestions: {  data },
     clearSuggestions,
   } = usePlacesAutocomplete();
 

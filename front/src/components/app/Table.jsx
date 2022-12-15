@@ -9,7 +9,6 @@ import MapaReferencia from "../../pages/app/MapaReferencia";
 function BasicTable({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles, setDetalles] = useState({});
-  const google = window.google;
   const ucab = {
     lat: 8.297321035371798,
     lng: -62.71149786538124,
@@ -26,8 +25,10 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
       lat: parseFloat(destino.lat),
       lng: parseFloat(destino.lng),
     };
-    var directionsService = new google.maps.DirectionsService();
+    const google = window.google;
 
+    var directionsService = new google.maps.DirectionsService();
+    
     const results = await directionsService.route({
       origin: ucab,
       destination: ruta,
