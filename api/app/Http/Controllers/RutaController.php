@@ -12,8 +12,8 @@ class RutaController extends Controller
     }
 
     public function perfil_localizacion(){
-        return response()->json(['lat'=>'8.352143',
-                                'lng'=>'-62.665064']);
+        $direccion = auth()->user()->direccion;
+        return response()->json($direccion);
     }
 
     public function distancia_dispuesto_caminar(){
@@ -30,6 +30,6 @@ class RutaController extends Controller
 
         $user = auth()->user();
         $user->update(['direccion'=>$request->LatLng]);
-        return response()->json(['exito'=>$request->LatLng]);
+        return response()->json($request->LatLng);
     }
 }

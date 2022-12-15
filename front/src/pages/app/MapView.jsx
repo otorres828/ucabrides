@@ -65,6 +65,7 @@ function MapView() {
     }) 
     obtener_localizacion_direccion_usuario().then(result => { //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
       setLocalizacion_usuario(result)
+      console.log(result)
     })     
     console.log('ejecutando');
     rutas.map((ruta) => {

@@ -9,6 +9,7 @@ import {
   obtener_localizacion_direccion_usuario,
 } from "../../hooks/RutaMasCorta";
 import BasicTable from "./Table";
+import RedirigirPerfilUbicacion from "./RedirigirPerfilUbicacion";
 
 function ListadoColas() {
   const [rutas, setRutas] = useState([]);
@@ -44,7 +45,7 @@ function ListadoColas() {
 
   return rutas.length > 0 &&
     distancia > 0 &&
-    JSON.stringify(localizacion_usuario) !== "{}" ? (
+    JSON.stringify(localizacion_usuario) === null ? (
     <>
       <div className="container mx-auto">
         <div className="p-5 pt-12 mb-10 sm:px-20">
@@ -61,6 +62,7 @@ function ListadoColas() {
     <>
       {distancia === 0 && <ConfirmarDistancia />}
       <Rsidebar />
+      {localizacion_usuario !==null &&  <RedirigirPerfilUbicacion />}
       <div className="flex h-screen justify-center items-center  rounded-lg">
         <img src={logo} className="App-logo" alt="logo" />
       </div>
