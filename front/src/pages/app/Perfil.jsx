@@ -93,9 +93,9 @@ function Perfi({ user }) {
               </h3>
               <div className="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
               <Clave />
-             <ConfigurarUbicacion/>
+             {/* <ConfigurarUbicacion/> */}
 
-              {/* <MiUbicacion/> */}
+              <MiUbicacion/>
               <DistanciaCaminar />
 
                 <a

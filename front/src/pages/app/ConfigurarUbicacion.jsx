@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -12,6 +12,8 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 export default function ConfigurarUbicacion() {
   const { isLoaded } = useLoadScript({
@@ -28,7 +30,7 @@ function Map() {
 
   const containerStyle = {
     width: "100%",
-    height: "100vh",
+    height: "50vh",
   };
   const ucab = {
     lat: 8.297321035371798,
@@ -77,23 +79,25 @@ const PlacesAutocomplete = ({ setSelected }) => {
   };
 
   return (
-    <Combobox onSelect={handleSelect} className="z-40">
-    
-      <ComboboxInput
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
-        placeholder="Escriba su direccion"
-        className="shadow w-96 border-spacing-0 p-2 justify-center z-30"
+    <>
+   <Autocomplete
+        freeSolo
+        disableClearable
+        options={data.map((option) => option.description)}
+        renderInput={(params) => (
+          <TextField className="z-30"
+            onChange={(e) => setValue(e.target.value)}
+            {...params}
+            label="Buscar Zona"
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+          />
+        )}
       />
-      <ComboboxPopover className="z-40">
-        <ComboboxList className="z-40">
-          {status === "OK" &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
+
+    </>
+      
   );
 };
