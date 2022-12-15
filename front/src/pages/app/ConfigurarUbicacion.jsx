@@ -69,7 +69,7 @@ function Map() {
   useEffect(() => {
     panto();
     setUbicacion(selected);
-  }, [selected, ubicacion]);
+  }, [selected]);
 
   return (
     <>
