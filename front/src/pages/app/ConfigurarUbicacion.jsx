@@ -17,7 +17,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 export default function ConfigurarUbicacion() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey:  process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyBTL6mwVxZgbLAokpY6eIfqD35FKfRQhpo",
     libraries: ["places"],
   });
 
