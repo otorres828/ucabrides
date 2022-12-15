@@ -19,6 +19,7 @@ import MapView from "./pages/app/MapView";
 import Rol from "./pages/app/Rol";
 import ListadoColas from "./components/app/ListadoColas";
 import Mensajes from "./pages/app/Mensajes";
+import ConfigurarUbicacion from "./pages/app/ConfigurarUbicacion";
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -64,6 +65,7 @@ function App() {
           <Route path="/rol"  element={<Rol user={user} />} />
           <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
           <Route path="/mensajes"  element={<Mensajes user={user} />} />
+          <Route path="/configurar/ubicacion"  element={<ConfigurarUbicacion user={user} />} />
 
         </Route>
       </Routes>

@@ -5,7 +5,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useSnackbar } from "notistack";
 import axios from "../../api/axios";
-import { distancia_a_caminar } from "../../hooks/RutaMasCorta";
 
 function ConfirmarDistancia() {
   const [open, setOpen] = useState(true);

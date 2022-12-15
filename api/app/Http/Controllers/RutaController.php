@@ -25,4 +25,11 @@ class RutaController extends Controller
         $user->update(['distancia'=>$request->distancia]);
         return response()->json(['exito'=>$request->distancia]);
     }
+
+    public function cambiar_ubicacion (Request $request){
+
+        $user = auth()->user();
+        $user->update(['direccion'=>$request->LatLng]);
+        return response()->json(['exito'=>$request->LatLng]);
+    }
 }

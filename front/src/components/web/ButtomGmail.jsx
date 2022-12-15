@@ -62,17 +62,9 @@ function ButtomGmail() {
 
   return (
     <>
-      <GoogleLogin
+      <GoogleLogin className="w-full justify-center text-white bg-red-400 hover:bg-red-500"
         clientId={clientId}
-        render={(renderProps) => (
-          <button
-            className="btn px-0 text-white bg-red-400 hover:bg-red-500 w-full relative flex items-center"
-            onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
-          >
-            Continuar con Correo Ucab
-          </button>
-        )}
+        buttonText="Continuar con Correo Ucab"
         onSuccess={responseGoogleSuccess}
         onFailure={responseGoogleFailed}
       />

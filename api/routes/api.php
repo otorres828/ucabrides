@@ -19,6 +19,7 @@ Route::get('perfil_localizacion',[RutaController::class,'perfil_localizacion']);
 Route::group(['middleware'=>'auth'],function(){
     Route::get('distancia_dispuesto_caminar',[RutaController::class,'distancia_dispuesto_caminar']);
     Route::post('cambiar_distancia_caminar',[RutaController::class,'cambiar_distancia_caminar']);
+    Route::post('cambiar_ubicacion',[RutaController::class,'cambiar_ubicacion']);
     Route::post('cambiarclave',[AuthController::class,'cambiarclave']);
 });
 
