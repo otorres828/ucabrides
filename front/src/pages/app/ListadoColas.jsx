@@ -9,9 +9,10 @@ import {
 } from "../../hooks/RutaMasCorta";
 import BasicTable from "../../components/app/Table";
 import RedirigirPerfilUbicacion from "../../components/app/RedirigirPerfilUbicacion";
+import AlertaSinColas from "../../components/app/AlertaSinColas";
 
-function ListadoColas() {
-  const [rutas, setRutas] = useState([]);
+function ListadoColas({user}) {
+  const [rutas, setRutas] = useState(null);
   const [distancia, setDistancia] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
   const access_token = localStorage.getItem("access_token");
@@ -48,7 +49,7 @@ function ListadoColas() {
     inicializar();
   }, []);
 
-  return direccion_usuario !== null && distancia !== null ? (
+  return direccion_usuario !== null && distancia !== null && rutas!==null ? (
     (JSON.stringify(direccion_usuario)==='{}' || distancia===0) ?
     <RedirigirPerfilUbicacion />
     :
@@ -66,9 +67,13 @@ function ListadoColas() {
         <Rsidebar />
       </>
     ) : (
+      <>
       <div className="flex h-screen justify-center items-center  rounded-lg">
         <img src={logo} className="App-logo" alt="logo" />
       </div>
+      <AlertaSinColas user={user}/>
+      <Rsidebar />
+      </>
     )
   ) : (
     <>
@@ -76,6 +81,7 @@ function ListadoColas() {
         <img src={logo} className="App-logo" alt="logo" />
       </div>
       <Rsidebar />
+      
     </>
   );
 }

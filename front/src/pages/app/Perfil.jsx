@@ -5,7 +5,7 @@ import Clave from "../../components/app/Clave";
 import DistanciaCaminar from "../../components/app/DistanciaCaminar";
 import MiUbicacion from "../../components/app/MiUbicacion";
 
-function Perfi({ user }) {
+function Perfil({ user }) {
   user = JSON.parse(user);
 
   return (
@@ -173,4 +173,4 @@ function Perfi({ user }) {
   );
 }
 
-export default Perfi;
+export default Perfil;

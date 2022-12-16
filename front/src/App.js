@@ -14,7 +14,7 @@ import AOS from 'aos';
 import { useSnackbar } from "notistack";
 import useNetwork from "./hooks/useNetwork";
 import { RedirectLogin, RedirectPanel } from "./components/ProtectedRoute";
-import Perfi from "./pages/app/Perfil";
+import Perfil from "./pages/app/Perfil";
 import MapView from "./pages/app/MapView";
 import Rol from "./pages/app/Rol";
 import ListadoColas from "./pages/app/ListadoColas";
@@ -61,7 +61,7 @@ function App() {
         {/* PARA ACCEDER DEBE DE EXISTIR UN UNSUARIO LOGUEADO */}
         <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
           <Route path="/mapa" element={<MapView />} />
-          <Route path="/perfil"  element={<Perfi user={user} />} />
+          <Route path="/perfil"  element={<Perfil user={user} />} />
           <Route path="/rol"  element={<Rol user={user} />} />
           <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
           <Route path="/mensajes"  element={<Mensajes user={user} />} />
