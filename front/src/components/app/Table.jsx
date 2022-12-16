@@ -5,10 +5,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import MapaReferencia from "../../pages/app/MapaReferencia";
+import logo from "../../images/fondo_logos.png";
 
 function BasicTable({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles, setDetalles] = useState({});
+  const user = localStorage.getItem("user");
   const ucab = {
     lat: 8.297321035371798,
     lng: -62.71149786538124,
@@ -67,11 +69,11 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
 
   return (
     <>
+      {rutas_disponibles.length > 0 ? (
+        <div>
       <h1 className="font-bold text-slate-600 text-xl">
         Bienvenido al listado de Colas Disponibles
       </h1>
-      {rutas_disponibles.length > 0 && (
-        <div>
           <ul className="mb-6">
             {rutas_disponibles.map((row) => (
               <li
@@ -121,7 +123,11 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
             </Dialog>
           </ul>
         </div>
-      )}
+      ):
+      <div className="flex h-screen justify-center items-center  rounded-lg">
+        <img src={logo} className="App-logo" alt="logo" />
+      </div>
+      }
     </>
   );
 }

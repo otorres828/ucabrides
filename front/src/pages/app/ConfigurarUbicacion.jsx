@@ -1,22 +1,30 @@
 import { useState, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
+import logo from "../../images/fondo_logos.png";
 import useOnclickOutside from "react-cool-onclickoutside";
 import Rsidebar from "../../components/app/Rsidebar";
 import { Box, Flex } from "@chakra-ui/react";
 import axios from "../../api/axios";
 import { useSnackbar } from "notistack";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+
+
 export default function ConfigurarUbicacion() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyBTL6mwVxZgbLAokpY6eIfqD35FKfRQhpo",
     libraries: ["places"],
   });
 
-  if (!isLoaded) return;
-  return <Map />;
+  return isLoaded ? (
+    <Map />
+  ) : (
+    <div className="flex h-screen justify-center items-center  rounded-lg">
+      <img src={logo} className="App-logo" alt="logo" />
+    </div>
+  );
 }
 
 function Map() {
@@ -35,41 +43,35 @@ function Map() {
   };
   const google = window.google;
 
-  
   const handlecambiar = async () => {
     const access_token = localStorage.getItem("access_token");
-      try {
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${access_token}`;
-        const res = await axios.post(`cambiar_ubicacion`, {
-          LatLng: ubicacion,
+    try {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+      const res = await axios.post(`cambiar_ubicacion`, {
+        LatLng: ubicacion,
+      });
+
+      if (res.data.error) enqueueSnackbar(res.data.error, { variant: "error" });
+      else {
+        console.log(res.data);
+        enqueueSnackbar("Ubicacion cambiada exitosamente :D ", {
+          variant: "success",
         });
-
-        if (res.data.error)
-          enqueueSnackbar(res.data.error, { variant: "error" });
-        else {
-          console.log(res.data)
-          enqueueSnackbar("Ubicacion cambiada exitosamente :D ", {
-            variant: "success",
-          });
-          delete axios.defaults.headers.common["Authorization"];
-        }
-      } catch (error) {
-        enqueueSnackbar("Error de conexion", { variant: "error" });
+        delete axios.defaults.headers.common["Authorization"];
       }
-
+    } catch (error) {
+      enqueueSnackbar("Error de conexion", { variant: "error" });
+    }
   };
-
-
-  function panto() {
-    if (selected !== null)
-      map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
-  }
+  
   useEffect(() => {
+      function panto() {
+        if (selected !== null)
+          map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
+      }
     panto();
     setUbicacion(selected);
-  }, [selected,ubicacion]);
+  }, [selected, ubicacion]);
 
   return (
     <>
@@ -92,9 +94,13 @@ function Map() {
             fullscreenControl: false,
           }}
         >
-          {selected && <Marker position={selected} draggable={true}  onDragEnd={(e) => setUbicacion(e.latLng)}
-
-          />}
+          {selected && (
+            <Marker
+              position={selected}
+              draggable={true}
+              onDragEnd={(e) => setUbicacion(e.latLng)}
+            />
+          )}
         </GoogleMap>
         <Box
           p={4}
@@ -108,18 +114,20 @@ function Map() {
           <PlacesAutocomplete setSelected={setSelected} />
         </Box>
       </Flex>
-      {ubicacion && 
-      <div className="fixed bottom-20 z-30 rounded-lg mx-auto">
-        <div className="content-center   justify-between">
-          <div className="m-3 rounded-lg bg-gradient-to-l  vh-100 flex flex-row md:flex-col pt-3 md:py-3  px-2 text-center ">
-            <button className=" bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded " onClick={handlecambiar}>
-              Guardar
-            </button>
+      {ubicacion && (
+        <div className="fixed bottom-20 z-30 rounded-lg mx-auto">
+          <div className="content-center   justify-between">
+            <div className="m-3 rounded-lg bg-gradient-to-l  vh-100 flex flex-row md:flex-col pt-3 md:py-3  px-2 text-center ">
+              <button
+                className=" bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded "
+                onClick={handlecambiar}
+              >
+                Guardar
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      
-      }
+      )}
       <Rsidebar />
     </>
   );
@@ -171,7 +179,7 @@ const PlacesAutocomplete = ({ setSelected }) => {
         <li
           key={place_id}
           onClick={handleSelect(suggestion)}
-          className="bg-slate-50 cursor-pointer p-1 border"
+          className="bg-slate-50 cursor-pointer p-1 border hover:bg-zinc-300"
         >
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
@@ -185,8 +193,7 @@ const PlacesAutocomplete = ({ setSelected }) => {
         onChange={handleInput}
         disabled={!ready}
         placeholder="Ingrese su Zona"
-        className="p-2 border bg-slate-50  w-full"
-        color="blue"
+        className="p-2 border bg-slate-50  w-full border-blue-400"
       />
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === "OK" && <ul>{renderSuggestions()}</ul>}

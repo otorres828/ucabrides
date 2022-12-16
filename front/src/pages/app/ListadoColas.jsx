@@ -5,7 +5,6 @@ import axios from "../../api/axios";
 
 import {
   listado_rutas_disponibles,
-  obtener_direccion_usuario,
 } from "../../hooks/RutaMasCorta";
 import BasicTable from "../../components/app/Table";
 import RedirigirPerfilUbicacion from "../../components/app/RedirigirPerfilUbicacion";
@@ -15,9 +14,9 @@ function ListadoColas({user}) {
   const [rutas, setRutas] = useState(null);
   const [distancia, setDistancia] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
-  const access_token = localStorage.getItem("access_token");
-
+  
   useEffect(() => {
+    const access_token = localStorage.getItem("access_token");
     function inicializar() {
       listado_rutas_disponibles().then((result) => {
         //LISTADO DE RUTAS DISPONIBLES
