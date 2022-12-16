@@ -16,8 +16,8 @@ function RedirigirPerfilUbicacion() {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            <div className="text-xl text-teal-900 font-bold text-center">
-           Antes de continuar, asegurese de tener una direccion y distancia guardada, vaya a su perfil haciendo click en el boton y presione en "Configurar Direccion" o "Distancia dispuesto/a a caminar"
+            <div className="text-sm text-teal-900 font-bold text-justify">
+           Antes de continuar, asegurese de tener una direccion y distancia guardada, vaya a su perfil haciendo click en el boton azul "Ir a Perfil", luego presione la opcion "Configurar Direccion" o "Distancia dispuesto/a a caminar"
             </div>
           </DialogTitle>
           
