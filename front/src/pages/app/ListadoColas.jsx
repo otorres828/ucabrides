@@ -49,8 +49,8 @@ function ListadoColas({user}) {
     inicializar();
   }, []);
 
-  return direccion_usuario !== null && distancia !== null && rutas!==null ? (
-    (JSON.stringify(direccion_usuario)==='{}' || distancia===0) ?
+  return direccion_usuario !== null && distancia !== null && rutas!==null ? (   //ESPERA A QUE SE HAGAN LAS PETICIONES A LA API
+    (JSON.stringify(direccion_usuario)==='{}' || distancia===0) ?               //EN CASO DE QUE LAS PETICIONES TENGAN VALORES VACIOS  
     <RedirigirPerfilUbicacion />
     :
     rutas.length > 0 ? (
@@ -80,8 +80,7 @@ function ListadoColas({user}) {
       <div className="flex h-screen justify-center items-center  rounded-lg">
         <img src={logo} className="App-logo" alt="logo" />
       </div>
-      <Rsidebar />
-      
+      <Rsidebar />  
     </>
   );
 }
