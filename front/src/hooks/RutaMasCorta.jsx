@@ -24,8 +24,8 @@ const distancia = (lat1, lon1, lat2, lon2) => {
   return RADIO_TIERRA_EN_KILOMETROS * c * 1000;
 };
 
-export const obtener_localizacion_direccion_usuario = async () => {
-    const localizacion=await axios.get("perfil_localizacion", {
+export const obtener_direccion_usuario = async () => {
+    const localizacion=await axios.get("perfil_direccion", {
       headers: {
         Authorization: `Bearer ${access_token}`,
         Accept: "application/json",

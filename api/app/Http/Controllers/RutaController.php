@@ -11,7 +11,7 @@ class RutaController extends Controller
         return response()->json(['rutas'=>Rutas::all()]);
     }
 
-    public function perfil_localizacion(){
+    public function perfil_direccion(){
         $direccion = auth()->user()->direccion;
         return response()->json($direccion);
     }
@@ -27,7 +27,6 @@ class RutaController extends Controller
     }
 
     public function cambiar_ubicacion (Request $request){
-
         $user = auth()->user();
         $user->update(['direccion'=>$request->LatLng]);
         return response()->json($request->LatLng);

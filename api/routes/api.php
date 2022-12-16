@@ -14,9 +14,9 @@ Route::post('login', [AuthController::class,'login']);
 
 Route::get('listado_rutas_disponibles', [RutaController::class,'listado_rutas_disponibles']);
 Route::post('refresh', [AuthController::class,'refresh']);
-Route::get('perfil_localizacion',[RutaController::class,'perfil_localizacion']);
 
 Route::group(['middleware'=>'auth'],function(){
+    Route::get('perfil_direccion',[RutaController::class,'perfil_direccion']);
     Route::get('distancia_dispuesto_caminar',[RutaController::class,'distancia_dispuesto_caminar']);
     Route::post('cambiar_distancia_caminar',[RutaController::class,'cambiar_distancia_caminar']);
     Route::post('cambiar_ubicacion',[RutaController::class,'cambiar_ubicacion']);

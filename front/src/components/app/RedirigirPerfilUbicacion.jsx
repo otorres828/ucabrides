@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 
 function RedirigirPerfilUbicacion() {
   const [open, setOpen] = useState(true);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <>
@@ -22,8 +16,8 @@ function RedirigirPerfilUbicacion() {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            <div className="text-2xl text-teal-900 font-bold text-center">
-           Antes de continuar, agregue una direccion, vaya a su perfil haciendo click en el boton y presione en "Configurar Direccion"
+            <div className="text-xl text-teal-900 font-bold text-center">
+           Antes de continuar, asegurese de tener una direccion y distancia guardada, vaya a su perfil haciendo click en el boton y presione en "Configurar Direccion" o "Distancia dispuesto/a a caminar"
             </div>
           </DialogTitle>
           

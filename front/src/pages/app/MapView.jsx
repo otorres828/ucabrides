@@ -12,7 +12,7 @@ import {
   faLocationCrosshairs,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { DistanciaMasCorta, distancia_a_caminar, listado_rutas_disponibles, obtener_localizacion_direccion_usuario } from "../../hooks/RutaMasCorta";
+import { DistanciaMasCorta, distancia_a_caminar, listado_rutas_disponibles, obtener_direccion_usuario } from "../../hooks/RutaMasCorta";
 
 const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
 const clear = <FontAwesomeIcon icon={faTrash} />;
@@ -63,7 +63,7 @@ function MapView() {
     distancia_a_caminar().then(result => { // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
       setDistancia(result)
     }) 
-    obtener_localizacion_direccion_usuario().then(result => { //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+    obtener_direccion_usuario().then(result => { //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
       setLocalizacion_usuario(result)
       console.log(result)
     })     
