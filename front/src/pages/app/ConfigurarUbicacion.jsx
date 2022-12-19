@@ -6,11 +6,15 @@ import Rsidebar from "../../components/app/Rsidebar";
 import { Box, Flex } from "@chakra-ui/react";
 import axios from "../../api/axios";
 import { useSnackbar } from "notistack";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-
+import {
+  faLocationCrosshairs,
+} from "@fortawesome/free-solid-svg-icons";
+const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
 
 export default function ConfigurarUbicacion() {
   const { isLoaded } = useLoadScript({
@@ -32,6 +36,7 @@ function Map() {
   const [ubicacion, setUbicacion] = useState(null);
   const [map, setMap] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
+  const google = window.google;
 
   const containerStyle = {
     width: "100%",
@@ -41,7 +46,6 @@ function Map() {
     lat: 8.297321035371798,
     lng: -62.71149786538124,
   };
-  const google = window.google;
 
   const handlecambiar = async () => {
     const access_token = localStorage.getItem("access_token");
@@ -63,12 +67,27 @@ function Map() {
       enqueueSnackbar("Error de conexion", { variant: "error" });
     }
   };
-  
+
+  function obtener_mi_ubicacion() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setSelected({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+      map.panTo(
+        new google.maps.LatLng(
+          position.coords.latitude,
+          position.coords.longitude
+        )
+      );
+    });
+  }
+
   useEffect(() => {
-      function panto() {
-        if (selected !== null)
-          map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
-      }
+    function panto() {
+      if (selected !== null)
+        map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
+    }
     panto();
     setUbicacion(selected);
   }, [selected, ubicacion]);
@@ -128,6 +147,20 @@ function Map() {
           </div>
         </div>
       )}
+      <div
+        onClick={obtener_mi_ubicacion}
+        className="z-20  xl:w-96 mx-auto absolute right-2 bottom-20 mr-9  sm:justify-center flex"
+        style={{ transform: "traslateX(-50%)", margin: "auto" }}
+      >
+        <div className="justify-center text-center mt-20">
+          <div
+            style={{ cursor: "pointer" }}
+            className="  bg-white rounded-lg p-2"
+          >
+            {location}
+          </div>
+        </div>
+      </div>
       <Rsidebar />
     </>
   );
