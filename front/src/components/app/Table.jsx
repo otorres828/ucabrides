@@ -10,12 +10,12 @@ import logo from "../../images/fondo_logos.png";
 function BasicTable({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles, setDetalles] = useState({});
+  const [open, setOpen] = React.useState(false);
   const user = localStorage.getItem("user");
   const ucab = {
     lat: 8.297321035371798,
     lng: -62.71149786538124,
   };
-  const [open, setOpen] = React.useState(false);
 
   const handleClose = () => {
     setOpen(false);
