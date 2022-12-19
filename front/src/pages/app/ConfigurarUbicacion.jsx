@@ -94,9 +94,7 @@ function Map() {
   useEffect(() => {
     function panto() {
       if (ubicacion !== null){
-        setSelected({lat:ubicacion.lat(),lng:ubicacion.lng()})
-        map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
-
+        map.panTo(new google.maps.LatLng(ubicacion.lat(), ubicacion.lng()));
       }
     }
     panto();
