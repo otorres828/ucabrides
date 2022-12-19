@@ -86,11 +86,21 @@ function Map() {
   useEffect(() => {
     function panto() {
       if (selected !== null)
-        map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
+      map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
     }
     panto();
-    setUbicacion(selected);
-  }, [selected, ubicacion]);
+  }, [selected]);
+
+  useEffect(() => {
+    function panto() {
+      if (ubicacion !== null){
+        setSelected({lat:ubicacion.lat(),lng:ubicacion.lng()})
+        map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
+
+      }
+    }
+    panto();
+  }, [ubicacion]);
 
   return (
     <>
