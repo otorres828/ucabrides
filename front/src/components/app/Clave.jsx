@@ -5,6 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useSnackbar } from "notistack";
 import axios from "../../api/axios";
+import icono from "../../images/icono_perfil.png";
 
 function Clave() {
   const [open, setOpen] = useState(false);
@@ -51,7 +52,7 @@ function Clave() {
         className="cursor-pointer w-full  border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
       >
         <img
-          src="https://avatars0.githubusercontent.com/u/35900628?v=4"
+          src={icono}
           alt=""
           className="rounded-full h-6 shadow-md inline-block mr-2"
         />
