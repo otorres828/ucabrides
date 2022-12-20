@@ -33,6 +33,7 @@ class User extends Eloquent implements JWTSubject, AuthenticatableContract
         'avatar',
         'distancia',
         'direccion',
+        'estatus',
     ];
 
     protected $hidden = [
