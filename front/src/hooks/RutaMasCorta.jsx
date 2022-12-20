@@ -80,3 +80,12 @@ export const distancia_a_caminar = async ()=>{
   return res.data;  
 }
 
+export const me = async ()=>{
+  const res = await axios.get("me", {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+      Accept: "application/json",
+    },
+  });
+  return res;
+}

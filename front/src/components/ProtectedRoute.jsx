@@ -1,16 +1,36 @@
-import { Navigate,Outlet } from "react-router-dom"
+import React, { useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import axios from "../api/axios";
 
-export const RedirectPanel =({user,access_token,children, redirectTo="/panel"})=>{
-    if(user && access_token){
-        return <Navigate to={redirectTo} />
+export const RedirectPanel = ({ user, access_token, children,redirectTo = "/rol",}) => {
+  if (user && access_token) {
+    return <Navigate to={redirectTo} />;
+  }
+  return children ? children : <Outlet />;
+};
+
+export const RedirectLogin = ({ user, access_token,children, redirectTo = "/login",}) => {
+  if (!user || !access_token) {
+    return <Navigate to={redirectTo} />;
+  }
+  return <Outlet />;
+};
+
+export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) => {
+    const [estatus,setEstatus]= useState(null);
+    axios.get("me", {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        Accept: "application/json",
+      },
+    }).then((response) => {
+      setEstatus(response.data)
+    });
+
+    if(estatus!==null){
+      console.log('hay una cola en curso')
+      return <Navigate to={redirectTo} />
     }
-    return children?children:<Outlet />;
-}
 
-export const RedirectLogin =({user,access_token,children,redirectTo="/login"})=>{
-    if(!user  || ! access_token){
-        return <Navigate to={redirectTo} />
-    }
-    return <Outlet />;
-}
-
+  return children ? children : <Outlet />;
+};

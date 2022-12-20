@@ -99,4 +99,7 @@ class AuthController extends Controller
        return response()->json(['exito'=>$nuevaclave,200]);
     }
 
+    public function me(){
+        return response()->json(auth()->user()->estatus);
+    }
 }

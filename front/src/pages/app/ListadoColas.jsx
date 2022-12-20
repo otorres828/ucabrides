@@ -9,14 +9,25 @@ import {
 import BasicTable from "../../components/app/Table";
 import RedirigirPerfilUbicacion from "../../components/app/RedirigirPerfilUbicacion";
 import AlertaSinColas from "../../components/app/AlertaSinColas";
+import { Navigate } from "react-router-dom";
 
 function ListadoColas({user}) {
   const [rutas, setRutas] = useState(null);
   const [distancia, setDistancia] = useState(null);
+  const [estatus, setEstatus] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
   
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
+    axios.get("me", {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        Accept: "application/json",
+      },
+    }).then((response)=>{
+      setEstatus(response.data.cola)
+    });
+
     function inicializar() {
       listado_rutas_disponibles().then((result) => {
         //LISTADO DE RUTAS DISPONIBLES
@@ -48,7 +59,7 @@ function ListadoColas({user}) {
     inicializar();
   }, []);
 
-  return direccion_usuario !== null && distancia !== null && rutas!==null ? (   //ESPERA A QUE SE HAGAN LAS PETICIONES A LA API
+  return !estatus && direccion_usuario !== null && distancia !== null && rutas!==null ? (   //ESPERA A QUE SE HAGAN LAS PETICIONES A LA API
     (JSON.stringify(direccion_usuario)==='{}' || distancia===0) ?               //EN CASO DE QUE LAS PETICIONES TENGAN VALORES VACIOS  
     <RedirigirPerfilUbicacion />
     :
@@ -76,6 +87,7 @@ function ListadoColas({user}) {
     )
   ) : (
     <>
+      {/* {estatus && <Navigate to='../../cola/curso' />} */}
       <div className="flex h-screen justify-center items-center  rounded-lg">
         <img src={logo} className="App-logo" alt="logo" />
       </div>

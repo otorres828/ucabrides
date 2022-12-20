@@ -5,21 +5,20 @@ import "./css/style.css";
 
 import Home from "./pages/web/Home";
 import Login from "./pages/web/Login";
-import SignUp from "./pages/web/SignUp";
-import ResetPassword from "./pages/web/ResetPassword";
 
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 
 import { useSnackbar } from "notistack";
 import useNetwork from "./hooks/useNetwork";
-import { RedirectLogin, RedirectPanel } from "./components/ProtectedRoute";
+import { RedirectLogin, RedirectPanel,EstaEnCola } from "./components/ProtectedRoute";
 import Perfil from "./pages/app/Perfil";
 import MapView from "./pages/app/MapView";
 import Rol from "./pages/app/Rol";
 import ListadoColas from "./pages/app/ListadoColas";
 import Mensajes from "./pages/app/Mensajes";
 import ConfigurarUbicacion from "./pages/app/ConfigurarUbicacion";
+import ColaEnCurso from "./pages/app/ColaEnCurso";
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -55,17 +54,20 @@ function App() {
         {/* REDIRIGE AL PANEL DE CONTROL SI HAY UN USUARIO LOGUEADO */}
         <Route element={<RedirectPanel user={user} access_token={access_token}/>}>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
         {/* PARA ACCEDER DEBE DE EXISTIR UN UNSUARIO LOGUEADO */}
         <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
           <Route path="/mapa" element={<MapView />} />
           <Route path="/perfil"  element={<Perfil user={user} />} />
           <Route path="/rol"  element={<Rol user={user} />} />
-          <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
           <Route path="/mensajes"  element={<Mensajes user={user} />} />
           <Route path="/configurar/ubicacion"  element={<ConfigurarUbicacion user={user} />} />
+
+          <Route element={<EstaEnCola access_token={access_token}/>}>
+            <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
+          </Route>
+
+          <Route path="/cola/curso"  element={<ColaEnCurso user={user} />} />
 
         </Route>
       </Routes>
