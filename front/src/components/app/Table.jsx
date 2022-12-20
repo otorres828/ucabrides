@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 import { DistanciaMasCorta } from "../../hooks/RutaMasCorta";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,13 +9,14 @@ import DialogTitle from "@mui/material/DialogTitle";
 import MapaReferencia from "../../pages/app/MapaReferencia";
 import logo from "../../images/fondo_logos.png";
 import axios from "../../api/axios";
-import { Navigate } from "react-router-dom";
 
 function BasicTable({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles, setDetalles] = useState({});
   const [bandera, setBandera] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+
   const ucab = {
     lat: 8.297321035371798,
     lng: -62.71149786538124,
@@ -36,7 +39,8 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
     })
     setOpen(false);
     setBandera(true)
-  
+    enqueueSnackbar('Peticion de cola enviada al conductor', { variant: "success" })
+
   };
 
 
