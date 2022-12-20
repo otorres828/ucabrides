@@ -43,7 +43,7 @@ function ColaEnCurso() {
             </h1>
             <ul className="mb-6">
               <li
-                className="rounded-lg bg-slate-200 p-3 font-semibold my-3 cursor-pointer"
+                className="rounded-lg bg-slate-200 p-5 sm:p-4 font-semibold my-3 cursor-pointer"
                 onClick={() => {
                   setOpen(true);
                 }}
