@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import Rsidebar from "../../components/app/Rsidebar";
 import logo from "../../images/fondo_logos.png";
 import axios from "../../api/axios";
-
-import {
-  listado_rutas_disponibles,
-} from "../../hooks/RutaMasCorta";
 import BasicTable from "../../components/app/Table";
 import RedirigirPerfilUbicacion from "../../components/app/RedirigirPerfilUbicacion";
 import AlertaSinColas from "../../components/app/AlertaSinColas";
 // import { Navigate } from "react-router-dom";
+import {
+  listado_rutas_disponibles,
+} from "../../hooks/RutaMasCorta";
 
 function ListadoColas({user}) {
   const [rutas, setRutas] = useState(null);
   const [distancia, setDistancia] = useState(null);
-  // const [estatus, setEstatus] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
+  // const [estatus, setEstatus] = useState(null);
+
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
     

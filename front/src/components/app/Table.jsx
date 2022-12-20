@@ -46,6 +46,8 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
         lng: ruta.lng,
         distancia: punto[0],
         puntomascerca: punto,
+        asientos:destino.asientos,
+        usuarios:destino.usuarios
       };
       setRutas_disponibles((rutas_disponibles) => {
         return [...rutas_disponibles, obj];
@@ -60,6 +62,8 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
           lat: ruta.rutas.lat,
           lng: ruta.rutas.lng,
           id: ruta._id,
+          asientos:ruta.asientos,
+          usuarios: ruta.usuarios.lenght
         });
       });
     }
@@ -82,8 +86,8 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
                   setDetalles(row);
                   setOpen(true);
                 }}
-              >
-                te dejaran a {row.distancia} metros - 2 asientos disponibles
+              >{console.log(row)}
+                te dejaran a {row.distancia} metros - {row.asientos} asientos disponibles
               </li>
             ))}
             <Dialog
