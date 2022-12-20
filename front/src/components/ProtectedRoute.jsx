@@ -28,10 +28,9 @@ export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) =
     });
 
     if(estatus!==null){
-      isset(estatus.cola)
-        if(estatus.cola===true){
-          console.log('hay una cola en curso')
-          return <Navigate to={redirectTo} />
+      if(estatus.cola===true){
+        console.log('hay una cola en curso')
+        return <Navigate to={redirectTo} />
         }
     }
 
