@@ -9,24 +9,24 @@ import {
 import BasicTable from "../../components/app/Table";
 import RedirigirPerfilUbicacion from "../../components/app/RedirigirPerfilUbicacion";
 import AlertaSinColas from "../../components/app/AlertaSinColas";
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 
 function ListadoColas({user}) {
   const [rutas, setRutas] = useState(null);
   const [distancia, setDistancia] = useState(null);
-  const [estatus, setEstatus] = useState(null);
+  // const [estatus, setEstatus] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
-  
-  // axios.get("me", {
-  //   headers: {
-  //     Authorization: `Bearer ${access_token}`,
-  //     Accept: "application/json",
-  //   },
-  // }).then((response)=>{
-  //   setEstatus(response.data.cola)
-  // });
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
+    
+    // axios.get("me", {
+    //   headers: {
+    //     Authorization: `Bearer ${access_token}`,
+    //     Accept: "application/json",
+    //   },
+    // }).then((response)=>{
+    //   setEstatus(response.data.cola)
+    // });
 
     function inicializar() {
       listado_rutas_disponibles().then((result) => {
@@ -78,9 +78,6 @@ function ListadoColas({user}) {
       </>
     ) : (
       <>
-      <div className="flex h-screen justify-center items-center  rounded-lg">
-        <img src={logo} className="App-logo" alt="logo" />
-      </div>
       <AlertaSinColas user={user}/>
       <Rsidebar />
       </>
