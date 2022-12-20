@@ -11,7 +11,6 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles, setDetalles] = useState({});
   const [open, setOpen] = React.useState(false);
-  const user = localStorage.getItem("user");
   const ucab = {
     lat: 8.297321035371798,
     lng: -62.71149786538124,
@@ -71,9 +70,9 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
     <>
       {rutas_disponibles.length > 0 ? (
         <div>
-      <h1 className="font-bold text-slate-600 text-xl">
-        Bienvenido al listado de Colas Disponibles
-      </h1>
+          <h1 className="font-bold text-slate-600 text-xl">
+            Bienvenido al listado de Colas Disponibles
+          </h1>
           <ul className="mb-6">
             {rutas_disponibles.map((row) => (
               <li
