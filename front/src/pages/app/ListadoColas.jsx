@@ -59,7 +59,7 @@ function ListadoColas({user}) {
     inicializar();
   }, []);
 
-  return !estatus && direccion_usuario !== null && distancia !== null && rutas!==null ? (   //ESPERA A QUE SE HAGAN LAS PETICIONES A LA API
+  return direccion_usuario !== null && distancia !== null && rutas!==null ? (   //ESPERA A QUE SE HAGAN LAS PETICIONES A LA API
     (JSON.stringify(direccion_usuario)==='{}' || distancia===0) ?               //EN CASO DE QUE LAS PETICIONES TENGAN VALORES VACIOS  
     <RedirigirPerfilUbicacion />
     :
