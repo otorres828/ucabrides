@@ -6,10 +6,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import MapaReferencia from "../../pages/app/MapaReferencia";
 import logo from "../../images/fondo_logos.png";
+import axios from "../../api/axios";
+import { Navigate } from "react-router-dom";
 
 function BasicTable({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles, setDetalles] = useState({});
+  const [bandera, setBandera] = useState(false);
   const [open, setOpen] = React.useState(false);
   const ucab = {
     lat: 8.297321035371798,
@@ -19,6 +22,23 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleContinuar = () => {
+    const access_token = localStorage.getItem("access_token");
+    axios.get(`cambiar_estatus_usuario_activo/`+true+`/`+detalles.id,
+              {headers: {
+                Authorization: `Bearer ${access_token}`,
+                Accept: "application/json",
+              }},
+           
+    ).then((response)=>{
+        console.log(response.data)
+    })
+    setOpen(false);
+    setBandera(true)
+  
+  };
+
 
   const verificar_distancia = async (destino) => {
     const ruta = {
@@ -59,11 +79,11 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
     function calcularRutas() {
       rutas.map((ruta) => {
         return verificar_distancia({
-          lat: ruta.rutas.lat,
-          lng: ruta.rutas.lng,
-          id: ruta._id,
-          asientos:ruta.asientos,
-          usuarios: ruta.usuarios.lenght
+          lat: ruta.rutas.lat,                //LONGITUD DE LA RUTA
+          lng: ruta.rutas.lng,                //LATITUD DE LA RUTA
+          id: ruta._id,                       //ID DE LA ORDEN DE RUTA
+          asientos:ruta.asientos,             //ASIENTOS DISPONIBLES - ORDEN DE RUTA
+          usuarios: ruta.usuarios             //USUARIOS QUE PERTENECEN A LA ORDEN DE RUTA 
         });
       });
     }
@@ -72,6 +92,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
 
   return (
     <>
+      {bandera && <Navigate to="/cola/curso"/>}
       {rutas_disponibles.length > 0 ? (
         <div>
           <h1 className="font-bold text-slate-600 text-xl">
@@ -86,10 +107,11 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
                   setDetalles(row);
                   setOpen(true);
                 }}
-              >{console.log(row)}
-                te dejaran a {row.distancia} metros - {row.asientos} asientos disponibles
+              >
+                te dejaran a {row.distancia} metros - {row.asientos - row.usuarios.length} asientos disponibles
               </li>
             ))}
+
             <Dialog
               fullWidth={true}
               open={open}
@@ -112,7 +134,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
               <DialogActions>
                 <div
                   className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
-                  onClick={handleClose}
+                  onClick={handleContinuar}
                 >
                   Continuar
                 </div>

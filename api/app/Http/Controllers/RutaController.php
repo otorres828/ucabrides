@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 class RutaController extends Controller
 {
     public function listado_rutas_disponibles(){
-        return response()->json(['rutas'=>OrdenesRutas::with('rutas')->where('estatus','activo')->get()]);
+        return response()->json(['rutas'=>OrdenesRutas::with('rutas')
+                                                        ->where('estatus','activo')
+                                                        ->where('asientos','>',0)
+                                                        ->get()
+                                ]);
     }
 
     public function perfil_direccion(){
@@ -31,5 +35,20 @@ class RutaController extends Controller
         $user = auth()->user();
         $user->update(['direccion'=>$request->LatLng]);
         return response()->json($request->LatLng);
+    }
+
+    public function cambiar_estatus_usuario_activo(Request $request){
+        $user = auth()->user();
+        $user->update(['estatus'=>['cola'=>$request->cola,'orden_ruta_id'=>$request->orden_ruta_id]]);
+        //AÑADIR USUARIO A ORDEN DE RUTA
+        return response()->json([$user->estatus],200);
+    }
+
+    public function cambiar_estatus_usuario_cancelar(){
+        $user = auth()->user();
+        $user->update(['estatus'=>['cola'=>false,'orden_ruta_id'=>null]]);
+        
+        return response()->json([$user->estatus],200);
+
     }
 }

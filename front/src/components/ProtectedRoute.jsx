@@ -30,7 +30,7 @@ export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) =
     },[])
 
     if(estatus!==null){
-      if(estatus.cola===true){
+      if(estatus.cola==='true'){
         localStorage.setItem(
           "orden_ruta_id",estatus.orden_ruta_id
         );

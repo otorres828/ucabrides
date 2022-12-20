@@ -22,6 +22,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('cambiar_ubicacion',[RutaController::class,'cambiar_ubicacion']);
     Route::post('cambiarclave',[AuthController::class,'cambiarclave']);
     Route::get('me',[AuthController::class,'me']);
+    Route::get('cambiar_estatus_usuario_activo/{cola}/{orden_ruta_id}',[RutaController::class,'cambiar_estatus_usuario_activo']);
+    Route::get('cambiar_estatus_usuario_cancelar',[RutaController::class,'cambiar_estatus_usuario_cancelar']);
 });
 
 Route::get('hola',function(){

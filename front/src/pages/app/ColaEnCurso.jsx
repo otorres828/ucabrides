@@ -1,18 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Rsidebar from "../../components/app/Rsidebar";
+import axios from "../../api/axios";
+import { Navigate } from "react-router-dom";
 
 function ColaEnCurso() {
   const [open, setOpen] = React.useState(false);
+  const [bandera, setBandera] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleCancelar = () => {
+    const access_token = localStorage.getItem("access_token");
+
+    axios.get(`cambiar_estatus_usuario_cancelar/`,
+              {headers: {
+                Authorization: `Bearer ${access_token}`,
+                Accept: "application/json",
+              }},
+           
+    ).then((response)=>{
+        console.log(response.data)
+    })
+    setOpen(false);
+    setBandera(true);
+    <Navigate to="/listado/colas"/>
+  };
+
+
   return (
     <>
+    {bandera && <Navigate to="/listado/colas"/>}
         <div className="container mx-auto">
           <div className="p-5 pt-12 mb-10 sm:px-20">
           <div>
@@ -51,9 +74,9 @@ function ColaEnCurso() {
               <DialogActions>
                 <div
                   className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
-                  onClick={handleClose}
+                  onClick={handleCancelar}
                 >
-                  Continuar
+                  Cancelar Cola
                 </div>
                 <div
                   className="bg-green-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
