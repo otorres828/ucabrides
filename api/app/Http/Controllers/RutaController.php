@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrdenesRutas;
 use App\Models\Rutas;
 use Illuminate\Http\Request;
 
 class RutaController extends Controller
 {
     public function listado_rutas_disponibles(){
-        return response()->json(['rutas'=>Rutas::where('estatus',true)->get()]);
+        return response()->json(['rutas'=>OrdenesRutas::with('rutas')->where('estatus','activo')->get()]);
     }
 
     public function perfil_direccion(){

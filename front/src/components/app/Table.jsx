@@ -57,8 +57,8 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
     function calcularRutas() {
       rutas.map((ruta) => {
         return verificar_distancia({
-          lat: ruta.lat,
-          lng: ruta.lng,
+          lat: ruta.rutas.lat,
+          lng: ruta.rutas.lng,
           id: ruta._id,
         });
       });

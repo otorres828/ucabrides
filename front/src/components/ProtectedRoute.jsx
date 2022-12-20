@@ -25,15 +25,20 @@ export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) =
           Accept: "application/json",
         },
       }).then((response) => {
-        setEstatus(response.data)
+        setEstatus(response.data);
       });
     },[])
 
     if(estatus!==null){
       if(estatus.cola===true){
+        localStorage.setItem(
+          "orden_ruta_id",estatus.orden_ruta_id
+        );
         console.log('hay una orden en curso')
         return <Navigate to={redirectTo} />
-        }
+      }else{
+        localStorage.removeItem('orden_ruta_id');
+      }
     }
 
   return children ? children : <Outlet />;
