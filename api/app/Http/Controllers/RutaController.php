@@ -40,7 +40,7 @@ class RutaController extends Controller
     public function cambiar_estatus_usuario_activo(Request $request){
         $user = auth()->user();
         $user->update(['estatus'=>['cola'=>$request->cola,'orden_ruta_id'=>$request->orden_ruta_id]]);
-        //AÑADIR USUARIO A ORDEN DE RUTA
+        //ENVIAR NOTIFICACION AL CONDUCTOR
         return response()->json([$user->estatus],200);
     }
 

@@ -29,7 +29,6 @@ function ColaEnCurso() {
     })
     setOpen(false);
     setBandera(true);
-    <Navigate to="/listado/colas"/>
   };
 
 
