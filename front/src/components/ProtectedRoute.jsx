@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import axios from "../api/axios";
 
@@ -18,18 +18,20 @@ export const RedirectLogin = ({ user, access_token,children, redirectTo = "/logi
 
 export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) => {
     const [estatus,setEstatus]= useState(null);
-    axios.get("me", {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-        Accept: "application/json",
-      },
-    }).then((response) => {
-      setEstatus(response.data)
-    });
+    useEffect(()=>{
+      axios.get("me", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      }).then((response) => {
+        setEstatus(response.data)
+      });
+    },[])
 
     if(estatus!==null){
       if(estatus.cola===true){
-        console.log('hay una cola en curso')
+        console.log('hay una orden en curso')
         return <Navigate to={redirectTo} />
         }
     }

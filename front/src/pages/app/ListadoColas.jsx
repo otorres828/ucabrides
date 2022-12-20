@@ -9,12 +9,12 @@ import {
 import BasicTable from "../../components/app/Table";
 import RedirigirPerfilUbicacion from "../../components/app/RedirigirPerfilUbicacion";
 import AlertaSinColas from "../../components/app/AlertaSinColas";
-// import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function ListadoColas({user}) {
   const [rutas, setRutas] = useState(null);
   const [distancia, setDistancia] = useState(null);
-  // const [estatus, setEstatus] = useState(null);
+  const [estatus, setEstatus] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
   
   // axios.get("me", {

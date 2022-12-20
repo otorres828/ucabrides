@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class RutaController extends Controller
 {
     public function listado_rutas_disponibles(){
-        return response()->json(['rutas'=>Rutas::all()]);
+        return response()->json(['rutas'=>Rutas::where('estatus',true)->get()]);
     }
 
     public function perfil_direccion(){
