@@ -50,7 +50,7 @@ class AuthController extends Controller
                     'external_id' => $request['external_id'],
                     'avatar' => $request['avatar'],
                     'distancia'=>0,
-                    'direccion'=>"",
+                    'direccion'=>null,
                     'estatus'=>['cola'=>false,'orden_ruta_id'=>null],
                 ]);
             }else{
