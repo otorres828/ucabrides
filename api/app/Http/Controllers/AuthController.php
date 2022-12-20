@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class AuthController extends Controller
 {
@@ -48,6 +49,9 @@ class AuthController extends Controller
                     'username' => $username,
                     'external_id' => $request['external_id'],
                     'avatar' => $request['avatar'],
+                    'distancia'=>0,
+                    'direccion'=>"",
+                    'estatus'=>"",
                 ]);
             }else{
                 return response()->json(['error' => 'Credenciales Incorrectas',401]);
