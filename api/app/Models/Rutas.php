@@ -14,9 +14,9 @@ class Rutas extends Eloquent
     protected $connection = 'mongodb';
 	protected $collection = 'rutas';
 
-        //relacion uno a muchos inversa
+    //relacion uno a muchos inversa
     public function ordenes(){
         return $this->hasMany(OrdenesRutas::class);
     }
-        
+    
 }

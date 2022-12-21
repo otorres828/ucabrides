@@ -36,10 +36,10 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
            
     ).then((response)=>{
         console.log(response.data)
+        setOpen(false);
+        setBandera(true)
+        enqueueSnackbar('Peticion de cola enviada al conductor', { variant: "success" })
     })
-    setOpen(false);
-    setBandera(true)
-    enqueueSnackbar('Peticion de cola enviada al conductor', { variant: "success" })
 
   };
 
