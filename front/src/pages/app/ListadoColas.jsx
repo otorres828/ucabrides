@@ -66,7 +66,7 @@ function ListadoColas({user}) {
     rutas.length > 0 ? (
       <>
         <div className="container mx-auto">
-          <div className="p-5 pt-12 mb-10 sm:px-20">
+          <div className="p-5 pt-12 mb-10 sm:px-40">
             <BasicTable
               rutas={rutas}
               localizacion_usuario={direccion_usuario}
