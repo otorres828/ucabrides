@@ -6,7 +6,7 @@ import DistanciaCaminar from "../../components/app/DistanciaCaminar";
 import MiUbicacion from "../../components/app/MiUbicacion";
 import icono from "../../images/icono_perfil.png";
 
-function Perfil({ user }) {
+function Perfil({ user ,access_token}) {
   user = JSON.parse(user);
 
   return (
@@ -92,9 +92,9 @@ function Perfil({ user }) {
                 CONFIGURACIONES
               </h3>
               <div className="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
-              <Clave />
-              <MiUbicacion/>
-              <DistanciaCaminar />
+              <Clave access_token={access_token} />
+              <MiUbicacion access_token={access_token}/>
+              <DistanciaCaminar access_token={access_token} />
 
                 <a
                   href="/"

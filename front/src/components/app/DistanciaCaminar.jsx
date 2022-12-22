@@ -8,14 +8,13 @@ import axios from "../../api/axios";
 import icono from "../../images/icono_perfil.png"
 // import { distancia_a_caminar } from "../../hooks/RutaMasCorta";
 
-function DistanciaCaminar() {
+function DistanciaCaminar({access_token}) {
   const [open, setOpen] = useState(false);
   const [distancia, setDistancia] = useState("");
   const [actual, setActual] = useState("");
   const { enqueueSnackbar } = useSnackbar();
 
   const handlecambiar = async () => {
-    const access_token = localStorage.getItem("access_token");
     if (distancia>0) {
       try {
         axios.defaults.headers.common[
@@ -49,7 +48,6 @@ function DistanciaCaminar() {
 
   function obtener_distancia() {
     // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
-      const access_token = localStorage.getItem("access_token");
       axios.get("distancia_dispuesto_caminar",{
         headers: {
           Authorization: `Bearer ${access_token}`,

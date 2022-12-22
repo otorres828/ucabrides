@@ -58,10 +58,10 @@ function App() {
         {/* PARA ACCEDER DEBE DE EXISTIR UN UNSUARIO LOGUEADO */}
         <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
           <Route path="/mapa" element={<MapView />} />
-          <Route path="/perfil"  element={<Perfil user={user} />} />
+          <Route path="/perfil"  element={<Perfil user={user} access_token={access_token}/>} />
           <Route path="/rol"  element={<Rol user={user} />} />
           <Route path="/mensajes"  element={<Mensajes user={user} />} />
-          <Route path="/configurar/ubicacion"  element={<ConfigurarUbicacion user={user} />} />
+          <Route path="/configurar/ubicacion"  element={<ConfigurarUbicacion user={user} access_token={access_token}/>} />
 
           <Route element={<EstaEnCola access_token={access_token}/>}>
             <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
@@ -70,6 +70,9 @@ function App() {
           <Route element={<SalioDeCola access_token={access_token}/>}>
             <Route path="/cola/curso"  element={<ColaEnCurso user={user} access_token={access_token} />} />
           </Route>
+
+          <Route path="/cola/curso"  element={<ColaEnCurso user={user} access_token={access_token} />} />
+
         </Route>
       </Routes>
     </>

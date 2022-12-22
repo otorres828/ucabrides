@@ -7,14 +7,13 @@ import { useSnackbar } from "notistack";
 import axios from "../../api/axios";
 import icono from "../../images/icono_perfil.png";
 
-function Clave() {
+function Clave({access_token}) {
   const [open, setOpen] = useState(false);
   const [clave, setClave] = useState("");
   const [repetirclave, setRepetirclave] = useState("");
   const { enqueueSnackbar } = useSnackbar();
 
   const handlecambiar = async () => {
-    const access_token = localStorage.getItem("access_token");
     if (clave !== "" && clave === repetirclave) {
       try {
         axios.defaults.headers.common[
@@ -43,6 +42,7 @@ function Clave() {
   const handleClose = () => {
     setOpen(false);
   };
+  
   return (
     <>
       <div

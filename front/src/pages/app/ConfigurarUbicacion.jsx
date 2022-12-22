@@ -16,14 +16,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
 
-export default function ConfigurarUbicacion() {
+export default function ConfigurarUbicacion({access_token}) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyBTL6mwVxZgbLAokpY6eIfqD35FKfRQhpo",
     libraries: ["places"],
   });
 
   return isLoaded ? (
-    <Map />
+    <Map access_token={access_token} />
   ) : (
     <div className="flex h-screen justify-center items-center  rounded-lg">
       <img src={logo} className="App-logo" alt="logo" />
@@ -31,7 +31,7 @@ export default function ConfigurarUbicacion() {
   );
 }
 
-function Map() {
+function Map({access_token}) {
   const [selected, setSelected] = useState(null);
   const [ubicacion, setUbicacion] = useState(null);
   const [map, setMap] = useState(null);
@@ -48,7 +48,6 @@ function Map() {
   };
 
   const handlecambiar = async () => {
-    const access_token = localStorage.getItem("access_token");
     try {
       axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
       const res = await axios.post(`cambiar_ubicacion`, {
