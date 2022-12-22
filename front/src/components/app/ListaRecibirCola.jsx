@@ -10,7 +10,7 @@ import DetallesCola from "./DetallesCola";
 import logo from "../../images/fondo_logo432x460.png";
 import axios from "../../api/axios";
 
-function BasicTable({ rutas, localizacion_usuario, distancia }) {
+function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles_orden, setDetalles_orden] = useState({});
   const [bandera, setBandera] = useState(false);
@@ -169,4 +169,4 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
   );
 }
 
-export default BasicTable;
+export default ListaRecibirCola;

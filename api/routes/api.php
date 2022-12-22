@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RutaController;
+use App\Http\Controllers\VehiculoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,9 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('usuarios_por_aceptar',[RutaController::class,'usuarios_por_aceptar']);
     Route::get('obtener_conductor/{orden_ruta_id}',[RutaController::class,'obtener_conductor']);
     Route::get('obtener_detalles_orden_abierta/{orden_ruta_id}',[RutaController::class,'obtener_detalles_orden_abierta']);
+
+    //VEHICULOS
+    Route::get('vehiculos',[VehiculoController::class,'index']);
 });
 
 Route::get('hola',function(){
