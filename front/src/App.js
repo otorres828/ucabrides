@@ -11,7 +11,7 @@ import AOS from 'aos';
 
 import { useSnackbar } from "notistack";
 import useNetwork from "./hooks/useNetwork";
-import { RedirectLogin, RedirectPanel,EstaEnCola } from "./components/ProtectedRoute";
+import { RedirectLogin, RedirectPanel,EstaEnCola, SalioDeCola } from "./components/ProtectedRoute";
 import Perfil from "./pages/app/Perfil";
 import MapView from "./pages/app/MapView";
 import Rol from "./pages/app/Rol";
@@ -67,8 +67,9 @@ function App() {
             <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
           </Route>
 
-          <Route path="/cola/curso"  element={<ColaEnCurso user={user} access_token={access_token} />} />
-
+          <Route element={<SalioDeCola access_token={access_token}/>}>
+            <Route path="/cola/curso"  element={<ColaEnCurso user={user} access_token={access_token} />} />
+          </Route>
         </Route>
       </Routes>
     </>

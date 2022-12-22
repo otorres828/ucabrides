@@ -37,9 +37,20 @@ export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) =
         console.log('hay una orden en curso')
         return <Navigate to={redirectTo} />
       }else{
-        localStorage.removeItem('orden_ruta_id');
+        localStorage.removeItem('ucabrides_orden_ruta_id');
       }
     }
 
   return children ? children : <Outlet />;
+};
+
+export const SalioDeCola = ({access_token,children,redirectTo = "/listado/colas"}) => {
+  const orde_ruta_id = localStorage.getItem('ucabrides_orden_ruta_id');
+  if(orde_ruta_id===null){
+      console.log('NO hay colas en curso')
+      return <Navigate to={redirectTo} />
+
+  }
+
+return children ? children : <Outlet />;
 };
