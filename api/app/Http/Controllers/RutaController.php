@@ -69,4 +69,10 @@ class RutaController extends Controller
         return response()->json(['users'=>$users],200);
     }
 
+    public function obtener_conductor(Request $request){
+        $ruta_id=OrdenesRutas::where('_id',$request->orden_ruta_id)->first()->ruta_id;
+        $user=Rutas::with('user')->where('_id',$ruta_id)->first()->user;
+        return response()->json($user,200);
+    }
+
 }

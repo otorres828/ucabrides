@@ -19,4 +19,7 @@ class Rutas extends Eloquent
         return $this->hasMany(OrdenesRutas::class);
     }
     
+    public function user(){
+        return $this->belongsTo(User::class,'user_id','_id');
+    }
 }

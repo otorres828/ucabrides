@@ -3,15 +3,14 @@ import { Marker, GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import house from "../../images/house_icon.png";
 import marcador from "../../images/marcador_icon.png";
 
-
-function MapaCola({punto_destino,localizacion_usuario}) {
+function MapaCola({detalles_orden,localizacion_usuario}) {
     const containerStyle = {
       width: "100%",
-      height: "50vh",
+      height: "55vh",
     };
   const ubicacion = {
-    lat: punto_destino.puntomascerca[1],
-    lng: punto_destino.puntomascerca[2],
+    lat: detalles_orden.puntomascerca[1],
+    lng: detalles_orden.puntomascerca[2],
   };
   const localizacion = {
     lat: parseFloat(localizacion_usuario.lat),

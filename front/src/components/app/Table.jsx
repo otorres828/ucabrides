@@ -6,13 +6,13 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import DetallesColaPendiente from "../../pages/app/DetallesColaPendiente";
+import DetallesCola from "./DetallesCola";
 import logo from "../../images/fondo_logos.png";
 import axios from "../../api/axios";
 
 function BasicTable({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
-  const [punto_destino, setPunto_destino] = useState({});
+  const [detalles_orden, setDetalles_orden] = useState({});
   const [bandera, setBandera] = useState(false);
   const [open, setOpen] = React.useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -28,7 +28,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
 
   const handleContinuar = () => {
     const access_token = localStorage.getItem("access_token");
-    axios.get(`cambiar_estatus_usuario_activo/`+true+`/`+punto_destino.id,
+    axios.get(`cambiar_estatus_usuario_activo/`+true+`/`+detalles_orden.id,
               {headers: {
                 Authorization: `Bearer ${access_token}`,
                 Accept: "application/json",
@@ -42,7 +42,6 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
     })
 
   };
-
 
   const verificar_distancia = async (destino) => {
     const ruta = {
@@ -108,7 +107,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
                 key={row.id}
                 className="rounded-lg bg-slate-200 p-3 font-semibold my-3 cursor-pointer"
                 onClick={() => {
-                  setPunto_destino(row);
+                  setDetalles_orden(row); 
                   setOpen(true);
                 }}
               >
@@ -130,8 +129,8 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
               </DialogTitle>
               <DialogContent>
                 {/* LLAMAMOS AL MODAL CON EL MAPA */}
-                <DetallesColaPendiente
-                  punto_destino={punto_destino}
+                <DetallesCola
+                  detalles_orden={detalles_orden}
                   localizacion_usuario={localizacion_usuario}
                 />
               </DialogContent>

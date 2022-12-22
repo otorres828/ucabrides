@@ -65,4 +65,8 @@ class User extends Eloquent implements JWTSubject, AuthenticatableContract
     public function usuarioporaceptar(){
         return $this->hasMany(UsuariosPorAceptar::class);
     }
+
+    public function ruta(){
+        return $this->hasMany(Rutas::class);
+    }
 }
