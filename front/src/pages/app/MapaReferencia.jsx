@@ -27,7 +27,7 @@ function MapaReferencia({ detalles, localizacion_usuario }) {
 
   return (
     isLoaded && (
-      <Carousel showArrows={true} emulateTouch={false} showThumbs={false}>
+      <Carousel showArrows={true} emulateTouch={false} showThumbs={false} swipeable={false}>
         <div className="bg-slate-100 p-3 rounded-lg shadow">
           <div className="text-left vh-100 w-full">
             <h1 className=" text-ellipsis font-serif font-semibold">
