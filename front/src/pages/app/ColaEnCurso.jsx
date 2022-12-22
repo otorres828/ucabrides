@@ -29,7 +29,6 @@ function ColaEnCurso({ access_token }) {
         Accept: "application/json",
       },
     });
-    console.log(response.data);
     localStorage.removeItem("ucabrides_orden_ruta_id");
     localStorage.removeItem("ucabrides_puntomascerca");
     setOpen(false);
