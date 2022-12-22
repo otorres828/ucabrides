@@ -6,7 +6,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import MapaReferencia from "../../pages/app/MapaReferencia";
+import DetallesColaPendiente from "../../pages/app/DetallesColaPendiente";
 import logo from "../../images/fondo_logos.png";
 import axios from "../../api/axios";
 
@@ -130,7 +130,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
               </DialogTitle>
               <DialogContent>
                 {/* LLAMAMOS AL MODAL CON EL MAPA */}
-                <MapaReferencia
+                <DetallesColaPendiente
                   detalles={detalles}
                   localizacion_usuario={localizacion_usuario}
                 />
