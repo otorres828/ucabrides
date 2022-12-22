@@ -12,7 +12,7 @@ import axios from "../../api/axios";
 
 function BasicTable({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
-  const [detalles, setDetalles] = useState({});
+  const [punto_destino, setPunto_destino] = useState({});
   const [bandera, setBandera] = useState(false);
   const [open, setOpen] = React.useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -28,7 +28,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
 
   const handleContinuar = () => {
     const access_token = localStorage.getItem("access_token");
-    axios.get(`cambiar_estatus_usuario_activo/`+true+`/`+detalles.id,
+    axios.get(`cambiar_estatus_usuario_activo/`+true+`/`+punto_destino.id,
               {headers: {
                 Authorization: `Bearer ${access_token}`,
                 Accept: "application/json",
@@ -108,7 +108,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
                 key={row.id}
                 className="rounded-lg bg-slate-200 p-3 font-semibold my-3 cursor-pointer"
                 onClick={() => {
-                  setDetalles(row);
+                  setPunto_destino(row);
                   setOpen(true);
                 }}
               >
@@ -131,7 +131,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
               <DialogContent>
                 {/* LLAMAMOS AL MODAL CON EL MAPA */}
                 <DetallesColaPendiente
-                  detalles={detalles}
+                  punto_destino={punto_destino}
                   localizacion_usuario={localizacion_usuario}
                 />
               </DialogContent>

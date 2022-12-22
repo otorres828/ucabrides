@@ -6,11 +6,11 @@ import InformacionColaPendiente from "./InformacionColaPendiente";
 import MapaCola from "./MapaCola";
 
 
-function DetallesColaPendiente({ detalles, localizacion_usuario }) {
+function DetallesColaPendiente({ punto_destino, localizacion_usuario }) {
   return (
       <Carousel showArrows={true} emulateTouch={false} showThumbs={false} swipeable={false}>
         <InformacionColaPendiente />
-        <MapaCola detalles={detalles} localizacion_usuario={localizacion_usuario} />
+        <MapaCola punto_destino={punto_destino} localizacion_usuario={localizacion_usuario} />
       </Carousel>
   );
 }
