@@ -21,19 +21,18 @@ const StyledMenu = styled((props) => (
   '& .MuiPaper-root': {
     borderRadius: 8,
     marginTop: theme.spacing(1),
-    minWidth: 50,
     color:
       theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
     boxShadow:
-      'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+      'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 5px 10px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
     '& .MuiMenu-list': {
-      padding: '4px 0',
+      padding: '1px 0',
     },
     '& .MuiMenuItem-root': {
       '& .MuiSvgIcon-root': {
         fontSize: 5,
         color: theme.palette.text.secondary,
-        marginRight: theme.spacing(1.5),
+        marginRight: theme.spacing(1),
       },
       '&:active': {
         backgroundColor: alpha(
@@ -58,7 +57,6 @@ export default function CustomizedMenus() {
   return (
     <div>
       <Button
-        id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
@@ -67,7 +65,7 @@ export default function CustomizedMenus() {
         onClick={handleClick}
         
       >
-        Opciones
+        ⚙️
       </Button>
       <StyledMenu
         id="demo-customized-menu"
