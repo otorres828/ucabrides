@@ -9,11 +9,11 @@ import axios from "../../api/axios";
 import { useSnackbar } from "notistack";
 import DetallesCola from "../../components/app/DetallesCola";
 
-function ColaEnCurso({access_token}) {
+function ColaEnCurso({ access_token }) {
   const [open, setOpen] = React.useState(false);
   const [bandera, setBandera] = useState(false);
-  const orden_ruta_id = localStorage.getItem('ucabrides_orden_ruta_id');
-  const [detalles_orden,setDetalles_orden] = useState({})
+  const orden_ruta_id = localStorage.getItem("ucabrides_orden_ruta_id");
+  const [detalles_orden, setDetalles_orden] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -22,46 +22,64 @@ function ColaEnCurso({access_token}) {
     setOpen(false);
   };
 
-  const handleCancelar = async()  => {
-    const response=await axios.get("cambiar_estatus_usuario_cancelar",
-                              {headers: {
-                                Authorization: `Bearer ${access_token}`,
-                                Accept: "application/json",
-                              }}     
-                              );
-    console.log(response.data)
+  const handleCancelar = async () => {
+    const response = await axios.get("cambiar_estatus_usuario_cancelar", {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        Accept: "application/json",
+      },
+    });
+    console.log(response.data);
     localStorage.removeItem("ucabrides_orden_ruta_id");
     localStorage.removeItem("ucabrides_puntomascerca");
     setOpen(false);
     setBandera(true);
-    enqueueSnackbar('Cola cancelada correctamente', { variant: "warning" })
+    enqueueSnackbar("Cola cancelada correctamente", { variant: "warning" });
   };
 
-  useEffect(()=>{
-    function obtener_detalles(){
-       axios.get(`obtener_detalles_orden_abierta/`+orden_ruta_id,
-       {headers: {
-        Authorization: `Bearer ${access_token}`,
-        Accept: "application/json",
-      }},
-       ).then((response)=>{
-        setDetalles_orden(response.data.detalles_orden);
-       })
+  useEffect(() => {
+    function obtener_detalles() {
+      axios
+        .get(`obtener_detalles_orden_abierta/` + orden_ruta_id, {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: "application/json",
+          },
+        })
+        .then((response) => {
+          var puntomascerca = JSON.parse(
+            localStorage.getItem("ucabrides_puntomascerca")
+          );
+          setDetalles_orden({
+            id: response.data.detalles_orden._id,
+            asientos: response.data.detalles_orden.asientos,
+            lat: response.data.detalles_orden.rutas.lat,
+            lng: response.data.detalles_orden.rutas.lng,
+            usuarios: response.data.detalles_orden.usuarios,
+            vehiculo: response.data.detalles_orden.vehiculo,
+            distancia:puntomascerca.distancia,
+            puntomascerca: [
+              puntomascerca.distancia,
+              puntomascerca.lat,
+              puntomascerca.lng,
+            ],
+          });
+        });
 
-       axios
-       .get("perfil_direccion", {
-         headers: {
-           Authorization: `Bearer ${access_token}`,
-           Accept: "application/json",
-         },
-       })
-       .then((response) => {
-         //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
-         setDireccion_usuario(response.data);
-       });
+      axios
+        .get("perfil_direccion", {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: "application/json",
+          },
+        })
+        .then((response) => {
+          //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+          setDireccion_usuario(response.data);
+        });
     }
     obtener_detalles();
-  },[])
+  }, []);
 
   return (
     <>
@@ -98,7 +116,12 @@ function ColaEnCurso({access_token}) {
                   </div>
                 </DialogTitle>
                 <DialogContent>
-                  
+                  {detalles_orden && direccion_usuario &&
+                    <DetallesCola
+                      detalles_orden={detalles_orden}
+                      localizacion_usuario={direccion_usuario}
+                    />
+                  }
                 </DialogContent>
                 <DialogActions>
                   <div

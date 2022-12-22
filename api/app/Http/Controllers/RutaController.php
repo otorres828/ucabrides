@@ -78,7 +78,7 @@ class RutaController extends Controller
 
     public function obtener_detalles_orden_abierta(Request $request){
         $detalles= OrdenesRutas::with('rutas')->with('vehiculo')->where('_id',$request->orden_ruta_id)->first();
-         $conductor = User::select('name','email')->where('_id',$detalles->rutas->user_id)->first();
+        $conductor = User::select('name','email')->where('_id',$detalles->rutas->user_id)->first();
         return response()->json([
             'detalles_orden'=>$detalles,"conductor"=>$conductor
         ],200);
