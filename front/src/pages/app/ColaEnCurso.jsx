@@ -31,6 +31,7 @@ function ColaEnCurso({access_token}) {
                               );
     console.log(response.data)
     localStorage.removeItem("ucabrides_orden_ruta_id");
+    localStorage.removeItem("ucabrides_puntomascerca");
     setOpen(false);
     setBandera(true);
     enqueueSnackbar('Cola cancelada correctamente', { variant: "warning" })

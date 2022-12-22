@@ -40,7 +40,8 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
                           lat:detalles_orden.puntomascerca[1],
                           lng:detalles_orden.puntomascerca[2]
                           }
-      localStorage.setItem("ucabrides_puntomascerca", puntocercano);
+      
+      localStorage.setItem("ucabrides_puntomascerca", JSON.stringify(puntocercano));
       console.log(response.data)
         setOpen(false);
         setBandera(true)
