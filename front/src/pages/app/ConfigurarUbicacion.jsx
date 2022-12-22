@@ -235,7 +235,6 @@ const PlacesAutocomplete = ({ setSelected }) => {
         placeholder="Ingrese su Zona"
         className="p-2 border bg-slate-50  w-full border-blue-400"
       />
-      {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === "OK" && <ul>{renderSuggestions()}</ul>}
     </div>
   );

@@ -8,6 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import Rsidebar from "../../components/app/Rsidebar";
+import Dropdown from "../../utils/Dropdown";
 
 function Vehiculos({ user, access_token }) {
   const [vehiculos, setVehiculos] = useState(null);
@@ -26,7 +27,7 @@ function Vehiculos({ user, access_token }) {
         });
     }
     obtener_vehiculos();
-  }, []);
+  }, [access_token]);
 
   return (
     <>
@@ -71,7 +72,7 @@ function Vehiculos({ user, access_token }) {
                             <p className="text-red-600">SIN PLACA</p>
                           )}
                         </TableCell>
-                        <TableCell align="right">Editar</TableCell>
+                        <TableCell align="right"><Dropdown /></TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

@@ -1,56 +1,92 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Transition from '../utils/Transition';
+import * as React from 'react';
+import { styled, alpha } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
-function Dropdown({
-  children,
-  title
-}) {
+const StyledMenu = styled((props) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'right',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  '& .MuiPaper-root': {
+    borderRadius: 8,
+    marginTop: theme.spacing(1),
+    minWidth: 50,
+    color:
+      theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+    '& .MuiMenu-list': {
+      padding: '4px 0',
+    },
+    '& .MuiMenuItem-root': {
+      '& .MuiSvgIcon-root': {
+        fontSize: 5,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+      '&:active': {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity,
+        ),
+      },
+    },
+  },
+}));
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+export default function CustomizedMenus() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <li
-      className="relative"
-      onMouseEnter={() => setDropdownOpen(true)}
-      onMouseLeave={() => setDropdownOpen(false)}
-      onFocus={() => setDropdownOpen(true)}
-      onBlur={() => setDropdownOpen(false)}
-    >
-      <a
-        className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out"
-        href="#0"
-        aria-expanded={dropdownOpen}
-        onClick={(e) => e.preventDefault()}
+    <div>
+      <Button
+        id="demo-customized-button"
+        aria-controls={open ? 'demo-customized-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        variant="contained"
+        disableElevation
+        onClick={handleClick}
+        
       >
-        {title}
-        <svg className="w-3 h-3 fill-current text-gray-500 cursor-pointer ml-1 flex-shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10.28 4.305L5.989 8.598 1.695 4.305A1 1 0 00.28 5.72l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z" />
-        </svg>
-      </a>
-      <Transition
-        show={dropdownOpen}
-        tag="ul"
-        className="origin-top-right absolute top-full right-0 w-40 bg-white py-2 ml-4 rounded shadow-lg"
-        enter="transition ease-out duration-200 transform"
-        enterStart="opacity-0 -translate-y-2"
-        enterEnd="opacity-100 translate-y-0"
-        leave="transition ease-out duration-200"
-        leaveStart="opacity-100"
-        leaveEnd="opacity-0"
+        Opciones
+      </Button>
+      <StyledMenu
+        id="demo-customized-menu"
+        MenuListProps={{
+          'aria-labelledby': 'demo-customized-button',
+        }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
       >
-        {children}
-      </Transition>
-    </li>
+        <MenuItem onClick={handleClose} disableRipple>
+          
+          Editar
+        </MenuItem>
+        <MenuItem onClick={handleClose} disableRipple>
+          
+          Eliminar
+        </MenuItem>     
+      </StyledMenu>
+    </div>
   );
 }
-
-export default Dropdown;
-
-Dropdown.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element.isRequired
-  ]),
-  title: PropTypes.string.isRequired,
-};
