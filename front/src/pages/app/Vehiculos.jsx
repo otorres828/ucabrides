@@ -32,51 +32,52 @@ function Vehiculos({ user, access_token }) {
     <>
       <div className="mx-auto my-12 pb-12 vh-100">
         <div className="bg-gray-100 relative shadow rounded-lg w-5/6 md:w-4/6  lg:w-3/6 xl:w-2/6 mx-auto">
-          <div>
-            <h1 className="border-blue-800 border-b-2 block pt-5 pb-2 font-bold text-center text-3xl text-gray-900">
+          <div className="flex border-blue-800 border-b-2  mx-4">
+            <h1 className="text-left block pt-5 pb-2 font-bold  text-xl sm:text-3xl text-gray-900">
               Listado de Vehiculos
             </h1>
-            <div className="flex justify-between items-center my-5 px-6">
-              {vehiculos === null ? (
-                "Cargando..."
-              ) : (
-                <TableContainer >
-                  <Table>
-                    <TableHead>
-                      <TableRow className="font-semibold">
-                        <TableCell align="left">Marca</TableCell>
-                        <TableCell align="left">Color</TableCell>
-                        <TableCell align="right">Placa</TableCell>
-                        <TableCell align="right">Acciones</TableCell>
+           
+          </div>
+          <div className="flex justify-between items-center my-5 px-6">
+            {vehiculos === null ? (
+              "Cargando..."
+            ) : (
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow className="font-semibold">
+                      <TableCell align="left">Marca</TableCell>
+                      <TableCell align="left">Color</TableCell>
+                      <TableCell align="right">Placa</TableCell>
+                      <TableCell align="right">Acciones</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {vehiculos.map((row) => (
+                      <TableRow
+                        key={row._id}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {row.marca}
+                        </TableCell>
+                        <TableCell align="left">{row.color}</TableCell>
+                        <TableCell align="right">
+                          {row.placa ? (
+                            row.placa
+                          ) : (
+                            <p className="text-red-600">SIN PLACA</p>
+                          )}
+                        </TableCell>
+                        <TableCell align="right">Editar</TableCell>
                       </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {vehiculos.map((row) => (
-                        <TableRow
-                          key={row._id}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            {row.marca}
-                          </TableCell>
-                          <TableCell align="left">{row.color}</TableCell>
-                          <TableCell align="right">
-                            {row.placa ? (
-                              row.placa
-                            ) : (
-                              <p className="text-red-600">SIN PLACA</p>
-                            )}
-                          </TableCell>
-                          <TableCell align="right">Editar</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              )}
-            </div>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
           </div>
         </div>
       </div>
