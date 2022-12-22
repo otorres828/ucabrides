@@ -37,37 +37,44 @@ function Vehiculos({ user, access_token }) {
               Listado de Vehiculos
             </h1>
             <div className="flex justify-between items-center my-5 px-6">
-              {vehiculos===null ? (
+              {vehiculos === null ? (
                 "Cargando..."
               ) : (
-                <Table>
-                  <TableHead>
-                    <TableRow className="font-semibold">
-                      <TableCell align="left">Marca</TableCell>
-                      <TableCell align="left">Color</TableCell>
-                      <TableCell align="right">Placa</TableCell>
-                      <TableCell align="right">Acciones</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {vehiculos.map((row) => (
-                      <TableRow
-                        key={row._id}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell component="th" scope="row">
-                          {row.marca}
-                        </TableCell>
-                        <TableCell align="left">{row.color}</TableCell>
-                        <TableCell align="right">{row.placa ? row.placa : <p className="text-red-600">SIN PLACA</p>}</TableCell>
-                        <TableCell align="right">Editar</TableCell>
-
+                <TableContainer >
+                  <Table>
+                    <TableHead>
+                      <TableRow className="font-semibold">
+                        <TableCell align="left">Marca</TableCell>
+                        <TableCell align="left">Color</TableCell>
+                        <TableCell align="right">Placa</TableCell>
+                        <TableCell align="right">Acciones</TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHead>
+                    <TableBody>
+                      {vehiculos.map((row) => (
+                        <TableRow
+                          key={row._id}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <TableCell component="th" scope="row">
+                            {row.marca}
+                          </TableCell>
+                          <TableCell align="left">{row.color}</TableCell>
+                          <TableCell align="right">
+                            {row.placa ? (
+                              row.placa
+                            ) : (
+                              <p className="text-red-600">SIN PLACA</p>
+                            )}
+                          </TableCell>
+                          <TableCell align="right">Editar</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               )}
             </div>
           </div>
