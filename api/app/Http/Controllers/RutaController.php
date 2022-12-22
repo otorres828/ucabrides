@@ -6,12 +6,13 @@ use App\Models\OrdenesRutas;
 use App\Models\Rutas;
 use App\Models\User;
 use App\Models\UsuariosPorAceptar;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
 class RutaController extends Controller
 {
     public function listado_rutas_disponibles(){
-        return response()->json(['rutas'=>OrdenesRutas::with('rutas')
+        return response()->json(['rutas'=>OrdenesRutas::with('rutas')->with('vehiculo')
                                                         ->where('estatus','activo')
                                                         ->where('asientos','>',0)
                                                         ->get()

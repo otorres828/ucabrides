@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Rsidebar from "../../components/app/Rsidebar";
-import logo from "../../images/fondo_logos.png";
+import logo from "../../images/fondo_logo432x460.png";
 import axios from "../../api/axios";
 import BasicTable from "../../components/app/Table";
 import RedirigirPerfilUbicacion from "../../components/app/RedirigirPerfilUbicacion";
@@ -63,7 +63,7 @@ function ListadoColas({user}) {
     (JSON.stringify(direccion_usuario)==='{}' || distancia===0) ?               //EN CASO DE QUE LAS PETICIONES TENGAN VALORES VACIOS  
     <RedirigirPerfilUbicacion />
     :
-    rutas.length > 0 ? (
+    rutas.length > 0 ? ( 
       <>
         <div className="container mx-auto">
           <div className="p-5 pt-12 mb-10 sm:px-40">

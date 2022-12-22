@@ -7,7 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import DetallesCola from "./DetallesCola";
-import logo from "../../images/fondo_logos.png";
+import logo from "../../images/fondo_logo432x460.png";
 import axios from "../../api/axios";
 
 function BasicTable({ rutas, localizacion_usuario, distancia }) {
@@ -70,7 +70,8 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
         distancia: punto[0],
         puntomascerca: punto,
         asientos:destino.asientos,
-        usuarios:destino.usuarios
+        usuarios:destino.usuarios,
+        vehiculo:destino.vehiculo,
       };
       setRutas_disponibles((rutas_disponibles) => {
         return [...rutas_disponibles, obj];
@@ -86,7 +87,8 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
           lng: ruta.rutas.lng,                //LATITUD DE LA RUTA
           id: ruta._id,                       //ID DE LA ORDEN DE RUTA
           asientos:ruta.asientos,             //ASIENTOS DISPONIBLES - ORDEN DE RUTA
-          usuarios: ruta.usuarios             //USUARIOS QUE PERTENECEN A LA ORDEN DE RUTA 
+          usuarios: ruta.usuarios,             //USUARIOS QUE PERTENECEN A LA ORDEN DE RUTA 
+          vehiculo:ruta.vehiculo,
         });
       });
     }
@@ -97,7 +99,7 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
     <>
       {bandera && <Navigate to="/cola/curso"/>}
       {rutas_disponibles.length > 0 ? (
-        <div>
+        <div> 
           <h1 className="font-bold text-slate-600 text-xl">
             Bienvenido al listado de Colas Disponibles
           </h1>

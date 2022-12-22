@@ -7,7 +7,7 @@ import MapaCola from "../../pages/app/MapaCola";
 
 function DetallesCola({ detalles_orden, localizacion_usuario }) {
   return (
-      <Carousel showArrows={true} emulateTouch={false} showThumbs={false} swipeable={false}>
+    <Carousel showArrows={true} emulateTouch={false} showThumbs={false} swipeable={false} >
         <InformacionCola detalles_orden={detalles_orden}/>
         <MapaCola detalles_orden={detalles_orden} localizacion_usuario={localizacion_usuario} />
       </Carousel>

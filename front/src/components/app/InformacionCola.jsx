@@ -3,7 +3,7 @@ import axios from '../../api/axios';
 
 function InformacionCola({detalles_orden}) {
   const [conductor,setConductor]=useState(null);
-  const cargando="Cargando...";
+
   useEffect(()=>{
     function obtener_conductor (){
       const access_token = localStorage.getItem("access_token");
@@ -34,13 +34,13 @@ function InformacionCola({detalles_orden}) {
               Informacion del Vehiculo
             </h1>
             <p>
-              <small className="font-bold">Modelo:</small> Centauro
+              <small className="font-bold">Modelo:</small> {detalles_orden.vehiculo.marca}
             </p>
             <p>
-              <small className="font-bold">Color:</small> Blanco
+              <small className="font-bold">Color:</small> {detalles_orden.vehiculo.color}
             </p>
             <p>
-              <small className="font-bold">Placa:</small> "El conductor prefiere mantenerlo en privado"
+              <small className="font-bold">Placa:</small> {detalles_orden.vehiculo.placa ? detalles_orden.vehiculo.placa : "El conductor prefiere mantenerlo en privado"}
             </p>
 
             <h1 className="pt-3 text-ellipsis font-serif font-semibold">

@@ -21,4 +21,8 @@ class OrdenesRutas extends Eloquent
     public function usuarioporaceptar(){
         return $this->hasMany(UsuariosPorAceptar::class);
     }
+
+    public function vehiculo(){
+        return $this->belongsTo(Vehiculo::class,"vehiculo_id","_id");
+    }
 }
