@@ -35,7 +35,13 @@ function BasicTable({ rutas, localizacion_usuario, distancia }) {
               }},
            
     ).then((response)=>{
-        console.log(response.data)
+      localStorage.setItem("ucabrides_orden_ruta_id", detalles_orden.id);
+      var puntocercano = {distancia:detalles_orden.puntomascerca[0],
+                          lat:detalles_orden.puntomascerca[1],
+                          lng:detalles_orden.puntomascerca[2]
+                          }
+      localStorage.setItem("ucabrides_puntomascerca", puntocercano);
+      console.log(response.data)
         setOpen(false);
         setBandera(true)
         enqueueSnackbar('Peticion de cola enviada al conductor', { variant: "success" })

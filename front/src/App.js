@@ -67,7 +67,7 @@ function App() {
             <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
           </Route>
 
-          <Route path="/cola/curso"  element={<ColaEnCurso user={user} />} />
+          <Route path="/cola/curso"  element={<ColaEnCurso user={user} access_token={access_token} />} />
 
         </Route>
       </Routes>

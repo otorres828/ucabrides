@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -7,10 +7,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Rsidebar from "../../components/app/Rsidebar";
 import axios from "../../api/axios";
 import { useSnackbar } from "notistack";
+import DetallesCola from "../../components/app/DetallesCola";
 
-function ColaEnCurso() {
+function ColaEnCurso({access_token}) {
   const [open, setOpen] = React.useState(false);
   const [bandera, setBandera] = useState(false);
+  const orden_ruta_id = localStorage.getItem('ucabrides_orden_ruta_id');
+  const [detalles_orden,setDetalles_orden] = useState({})
+  const [direccion_usuario, setDireccion_usuario] = useState(null);
+
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
@@ -18,7 +23,6 @@ function ColaEnCurso() {
   };
 
   const handleCancelar = async()  => {
-    const access_token = localStorage.getItem("access_token");
     const response=await axios.get("cambiar_estatus_usuario_cancelar",
                               {headers: {
                                 Authorization: `Bearer ${access_token}`,
@@ -26,11 +30,37 @@ function ColaEnCurso() {
                               }}     
                               );
     console.log(response.data)
-    localStorage.removeItem("orden_ruta_id");
+    localStorage.removeItem("ucabrides_orden_ruta_id");
     setOpen(false);
     setBandera(true);
     enqueueSnackbar('Cola cancelada correctamente', { variant: "warning" })
   };
+
+  useEffect(()=>{
+    function obtener_detalles(){
+       axios.get(`obtener_detalles_orden_abierta/`+orden_ruta_id,
+       {headers: {
+        Authorization: `Bearer ${access_token}`,
+        Accept: "application/json",
+      }},
+       ).then((response)=>{
+        setDetalles_orden(response.data.detalles_orden);
+       })
+
+       axios
+       .get("perfil_direccion", {
+         headers: {
+           Authorization: `Bearer ${access_token}`,
+           Accept: "application/json",
+         },
+       })
+       .then((response) => {
+         //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+         setDireccion_usuario(response.data);
+       });
+    }
+    obtener_detalles();
+  },[])
 
   return (
     <>
@@ -67,7 +97,7 @@ function ColaEnCurso() {
                   </div>
                 </DialogTitle>
                 <DialogContent>
-                  {/* LLAMAMOS AL MODAL CON EL MAPA */}
+                  
                 </DialogContent>
                 <DialogActions>
                   <div

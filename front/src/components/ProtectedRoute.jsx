@@ -32,7 +32,7 @@ export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) =
     if(estatus!==null){
       if(estatus.cola==='true'){
         localStorage.setItem(
-          "orden_ruta_id",estatus.orden_ruta_id
+          "ucabrides_orden_ruta_id",estatus.orden_ruta_id
         );
         console.log('hay una orden en curso')
         return <Navigate to={redirectTo} />
