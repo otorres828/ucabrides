@@ -72,7 +72,7 @@ function App() {
             <Route path="/cola/curso"  element={<ColaEnCurso user={user} access_token={access_token} />} />
           </Route>
 
-          <Route path="/vehiculos"  element={<Vehiculos user={user} access_token={access_token} />} />
+          <Route path="/vehiculos"  element={<Vehiculos access_token={access_token} />} />
 
         </Route>
       </Routes>

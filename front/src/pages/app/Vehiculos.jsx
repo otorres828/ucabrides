@@ -10,7 +10,7 @@ import axios from "../../api/axios";
 import Rsidebar from "../../components/app/Rsidebar";
 import Dropdown from "../../utils/Dropdown";
 
-function Vehiculos({ user, access_token }) {
+function Vehiculos({access_token }) {
   const [vehiculos, setVehiculos] = useState(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function Vehiculos({ user, access_token }) {
         });
     }
     obtener_vehiculos();
-  }, [access_token]);
+  }, [vehiculos]);
 
   return (
     <>
@@ -72,7 +72,7 @@ function Vehiculos({ user, access_token }) {
                             <p className="text-red-600">SIN PLACA</p>
                           )}
                         </TableCell>
-                        <TableCell align="right"><Dropdown /></TableCell>
+                        <TableCell align="right"><Dropdown vehiculo={row} access_token={access_token} /></TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

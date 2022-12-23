@@ -31,6 +31,7 @@ Route::group(['middleware'=>'auth'],function(){
 
     //VEHICULOS
     Route::get('vehiculos',[VehiculoController::class,'index']);
+    Route::put('vehiculos/{id}',[VehiculoController::class,'update']);
 });
 
 Route::get('hola',function(){
