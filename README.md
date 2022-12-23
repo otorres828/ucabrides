@@ -1,4 +1,3 @@
-
 # UCAB RIDES 🚗
   _aplicacion web, basada en un sistema de "colas" para la poblacion ucabista, ubicada en Venezuela, Proyecto de Formulas Innovadoras_
 ## Construido con 🛠️
