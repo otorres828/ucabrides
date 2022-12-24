@@ -3,7 +3,6 @@ import axios from '../../../api/axios';
 
 function InformacionCola({detalles_orden}) {
   const [conductor,setConductor]=useState(null);
-  console.log(detalles_orden)
 
   useEffect(()=>{
     function obtener_conductor (){
@@ -41,7 +40,7 @@ function InformacionCola({detalles_orden}) {
               <small className="font-bold">Color:</small> {detalles_orden.vehiculo===null  || detalles_orden.vehiculo.color===null ? "cargando": detalles_orden.vehiculo.color }
             </p>
             <p>
-              <small className="font-bold">Placa:</small> {detalles_orden.vehiculo===null  || detalles_orden.vehiculo.placa===null ? "El conductor prefiere mantenerlo en privado": detalles_orden.vehiculo.placa  }
+              <small className="font-bold">Placa:</small> {(!detalles_orden.vehiculo.placa) ? "El conductor prefiere mantenerlo en privado" : detalles_orden.vehiculo.placa  }
             </p>
 
             <h1 className="pt-3 text-ellipsis font-serif font-semibold">
