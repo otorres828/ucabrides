@@ -1,7 +1,7 @@
 import React from "react";
 import { Marker, GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import house from "../../images/house_icon.png";
-import marcador from "../../images/marcador_icon.png";
+import house from "../../../images/house_icon.png";
+import marcador from "../../../images/marcador_icon.png";
 
 function MapaCola({detalles_orden,localizacion_usuario}) {
     const containerStyle = {

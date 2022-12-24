@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import logo from "../../images/fondo_logos.png";
+import logo from "../../../images/fondo_logos.png";
 import useOnclickOutside from "react-cool-onclickoutside";
-import Rsidebar from "../../components/app/Rsidebar";
+import Rsidebar from "../../../components/app/Rsidebar";
 import { Box, Flex } from "@chakra-ui/react";
-import axios from "../../api/axios";
+import axios from "../../../api/axios";
 import { useSnackbar } from "notistack";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import usePlacesAutocomplete, {

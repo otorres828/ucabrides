@@ -12,14 +12,14 @@ import AOS from 'aos';
 import { useSnackbar } from "notistack";
 import useNetwork from "./hooks/useNetwork";
 import { RedirectLogin, RedirectPanel,EstaEnCola, SalioDeCola } from "./components/ProtectedRoute";
-import Perfil from "./pages/app/Perfil";
-import MapView from "./pages/app/MapView";
+import Perfil from "./pages/app/perfil/Perfil";
+import MapView from "./pages/app/RecibirCola/MapView";
 import Rol from "./pages/app/Rol";
-import ListadoColas from "./pages/app/ListadoColas";
-import Mensajes from "./pages/app/Mensajes";
-import ConfigurarUbicacion from "./pages/app/ConfigurarUbicacion";
-import ColaEnCurso from "./pages/app/ColaEnCurso";
-import Vehiculos from "./pages/app/Vehiculos";
+import ListadoColas from "./pages/app/RecibirCola/ListadoColas";
+import Mensajes from "./pages/app/RecibirCola/Mensajes";
+import ConfigurarUbicacion from "./pages/app/perfil/ConfigurarUbicacion";
+import ColaEnCurso from "./pages/app/RecibirCola/ColaEnCurso";
+import Vehiculos from "./pages/app/perfil/Vehiculos";
 
 function App() {
   const access_token = localStorage.getItem("access_token");

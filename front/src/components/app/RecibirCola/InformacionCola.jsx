@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../../api/axios';
+import axios from '../../../api/axios';
 
 function InformacionCola({detalles_orden}) {
   const [conductor,setConductor]=useState(null);
+  console.log(detalles_orden)
 
   useEffect(()=>{
     function obtener_conductor (){
@@ -34,13 +35,13 @@ function InformacionCola({detalles_orden}) {
               Informacion del Vehiculo
             </h1>
             <p>
-              <small className="font-bold">Modelo:</small> {detalles_orden.vehiculo.marca}
+              <small className="font-bold">Marca:</small> {detalles_orden.vehiculo===null ? "cargando" : detalles_orden.vehiculo.marca}
             </p>
             <p>
-              <small className="font-bold">Color:</small> {detalles_orden.vehiculo.color}
+              <small className="font-bold">Color:</small> {detalles_orden.vehiculo===null  || detalles_orden.vehiculo.color===null ? "cargando": detalles_orden.vehiculo.color }
             </p>
             <p>
-              <small className="font-bold">Placa:</small> {detalles_orden.vehiculo.placa ? detalles_orden.vehiculo.placa : "El conductor prefiere mantenerlo en privado"}
+              <small className="font-bold">Placa:</small> {detalles_orden.vehiculo===null  || detalles_orden.vehiculo.placa===null ? "El conductor prefiere mantenerlo en privado": detalles_orden.vehiculo.placa  }
             </p>
 
             <h1 className="pt-3 text-ellipsis font-serif font-semibold">

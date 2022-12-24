@@ -6,11 +6,11 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 
-import axios from "../../api/axios";
-import Rsidebar from "../../components/app/Rsidebar";
-import Dropdown from "../../utils/Dropdown";
+import axios from "../../../api/axios";
+import Rsidebar from "../../../components/app/Rsidebar";
+import Dropdown from "../../../utils/Dropdown";
 
-import AgregarVehiculo from "../../utils/AgregarVehiculo";
+import AgregarVehiculo from "../../../utils/AgregarVehiculo";
 
 function Vehiculos({access_token }) {
   const [vehiculos, setVehiculos] = useState(null);

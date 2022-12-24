@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import icono from "../../images/icono_perfil.png";
+import icono from "../../../images/icono_perfil.png";
 
 function MiUbicacion() {
 

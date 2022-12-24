@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Rsidebar from "../../components/app/Rsidebar";
-import MensajesDarCola from "../../components/app/MensajesDarCola";
-import MensajesRecibirCola from "../../components/app/MensajesRecibirCola";
+import Rsidebar from "../../../components/app/Rsidebar";
+import MensajesDarCola from "../../../components/app/RecibirCola/MensajesDarCola";
+import MensajesRecibirCola from "../../../components/app/RecibirCola/MensajesRecibirCola";
 
 function Mensajes({user}) {
   user=(JSON.parse(user));

@@ -4,10 +4,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import Rsidebar from "../../components/app/Rsidebar";
-import axios from "../../api/axios";
+import axios from "../../../api/axios";
 import { useSnackbar } from "notistack";
-import DetallesCola from "../../components/app/DetallesCola";
+import DetallesCola from "../../../components/app/RecibirCola/DetallesCola";
+import Rsidebar from "../../../components/app/Rsidebar";
 
 function ColaEnCurso({ access_token }) {
   const [open, setOpen] = React.useState(false);

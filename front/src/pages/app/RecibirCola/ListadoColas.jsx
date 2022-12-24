@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Rsidebar from "../../components/app/Rsidebar";
-import logo from "../../images/fondo_logo432x460.png";
-import axios from "../../api/axios";
-import ListaRecibirCola from "../../components/app/ListaRecibirCola";
-import RedirigirPerfilUbicacion from "../../components/app/RedirigirPerfilUbicacion";
-import AlertaSinColas from "../../components/app/AlertaSinColas";
+import Rsidebar from "../../../components/app/Rsidebar";
+import logo from "../../../images/fondo_logo432x460.png";
+import axios from "../../../api/axios";
+import ListaRecibirCola from "../../../components/app/RecibirCola/ListaRecibirCola";
+import RedirigirPerfilUbicacion from "../../../components/app/RecibirCola/RedirigirPerfilUbicacion";
+import AlertaSinColas from "../../../components/app/RecibirCola/AlertaSinColas";
 // import { Navigate } from "react-router-dom";
 import {
   listado_rutas_disponibles,
-} from "../../hooks/RutaMasCorta";
+} from "../../../hooks/RutaMasCorta";
 
 function ListadoColas({user}) {
   const [rutas, setRutas] = useState(null);

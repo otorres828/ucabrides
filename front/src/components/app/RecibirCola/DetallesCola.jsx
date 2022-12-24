@@ -3,7 +3,7 @@ import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import InformacionCola from "./InformacionCola";
-import MapaCola from "../../pages/app/MapaCola";
+import MapaCola from "../../../pages/app/RecibirCola/MapaCola";
 
 function DetallesCola({ detalles_orden, localizacion_usuario }) {
   return (

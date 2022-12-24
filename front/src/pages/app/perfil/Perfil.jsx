@@ -1,10 +1,10 @@
 import React from "react";
-import Rsidebar from "../../components/app/Rsidebar";
-import CerrarSesion from "../../components/app/CerrarSesion";
-import Clave from "../../components/app/Clave";
-import DistanciaCaminar from "../../components/app/DistanciaCaminar";
-import MiUbicacion from "../../components/app/MiUbicacion";
-import icono from "../../images/icono_perfil.png";
+import Rsidebar from "../../../components/app/Rsidebar";
+import CerrarSesion from "../../../components/app/RecibirCola/CerrarSesion";
+import Clave from "../../../components/app/RecibirCola/Clave";
+import DistanciaCaminar from "../../../components/app/RecibirCola/DistanciaCaminar";
+import MiUbicacion from "../../../components/app/RecibirCola/MiUbicacion";
+import icono from "../../../images/icono_perfil.png";
 import { Link } from "react-router-dom";
 
 function Perfil({ user ,access_token}) {

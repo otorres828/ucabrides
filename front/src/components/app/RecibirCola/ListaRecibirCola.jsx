@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
-import { DistanciaMasCorta } from "../../hooks/RutaMasCorta";
+import { DistanciaMasCorta } from "../../../hooks/RutaMasCorta";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import DetallesCola from "./DetallesCola";
-import logo from "../../images/fondo_logo432x460.png";
-import axios from "../../api/axios";
+import logo from "../../../images/fondo_logo432x460.png";
+import axios from "../../../api/axios";
 
 function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);

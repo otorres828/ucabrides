@@ -1,6 +1,6 @@
 import React, {useState } from "react";
-import Rsidebar from "../../components/app/Rsidebar";
-import logo from "../../logo.png";
+import Rsidebar from "../../../components/app/Rsidebar";
+import logo from "../../../logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Marker,
@@ -12,7 +12,7 @@ import {
   faLocationCrosshairs,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { DistanciaMasCorta, distancia_a_caminar, listado_rutas_disponibles, obtener_direccion_usuario } from "../../hooks/RutaMasCorta";
+import { DistanciaMasCorta, distancia_a_caminar, listado_rutas_disponibles, obtener_direccion_usuario } from "../../../hooks/RutaMasCorta";
 
 const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
 const clear = <FontAwesomeIcon icon={faTrash} />;

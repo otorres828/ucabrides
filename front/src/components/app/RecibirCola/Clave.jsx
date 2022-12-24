@@ -4,8 +4,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useSnackbar } from "notistack";
-import axios from "../../api/axios";
-import icono from "../../images/icono_perfil.png";
+import axios from "../../../api/axios";
+import icono from "../../../images/icono_perfil.png";
 
 function Clave({access_token}) {
   const [open, setOpen] = useState(false);
