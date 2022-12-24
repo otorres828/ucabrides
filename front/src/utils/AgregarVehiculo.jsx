@@ -20,7 +20,7 @@ function AgregarVehiculo({access_token}) {
     setOpen(false);
     e.preventDefault();
     axios.post(
-      `vehiculos/`,
+      `vehiculos`,
       { marca: marca, color: color, placa: placa },
       {
         headers: {

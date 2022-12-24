@@ -94,7 +94,7 @@ function CustomizedMenus({ vehiculo, access_token }) {
   const eliminar_vehiculo =  () => {
     setOpen_modal(false);
     axios.delete(
-      `vehiculos/` + vehiculo._id,
+      `vehiculos` + vehiculo._id,
       
       {
         headers: {
