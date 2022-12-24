@@ -39,7 +39,7 @@ function Vehiculos({access_token }) {
             <h1 className="text-left block pt-5 pb-2 font-bold  text-xl sm:text-3xl text-gray-900">
               Listado de Vehiculos
             </h1>
-            <AgregarVehiculo />
+            <AgregarVehiculo access_token={access_token} />
           </div>
           <div className="flex justify-between items-center my-5 px-6">
             {vehiculos === null ? (

@@ -12,6 +12,16 @@ class VehiculoController extends Controller
         return response()->json($vehiculos,200);
     }
 
+    public function store(Request $request){
+        $vehiculo = new Vehiculo();
+        $vehiculo->marca= $request->marca;
+        $vehiculo->color= $request->color;
+        $vehiculo->placa= $request->placa;
+        $vehiculo->user_id =auth()->user()->_id;
+        $vehiculo->save();
+        return $vehiculo;
+    }
+
     public function update(Request $request, $id)
     {
         $vehiculo = Vehiculo::findOrFail($id);
@@ -21,5 +31,11 @@ class VehiculoController extends Controller
 
         $vehiculo->save();
         return $vehiculo;
+    }
+
+    public function delete($id){
+        $vehiculo = Vehiculo::findOrFail($id);
+        $vehiculo->delete();
+        return Vehiculo::all();
     }
 }

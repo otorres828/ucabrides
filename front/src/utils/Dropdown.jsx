@@ -91,6 +91,22 @@ function CustomizedMenus({ vehiculo, access_token }) {
     });
   };
 
+  const eliminar_vehiculo =  () => {
+    setOpen_modal(false);
+    axios.delete(
+      `vehiculos/` + vehiculo._id,
+      
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      }
+    ).then(()=>{
+      enqueueSnackbar('Vehiculo eliminado con exito',{ variant: "warning" })
+    });
+  };
+
   return (
     <div>
       <Button
@@ -121,7 +137,12 @@ function CustomizedMenus({ vehiculo, access_token }) {
         >
           Editar
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem 
+            onClick={() => {
+            handleClose();
+            eliminar_vehiculo();
+          }}
+         disableRipple>
           Eliminar
         </MenuItem>
       </StyledMenu>

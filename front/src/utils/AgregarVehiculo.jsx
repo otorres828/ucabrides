@@ -2,20 +2,37 @@ import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useSnackbar } from "notistack";
+import axios from "../api/axios";
 
-function AgregarVehiculo() {
+function AgregarVehiculo({access_token}) {
   const [open, setOpen] = useState(false);
   const [marca, setMarca] = useState(null);
   const [color, setColor] = useState(null);
   const [placa, setPlaca] = useState(null);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const agregar_vehiculo = async () => {
+  const agregar_vehiculo = (e) => {
     setOpen(false);
-  };
+    e.preventDefault();
+    axios.post(
+      `vehiculos/`,
+      { marca: marca, color: color, placa: placa },
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      }
+    ).then(()=>{
+      enqueueSnackbar('Vehiculo agregado con exito',{ variant: "success" })
+    });  
+};
+
   return (
     <>
       <div
@@ -72,7 +89,7 @@ function AgregarVehiculo() {
                   className="mx-2 bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
                   type="submit"
                 >
-                  Cambiar
+                  Agregar
                 </button>
                 <div
                   className="bg-green-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
