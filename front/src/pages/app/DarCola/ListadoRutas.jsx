@@ -65,7 +65,7 @@ function ListadoRutas({ access_token }) {
                         </TableCell>
                         <TableCell align="right">
                           {" "}
-                          <Switch {...label} defaultChecked />
+                          <Switch {...label}  />
                         </TableCell>
                       </TableRow>
                     ))}
