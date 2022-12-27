@@ -7,7 +7,7 @@ function Rol() {
     <>
       <div className="flex h-screen justify-center items-center  rounded-lg">
         <div className="w-96 px-3">
-          <NavLink to="/conductor/listado-de-colas">
+          <NavLink to="/listado/rutas">
             <div className="content-center items-center bg-sky-500 hover:bg-sky-600 border-collapse border-gray-400   lg:border-gray-400 rounded-lg  p-4 leading-normal">
               <div className="">
                 <div className="text-white font-bold  text-3xl mb-2 text-center ">

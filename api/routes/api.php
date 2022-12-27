@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RutaController;
+use App\Http\Controllers\RutaDarController;
 use App\Http\Controllers\VehiculoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,10 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('vehiculos',[VehiculoController::class,'store']);
     Route::put('vehiculos/{id}',[VehiculoController::class,'update']);
     Route::delete('vehiculos/{id}',[VehiculoController::class,'delete']);
+
+
+    //DAR COLA
+    Route::get('rutas',[RutaDarController::class,'index']);
 });
 
 Route::get('hola',function(){

@@ -20,6 +20,7 @@ import Mensajes from "./pages/app/RecibirCola/Mensajes";
 import ConfigurarUbicacion from "./pages/app/perfil/ConfigurarUbicacion";
 import ColaEnCurso from "./pages/app/RecibirCola/ColaEnCurso";
 import Vehiculos from "./pages/app/perfil/Vehiculos";
+import ListadoRutas from "./pages/app/DarCola/ListadoRutas";
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -73,6 +74,9 @@ function App() {
           </Route>
 
           <Route path="/vehiculos"  element={<Vehiculos access_token={access_token} />} />
+          
+          {/* DAR COLA */}
+          <Route path="/listado/rutas"  element={<ListadoRutas access_token={access_token} />} />
 
         </Route>
       </Routes>
