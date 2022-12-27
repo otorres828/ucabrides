@@ -15,6 +15,7 @@ function ColaEnCurso({ access_token }) {
   const orden_ruta_id = localStorage.getItem("ucabrides_orden_ruta_id");
   const [detalles_orden, setDetalles_orden] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
+  const [estatus,setEstatus]= useState(null);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -56,7 +57,7 @@ function ColaEnCurso({ access_token }) {
             lng: response.data.detalles_orden.rutas.lng,
             usuarios: response.data.detalles_orden.usuarios,
             vehiculo: response.data.detalles_orden.vehiculo,
-            distancia:puntomascerca.distancia,
+            distancia: puntomascerca.distancia,
             puntomascerca: [
               puntomascerca.distancia,
               puntomascerca.lat,
@@ -75,6 +76,17 @@ function ColaEnCurso({ access_token }) {
         .then((response) => {
           //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
           setDireccion_usuario(response.data);
+        });
+
+      axios  
+        .get("me", {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: "application/json",
+          },
+        })
+        .then((response) => {
+          setEstatus(response.data);
         });
     }
     obtener_detalles();
@@ -98,8 +110,8 @@ function ColaEnCurso({ access_token }) {
               >
                 te dejaran a metros - 2 asientos disponibles
               </li>
-              <div className="-mt-5 mx-3 rounded-lg flex-1 bg-red-500 text-white font-semibold text-center">
-                Pendiente
+              <div className={`-mt-5 mx-3 rounded-lg flex-1 ${estatus ? (estatus.cola==='true' ? 'bg-red-500' : 'bg-green-500') : "bg-slate-500"} text-white font-semibold text-center`}>
+                {estatus ? (estatus.cola==='true' ? 'Pendiente' : 'Aprobado') : "Cargando"}
               </div>
 
               <Dialog
@@ -115,12 +127,12 @@ function ColaEnCurso({ access_token }) {
                   </div>
                 </DialogTitle>
                 <DialogContent>
-                  {detalles_orden && direccion_usuario &&
+                  {detalles_orden && direccion_usuario && (
                     <DetallesCola
                       detalles_orden={detalles_orden}
                       localizacion_usuario={direccion_usuario}
                     />
-                  }
+                  )}
                 </DialogContent>
                 <DialogActions>
                   <div

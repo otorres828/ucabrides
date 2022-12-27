@@ -30,12 +30,15 @@ export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) =
     },[])
 
     if(estatus!==null){
-      if(estatus.cola==='true'){
+      if(estatus.cola==='true' || estatus.cola==='aprobado'){
         localStorage.setItem(
           "ucabrides_orden_ruta_id",estatus.orden_ruta_id
         );
         console.log('hay una orden en curso')
         return <Navigate to={redirectTo} />
+      }else if(estatus.cola==='aprobado' ){
+        console.log('hay una orden en curso')
+        return <Navigate to="/cola/aprobada" />
       }else{
         localStorage.removeItem('ucabrides_orden_ruta_id');
       }
