@@ -11,12 +11,10 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import {
-  faLocationCrosshairs,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
 
-export default function ConfigurarUbicacion({access_token}) {
+export default function ConfigurarUbicacion({ access_token }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyBTL6mwVxZgbLAokpY6eIfqD35FKfRQhpo",
     libraries: ["places"],
@@ -31,10 +29,11 @@ export default function ConfigurarUbicacion({access_token}) {
   );
 }
 
-function Map({access_token}) {
+function Map({ access_token }) {
   const [selected, setSelected] = useState(null);
   const [ubicacion, setUbicacion] = useState(null);
   const [map, setMap] = useState(null);
+  const [direccion_usuario, setDireccion_usuario] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
   const google = window.google;
 
@@ -85,14 +84,28 @@ function Map({access_token}) {
   useEffect(() => {
     function panto() {
       if (selected !== null)
-      map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
+        map.panTo(new google.maps.LatLng(selected.lat, selected.lng));
     }
     panto();
   }, [selected]);
 
   useEffect(() => {
+    axios
+      .get("perfil_direccion", {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      })
+      .then((response) => {
+        //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+        setDireccion_usuario(response.data);
+      });
+  }, []);
+
+  useEffect(() => {
     function panto() {
-      if (ubicacion !== null){
+      if (ubicacion !== null) {
         map.panTo(new google.maps.LatLng(ubicacion.lat(), ubicacion.lng()));
       }
     }
@@ -108,26 +121,28 @@ function Map({access_token}) {
         h="100vh"
         w="100vw"
       >
-        <GoogleMap
-          onLoad={(map) => setMap(map)}
-          mapContainerStyle={containerStyle}
-          center={ucab}
-          zoom={15}
-          options={{
-            zoomControl: false,
-            streetViewControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false,
-          }}
-        >
-          {selected && (
-            <Marker
-              position={selected}
-              draggable={true}
-              onDragEnd={(e) => setUbicacion(e.latLng)}
-            />
-          )}
-        </GoogleMap>
+        {direccion_usuario && (
+          <GoogleMap
+            onLoad={(map) => setMap(map)}
+            mapContainerStyle={containerStyle}
+            center={direccion_usuario ? direccion_usuario : ucab}
+            zoom={15}
+            options={{
+              zoomControl: false,
+              streetViewControl: false,
+              mapTypeControl: false,
+              fullscreenControl: false,
+            }}
+          >
+            {selected && (
+              <Marker
+                position={selected }
+                draggable={true}
+                onDragEnd={(e) => setUbicacion(e.latLng)}
+              />
+            )}
+          </GoogleMap>
+        )}
         <Box
           p={4}
           borderRadius="lg"
@@ -140,7 +155,7 @@ function Map({access_token}) {
           <PlacesAutocomplete setSelected={setSelected} />
         </Box>
       </Flex>
-      {ubicacion && (
+      {selected && (
         <div className="fixed bottom-20 z-30 rounded-lg mx-auto">
           <div className="content-center   justify-between">
             <div className="m-3 rounded-lg bg-gradient-to-l  vh-100 flex flex-row md:flex-col pt-3 md:py-3  px-2 text-center ">
