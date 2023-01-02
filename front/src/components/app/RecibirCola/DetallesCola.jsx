@@ -10,7 +10,7 @@ function DetallesCola({ detalles_orden, localizacion_usuario }) {
     <Carousel showArrows={true} emulateTouch={false} showThumbs={false} swipeable={false} >
         <InformacionCola detalles_orden={detalles_orden}/>
         <MapaCola detalles_orden={detalles_orden} localizacion_usuario={localizacion_usuario} />
-      </Carousel>
+    </Carousel>
   );
 }
 
