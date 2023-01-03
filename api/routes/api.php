@@ -39,7 +39,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::put('vehiculos/{id}',[VehiculoController::class,'update']);
     Route::delete('vehiculos/{id}',[VehiculoController::class,'delete']);
 
-    //VEHICULOS
+    //contactos sos
     Route::get('contactosos',[ContactoSosController::class,'index']);
     Route::post('contactosos',[ContactoSosController::class,'store']);
     Route::put('contactosos/{id}',[ContactoSosController::class,'update']);
