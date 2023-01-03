@@ -31,10 +31,8 @@ class ContactoSosController extends Controller
     public function update(Request $request, $id)
     {
         $contactossos = Contactosos::findOrFail($id);
-        $contactossos->marca = strtoupper($request->marca);
-        $contactossos->color = $request->color;
-        $contactossos->placa = strtoupper($request->placa);
-
+        $contactossos->nombre = ($request->nombre);
+        $contactossos->telefono = $request->telefono;
         $contactossos->save();
         return $contactossos;
     }

@@ -12,6 +12,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import AgregarContactoSos from "../../../utils/AgregarContactoSos";
 import { useSnackbar } from "notistack";
+import DropdownContactoSos from "../../../utils/DropdownContactoSos";
 
 function ContactosSos({ access_token }) {
   const [contactos, setContactos] = useState(null);
@@ -40,7 +41,6 @@ function ContactosSos({ access_token }) {
     ).then(()=>{
       enqueueSnackbar('Contacto eliminado con exito',{ variant: "warning" })
     });
-    console.log(_id)
   }
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function ContactosSos({ access_token }) {
     }
 
     obtener_contactos();
-  }, [contactos,access_token]);
+  }, [contactos]);
 
   return (
     <>
@@ -89,37 +89,10 @@ function ContactosSos({ access_token }) {
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <TableCell component="th" scope="row">
-                          {row.nombre} {row._id}
-                        </TableCell>
+                        <TableCell component="th" scope="row">{row.nombre}</TableCell>
                         <TableCell align="left">{row.telefono}</TableCell>
                         <TableCell align="right">
-                          <div className="flex justify-end">
-                            <div className="bg-blue-600 text-center rounded-lg p-2 w-16 cursor-pointer font-bold text-white"
-                              id="basic-button"
-                              aria-controls={open ? "basic-menu" : undefined}
-                              aria-haspopup="true"
-                              aria-expanded={open ? "true" : undefined}
-                              onClick={handleClick}
-                            >
-                              ⚙️
-                            </div>
-                            <Menu
-                         
-                              anchorEl={anchorEl}
-                              open={open}
-                              onClose={handleClose}
-                              MenuListProps={{
-                                "aria-labelledby": "basic-button",
-                              }}
-                            >
-                              <MenuItem onClick={handleClose}>Editar</MenuItem>
-                              <MenuItem    key={row._id} onClick={ ()=>{
-                                handleEliminar(row._id)} }>
-                               {row._id}
-                              </MenuItem>
-                            </Menu>
-                          </div>
+                          <DropdownContactoSos contacto={row} access_token={access_token} />
                         </TableCell>
                       </TableRow>
                     ))}

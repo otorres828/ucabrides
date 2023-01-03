@@ -8,7 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 
 import axios from "../../../api/axios";
 import Rsidebar from "../../../components/app/Rsidebar";
-import Dropdown from "../../../utils/Dropdown";
+import DropdownVehiculo from "../../../utils/DropdownVehiculo";
 
 import AgregarVehiculo from "../../../utils/AgregarVehiculo";
 
@@ -74,7 +74,7 @@ function Vehiculos({access_token }) {
                             <p className="text-red-600">SIN PLACA</p>
                           )}
                         </TableCell>
-                        <TableCell align="right"><Dropdown vehiculo={row} access_token={access_token} /></TableCell>
+                        <TableCell align="right"><DropdownVehiculo vehiculo={row} access_token={access_token} /></TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

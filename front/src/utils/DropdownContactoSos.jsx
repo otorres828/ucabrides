@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSnackbar } from "notistack";
+import axios from "../api/axios";
 import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
@@ -6,8 +8,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useSnackbar } from "notistack";
-import axios from "../api/axios";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -51,14 +53,13 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-function CustomizedMenus({ vehiculo, access_token }) {
+function DropdownContactoSos({ contacto, access_token }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { enqueueSnackbar } = useSnackbar();
   const [open_modal, setOpen_modal] = useState(false);
-  const [marca, setMarca] = useState(vehiculo.marca);
-  const [color, setColor] = useState(vehiculo.color);
-  const [placa, setPlaca] = useState(vehiculo.placa);
+  const [nombre, setNombre] = useState(contacto.nombre);
+  const [telefono, setTelefono] = useState(contacto.telefono);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -68,9 +69,8 @@ function CustomizedMenus({ vehiculo, access_token }) {
   };
 
   const cerrar_modal = () => {
-    setMarca(vehiculo.marca);
-    setColor(vehiculo.color);
-    setPlaca(vehiculo.placa);
+    setNombre(null);
+    setTelefono(null);
     setOpen_modal(false);
   };
 
@@ -78,8 +78,8 @@ function CustomizedMenus({ vehiculo, access_token }) {
     setOpen_modal(false);
     e.preventDefault();
     axios.put(
-      `vehiculos/` + vehiculo._id,
-      { marca: marca, color: color, placa: placa },
+      `contactosos/` + contacto._id,
+      { nombre: nombre, telefono: telefono },
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -87,14 +87,14 @@ function CustomizedMenus({ vehiculo, access_token }) {
         },
       }
     ).then(()=>{
-      enqueueSnackbar('Vehiculo Modificado con exito',{ variant: "success" })
+      enqueueSnackbar('Contacto Modificado con exito',{ variant: "success" })
     });
   };
 
   const eliminar_vehiculo =  () => {
     setOpen_modal(false);
     axios.delete(
-      `vehiculos/` + vehiculo._id,
+      `contactosos/` + contacto._id,
       
       {
         headers: {
@@ -103,7 +103,7 @@ function CustomizedMenus({ vehiculo, access_token }) {
         },
       }
     ).then(()=>{
-      enqueueSnackbar('Vehiculo eliminado con exito',{ variant: "warning" })
+      enqueueSnackbar('Contacto eliminado con exito',{ variant: "warning" })
     });
   };
 
@@ -155,40 +155,30 @@ function CustomizedMenus({ vehiculo, access_token }) {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">
-            <div className="text-2xl text-teal-900 font-bold text-center">
-              Modificar Vehiculo
+        <DialogTitle id="alert-dialog-title">
+            <div className="text-xl text-teal-900 font-bold text-center">
+              Editar Contacto de Emergencia
             </div>
           </DialogTitle>
           <DialogContent>
             <form onSubmit={modificar_vehiculo}>
-              <label>Escriba la marca del vehiculo *</label>
+            <label>Escriba el nombre del contacto *</label>
               <input
+               value={nombre}
                 onChange={(e) => {
-                  setMarca(e.target.value);
+                  setNombre(e.target.value);
                 }}
                 required
-                className="uppercase mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className=" mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
-                placeholder="Ingresar Marca del Vehiculo"
-                value={marca}
+                placeholder="Ingresar el nombre del contacto"
               />
-              <label>Escriba el color del vehiculo *</label>
-              <input
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
-                required
-                type="text"
-                className="mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Ingrese Color"
-              />
-              <label>Escriba la placa del vehiculo (opcional)</label>
-              <input
-                onChange={(e) => setPlaca(e.target.value)}
-                className="uppercase shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                type="text"
-                placeholder="Ingrese Placa"
-                value={placa === null ? "" : placa}
+              <label>Escriba el numero del contacto *</label>
+              <PhoneInput
+                placeholder="INGRESA EL NUMERO DE TELEFONO"
+                value={telefono}
+                onChange={setTelefono}
+                className=" border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <div className="flex justify-center mt-4">
                 <button
@@ -212,4 +202,4 @@ function CustomizedMenus({ vehiculo, access_token }) {
   );
 }
 
-export default CustomizedMenus;
+export default DropdownContactoSos;
