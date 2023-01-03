@@ -7,8 +7,8 @@ function CerrarSesion() {
   const { enqueueSnackbar } = useSnackbar();
 
   function cerrar_sesion() {
-    sessionStorage.clear();
-    localStorage.clear();
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user');
     enqueueSnackbar("Ha cerrado sesion con exito", { variant: "success" });
 
     navigate("/login");
