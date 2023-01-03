@@ -73,4 +73,8 @@ class User extends Eloquent implements JWTSubject, AuthenticatableContract
     public function vehiculo(){
         return $this->hasMany(Vehiculo::class);
     }
+
+    public function contactosos(){
+        return $this->hasMany(Contactosos::class);
+    }
 }

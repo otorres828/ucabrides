@@ -1,11 +1,12 @@
 import React from "react";
 import Rsidebar from "../../../components/app/Rsidebar";
-import CerrarSesion from "../../../components/app/RecibirCola/CerrarSesion";
-import Clave from "../../../components/app/RecibirCola/Clave";
+import CerrarSesion from "../../../components/app/perfil/CerrarSesion";
+import Clave from "../../../components/app/perfil/Clave";
 import DistanciaCaminar from "../../../components/app/RecibirCola/DistanciaCaminar";
-import MiUbicacion from "../../../components/app/RecibirCola/MiUbicacion";
+import MiUbicacion from "../../../components/app/perfil/MiUbicacion";
 import icono from "../../../images/icono_perfil.png";
 import { Link } from "react-router-dom";
+import ContactosSos from "../../../components/app/perfil/ContactosSos";
 
 function Perfil({ user ,access_token}) {
   user = JSON.parse(user);
@@ -96,6 +97,7 @@ function Perfil({ user ,access_token}) {
               <Clave access_token={access_token} />
               <MiUbicacion access_token={access_token}/>
               <DistanciaCaminar access_token={access_token} />
+              <ContactosSos access_token={access_token} />
 
                <Link to="/vehiculos"
                   className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"

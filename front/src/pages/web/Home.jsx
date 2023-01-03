@@ -9,7 +9,6 @@ import Newsletter from '../../components/web/Newsletter';
 import Footer from '../../components/web/Footer';
 
 function Home() {
-
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 

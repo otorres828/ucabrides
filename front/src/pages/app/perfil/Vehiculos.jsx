@@ -84,7 +84,6 @@ function Vehiculos({access_token }) {
           </div>
         </div>
       </div>
-
       <Rsidebar />
     </>
   );

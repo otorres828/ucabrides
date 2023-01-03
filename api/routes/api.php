@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactoSosController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RutaController;
 use App\Http\Controllers\RutaDarController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VehiculoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +25,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('cambiar_distancia_caminar',[RutaController::class,'cambiar_distancia_caminar']);
     Route::post('cambiar_ubicacion',[RutaController::class,'cambiar_ubicacion']);
     Route::post('cambiarclave',[AuthController::class,'cambiarclave']);
+
     Route::get('me',[AuthController::class,'me']);
     Route::get('cambiar_estatus_usuario_activo/{cola}/{orden_ruta_id}',[RutaController::class,'cambiar_estatus_usuario_activo']);
     Route::get('cambiar_estatus_usuario_cancelar',[RutaController::class,'cambiar_estatus_usuario_cancelar']);
@@ -36,11 +39,13 @@ Route::group(['middleware'=>'auth'],function(){
     Route::put('vehiculos/{id}',[VehiculoController::class,'update']);
     Route::delete('vehiculos/{id}',[VehiculoController::class,'delete']);
 
-
+    //VEHICULOS
+    Route::get('contactosos',[ContactoSosController::class,'index']);
+    Route::post('contactosos',[ContactoSosController::class,'store']);
+    Route::put('contactosos/{id}',[ContactoSosController::class,'update']);
+    Route::delete('contactosos/{id}',[ContactoSosController::class,'delete']);
+    
+    
     //DAR COLA
     Route::get('rutas',[RutaDarController::class,'index']);
-});
-
-Route::get('hola',function(){
-    return "hola mundo";
 });
