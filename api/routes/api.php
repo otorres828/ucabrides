@@ -45,7 +45,6 @@ Route::group(['middleware'=>'auth'],function(){
     Route::put('contactosos/{id}',[ContactoSosController::class,'update']);
     Route::delete('contactosos/{id}',[ContactoSosController::class,'delete']);
     
-    
     //DAR COLA
     Route::get('rutas',[RutaDarController::class,'index']);
 });

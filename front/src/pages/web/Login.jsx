@@ -95,7 +95,7 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         autoComplete="off"
-                        placeholder="*******"
+                        placeholder="***********"
                         required
                       />
                     </div>
