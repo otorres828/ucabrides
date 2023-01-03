@@ -19,15 +19,6 @@ function ListadoColas({user}) {
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
     
-    // axios.get("me", {
-    //   headers: {
-    //     Authorization: `Bearer ${access_token}`,
-    //     Accept: "application/json",
-    //   },
-    // }).then((response)=>{
-    //   setEstatus(response.data.cola)
-    // });
-
     function inicializar() {
       listado_rutas_disponibles().then((result) => {
         //LISTADO DE RUTAS DISPONIBLES

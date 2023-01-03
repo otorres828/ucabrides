@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrdenesRutas;
+use App\Models\PuntoCercano;
 use App\Models\Rutas;
 use App\Models\User;
 use App\Models\UsuariosPorAceptar;
@@ -82,6 +83,19 @@ class RutaController extends Controller
         return response()->json([
             'detalles_orden'=>$detalles,"conductor"=>$conductor
         ],200);
+    }
+
+    public function guardar_puntomascerca(Request $request){
+        $puntocercano= new  PuntoCercano();
+        $puntocercano->user_id=$request->user_id;
+        $puntocercano->puntomascerca=$request->puntocercano;
+        $puntocercano->save();
+        return $puntocercano;
+    }
+
+    public function obtener_puntomascerca(Request $request){
+        return $puntomascerca= PuntoCercano::where('user_id',$request->user_id)->first();
+
     }
 
 }

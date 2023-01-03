@@ -32,6 +32,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('usuarios_por_aceptar',[RutaController::class,'usuarios_por_aceptar']);
     Route::get('obtener_conductor/{orden_ruta_id}',[RutaController::class,'obtener_conductor']);
     Route::get('obtener_detalles_orden_abierta/{orden_ruta_id}',[RutaController::class,'obtener_detalles_orden_abierta']);
+    Route::post('puntomascerca/',[RutaController::class,'guardar_puntomascerca']);
+    Route::get('puntomascerca/{user_id}',[RutaController::class,'obtener_puntomascerca']);
 
     //VEHICULOS
     Route::get('vehiculos',[VehiculoController::class,'index']);

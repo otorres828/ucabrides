@@ -28,6 +28,8 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
 
   const handleContinuar = () => {
     const access_token = localStorage.getItem("access_token");
+    const user = JSON.parse(localStorage.getItem("user"));
+
     axios.get(`cambiar_estatus_usuario_activo/`+true+`/`+detalles_orden.id,
               {headers: {
                 Authorization: `Bearer ${access_token}`,
@@ -40,12 +42,16 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
                           lat:detalles_orden.puntomascerca[1],
                           lng:detalles_orden.puntomascerca[2]
                           }
-      
+      axios.post("puntomascerca", {puntocercano: puntocercano,user_id:user._id})
+      .then((response)=>{
+        console.log(response.data)
+      });
+
       localStorage.setItem("ucabrides_puntomascerca", JSON.stringify(puntocercano));
       console.log(response.data)
-        setOpen(false);
-        setBandera(true)
-        enqueueSnackbar('Peticion de cola enviada al conductor', { variant: "success" })
+      setOpen(false);
+      setBandera(true)
+      enqueueSnackbar('Peticion de cola enviada al conductor', { variant: "success" })
     })
 
   };
