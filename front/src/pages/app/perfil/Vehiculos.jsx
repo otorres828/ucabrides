@@ -29,7 +29,7 @@ function Vehiculos({access_token }) {
         });
     }
     obtener_vehiculos();
-  }, [vehiculos]);
+  }, [vehiculos,access_token]);
 
   return (
     <>

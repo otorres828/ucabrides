@@ -27,7 +27,7 @@ export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) =
       }).then((response) => {
         setEstatus(response.data);
       });
-    },[])
+    },[access_token])
 
     if(estatus!==null){
       if(estatus.cola==='true' || estatus.cola==='aprobado'){

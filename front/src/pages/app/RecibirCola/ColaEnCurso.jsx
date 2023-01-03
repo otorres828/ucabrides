@@ -24,7 +24,7 @@ function ColaEnCurso({ access_token }) {
   };
 
   const handleCancelar = async () => {
-    const response = await axios.get("cambiar_estatus_usuario_cancelar", {
+    await axios.get("cambiar_estatus_usuario_cancelar", {
       headers: {
         Authorization: `Bearer ${access_token}`,
         Accept: "application/json",

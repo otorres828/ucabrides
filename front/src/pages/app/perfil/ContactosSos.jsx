@@ -26,10 +26,10 @@ function ContactosSos({ access_token }) {
     setAnchorEl(null);
   };
 
-  const handleEliminar = async (id) => {
+  const handleEliminar = async (_id) => {
     setAnchorEl(null);
     axios.delete(
-      `contactosos/` + id,
+      `contactosos/` + _id,
       
       {
         headers: {
@@ -40,6 +40,7 @@ function ContactosSos({ access_token }) {
     ).then(()=>{
       enqueueSnackbar('Contacto eliminado con exito',{ variant: "warning" })
     });
+    console.log(_id)
   }
 
   useEffect(() => {
@@ -89,11 +90,9 @@ function ContactosSos({ access_token }) {
                         }}
                       >
                         <TableCell component="th" scope="row">
-                          {row.nombre}
+                          {row.nombre} {row._id}
                         </TableCell>
-                        <TableCell align="left">
-                        {row.telefono}
-                        </TableCell>
+                        <TableCell align="left">{row.telefono}</TableCell>
                         <TableCell align="right">
                           <div className="flex justify-end">
                             <div className="bg-blue-600 text-center rounded-lg p-2 w-16 cursor-pointer font-bold text-white"
@@ -106,6 +105,7 @@ function ContactosSos({ access_token }) {
                               ⚙️
                             </div>
                             <Menu
+                         
                               anchorEl={anchorEl}
                               open={open}
                               onClose={handleClose}
@@ -114,8 +114,9 @@ function ContactosSos({ access_token }) {
                               }}
                             >
                               <MenuItem onClick={handleClose}>Editar</MenuItem>
-                              <MenuItem onClick={ ()=>handleEliminar(row._id) }>
-                                Eliminar
+                              <MenuItem    key={row._id} onClick={ ()=>{
+                                handleEliminar(row._id)} }>
+                               {row._id}
                               </MenuItem>
                             </Menu>
                           </div>

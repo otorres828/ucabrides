@@ -16,6 +16,10 @@ class ContactoSosController extends Controller
         $cuenta = Contactosos::where('user_id',auth()->user()->id)->count();
         if($cuenta>2)
             return response()->json(['error'=>'No puede registrar, ha llegado al limite']);
+        $contacto = Contactosos::where('telefono','=',$request->telefono)->where('user_id','=',auth()->user()->_id)->first();
+        if($contacto)
+            return response()->json(['error'=>'Ya ha registrado este numero, intente con otro']);
+
         $contactossos = new Contactosos();
         $contactossos->nombre= $request->nombre;
         $contactossos->telefono= $request->telefono;
