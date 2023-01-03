@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class RutaDarController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Rutas::where('user_id',auth()->user()->_id)->where('estatus',true)->get());
+        return response()->json(Rutas::where('user_id',auth()->user()->_id)->get());
     }
 
 
