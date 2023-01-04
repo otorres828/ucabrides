@@ -22,6 +22,7 @@ function ListadoRutas({ access_token }) {
   const [rutaseleccionada, setRutaseleccionada] = React.useState();
   const { enqueueSnackbar } = useSnackbar();
   const [vehiculos, setVehiculos] = React.useState(null);
+  const refresh = () => window.location.reload(true);
 
   const obtenerRutas =() => {
     axios
@@ -68,13 +69,10 @@ function ListadoRutas({ access_token }) {
         //Aqui abrimos el modal para seleccionar los vehiculos
         setmodalHandler(true);
       }else{
-        refresh();
         enqueueSnackbar('Ya tiene una ruta activa',{ variant: "error" })
       }
     }
   };
-
-  const refresh = () => window.location.reload(true);
   
   const desactivarRuta = async (id) => {
     var iddeorden;
