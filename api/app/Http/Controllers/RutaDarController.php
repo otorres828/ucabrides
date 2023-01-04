@@ -102,8 +102,8 @@ class RutaDarController extends Controller
 
     public function desactivar(Request $request){
         $ordenderuta=OrdenesRutas::where('_id',$request->orden_ruta_id)->first();
-        $ordenderuta->estatus='cancelado';
-        $ordenderuta->save();
+        $ordenderuta->delete();
+        
 
         $ruta = Rutas::where('_id',$request->ruta_id)->first();
         $ruta->estatus=false;
