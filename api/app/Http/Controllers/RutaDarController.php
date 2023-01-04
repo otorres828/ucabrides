@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrdenesRutas;
 use App\Models\Rutas;
 use Illuminate\Http\Request;
 
@@ -73,5 +74,9 @@ class RutaDarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ordenes_rutas(){
+        return OrdenesRutas::where('user_id',auth()->user()->_id)->get();
     }
 }

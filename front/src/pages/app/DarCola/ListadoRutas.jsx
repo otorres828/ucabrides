@@ -46,7 +46,13 @@ function ListadoRutas({ access_token }) {
   };
   const obtenerOrdenes = () => {
     axios
-      .get("https://rest-api-mongo-v2-production.up.railway.app/orden/")
+      .get("ordenes_rutas",
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        }
+      })
       .then((response) => {
         setOrdenes(response.data);
       });

@@ -6,7 +6,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import { useSnackbar } from "notistack";
 
-import Axios from "axios";
+import axios from "../../../api/axios";
 export default function FormDialog({
   cambiarModal,
   setFalse,
@@ -36,28 +36,22 @@ export default function FormDialog({
   };
 
   const obtenerVehiculos = async () => {
-    const usuario = JSON.parse(localStorage.getItem("user"));
-    const { data } = await Axios.get(
-      "https://rest-api-mongo-v2-production.up.railway.app/vehiculos/user/" +
-        usuario._id
-    );
+    const access_token = localStorage.getItem('access_token')
+    const { data } = await axios.get("vehiculos", {headers: {Authorization: `Bearer ${access_token}`, Accept: "application/json", }, });
+    
     setVehiculos(data);
   };
 
-  React.useEffect(() => {
-    obtenerVehiculos();
-  }, []);
-
-  const handleListItemClick = (value: string) => {
-    console.log("USted a seleccionado");
-    console.log(value);
-    setSelected(value);
-    setVehiculo(value);
-    //Insertamos la orden de la ruta aqui
-    cambiarModal();
-    setOpen(false);
-    insertarOrdendeRuta();
-  };
+  // const handleListItemClick = (value: string) => {
+  //   console.log("USted a seleccionado");
+  //   console.log(value);
+  //   setSelected(value);
+  //   setVehiculo(value);
+  //   //Insertamos la orden de la ruta aqui
+  //   cambiarModal();
+  //   setOpen(false);
+  //   insertarOrdendeRuta();
+  // };
 
   const handleActivar = ()=>{
     if(asientos>4){
@@ -67,9 +61,13 @@ export default function FormDialog({
       console.log(select.current)
       //CREAR REGISTRO DE ORDE DE RUTA
       enqueueSnackbar("La ruta se ha activado", { variant: "success" });
-
     }
   }
+
+  React.useEffect(() => {
+    obtenerVehiculos();
+  }, []);
+
   return (
     <>
       <Dialog open={open} onClose={handleClose}>

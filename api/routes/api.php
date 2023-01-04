@@ -49,4 +49,5 @@ Route::group(['middleware'=>'auth'],function(){
     
     //DAR COLA
     Route::get('rutas',[RutaDarController::class,'index']);
+    Route::get('ordenes_rutas',[RutaDarController::class,'ordenes_rutas']);
 });
