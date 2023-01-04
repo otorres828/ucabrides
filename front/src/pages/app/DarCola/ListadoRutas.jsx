@@ -9,7 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 /*************************************/
-import Rsidebar from "../../../components/app/Rsidebar";
+import Dsidebar from "../../../components/app/Dsidebar";
 import { useSnackbar } from "notistack";
 
 function ListadoRutas({ access_token }) {
@@ -183,7 +183,7 @@ function ListadoRutas({ access_token }) {
           )}
         </div>
       </div>
-      <Rsidebar />
+      <Dsidebar />
     </>
   );
 }

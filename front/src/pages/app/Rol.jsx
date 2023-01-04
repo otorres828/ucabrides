@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Rsidebar from "../../components/app/Rsidebar";
+import Psidebar from "../../components/app/Psidebar";
 
 function Rol() {
   return (
@@ -27,7 +27,7 @@ function Rol() {
           </NavLink>
         </div>
       </div>
-      <Rsidebar/>
+      <Psidebar/>
     </>
   );
 }
