@@ -16,7 +16,6 @@ function ListadoRutas({ access_token }) {
   const [rutas, setRutas] = React.useState(null);
   const [checkedState, setCheckedState] = React.useState([]);
   const [modalHandler, setmodalHandler] = React.useState(false);
-  const [detalleOrden, setDetalleOrden] = React.useState(false);
   const [dataRuta, setDataRuta] = React.useState({});
   const [ordenes, setOrdenes] = React.useState([]);
   const [rutaseleccionada, setRutaseleccionada] = React.useState();
@@ -177,7 +176,6 @@ function ListadoRutas({ access_token }) {
             <ActivarRuta
               cambiarModal={() => setmodalHandler(false)}
               setFalse={() => sethandleFalse()}
-              setDetalle={() => setDetalleOrden(true)}
               ruta_id={rutaseleccionada._id}
               access_token={access_token}
               vehiculos={vehiculos}

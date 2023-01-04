@@ -7,41 +7,11 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import AgregarContactoSos from "../../../utils/AgregarContactoSos";
-import { useSnackbar } from "notistack";
 import DropdownContactoSos from "../../../utils/DropdownContactoSos";
 
 function ContactosSos({ access_token }) {
   const [contactos, setContactos] = useState(null);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const { enqueueSnackbar } = useSnackbar();
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleEliminar = async (_id) => {
-    setAnchorEl(null);
-    axios.delete(
-      `contactosos/` + _id,
-      
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-          Accept: "application/json",
-        },
-      }
-    ).then(()=>{
-      enqueueSnackbar('Contacto eliminado con exito',{ variant: "warning" })
-    });
-  }
 
   useEffect(() => {
     function obtener_contactos() {  
@@ -56,7 +26,7 @@ function ContactosSos({ access_token }) {
     }
 
     obtener_contactos();
-  }, [contactos]);
+  }, [contactos,access_token]);
 
   return (
     <>
