@@ -99,8 +99,8 @@ function ListadoRutas({ access_token }) {
           },
         }
       );
+      refresh();
     }
-    refresh();
   };
 
   const sethandleFalse = () => {
