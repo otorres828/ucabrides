@@ -51,5 +51,6 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('rutas',[RutaDarController::class,'index']);
     Route::get('ordenes_rutas',[RutaDarController::class,'ordenes_rutas']);
     Route::post('crear_orden',[RutaDarController::class,'crear_orden']);
+    Route::post('desactivar',[RutaDarController::class,'desactivar']);
 
 });

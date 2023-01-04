@@ -77,7 +77,12 @@ class RutaDarController extends Controller
     }
 
     public function ordenes_rutas(){
-        return OrdenesRutas::where('user_id',auth()->user()->_id)->get();
+        $ruta = Rutas::where('user_id',auth()->user()->_id)->where('estatus',true)->first();
+        if($ruta){
+            $ordenderuta= OrdenesRutas::where('ruta_id',$ruta->_id)->first();
+            return $ordenderuta;
+        }
+        return ;
     }
 
     public function crear_orden(Request $request){
@@ -93,5 +98,16 @@ class RutaDarController extends Controller
         $ordenderuta->usuarios=[];
         $ordenderuta->save();
         return $ordenderuta;
+    }
+
+    public function desactivar(Request $request){
+        $ordenderuta=OrdenesRutas::where('_id',$request->orden_ruta_id)->first();
+        $ordenderuta->estatus='cancelado';
+        $ordenderuta->save();
+
+        $ruta = Rutas::where('_id',$request->ruta_id)->first();
+        $ruta->estatus=false;
+        $ruta->save();
+        return $ruta;
     }
 }

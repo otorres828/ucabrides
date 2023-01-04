@@ -24,19 +24,24 @@ function ListadoRutas({ access_token }) {
   const { enqueueSnackbar } = useSnackbar();
   const [vehiculos, setVehiculos] = React.useState(null);
 
-  const obtenerRutas = () => {
-    const usuario = JSON.parse(localStorage.getItem("user"));
+  const obtenerRutas =() => {
     axios
       .get("rutas",{
         headers: {
           Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
-      })
-      .then((response) => {
-        setRutas(response.data);
-      });
+      }).then((res)=>{
+        setRutas(res.data);
+        if (rutas!==null){
+          rutas.every(function (ruta) {
+              if(ruta.estatus===true)
+                return setBandera(true)
+          })
+        }
+      }) 
   };
+
   const obtenerOrdenes = () => {
     axios
       .get("ordenes_rutas",
@@ -49,7 +54,6 @@ function ListadoRutas({ access_token }) {
       .then((response) => {
         setOrdenes(response.data);
       });
-    //setCheckedState(new Array(rutas.length).fill(false));
   };
 
   const obtenerVehiculos = async () => {
@@ -57,14 +61,12 @@ function ListadoRutas({ access_token }) {
     setVehiculos(data);
   };
 
-  const handleOnChange = (position) => {
+  const handleOnChange = (position) => { 
     if(!bandera){
       setRutaseleccionada(rutas[position]);
       setDataRuta(rutaseleccionada);
-  
       //Aqui abrimos el modal para seleccionar los vehiculos
       setmodalHandler(true);
-
     }else{
       enqueueSnackbar('Ya tiene una ruta activa',{ variant: "error" })
     }
@@ -73,31 +75,28 @@ function ListadoRutas({ access_token }) {
   const refresh = () => window.location.reload(true);
 
   const desactivarRuta = async (id) => {
-    var iddeorden;
-    for (let i = 0; i < ordenes.length; i++) {
-      if (ordenes[i].estatus === "activo" && ordenes[i].ruta_id === id) {
-        if(ordenes[i].usuarios.length>0){
+        var iddeorden;
+        if(ordenes.usuarios.lenght>0){
           enqueueSnackbar('Esta ruta tiene usuarios asignados, debes de cancelarla o completarla',{ variant: "error" })
         }else{
-          //DESACTIVAR ORDEN
-          iddeorden = ordenes[i]._id;
-          const r = await axios.put(
-            "https://rest-api-mongo-v2-production.up.railway.app/orden/" +
-              iddeorden,
-            { estatus: "cancelado" }
+          //DESACTIVAR ORDEN Y RUTA
+          iddeorden = ordenes._id;
+          const r = await axios.post(
+            `desactivar`,
+            { orden_ruta_id:iddeorden,ruta_id:id},
+            {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
+                Accept: "application/json",
+              },
+            }
           );
-          //DESACTIVAR RUTA
-          const response = await axios.put(
-            "https://rest-api-mongo-v2-production.up.railway.app/rutas/" + id,
-            { estatus: false }
-            
-            );
-            console.log(response);
+          enqueueSnackbar('Ruta desactivada con exito',{ variant: "success" })
+          console.log(r);
         }
-      }
-    }
+    
 
-    refresh();
+    // refresh();
   };
 
   const sethandleFalse = () => {

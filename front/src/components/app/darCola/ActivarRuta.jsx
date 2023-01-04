@@ -43,7 +43,7 @@ export default function ActivarRuta({
       setOpen(false);
       axios.post(
         `crear_orden`,
-        { vehiculo_id:vehiculoSeleccionado,ruta_id,asientos:asientos},
+        { vehiculo_id:vehiculoSeleccionado,ruta_id:ruta_id,asientos:asientos},
         {
           headers: {
             Authorization: `Bearer ${access_token}`,

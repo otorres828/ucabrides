@@ -14,7 +14,7 @@ class OrdenesRutas extends Eloquent
     protected $connection = 'mongodb';
 	protected $collection = 'ordenes_rutas';
 
-    public function rutas(){
+    public function ruta(){
         return $this->belongsTo(Rutas::class,'ruta_id','_id');
     }
 
