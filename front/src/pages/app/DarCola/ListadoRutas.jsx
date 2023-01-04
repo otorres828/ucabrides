@@ -100,24 +100,27 @@ function ListadoRutas({ access_token }) {
 
   const desactivarRuta = async (id) => {
 
-    const response = await axios.put(
-      "https://rest-api-mongo-v2-production.up.railway.app/rutas/" + id,
-      { estatus: false }
-    );
-    console.log(response);
+
     var iddeorden;
     for (let i = 0; i < ordenes.length; i++) {
       if (ordenes[i].estatus === "activo" && ordenes[i].ruta_id === id) {
         if(ordenes[i].usuarios.length>0){
           enqueueSnackbar('Esta ruta tiene usuarios asignados, debes de cancelarla o completarla',{ variant: "error" })
         }else{
+          //DESACTIVAR ORDEN
           iddeorden = ordenes[i]._id;
           const r = await axios.put(
             "https://rest-api-mongo-v2-production.up.railway.app/orden/" +
               iddeorden,
             { estatus: "cancelado" }
           );
-
+          //DESACTIVAR RUTA
+          const response = await axios.put(
+            "https://rest-api-mongo-v2-production.up.railway.app/rutas/" + id,
+            { estatus: false }
+            
+            );
+            console.log(response);
         }
       }
     }
