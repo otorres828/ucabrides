@@ -69,37 +69,36 @@ function ListadoRutas({ access_token }) {
         //Aqui abrimos el modal para seleccionar los vehiculos
         setmodalHandler(true);
       }else{
+        refresh();
         enqueueSnackbar('Ya tiene una ruta activa',{ variant: "error" })
       }
     }
   };
 
   const refresh = () => window.location.reload(true);
-
+  
   const desactivarRuta = async (id) => {
-        var iddeorden;
-        if(ordenes.usuarios.lenght>0){
-          enqueueSnackbar('Esta ruta tiene usuarios asignados, debes de cancelarla o completarla',{ variant: "error" })
-        }else{
-          //DESACTIVAR ORDEN Y RUTA
-          enqueueSnackbar('Ruta desactivada con exito',{ variant: "success" })
-          iddeorden = ordenes._id;
-          const r = await axios.post(
-            `desactivar`,
-            { orden_ruta_id:iddeorden,ruta_id:id},
-            {
-              headers: {
+    var iddeorden;
+    if(ordenes.usuarios.lenght>0){
+      enqueueSnackbar('Esta ruta tiene usuarios asignados, debes de cancelarla o completarla',{ variant: "error" })
+    }else{
+      //DESACTIVAR ORDEN Y RUTA
+      enqueueSnackbar('Ruta desactivada con exito',{ variant: "success" })
+      iddeorden = ordenes._id;
+      const r = await axios.post(
+        `desactivar`,
+        { orden_ruta_id:iddeorden,ruta_id:id},
+        {
+          headers: {
                 Authorization: `Bearer ${access_token}`,
                 Accept: "application/json",
               },
             }
-          );
+            );
         }
-    
-
-    // refresh();
-  };
-
+        refresh();
+      };
+      
   const sethandleFalse = () => {
     const buscando = checkedState.map((item, index) => {
       return false;
