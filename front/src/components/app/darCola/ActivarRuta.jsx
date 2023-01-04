@@ -51,10 +51,11 @@ export default function ActivarRuta({
       ).then((response)=>{
         if(response.data.error)
         enqueueSnackbar(response.data.error,{ variant: "success" })
-        else
-        enqueueSnackbar('Ruta activada con exito',{ variant: "success" })
+        else{
+          refresh();
+          enqueueSnackbar('Ruta activada con exito',{ variant: "success" })
+        }
       });  
-      refresh();
     }
   }
 
