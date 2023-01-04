@@ -108,7 +108,7 @@ function ListadoRutas({ access_token }) {
     var iddeorden;
     for (let i = 0; i < ordenes.length; i++) {
       if (ordenes[i].estatus === "activo" && ordenes[i].ruta_id === id) {
-        if(ordenes.usuarios.length>0){
+        if(ordenes[i].usuarios.length>0){
           enqueueSnackbar('Esta ruta tiene usuarios asignados, debes de cancelarla o completarla',{ variant: "error" })
         }else{
           iddeorden = ordenes[i]._id;
