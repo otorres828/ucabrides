@@ -1,6 +1,5 @@
 import * as React from "react";
-import FormDialog from "../../../components/app/darCola/dialog.js";
-import DetalleOrdenDialog from "../../../components/app/darCola/detallesOrden.js";
+import ActivarRuta from "../../../components/app/darCola/ActivarRuta";
 import axios from "../../../api/axios.js";
 /*************************************/
 import Table from "@mui/material/Table";
@@ -18,18 +17,12 @@ function ListadoRutas({ access_token }) {
   const [checkedState, setCheckedState] = React.useState([]);
   const [modalHandler, setmodalHandler] = React.useState(false);
   const [detalleOrden, setDetalleOrden] = React.useState(false);
-  const [dataVehiculo, setdataVehiculo] = React.useState({});
   const [dataRuta, setDataRuta] = React.useState({});
   const [ordenes, setOrdenes] = React.useState([]);
   const [bandera, setBandera] = React.useState(false);
+  const [rutaseleccionada, setRutaseleccionada] = React.useState();
   const { enqueueSnackbar } = useSnackbar();
-
-  //new Array(rutas.length).fill(false)
-
-  React.useEffect(() => {
-    obtenerRutas();
-    obtenerOrdenes();
-  }, []);
+  const [vehiculos, setVehiculos] = React.useState(null);
 
   const obtenerRutas = () => {
     const usuario = JSON.parse(localStorage.getItem("user"));
@@ -59,18 +52,15 @@ function ListadoRutas({ access_token }) {
     //setCheckedState(new Array(rutas.length).fill(false));
   };
 
+  const obtenerVehiculos = async () => {
+    const { data } = await axios.get("vehiculos", {headers: {Authorization: `Bearer ${access_token}`, Accept: "application/json", }, });
+    setVehiculos(data);
+  };
+
   const handleOnChange = (position) => {
     if(!bandera){
-      /*
-      console.log(position);
-      const revisado = checkedState.map((item,index) => {
-        return index === position ? !item : item;
-      });
-      */
-      const rutaSelected = rutas[position];
-      console.log("rutaSelected");
-      console.log(rutaSelected);
-      setDataRuta(rutaSelected);
+      setRutaseleccionada(rutas[position]);
+      setDataRuta(rutaseleccionada);
   
       //Aqui abrimos el modal para seleccionar los vehiculos
       setmodalHandler(true);
@@ -79,28 +69,10 @@ function ListadoRutas({ access_token }) {
       enqueueSnackbar('Ya tiene una ruta activa',{ variant: "error" })
     }
   };
-  /*
-  const validarStatusRuta = async () => {
-    console.log("Iniciando status de ruta");
-    //Lo primero que tenemos que validar es, si ya hay una orden de ruta con estatus activo
-    //Si hay una orden de ruta con el estatus activo, marcalos la ruta con ese estado
-    const { data } = await Axios.get('https://rest-api-mongo-v2-production.up.railway.app/orden');
-    console.log(rutas);
-    const arrayRutasActivas = rutas.map( (item) => {
-      console.log(item);
-      return (item.estatus === true) ? item : null;
-    });
-    console.log("data");
-    console.log(data);
-    console.log("arrayRutasActivas");
-    console.log(arrayRutasActivas);
-  }
-*/
+
   const refresh = () => window.location.reload(true);
 
   const desactivarRuta = async (id) => {
-
-
     var iddeorden;
     for (let i = 0; i < ordenes.length; i++) {
       if (ordenes[i].estatus === "activo" && ordenes[i].ruta_id === id) {
@@ -134,6 +106,13 @@ function ListadoRutas({ access_token }) {
     });
     setCheckedState(buscando);
   };
+
+  React.useEffect(() => {
+    obtenerRutas();
+    obtenerOrdenes();
+    obtenerVehiculos()
+  }, [rutas]);
+
   return  detalleOrden === false ? (
     <>
       <div className="mx-auto my-12 pb-12 vh-100">
@@ -142,6 +121,11 @@ function ListadoRutas({ access_token }) {
             <h1 className="text-left block pt-5 pb-2 font-bold  text-xl sm:text-3xl text-gray-900">
               Listado de Rutas
             </h1>
+            <div
+        className="bg-blue-600 m-2.5 p-2 rounded-lg circle cursor-pointer"
+      >
+        ➕
+      </div>
             </div>
             <div className="flex justify-between items-center my-5 px-6">
             {rutas === null ? (
@@ -161,8 +145,7 @@ function ListadoRutas({ access_token }) {
                    ( <TableRow
                       key={ruta._id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                   
+                    >  
                       <TableCell>{ruta.nombre}</TableCell>
                       <TableCell align="right">
                         <input
@@ -189,12 +172,14 @@ function ListadoRutas({ access_token }) {
             )}
             </div>
           
-          {modalHandler &&
-            <FormDialog
+          {modalHandler && vehiculos &&
+            <ActivarRuta
               cambiarModal={() => setmodalHandler(false)}
               setFalse={() => sethandleFalse()}
               setDetalle={() => setDetalleOrden(true)}
-              setVehiculo={setdataVehiculo}
+              ruta_id={rutaseleccionada._id}
+              access_token={access_token}
+              vehiculos={vehiculos}
             />
           }
 
@@ -205,13 +190,7 @@ function ListadoRutas({ access_token }) {
   ) : detalleOrden === false ? (
    <div></div>
   ) : (
-    <DetalleOrdenDialog
-      dataVehiculoSelected={dataVehiculo}
-      dataRutaSelected={dataRuta}
-      setDetalle={() => setDetalleOrden(false)}
-      setModal={() => setmodalHandler(false)}
-      cargar={() => refresh()}
-    />
+   <></>
   );
 }
 

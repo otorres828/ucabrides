@@ -1,4 +1,5 @@
-import React,{useRef } from "react";
+import React,{useState } from "react";
+import axios from "../../../api/axios";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -6,19 +7,19 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import { useSnackbar } from "notistack";
 
-import axios from "../../../api/axios";
-export default function FormDialog({
+export default function ActivarRuta({
   cambiarModal,
   setFalse,
   setDetalle,
-  setVehiculo,
+  ruta_id,
+  access_token,
+  vehiculos
 }) {
   const [open, setOpen] = React.useState(true);
-  const [vehiculos, setVehiculos] = React.useState([]);
   const [selected, setSelected] = React.useState({});
   const [asientos, setAsientos] = React.useState(1)
   const { enqueueSnackbar } = useSnackbar();
-  const select = useRef();
+  const [vehiculoSeleccionado, setVehiculoSeleccionado] = useState(vehiculos[0]);
 
   const handleClose = () => {
     console.log("Ejecutando HandleClose");
@@ -35,38 +36,26 @@ export default function FormDialog({
     setDetalle();
   };
 
-  const obtenerVehiculos = async () => {
-    const access_token = localStorage.getItem('access_token')
-    const { data } = await axios.get("vehiculos", {headers: {Authorization: `Bearer ${access_token}`, Accept: "application/json", }, });
-    
-    setVehiculos(data);
-  };
-
-  // const handleListItemClick = (value: string) => {
-  //   console.log("USted a seleccionado");
-  //   console.log(value);
-  //   setSelected(value);
-  //   setVehiculo(value);
-  //   //Insertamos la orden de la ruta aqui
-  //   cambiarModal();
-  //   setOpen(false);
-  //   insertarOrdendeRuta();
-  // };
-
   const handleActivar = ()=>{
     if(asientos>4){
       enqueueSnackbar("La cantidad de asientos no puede ser mayor que 4", { variant: "error" });
     }else{
       setOpen(false);
-      console.log(select.current)
-      //CREAR REGISTRO DE ORDE DE RUTA
-      enqueueSnackbar("La ruta se ha activado", { variant: "success" });
+      axios.post(
+        `crear_orden`,
+        { vehiculo_id:vehiculoSeleccionado,ruta_id,asientos:asientos},
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: "application/json",
+          },
+        }
+      ).then(()=>{
+        enqueueSnackbar('Ruta activada con exito',{ variant: "success" })
+      });  
+    
     }
   }
-
-  React.useEffect(() => {
-    obtenerVehiculos();
-  }, []);
 
   return (
     <>
@@ -74,18 +63,19 @@ export default function FormDialog({
         <DialogTitle>Seleccione su vehiculo</DialogTitle>
         <DialogContent>
           <select 
-            ref={select}
+            value={vehiculoSeleccionado}
+            onChange={(event)=>{ setVehiculoSeleccionado(event.target.value);}}
             className=" border p-2 mb-3 shadow-lg w-full text-slate-700 font-semibold">
             {vehiculos.map((vehiculo) => (
               <option
                 className=" text-slate-700 font-semibold"
                 key={vehiculo._id}
-                value={vehiculo}
+                value={vehiculo._id}
               >
                 {vehiculo.marca}
               </option>
             ))}
-            p
+            
           </select>
           <label className="mt-6">Escriba la cantidad de puestos</label>
           <input type="number" value={asientos} 
