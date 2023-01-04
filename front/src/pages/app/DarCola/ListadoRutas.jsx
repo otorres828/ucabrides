@@ -68,7 +68,7 @@ function ListadoRutas({ access_token }) {
         setDataRuta(rutaseleccionada);
         //Aqui abrimos el modal para seleccionar los vehiculos
         setmodalHandler(true);
-        refresh();
+        
       }else{
         enqueueSnackbar('Ya tiene una ruta activa',{ variant: "error" })
       }

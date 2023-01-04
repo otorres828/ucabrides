@@ -20,6 +20,7 @@ export default function ActivarRuta({
   const [asientos, setAsientos] = React.useState(1)
   const { enqueueSnackbar } = useSnackbar();
   const [vehiculoSeleccionado, setVehiculoSeleccionado] = useState(vehiculos[0]);
+  const refresh = () => window.location.reload(true);
 
   const handleClose = () => {
     setSelected({});
@@ -53,7 +54,7 @@ export default function ActivarRuta({
         else
         enqueueSnackbar('Ruta activada con exito',{ variant: "success" })
       });  
-    
+      refresh();
     }
   }
 
