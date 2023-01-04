@@ -11,6 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 /*************************************/
 import Rsidebar from "../../../components/app/Rsidebar";
+import { useSnackbar } from "notistack";
 
 function ListadoRutas({ access_token }) {
   const [rutas, setRutas] = React.useState(null);
@@ -20,6 +21,9 @@ function ListadoRutas({ access_token }) {
   const [dataVehiculo, setdataVehiculo] = React.useState({});
   const [dataRuta, setDataRuta] = React.useState({});
   const [ordenes, setOrdenes] = React.useState([]);
+  const [bandera, setBandera] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+
   //new Array(rutas.length).fill(false)
 
   React.useEffect(() => {
@@ -50,19 +54,24 @@ function ListadoRutas({ access_token }) {
   };
 
   const handleOnChange = (position) => {
-    /*
-    console.log(position);
-    const revisado = checkedState.map((item,index) => {
-      return index === position ? !item : item;
-    });
-    */
-    const rutaSelected = rutas[position];
-    console.log("rutaSelected");
-    console.log(rutaSelected);
-    setDataRuta(rutaSelected);
+    if(!bandera){
+      /*
+      console.log(position);
+      const revisado = checkedState.map((item,index) => {
+        return index === position ? !item : item;
+      });
+      */
+      const rutaSelected = rutas[position];
+      console.log("rutaSelected");
+      console.log(rutaSelected);
+      setDataRuta(rutaSelected);
+  
+      //Aqui abrimos el modal para seleccionar los vehiculos
+      setmodalHandler(true);
 
-    //Aqui abrimos el modal para seleccionar los vehiculos
-    setmodalHandler(true);
+    }else{
+      enqueueSnackbar('Ya tiene una ruta activa',{ variant: "error" })
+    }
   };
   /*
   const validarStatusRuta = async () => {
@@ -82,21 +91,28 @@ function ListadoRutas({ access_token }) {
   }
 */
   const refresh = () => window.location.reload(true);
+
   const desactivarRuta = async (id) => {
+
     const response = await axios.put(
       "https://rest-api-mongo-v2-production.up.railway.app/rutas/" + id,
       { estatus: false }
     );
     console.log(response);
-
+    var iddeorden;
     for (let i = 0; i < ordenes.length; i++) {
       if (ordenes[i].estatus === "activo" && ordenes[i].ruta_id === id) {
-        let iddeorden = ordenes[i]._id;
-        const r = await axios.put(
-          "https://rest-api-mongo-v2-production.up.railway.app/orden/" +
-            iddeorden,
-          { estatus: "CANCELADO" }
-        );
+        if(ordenes.usuarios.length>0){
+          enqueueSnackbar('Esta ruta tiene usuarios asignados, debes de cancelarla o completarla',{ variant: "error" })
+        }else{
+          iddeorden = ordenes[i]._id;
+          const r = await axios.put(
+            "https://rest-api-mongo-v2-production.up.railway.app/orden/" +
+              iddeorden,
+            { estatus: "cancelado" }
+          );
+
+        }
       }
     }
 
@@ -109,7 +125,7 @@ function ListadoRutas({ access_token }) {
     });
     setCheckedState(buscando);
   };
-  return modalHandler === false && detalleOrden === false ? (
+  return  detalleOrden === false ? (
     <>
       <div className="mx-auto my-12 pb-12 vh-100">
         <div className="bg-gray-100 relative shadow rounded-lg w-5/6 md:w-4/6  lg:w-3/6 xl:w-2/6 mx-auto">
@@ -131,12 +147,13 @@ function ListadoRutas({ access_token }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rutas.map((ruta, index) => (
-                    <TableRow
+                  {rutas.map((ruta, index) => 
+                   
+                   ( <TableRow
                       key={ruta._id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      
+                   
                       <TableCell>{ruta.nombre}</TableCell>
                       <TableCell align="right">
                         <input
@@ -154,24 +171,30 @@ function ListadoRutas({ access_token }) {
                           }
                         />
                       </TableCell>
-                    </TableRow>
-                  ))}
+                    </TableRow>)
+                    
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
             )}
             </div>
+          
+          {modalHandler &&
+            <FormDialog
+              cambiarModal={() => setmodalHandler(false)}
+              setFalse={() => sethandleFalse()}
+              setDetalle={() => setDetalleOrden(true)}
+              setVehiculo={setdataVehiculo}
+            />
+          }
+
         </div>
       </div>
       <Rsidebar />
     </>
   ) : detalleOrden === false ? (
-    <FormDialog
-      cambiarModal={() => setmodalHandler(false)}
-      setFalse={() => sethandleFalse()}
-      setDetalle={() => setDetalleOrden(true)}
-      setVehiculo={setdataVehiculo}
-    />
+   <div></div>
   ) : (
     <DetalleOrdenDialog
       dataVehiculoSelected={dataVehiculo}

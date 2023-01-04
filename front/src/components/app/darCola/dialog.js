@@ -1,18 +1,24 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import React,{useRef } from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import { useSnackbar } from "notistack";
 
-import Axios from 'axios';
-export default function FormDialog({cambiarModal,setFalse,setDetalle,setVehiculo}) {
+import Axios from "axios";
+export default function FormDialog({
+  cambiarModal,
+  setFalse,
+  setDetalle,
+  setVehiculo,
+}) {
   const [open, setOpen] = React.useState(true);
   const [vehiculos, setVehiculos] = React.useState([]);
   const [selected, setSelected] = React.useState({});
+  const [asientos, setAsientos] = React.useState(1)
+  const { enqueueSnackbar } = useSnackbar();
+  const select = useRef();
 
   const handleClose = () => {
     console.log("Ejecutando HandleClose");
@@ -22,8 +28,7 @@ export default function FormDialog({cambiarModal,setFalse,setDetalle,setVehiculo
     cambiarModal();
     setFalse();
     setOpen(false);
-    console.log('Cerrando modal');
-
+    console.log("Cerrando modal");
   };
 
   const insertarOrdendeRuta = () => {
@@ -31,12 +36,15 @@ export default function FormDialog({cambiarModal,setFalse,setDetalle,setVehiculo
   };
 
   const obtenerVehiculos = async () => {
-    const usuario = JSON.parse(localStorage.getItem('user'));
-    const {data}= await Axios.get("https://rest-api-mongo-v2-production.up.railway.app/vehiculos/user/"+usuario._id);
+    const usuario = JSON.parse(localStorage.getItem("user"));
+    const { data } = await Axios.get(
+      "https://rest-api-mongo-v2-production.up.railway.app/vehiculos/user/" +
+        usuario._id
+    );
     setVehiculos(data);
-  }
+  };
 
-  React.useEffect( () => {
+  React.useEffect(() => {
     obtenerVehiculos();
   }, []);
 
@@ -45,27 +53,66 @@ export default function FormDialog({cambiarModal,setFalse,setDetalle,setVehiculo
     console.log(value);
     setSelected(value);
     setVehiculo(value);
-    //Insertamos la orden de la ruta aqui 
+    //Insertamos la orden de la ruta aqui
     cambiarModal();
     setOpen(false);
     insertarOrdendeRuta();
   };
-   
-  
-    return(<Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Seleccione su vehiculo</DialogTitle>
-      <List sx={{ pt: 0 }}>
-      {vehiculos.map((vehiculo) => (
-        <ListItem disableGutters key={vehiculo._id}>
-          <ListItemButton onClick={() => handleListItemClick(vehiculo)} key={vehiculo._id} /*href="http://localhost:3000/listado/rutas"*/>
-            <ListItemText primary={vehiculo.placa} />
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </List>
-      <DialogActions>
-        <Button onClick={(Object.entries(selected).length !== 0) ? (() => insertarOrdendeRuta()) : () => handleClose()}>Cancel</Button>
-      </DialogActions>
-    </Dialog>);
-      
+
+  const handleActivar = ()=>{
+    if(asientos>4){
+      enqueueSnackbar("La cantidad de asientos no puede ser mayor que 4", { variant: "error" });
+    }else{
+      setOpen(false);
+      console.log(select.current)
+      //CREAR REGISTRO DE ORDE DE RUTA
+      enqueueSnackbar("La ruta se ha activado", { variant: "success" });
+
+    }
+  }
+  return (
+    <>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Seleccione su vehiculo</DialogTitle>
+        <DialogContent>
+          <select 
+            ref={select}
+            className=" border p-2 mb-3 shadow-lg w-full text-slate-700 font-semibold">
+            {vehiculos.map((vehiculo) => (
+              <option
+                className=" text-slate-700 font-semibold"
+                key={vehiculo._id}
+                value={vehiculo}
+              >
+                {vehiculo.marca}
+              </option>
+            ))}
+            p
+          </select>
+          <label className="mt-6">Escriba la cantidad de puestos</label>
+          <input type="number" value={asientos} 
+          onChange={(e)=>{
+            setAsientos(e.target.value)
+          }} className="mt-2 p-2 w-full shadow py-2"></input>
+        </DialogContent>
+        <DialogActions>
+          <div
+            className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
+            onClick={handleActivar}
+          >
+            Activar
+          </div>
+          <Button
+            onClick={
+              Object.entries(selected).length !== 0
+                ? () => insertarOrdendeRuta()
+                : () => handleClose()
+            }
+          >
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
 }
