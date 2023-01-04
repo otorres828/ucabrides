@@ -19,7 +19,6 @@ function ListadoRutas({ access_token }) {
   const [detalleOrden, setDetalleOrden] = React.useState(false);
   const [dataRuta, setDataRuta] = React.useState({});
   const [ordenes, setOrdenes] = React.useState([]);
-  const [bandera, setBandera] = React.useState(false);
   const [rutaseleccionada, setRutaseleccionada] = React.useState();
   const { enqueueSnackbar } = useSnackbar();
   const [vehiculos, setVehiculos] = React.useState(null);
@@ -110,7 +109,7 @@ function ListadoRutas({ access_token }) {
     obtenerRutas();
     obtenerOrdenes();
     obtenerVehiculos()
-  }, [rutas,bandera]);
+  }, [rutas]);
 
   return  detalleOrden === false ? (
     <>
