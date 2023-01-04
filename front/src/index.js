@@ -8,7 +8,7 @@ import { SnackbarProvider } from "notistack";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <SnackbarProvider maxSnack={1} autoHideDuration={2000}>
+    <SnackbarProvider maxSnack={1} autoHideDuration={1000}>
       <Router>
         <App />
       </Router>

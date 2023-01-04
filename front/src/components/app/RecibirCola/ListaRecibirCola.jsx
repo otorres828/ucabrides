@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "../../../api/axios";
 import { Navigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { DistanciaMasCorta } from "../../../hooks/RutaMasCorta";
@@ -8,9 +9,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import DetallesCola from "./DetallesCola";
 import logo from "../../../images/fondo_logo432x460.png";
-import axios from "../../../api/axios";
+import AlertaSinColas from "./AlertaSinColas";
 
-function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
+function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles_orden, setDetalles_orden] = useState({});
   const [bandera, setBandera] = useState(false);
@@ -62,6 +63,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
       lat: parseFloat(destino.lat),
       lng: parseFloat(destino.lng),
     };
+    
     const google = window.google;
 
     var directionsService = new google.maps.DirectionsService();
@@ -73,6 +75,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
     });
 
     const direccion = results.routes[0].overview_path;
+   
     var punto = DistanciaMasCorta(direccion, localizacion_usuario);
 
     if (distancia >= punto[0]) {
@@ -90,10 +93,11 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
         return [...rutas_disponibles, obj];
       }); //SE AÑADE EL OBJETO FILTRADO A UN NUEVO ARRAY
     }
+   
   };
 
   useEffect(() => {
-    function calcularRutas() {
+    function calcularRutas() { 
       rutas.map((ruta) => {
         return verificar_distancia({
           lat: ruta.rutas.lat,                //LONGITUD DE LA RUTA
@@ -111,7 +115,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
   return (
     <>
       {bandera && <Navigate to="/cola/curso"/>}
-      {rutas_disponibles.length > 0 ? (
+      {rutas_disponibles!==[] && rutas_disponibles.length > 0 ? (
         <div> 
           <h1 className="font-bold text-slate-600 text-xl">
             Bienvenido al listado de Colas Disponibles
@@ -167,9 +171,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia }) {
           </ul>
         </div>
       ):
-      <div className="flex h-screen justify-center items-center  rounded-lg">
-        <img src={logo} className="App-logo" alt="logo" />
-      </div>
+      <AlertaSinColas user={user}/>
       }
     </>
   );

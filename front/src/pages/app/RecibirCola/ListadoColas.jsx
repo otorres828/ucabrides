@@ -62,6 +62,7 @@ function ListadoColas({user}) {
               rutas={rutas}
               localizacion_usuario={direccion_usuario}
               distancia={distancia}
+              user={user}
             />
           </div>
         </div>

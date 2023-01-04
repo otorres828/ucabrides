@@ -85,7 +85,7 @@ class RutaDarController extends Controller
         return ;
     }
 
-    public function crear_orden(Request $request){
+    public function crear_orden(Request $request){    
         $ruta = Rutas::where('_id',$request->ruta_id)->first();
         $ruta->estatus=true;
         $ruta->save();
@@ -93,7 +93,7 @@ class RutaDarController extends Controller
         $ordenderuta= new OrdenesRutas();
         $ordenderuta->estatus='activo';
         $ordenderuta->ruta_id=$request->ruta_id;
-        $ordenderuta->asientos=$request->asientos;
+        $ordenderuta->asientos=(int)$request->asientos;
         $ordenderuta->vehiculo_id=$request->vehiculo_id;
         $ordenderuta->usuarios=[];
         $ordenderuta->save();
@@ -104,7 +104,6 @@ class RutaDarController extends Controller
         $ordenderuta=OrdenesRutas::where('_id',$request->orden_ruta_id)->first();
         $ordenderuta->delete();
         
-
         $ruta = Rutas::where('_id',$request->ruta_id)->first();
         $ruta->estatus=false;
         $ruta->save();

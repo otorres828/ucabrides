@@ -33,12 +33,6 @@ function ListadoRutas({ access_token }) {
         },
       }).then((res)=>{
         setRutas(res.data);
-        if (rutas!==null){
-          rutas.every(function (ruta) {
-              if(ruta.estatus===true)
-                return setBandera(true)
-          })
-        }
       }) 
   };
 
@@ -62,13 +56,21 @@ function ListadoRutas({ access_token }) {
   };
 
   const handleOnChange = (position) => { 
-    if(!bandera){
-      setRutaseleccionada(rutas[position]);
-      setDataRuta(rutaseleccionada);
-      //Aqui abrimos el modal para seleccionar los vehiculos
-      setmodalHandler(true);
-    }else{
-      enqueueSnackbar('Ya tiene una ruta activa',{ variant: "error" })
+    if (rutas!==null){
+      var ban = false;
+      rutas.map(function (ruta) {
+          if(ruta.estatus===true)
+             ban=true
+      })
+     
+      if(!ban){
+        setRutaseleccionada(rutas[position]);
+        setDataRuta(rutaseleccionada);
+        //Aqui abrimos el modal para seleccionar los vehiculos
+        setmodalHandler(true);
+      }else{
+        enqueueSnackbar('Ya tiene una ruta activa',{ variant: "error" })
+      }
     }
   };
 
@@ -80,6 +82,7 @@ function ListadoRutas({ access_token }) {
           enqueueSnackbar('Esta ruta tiene usuarios asignados, debes de cancelarla o completarla',{ variant: "error" })
         }else{
           //DESACTIVAR ORDEN Y RUTA
+          enqueueSnackbar('Ruta desactivada con exito',{ variant: "success" })
           iddeorden = ordenes._id;
           const r = await axios.post(
             `desactivar`,
@@ -91,8 +94,6 @@ function ListadoRutas({ access_token }) {
               },
             }
           );
-          enqueueSnackbar('Ruta desactivada con exito',{ variant: "success" })
-          console.log(r);
         }
     
 
@@ -110,7 +111,7 @@ function ListadoRutas({ access_token }) {
     obtenerRutas();
     obtenerOrdenes();
     obtenerVehiculos()
-  }, [rutas]);
+  }, [rutas,bandera]);
 
   return  detalleOrden === false ? (
     <>

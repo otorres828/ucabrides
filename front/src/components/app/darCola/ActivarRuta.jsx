@@ -22,9 +22,6 @@ export default function ActivarRuta({
   const [vehiculoSeleccionado, setVehiculoSeleccionado] = useState(vehiculos[0]);
 
   const handleClose = () => {
-    console.log("Ejecutando HandleClose");
-    console.log(cambiarModal);
-    console.log(setFalse);
     setSelected({});
     cambiarModal();
     setFalse();
@@ -43,14 +40,17 @@ export default function ActivarRuta({
       setOpen(false);
       axios.post(
         `crear_orden`,
-        { vehiculo_id:vehiculoSeleccionado,ruta_id:ruta_id,asientos:asientos},
+        { vehiculo_id:vehiculoSeleccionado._id,ruta_id:ruta_id,asientos:asientos},
         {
           headers: {
             Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         }
-      ).then(()=>{
+      ).then((response)=>{
+        if(response.data.error)
+        enqueueSnackbar(response.data.error,{ variant: "success" })
+        else
         enqueueSnackbar('Ruta activada con exito',{ variant: "success" })
       });  
     
