@@ -39,8 +39,6 @@ export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) =
       }else if(estatus.cola==='aprobado' ){
         console.log('hay una orden en curso')
         return <Navigate to="/cola/aprobada" />
-      }else{
-        localStorage.removeItem('ucabrides_orden_ruta_id');
       }
     }
 
@@ -48,8 +46,8 @@ export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) =
 };
 
 export const SalioDeCola = ({access_token,children,redirectTo = "/listado/colas"}) => {
-  const orde_ruta_id = localStorage.getItem('ucabrides_orden_ruta_id');
-  if(orde_ruta_id===null){
+  const orden_ruta_id = localStorage.getItem('ucabrides_orden_ruta_id');
+  if(orden_ruta_id===null){
       console.log('NO hay colas en curso')
       return <Navigate to={redirectTo} />
 

@@ -2,57 +2,105 @@ import React, { useEffect, useState } from "react";
 import axios from "../../../api/axios";
 import DetallesDarCola from "../../../components/app/darCola/DetallesDarCola";
 import Dsidebar from "../../../components/app/Dsidebar";
+import UsuariosPorAceptar from "../../../components/app/darCola/UsuariosPorAceptar";
+import logo from "../../../images/fondo_logo432x460.png";
 
-function ColaAbierta({access_token}) {
+function ColaAbierta({ access_token }) {
   const [isMensaje, setIsMensaje] = useState(true);
   const [detalles, setDetalles] = useState(null);
+  const [usuarios, setUsuarios] = useState(null);
 
-  useEffect(()=>{
-    axios.get('detalles_orden_activa',
-    {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-      Accept: "application/json",
-    }}
-    ).then((response)=>{
-      setDetalles(response.data)
-      
-    })
-  },[])
+  useEffect(() => {
+    function detalles_orden() {
+      axios
+        .get("detalles_orden_activa", {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: "application/json",
+          },
+        })
+        .then((response) => {
+          setDetalles(response.data);
+          axios
+            .get(`obtener_usuarios_por_aceptar/` + response.data._id, {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
+                Accept: "application/json",
+              },
+            })
+            .then((respuesta) => {
+              setUsuarios(respuesta.data);
+            });
+        });
+    }
+    detalles_orden();
+  }, [usuarios]);
 
   return (
     <>
-     {detalles &&
-       <div className="mx-auto my-12 vh-100">
-        <div className="bg-gray-50 relative shadow rounded-lg w-5/6 md:w-4/6  lg:w-3/6 xl:w-2/6 mx-auto">
-          <div>
-            <h1 className="border-blue-800 border-b-2 block pt-5 pb-2 font-bold text-center text-3xl text-gray-900">
-              Cola En Curso
-            </h1>
-            <div className="flex justify-between items-center my-5 px-6">
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => setIsMensaje(true)}
-                className={` border-b-2 text-gray-500  hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3 ${
-                  isMensaje ? "border-blue-800 border-b-2" : ""
-                }`}
-              >
-                Detalles de Cola
+      {detalles && usuarios ? (
+        <div className="mx-auto my-12 vh-100 pb-16">
+          <div className="bg-gray-50 relative shadow rounded-lg w-5/6 md:w-4/6  lg:w-3/6 xl:w-2/6 mx-auto">
+            <div>
+              <h1 className="border-blue-800 border-b-2 block pt-5 pb-2 font-bold text-center text-3xl text-gray-900">
+                Cola En Curso
+              </h1>
+              <div className="flex justify-between items-center my-5 px-6">
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setIsMensaje(true)}
+                  className={` border-b-2 text-gray-500  hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3 ${
+                    isMensaje ? "border-blue-800 border-b-2" : ""
+                  }`}
+                >
+                  Detalles de Cola
+                </div>
+                  {usuarios.length > 0 && (
+                <div
+                  onClick={() => setIsMensaje(false)}
+                  style={{ cursor: "pointer" }}
+                  className={`flex border-b-2 justify-center text-gray-500  hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3 ${
+                    !isMensaje ? "border-blue-800 border-b-2" : ""
+                  }`}
+                >
+                  Usuarios por aceptar{" "}
+                    <div className="text-lg -mt-2 ml-3 font-bold text-red-600">
+                      {" "}
+                      {usuarios.length}
+                    </div>
+                </div>
+                  )}
               </div>
-              <div
-                onClick={() => setIsMensaje(false)}
-                style={{ cursor: "pointer" }}
-                className={`flex border-b-2 justify-center text-gray-500  hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3 ${
-                  !isMensaje ? "border-blue-800 border-b-2" : ""
-                }`}
-              >
-                Usuarios por aceptar {detalles.usuarios.length>0 && <div className="text-lg -mt-2 ml-3 font-bold text-red-600"> {detalles.usuarios.length}</div>}
-              </div>
+              {isMensaje ? (
+                <DetallesDarCola
+                  detalles={detalles}
+                  usuarios={detalles.usuarios}
+                />
+              ) : (
+                <UsuariosPorAceptar
+                  usuarios={usuarios}
+                  orden_ruta_id={detalles._id}
+                  access_token={access_token}
+                />
+              )}
+              <center className="pb-5">
+                <button className="p-2  bg-blue-600 rounded-lg shadow text-white font-semibold flex-1">
+                  Completar Cola
+                </button>
+                <button className="p-2 ml-2 bg-red-600 rounded-lg shadow text-white font-semibold flex-1">
+                  Cancelar Cola
+                </button>
+              </center>
             </div>
-            {isMensaje ? <DetallesDarCola detalles={detalles}/> : ""}
           </div>
         </div>
-      </div>}
+      ) : (
+        <>
+          <div className="flex h-screen justify-center items-center  rounded-lg">
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+        </>
+      )}
       <Dsidebar />
     </>
   );

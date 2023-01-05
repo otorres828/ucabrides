@@ -53,5 +53,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('crear_orden',[RutaDarController::class,'crear_orden']);
     Route::post('desactivar',[RutaDarController::class,'desactivar']);
     Route::get('detalles_orden_activa',[RutaDarController::class,'detalles_orden_activa']);
-    
+    Route::get('obtener_usuarios_por_aceptar/{orden_id}',[RutaDarController::class,'obtener_usuarios_por_aceptar']);
+    Route::post('agregar_usuario_orden',[RutaDarController::class,'agregar_usuario_orden']);
+    Route::post('rechazar_usuario_orden',[RutaDarController::class,'rechazar_usuario_orden']);
+
 });

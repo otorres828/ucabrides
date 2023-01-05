@@ -51,9 +51,10 @@ class RutaController extends Controller
 
     public function cambiar_estatus_usuario_cancelar(){                                    //ELIMINA AL USUARIO DE USUARIOS POR ACEPTAR Y MODIFICA LOS VALORES DE SU ESTATUS A FALSO Y NULLO
         $user = auth()->user();
-        $orden_ruta_id= ($user->estatus)['orden_ruta_id'];
+        $orden_ruta_id= $user->estatus['orden_ruta_id'];
         $usuario_por_aceptar=UsuariosPorAceptar::where('orden_ruta_id',$orden_ruta_id)->first();
-        UsuariosPorAceptar::destroy($usuario_por_aceptar->_id);
+        if($usuario_por_aceptar)
+            UsuariosPorAceptar::destroy($usuario_por_aceptar->_id);
         $user->update(['estatus'=>['cola'=>false,'orden_ruta_id'=>null]]);
         return response()->json([$user->estatus],200);
     }

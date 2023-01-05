@@ -34,22 +34,23 @@ function Dsidebar() {
                 </span>
               </NavLink>
             </li>
-            <li className=" w-full  sm:mr-3 flex-1 md:w-28">
+            <li className=" w-full   sm:mr-3 flex-1 md:w-28">
               <NavLink
-                to="/mensajes"
+                to="/listado/rutas"
                 className={({ isActive }) =>
                   isActive
-                    ? "block md:flex py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : "block md:flex py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
+                    ? " border-blue-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
+                    : "py-1 md:py-3 block md:flex  text-white no-underline hover:text-white "
                 }
               >
-                {mensajes}
-                <span className="pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
-                  Mensajes
+                {carro}
+                <span className="pb-1 md:ml-2 font-bold md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
+                  Rutas
                 </span>
               </NavLink>
             </li>
-        
+
+
             <li className=" w-full   sm:mr-3 flex-1  md:w-28">
               <NavLink
                 to="/conductor/cola/curso"
@@ -70,7 +71,7 @@ function Dsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    :" block md:flex   pl-1 align-middle text-white no-underline hover:text-white "
+                    : " block md:flex   pl-1 align-middle text-white no-underline hover:text-white "
                 }
               >
                 {notificacion}
