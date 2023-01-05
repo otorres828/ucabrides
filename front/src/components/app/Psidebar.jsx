@@ -2,16 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faMessage,
-  faUser,
-  faCheck,
   faCarRear,
 } from "@fortawesome/free-solid-svg-icons";
 
-const profle = <FontAwesomeIcon icon={faUser} />;
 const carro = <FontAwesomeIcon icon={faCarRear} />;
-const notificacion = <FontAwesomeIcon icon={faCheck} />;
-const mensajes = <FontAwesomeIcon icon={faMessage} />;
 
 function Psidebar() {
   return (
@@ -34,22 +28,6 @@ function Psidebar() {
                 </span>
               </NavLink>
             </li>
-
-            {/* <li className="  w-full  sm:mr-3 flex-1 md:w-28">
-              <NavLink
-                to="/perfil"
-                className={({ isActive }) =>
-                  isActive
-                    ? " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
-                }
-              >
-                {profle}
-                <span className="pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
-                  Perfil
-                </span>
-              </NavLink>
-            </li> */}
           </ul>
         </div>
       </div>

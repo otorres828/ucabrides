@@ -5,7 +5,6 @@ import Clave from "../../../components/app/perfil/Clave";
 import DistanciaCaminar from "../../../components/app/RecibirCola/DistanciaCaminar";
 import MiUbicacion from "../../../components/app/perfil/MiUbicacion";
 import icono from "../../../images/icono_perfil.png";
-import { Link } from "react-router-dom";
 import ContactosSos from "../../../components/app/perfil/ContactosSos";
 
 function Perfil({ user ,access_token}) {

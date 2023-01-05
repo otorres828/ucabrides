@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faMessage,
   faUser,
   faCheck,
   faCarRear,
@@ -11,7 +10,6 @@ import {
 const profle = <FontAwesomeIcon icon={faUser} />;
 const carro = <FontAwesomeIcon icon={faCarRear} />;
 const notificacion = <FontAwesomeIcon icon={faCheck} />;
-const mensajes = <FontAwesomeIcon icon={faMessage} />;
 
 function Dsidebar() {
   return (
