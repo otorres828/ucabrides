@@ -82,11 +82,11 @@ function Dsidebar() {
             </li>
             <li className="  w-full  sm:mr-3 flex-1 md:w-28">
               <NavLink
-                to="/perfil"
+                to="/perfil/conductor"
                 className={({ isActive }) =>
-                  isActive
-                    ? " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200  no-underline hover:text-white "
+                isActive
+                    ? "border-b-4 border-blue-800 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
+                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200 no-underline hover:text-white "
                 }
               >
                 {profle}

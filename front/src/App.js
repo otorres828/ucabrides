@@ -23,6 +23,7 @@ import Vehiculos from "./pages/app/perfil/Vehiculos";
 import ContactosSos from "./pages/app/perfil/ContactosSos";
 import ListadoRutas from "../src/pages/app/DarCola/ListadoRutas"
 import ColaAbierta from "../src/pages/app/DarCola/ColaAbierta"
+import PerfilConductor from "./pages/app/perfil/PerfilConductor";
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -63,6 +64,7 @@ function App() {
         <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
           <Route path="/mapa" element={<MapView />} />
           <Route path="/perfil"  element={<Perfil user={user} access_token={access_token}/>} />
+          <Route path="/perfil/conductor"  element={<PerfilConductor user={user} access_token={access_token}/>} />
           <Route path="/rol"  element={<Rol user={user} />} />
           <Route path="/mensajes"  element={<Mensajes user={user} />} />
           <Route path="/configurar/ubicacion"  element={<ConfigurarUbicacion user={user} access_token={access_token}/>} />

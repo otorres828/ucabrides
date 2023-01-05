@@ -1,14 +1,12 @@
 import React from "react";
-import Rsidebar from "../../../components/app/Rsidebar";
+import Dsidebar from "../../../components/app/Dsidebar";
 import CerrarSesion from "../../../components/app/perfil/CerrarSesion";
 import Clave from "../../../components/app/perfil/Clave";
-import DistanciaCaminar from "../../../components/app/RecibirCola/DistanciaCaminar";
-import MiUbicacion from "../../../components/app/perfil/MiUbicacion";
 import icono from "../../../images/icono_perfil.png";
 import { Link } from "react-router-dom";
 import ContactosSos from "../../../components/app/perfil/ContactosSos";
 
-function Perfil({ user ,access_token}) {
+function PerfilConductor({ user ,access_token}) {
   user = JSON.parse(user);
 
   return (
@@ -62,42 +60,24 @@ function Perfil({ user ,access_token}) {
               </ul>
             </div>
 
-            {/* <div className="flex justify-between items-center my-5 px-6">
-              <a
-                href="/"
-                className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3"
-              >
-                Facebook
-              </a>
-              <a
-                href="/"
-                className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3"
-              >
-                Twitter
-              </a>
-              <a
-                href="/"
-                className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3"
-              >
-                Instagram
-              </a>
-              <a
-                href="/"
-                className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3"
-              >
-                Email
-              </a>
-            </div> */}
-
             <div className="w-full">
               <h3 className="font-medium text-gray-50 text-center px-6">
                 CONFIGURACIONES
               </h3>
               <div className="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
               <Clave access_token={access_token} />
-              <MiUbicacion access_token={access_token}/>
-              <DistanciaCaminar access_token={access_token} />
               <ContactosSos access_token={access_token} />
+
+               <Link to="/vehiculos"
+                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
+                >
+                  <img
+                    src={icono}
+                    alt=""
+                    className="rounded-full h-6 shadow-md inline-block mr-2"
+                  />
+                  Vehiculos frecuentes
+                </Link>
                 <a
                   href="/"
                   className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
@@ -149,9 +129,9 @@ function Perfil({ user ,access_token}) {
         <CerrarSesion />
       </div>
 
-      <Rsidebar />
+      <Dsidebar />
     </>
   );
 }
 
-export default Perfil;
+export default PerfilConductor;

@@ -35,7 +35,7 @@ function Psidebar() {
               </NavLink>
             </li>
 
-            <li className="  w-full  sm:mr-3 flex-1 md:w-28">
+            {/* <li className="  w-full  sm:mr-3 flex-1 md:w-28">
               <NavLink
                 to="/perfil"
                 className={({ isActive }) =>
@@ -49,7 +49,7 @@ function Psidebar() {
                   Perfil
                 </span>
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

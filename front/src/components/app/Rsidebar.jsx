@@ -36,16 +36,16 @@ function Rsidebar() {
             </li>
             <li className=" w-full  sm:mr-3 flex-1 md:w-28">
               <NavLink
-                to="/mensajes"
+                to="/listado/colas"
                 className={({ isActive }) =>
-                  isActive
-                    ? "block md:flex py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : "block md:flex py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
+                isActive
+                    ? "border-b-4 border-blue-800 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
+                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200 no-underline hover:text-white "
                 }
               >
                 {mensajes}
                 <span className="pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
-                  Mensajes
+                  Colas
                 </span>
               </NavLink>
             </li>
@@ -83,9 +83,9 @@ function Rsidebar() {
               <NavLink
                 to="/perfil"
                 className={({ isActive }) =>
-                  isActive
-                    ? " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
+                isActive
+                    ? "border-b-4 border-blue-800 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
+                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200 no-underline hover:text-white "
                 }
               >
                 {profle}
