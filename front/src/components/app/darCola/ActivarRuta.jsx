@@ -19,7 +19,7 @@ export default function ActivarRuta({
   const [selected, setSelected] = React.useState({});
   const [asientos, setAsientos] = React.useState(1)
   const { enqueueSnackbar } = useSnackbar();
-  const [vehiculoSeleccionado, setVehiculoSeleccionado] = useState(vehiculos[0]);
+  const [vehiculoSeleccionado, setVehiculoSeleccionado] = useState(vehiculos[0]._id);
   const refresh = () => window.location.reload(true);
 
   const handleClose = () => {
@@ -27,7 +27,6 @@ export default function ActivarRuta({
     cambiarModal();
     setFalse();
     setOpen(false);
-    console.log("Cerrando modal");
   };
 
   const insertarOrdendeRuta = () => {
@@ -41,7 +40,7 @@ export default function ActivarRuta({
       setOpen(false);
       axios.post(
         `crear_orden`,
-        { vehiculo_id:vehiculoSeleccionado._id,ruta_id:ruta_id,asientos:asientos},
+        { vehiculo_id:vehiculoSeleccionado,ruta_id:ruta_id,asientos:asientos},
         {
           headers: {
             Authorization: `Bearer ${access_token}`,
@@ -66,8 +65,8 @@ export default function ActivarRuta({
         <DialogTitle>Seleccione su vehiculo</DialogTitle>
         <DialogContent>
           <select 
-            value={vehiculoSeleccionado}
-            onChange={(event)=>{ setVehiculoSeleccionado(event.target.value);}}
+            value={vehiculoSeleccionado._id}
+            onChange={(event)=>{ setVehiculoSeleccionado(event.target.value); console.log(vehiculoSeleccionado)}}
             className=" border p-2 mb-3 shadow-lg w-full text-slate-700 font-semibold">
             {vehiculos.map((vehiculo) => (
               <option
