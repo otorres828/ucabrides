@@ -24,7 +24,7 @@ function Psidebar() {
                 to="/rol"
                 className={({ isActive }) =>
                   isActive
-                    ? " border-blue-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
+                    ? "border-b-4 border-blue-800 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
                     : "py-1 md:py-3 block md:flex  text-white no-underline hover:text-white "
                 }
               >

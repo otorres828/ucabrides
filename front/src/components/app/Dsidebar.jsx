@@ -25,7 +25,7 @@ function Dsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? " border-blue-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : "py-1 md:py-3 block md:flex  text-white no-underline hover:text-white "
+                    : "py-1 md:py-3 block md:flex  text-gray-200 no-underline hover:text-white "
                 }
               >
                 {carro}
@@ -39,8 +39,8 @@ function Dsidebar() {
                 to="/listado/rutas"
                 className={({ isActive }) =>
                   isActive
-                    ? " border-blue-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : "py-1 md:py-3 block md:flex  text-white no-underline hover:text-white "
+                    ? "border-b-4 border-blue-800  block md:flex  py-1 md:py-3  align-middle text-white no-underline hover:text-white"
+                    : "py-1 md:py-3 block md:flex  text-gray-200 no-underline hover:text-white "
                 }
               >
                 {carro}
@@ -56,12 +56,12 @@ function Dsidebar() {
                 to="/conductor/cola/curso"
                 className={({ isActive }) =>
                   isActive
-                    ? "border-b-4 border-red-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
+                    ? "border-b-4 border-blue-800 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
+                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200 no-underline hover:text-white "
                 }
               >
                 {carro}
-                <span className=" pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
+                <span className=" pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white  block md:inline-block">
                   Colas
                 </span>
               </NavLink>
@@ -71,11 +71,11 @@ function Dsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " block md:flex   pl-1 align-middle text-white no-underline hover:text-white "
+                    : " block md:flex   pl-1 align-middle  text-gray-200 no-underline hover:text-white "
                 }
               >
                 {notificacion}
-                <span className="pb-1  font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
+                <span className="pb-1  font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white block md:inline-block">
                   Avisos
                 </span>
               </NavLink>
@@ -86,11 +86,11 @@ function Dsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
+                    : " block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200  no-underline hover:text-white "
                 }
               >
                 {profle}
-                <span className="pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
+                <span className="pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white  block md:inline-block">
                   Perfil
                 </span>
               </NavLink>
