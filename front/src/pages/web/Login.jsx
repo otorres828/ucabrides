@@ -34,7 +34,6 @@ function Login() {
       enqueueSnackbar("Error de conexion", { variant: "error" });
     }
   };
-  console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/*  Site header */}

@@ -51,6 +51,7 @@ function ButtomGmail() {
   };
 
   useEffect(() => {
+    console.log(clientId)
     const initClient = () => {
       gapi.client.init({
         clientId: clientId,
