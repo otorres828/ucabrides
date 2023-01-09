@@ -5,10 +5,12 @@ import {
   faUser,
   faCheck,
   faCarRear,
+  faGauge,
 } from "@fortawesome/free-solid-svg-icons";
 
 const profle = <FontAwesomeIcon icon={faUser} />;
 const carro = <FontAwesomeIcon icon={faCarRear} />;
+const panel = <FontAwesomeIcon icon={faGauge} />;
 const notificacion = <FontAwesomeIcon icon={faCheck} />;
 
 function Dsidebar() {
@@ -23,10 +25,10 @@ function Dsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? " border-blue-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : "py-1 md:py-3 block md:flex  text-gray-200 no-underline hover:text-white "
+                    : "py-1 md:py-3 block md:flex  text-white no-underline hover:text-white "
                 }
               >
-                {carro}
+                {panel}
                 <span className="pb-1 md:ml-2 font-bold md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
                   Panel
                 </span>
@@ -38,10 +40,10 @@ function Dsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? "border-b-4 border-blue-800  block md:flex  py-1 md:py-3  align-middle text-white no-underline hover:text-white"
-                    : "py-1 md:py-3 block md:flex  text-gray-200 no-underline hover:text-white "
+                    : "py-1 md:py-3 block md:flex  text-white no-underline hover:text-white "
                 }
               >
-                {carro}
+                {notificacion}
                 <span className="pb-1 md:ml-2 font-bold md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
                   Rutas
                 </span>
@@ -55,7 +57,7 @@ function Dsidebar() {
                 className={({ isActive }) =>
                   isActive
                     ? "border-b-4 border-blue-800 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200 no-underline hover:text-white "
+                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
                 }
               >
                 {carro}
@@ -64,27 +66,14 @@ function Dsidebar() {
                 </span>
               </NavLink>
             </li>
-            <li className="  w-full  sm:mr-3 flex-1 md:w-28">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " block md:flex   pl-1 align-middle  text-gray-200 no-underline hover:text-white "
-                }
-              >
-                {notificacion}
-                <span className="pb-1  font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white block md:inline-block">
-                  Avisos
-                </span>
-              </NavLink>
-            </li>
+           
             <li className="  w-full  sm:mr-3 flex-1 md:w-28">
               <NavLink
                 to="/perfil/conductor"
                 className={({ isActive }) =>
                 isActive
                     ? "border-b-4 border-blue-800 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200 no-underline hover:text-white "
+                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
                 }
               >
                 {profle}

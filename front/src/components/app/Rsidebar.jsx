@@ -2,16 +2,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faMessage,
   faUser,
-  faCheck,
+  faGauge,
   faCarRear,
 } from "@fortawesome/free-solid-svg-icons";
 
 const profle = <FontAwesomeIcon icon={faUser} />;
 const carro = <FontAwesomeIcon icon={faCarRear} />;
-const notificacion = <FontAwesomeIcon icon={faCheck} />;
-const mensajes = <FontAwesomeIcon icon={faMessage} />;
+const panel = <FontAwesomeIcon icon={faGauge} />;
 
 function Rsidebar() {
   return (
@@ -28,7 +26,7 @@ function Rsidebar() {
                     : "py-1 md:py-3 block md:flex  text-white no-underline hover:text-white "
                 }
               >
-                {carro}
+                {panel}
                 <span className="pb-1 md:ml-2 font-bold md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
                   Panel
                 </span>
@@ -40,52 +38,23 @@ function Rsidebar() {
                 className={({ isActive }) =>
                 isActive
                     ? "border-b-4 border-blue-800 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200 no-underline hover:text-white "
+                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
                 }
               >
-                {mensajes}
+                {carro}
                 <span className="pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
                   Colas
                 </span>
               </NavLink>
             </li>
         
-            <li className=" w-full   sm:mr-3 flex-1  md:w-28">
-              <NavLink
-                to="/tipo-de-cola"
-                className={({ isActive }) =>
-                  isActive
-                    ? "border-b-4 border-red-600 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
-                }
-              >
-                {carro}
-                <span className=" pb-1 font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
-                  Amigos
-                </span>
-              </NavLink>
-            </li>
-            <li className="  w-full  sm:mr-3 flex-1 md:w-28">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? " block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    :" block md:flex   pl-1 align-middle text-white no-underline hover:text-white "
-                }
-              >
-                {notificacion}
-                <span className="pb-1  font-bold md:ml-2 md:pb-0 text-xs md:text-base text-white md:text-gray-200 block md:inline-block">
-                  Avisos
-                </span>
-              </NavLink>
-            </li>
-            <li className="  w-full  sm:mr-3 flex-1 md:w-28">
+            <li className=" w-full  sm:mr-3 flex-1 md:w-28">
               <NavLink
                 to="/perfil"
                 className={({ isActive }) =>
                 isActive
                     ? "border-b-4 border-blue-800 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white"
-                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-gray-200 no-underline hover:text-white "
+                    : " hover:border-blue-500 block md:flex  py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white "
                 }
               >
                 {profle}

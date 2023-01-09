@@ -2,10 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCarRear,
+  faGauge,
 } from "@fortawesome/free-solid-svg-icons";
 
-const carro = <FontAwesomeIcon icon={faCarRear} />;
+const panel = <FontAwesomeIcon icon={faGauge} />;
 
 function Psidebar() {
   return (
@@ -22,7 +22,7 @@ function Psidebar() {
                     : "py-1 md:py-3 block md:flex  text-white no-underline hover:text-white "
                 }
               >
-                {carro}
+                {panel}
                 <span className="pb-1 md:ml-2 font-bold md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">
                   Panel
                 </span>
