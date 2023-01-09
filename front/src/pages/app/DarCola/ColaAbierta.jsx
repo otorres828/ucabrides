@@ -5,11 +5,11 @@ import Dsidebar from "../../../components/app/Dsidebar";
 import UsuariosPorAceptar from "../../../components/app/darCola/UsuariosPorAceptar";
 import logo from "../../../images/fondo_logo432x460.png";
 
-function ColaAbierta({ access_token }) {
+function ColaAbierta({user, access_token }) {
   const [isMensaje, setIsMensaje] = useState(true);
   const [detalles, setDetalles] = useState(null);
   const [usuarios, setUsuarios] = useState(null);
-
+  user=JSON.parse(user)
   useEffect(() => {
     function detalles_orden() {
       axios
@@ -81,6 +81,7 @@ function ColaAbierta({ access_token }) {
                   usuarios={usuarios}
                   orden_ruta_id={detalles._id}
                   access_token={access_token}
+                  conductor={user}
                 />
               )}
               <center className="pb-5">

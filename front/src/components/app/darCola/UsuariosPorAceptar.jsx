@@ -11,12 +11,48 @@ import { useSnackbar } from "notistack";
 
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function UsuariosPorAceptar({ usuarios, orden_ruta_id, access_token }) {
+function UsuariosPorAceptar({ usuarios, orden_ruta_id, access_token,conductor }) {
   const check = <FontAwesomeIcon icon={faCheck} />;
   const eliminar = <FontAwesomeIcon icon={faTrash} />;
   const { enqueueSnackbar } = useSnackbar();
-
   const aceptar = (user) => {
+    const enviar = { 
+      "messaging_product": "whatsapp",
+       "recipient_type": "individual",
+       "to": user.telefono,
+       "type": "template",
+       "template": {
+         "name": "alerta_ucab",
+         "language": {
+           "code": "es"
+         },
+         "components": [
+             {
+               "type": "body",
+               "parameters": [
+                 {
+                   "type": "text",
+                   "text": user.name
+                 },
+                 {
+                   "type": "text",
+                   "text": conductor.name
+                 },
+               ]
+             },
+           ]
+       }
+    }
+    axios.post(
+      "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_WHATSAPP_CLOUD}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      },
+    );
     axios
       .post(
         "agregar_usuario_orden",

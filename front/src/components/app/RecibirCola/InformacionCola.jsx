@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../../api/axios";
 
-function InformacionCola({ detalles_orden }) {
+function InformacionCola({ detalles_orden,setPiloto }) {
   const [conductor, setConductor] = useState(null);
 
   useEffect(() => {
@@ -16,6 +16,7 @@ function InformacionCola({ detalles_orden }) {
         })
         .then((response) => {
           setConductor(response.data);
+          setPiloto(response.data)
         });
     }
     obtener_conductor();

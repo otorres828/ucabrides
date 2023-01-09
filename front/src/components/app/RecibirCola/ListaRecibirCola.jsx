@@ -10,11 +10,14 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DetallesCola from "./DetallesCola";
 import AlertaSinColas from "./AlertaSinColas";
 
-function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
+function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
+  const usuario=(JSON.parse(user))
+  const access_token = localStorage.getItem("access_token");
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles_orden, setDetalles_orden] = useState({});
   const [bandera, setBandera] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [piloto, setPiloto] = React.useState(null);
   const { enqueueSnackbar } = useSnackbar();
 
   const ucab = {
@@ -27,32 +30,75 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
   };
 
   const handleContinuar = () => {
-    const access_token = localStorage.getItem("access_token");
-    const user = JSON.parse(localStorage.getItem("user"));
+    const enviar = { 
+      "messaging_product": "whatsapp",
+       "recipient_type": "individual",
+       "to": piloto.telefono,
+       "type": "template",
+       "template": {
+         "name": "alerta_conductor",
+         "language": {
+           "code": "es"
+         },
+         "components": [
+             {
+               "type": "body",
+               "parameters": [
+                 {
+                   "type": "text",
+                   "text": piloto.name
+                 },
+                 {
+                   "type": "text",
+                   "text": usuario.name
+                 },
+               ]
+             },
+           ]
+       }
+    }
+    axios.post(
+      "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_WHATSAPP_CLOUD}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    
+    axios
+      .get(`cambiar_estatus_usuario_activo/` + true + `/` + detalles_orden.id, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      })
+      .then((response) => {
+        localStorage.setItem("ucabrides_orden_ruta_id", detalles_orden.id);
+        var puntocercano = {
+          distancia: detalles_orden.puntomascerca[0],
+          lat: detalles_orden.puntomascerca[1],
+          lng: detalles_orden.puntomascerca[2],
+        };
+        axios.post("puntomascerca", {
+          puntocercano: puntocercano,
+          user_id: user._id,
+        });
 
-    axios.get(`cambiar_estatus_usuario_activo/`+true+`/`+detalles_orden.id,
-              {headers: {
-                Authorization: `Bearer ${access_token}`,
-                Accept: "application/json",
-              }},
-           
-    ).then((response)=>{
-      localStorage.setItem("ucabrides_orden_ruta_id", detalles_orden.id);
-      var puntocercano = {distancia:detalles_orden.puntomascerca[0],
-                          lat:detalles_orden.puntomascerca[1],
-                          lng:detalles_orden.puntomascerca[2]
-                          }
-      axios.post("puntomascerca", {puntocercano: puntocercano,user_id:user._id})
-      .then((response)=>{
-        console.log(response.data)
+        localStorage.setItem(
+          "ucabrides_puntomascerca",
+          JSON.stringify(puntocercano)
+        );
+
+
+        setOpen(false);
+        setBandera(true);
+        enqueueSnackbar("Peticion de cola enviada al conductor", {
+          variant: "success",
+        });
       });
-
-      localStorage.setItem("ucabrides_puntomascerca", JSON.stringify(puntocercano));
-      console.log(response.data)
-      setOpen(false);
-      setBandera(true)
-      enqueueSnackbar('Peticion de cola enviada al conductor', { variant: "success" })
-    })
 
   };
 
@@ -62,11 +108,11 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
       lat: parseFloat(destino.lat),
       lng: parseFloat(destino.lng),
     };
-    
+
     const google = window.google;
 
     var directionsService = new google.maps.DirectionsService();
-    
+
     const results = await directionsService.route({
       origin: ucab,
       destination: ruta,
@@ -74,7 +120,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
     });
 
     const direccion = results.routes[0].overview_path;
-   
+
     var punto = DistanciaMasCorta(direccion, localizacion_usuario);
 
     if (distancia >= punto[0]) {
@@ -84,27 +130,26 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
         lng: ruta.lng,
         distancia: punto[0],
         puntomascerca: punto,
-        asientos:destino.asientos,
-        usuarios:destino.usuarios,
-        vehiculo:destino.vehiculo,
+        asientos: destino.asientos,
+        usuarios: destino.usuarios,
+        vehiculo: destino.vehiculo,
       };
       setRutas_disponibles((rutas_disponibles) => {
         return [...rutas_disponibles, obj];
       }); //SE AÑADE EL OBJETO FILTRADO A UN NUEVO ARRAY
     }
-   
   };
 
   useEffect(() => {
-    function calcularRutas() { 
+    function calcularRutas() {
       rutas.map((ruta) => {
         return verificar_distancia({
-          lat: ruta.rutas.lat,                //LONGITUD DE LA RUTA
-          lng: ruta.rutas.lng,                //LATITUD DE LA RUTA
-          id: ruta._id,                       //ID DE LA ORDEN DE RUTA
-          asientos:ruta.asientos,             //ASIENTOS DISPONIBLES - ORDEN DE RUTA
-          usuarios: ruta.usuarios,             //USUARIOS QUE PERTENECEN A LA ORDEN DE RUTA 
-          vehiculo:ruta.vehiculo,
+          lat: ruta.rutas.lat, //LONGITUD DE LA RUTA
+          lng: ruta.rutas.lng, //LATITUD DE LA RUTA
+          id: ruta._id, //ID DE LA ORDEN DE RUTA
+          asientos: ruta.asientos, //ASIENTOS DISPONIBLES - ORDEN DE RUTA
+          usuarios: ruta.usuarios, //USUARIOS QUE PERTENECEN A LA ORDEN DE RUTA
+          vehiculo: ruta.vehiculo,
         });
       });
     }
@@ -113,9 +158,11 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
 
   return (
     <>
-      {bandera && <Navigate to="/cola/curso"/>}
-      {rutas_disponibles!==[] && rutas_disponibles.length > 0 ? (
-        <div> 
+      {bandera && <Navigate to="/cola/curso" />}
+      {rutas_disponibles !== [] && 
+      <>
+      {rutas_disponibles.length > 0 ?
+        <div>
           <h1 className="font-bold text-slate-600 text-xl">
             Bienvenido al listado de Colas Disponibles
           </h1>
@@ -125,11 +172,12 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
                 key={row.id}
                 className="rounded-lg bg-slate-200 p-3 font-semibold my-3 cursor-pointer"
                 onClick={() => {
-                  setDetalles_orden(row); 
+                  setDetalles_orden(row);
                   setOpen(true);
                 }}
               >
-                te dejaran a {row.distancia} metros - {row.asientos - row.usuarios.length} asientos disponibles
+                te dejaran a {row.distancia} metros -{" "}
+                {row.asientos - row.usuarios.length} asientos disponibles
               </li>
             ))}
 
@@ -150,6 +198,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
                 <DetallesCola
                   detalles_orden={detalles_orden}
                   localizacion_usuario={localizacion_usuario}
+                  setPiloto={setPiloto}
                 />
               </DialogContent>
               <DialogActions>
@@ -169,8 +218,9 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
             </Dialog>
           </ul>
         </div>
-      ):
-      <AlertaSinColas user={user}/>
+       : <AlertaSinColas user={user} />
+      }
+      </>
       }
     </>
   );

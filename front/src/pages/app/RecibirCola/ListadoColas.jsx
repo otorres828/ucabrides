@@ -24,6 +24,7 @@ function ListadoColas({user}) {
       listado_rutas_disponibles().then((result) => {
         //LISTADO DE RUTAS DISPONIBLES
         setRutas(result);
+        console.log(result)
       });
       axios
         .get("distancia_dispuesto_caminar", {
@@ -64,7 +65,7 @@ function ListadoColas({user}) {
   }, []);
 
   return telefono!=null && direccion_usuario !== null && distancia !== null && rutas!==null ? (   //ESPERA A QUE SE HAGAN LAS PETICIONES A LA API
-    (JSON.stringify(direccion_usuario)==='{}' || distancia===0)  || JSON.stringify(telefono)==='{}' ?               //EN CASO DE QUE LAS PETICIONES TENGAN VALORES VACIOS  
+    (JSON.stringify(direccion_usuario)==='{}' || distancia===0  || JSON.stringify(direccion_usuario)==='{}') ?               //EN CASO DE QUE LAS PETICIONES TENGAN VALORES VACIOS  
     <RedirigirPerfilUbicacion />
     :
     rutas.length > 0 ? ( 
