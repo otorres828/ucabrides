@@ -5,9 +5,9 @@ import { gapi } from "gapi-script";
 import { GoogleLogin } from "@leecheuk/react-google-login";
 import { useNavigate } from "react-router-dom";
 
-const clientId =process.env.REACT_APP_CLIENT_ID_GMAIL;
 
 function ButtomGmail() {
+  const clientId =process.env.REACT_APP_CLIENT_ID_GMAIL;
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
