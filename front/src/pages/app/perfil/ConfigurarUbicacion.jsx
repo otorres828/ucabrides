@@ -16,7 +16,7 @@ const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
 
 export default function ConfigurarUbicacion({ access_token }) {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBTL6mwVxZgbLAokpY6eIfqD35FKfRQhpo",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
   });
 
