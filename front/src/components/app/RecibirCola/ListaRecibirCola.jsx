@@ -8,7 +8,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import DetallesCola from "./DetallesCola";
-import logo from "../../../images/fondo_logo432x460.png";
 import AlertaSinColas from "./AlertaSinColas";
 
 function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user }) {
