@@ -5,7 +5,6 @@ import { gapi } from "gapi-script";
 import { GoogleLogin } from "@leecheuk/react-google-login";
 import { useNavigate } from "react-router-dom";
 
-
 function ButtomGmail() {
   const clientId =process.env.REACT_APP_CLIENT_ID_GMAIL;
   const { enqueueSnackbar } = useSnackbar();
@@ -51,7 +50,6 @@ function ButtomGmail() {
   };
 
   useEffect(() => {
-    console.log(clientId)
     const initClient = () => {
       gapi.client.init({
         clientId: clientId,
