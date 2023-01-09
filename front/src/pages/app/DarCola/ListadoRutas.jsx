@@ -11,8 +11,9 @@ import TableRow from "@mui/material/TableRow";
 /*************************************/
 import Dsidebar from "../../../components/app/Dsidebar";
 import { useSnackbar } from "notistack";
+import RedirigirPerfilTelefono from "../../../components/app/RecibirCola/RedirigirPerfilTelefono";
 
-function ListadoRutas({ access_token }) {
+function ListadoRutas({ access_token,telefono,contactos}) {
   const [rutas, setRutas] = React.useState(null);
   const [checkedState, setCheckedState] = React.useState([]);
   const [modalHandler, setmodalHandler] = React.useState(false);
@@ -117,6 +118,7 @@ function ListadoRutas({ access_token }) {
 
   return (
     <>
+    {telefono===''  && <RedirigirPerfilTelefono/>}
       <div className="mx-auto my-12 pb-12 vh-100">
         <div className="bg-gray-100 relative shadow rounded-lg w-5/6 md:w-4/6  lg:w-3/6 xl:w-2/6 mx-auto">
           <div className="flex justify-between border-blue-800 border-b-2  mx-4">
@@ -127,6 +129,7 @@ function ListadoRutas({ access_token }) {
               ➕
             </div>
           </div>
+          
           <div className="flex justify-between items-center my-5 px-6">
             {rutas === null ? (
               "Cargando..."
@@ -171,6 +174,7 @@ function ListadoRutas({ access_token }) {
               </TableContainer>
             )}
           </div>
+          
 
           {modalHandler && vehiculos && (
             <ActivarRuta

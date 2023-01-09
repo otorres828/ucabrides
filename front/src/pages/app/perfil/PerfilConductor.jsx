@@ -5,6 +5,7 @@ import Clave from "../../../components/app/perfil/Clave";
 import icono from "../../../images/icono_perfil.png";
 import { Link } from "react-router-dom";
 import ContactosSos from "../../../components/app/perfil/ContactosSos";
+import Telefono from "../../../components/app/perfil/Telefono";
 
 function PerfilConductor({ user ,access_token}) {
   user = JSON.parse(user);
@@ -36,7 +37,7 @@ function PerfilConductor({ user ,access_token}) {
                   href="/"
                   className="text-gray-50 font-bold text-md md:text-2xl hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in text-center w-full py-3"
                 >
-                  Puntos
+                  Conductor
                 </div>
               </div>
               <ul className="flex justify-center">
@@ -78,17 +79,8 @@ function PerfilConductor({ user ,access_token}) {
                   />
                   Vehiculos frecuentes
                 </Link>
-                <a
-                  href="/"
-                  className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
-                >
-                  <img
-                    src={icono}
-                    alt=""
-                    className="rounded-full h-6 shadow-md inline-block mr-2"
-                  />
-                  Listado de Amigos
-                </a>
+                <Telefono access_token={access_token} />
+
                 <a
                   href="/"
                   className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"

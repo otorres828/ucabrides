@@ -14,6 +14,7 @@ function ListadoColas({user}) {
   const [rutas, setRutas] = useState(null);
   const [distancia, setDistancia] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
+  const [telefono, setTelefono] = useState(null);
   // const [estatus, setEstatus] = useState(null);
 
   useEffect(() => {
@@ -46,12 +47,24 @@ function ListadoColas({user}) {
           //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
           setDireccion_usuario(response.data);
         });
+
+      axios
+        .get("telefono", {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: "application/json",
+          },
+        })
+        .then((response) => {
+          //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+          setTelefono(response.data);
+        });
     }
     inicializar();
   }, []);
 
-  return direccion_usuario !== null && distancia !== null && rutas!==null ? (   //ESPERA A QUE SE HAGAN LAS PETICIONES A LA API
-    (JSON.stringify(direccion_usuario)==='{}' || distancia===0) ?               //EN CASO DE QUE LAS PETICIONES TENGAN VALORES VACIOS  
+  return telefono!=null && direccion_usuario !== null && distancia !== null && rutas!==null ? (   //ESPERA A QUE SE HAGAN LAS PETICIONES A LA API
+    (JSON.stringify(direccion_usuario)==='{}' || distancia===0)  || JSON.stringify(telefono)==='{}' ?               //EN CASO DE QUE LAS PETICIONES TENGAN VALORES VACIOS  
     <RedirigirPerfilUbicacion />
     :
     rutas.length > 0 ? ( 

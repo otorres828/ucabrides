@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactoSosController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RutaController;
 use App\Http\Controllers\RutaDarController;
+use App\Http\Controllers\TelefonoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VehiculoController;
 use Illuminate\Http\Request;
@@ -25,6 +26,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('cambiar_distancia_caminar',[RutaController::class,'cambiar_distancia_caminar']);
     Route::post('cambiar_ubicacion',[RutaController::class,'cambiar_ubicacion']);
     Route::post('cambiarclave',[AuthController::class,'cambiarclave']);
+    Route::get('telefono',[TelefonoController::class,'index']);
+    Route::post('telefono',[TelefonoController::class,'update']);
 
     Route::get('me',[AuthController::class,'me']);
     Route::get('cambiar_estatus_usuario_activo/{cola}/{orden_ruta_id}',[RutaController::class,'cambiar_estatus_usuario_activo']);
