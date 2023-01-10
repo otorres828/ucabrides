@@ -111,6 +111,21 @@ class RutaDarController extends Controller
         
         return $usuariosporaceptar;
     }
+
+    public function cancelar_cola_usuario(Request $request){
+        $ordenes=OrdenesRutas::where('_id',$request->orden_ruta_id)->first();
+        $user=User::where('_id',$request->user_id)->first();
+        $newArray = array(); 
+        foreach($ordenes->usuarios as $key => $value) { 
+            if($value['_id']!=$user->_id)
+            $newArray[$key] = $value; 
+        } 
+        $ordenes->usuarios=$newArray;
+        $ordenes->asientos=$ordenes->asientos+1;
+        $ordenes->save();
+        $user->update(['estatus'=>['cola'=>false,'orden_ruta_id'=>null]]);
+        return $ordenes;
+    }
 }
 
 

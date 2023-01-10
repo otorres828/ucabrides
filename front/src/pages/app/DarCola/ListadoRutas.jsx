@@ -80,7 +80,7 @@ function ListadoRutas({ access_token,telefono,contactos}) {
 
   const desactivarRuta = async (id) => {
     var iddeorden;
-    if (ordenes.usuarios.lenght > 0) {
+    if (ordenes.usuarios.length > 0) {
       enqueueSnackbar(
         "Esta ruta tiene usuarios asignados, debes de cancelarla o completarla",
         { variant: "error" }

@@ -1,12 +1,31 @@
 import React from "react";
+import axios from "../../../api/axios.js";
 import { Table } from "@mui/material";
 import TableRow from "@mui/material/TableRow";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
+import {  faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSnackbar } from "notistack";
 
 function DetallesDarCola({ detalles, usuarios }) {
+  const eliminar = <FontAwesomeIcon icon={faTrash} />;
+  const access_token = localStorage.getItem('access_token');
+  const { enqueueSnackbar } = useSnackbar();
+
+  const rechazar = (user) => {
+    axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles._id,user_id:user._id},
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        Accept: "application/json",
+      },
+    });
+    enqueueSnackbar("usuario sacado de la cola exito", { variant: "success" });    
+  };
+
   return (
     <>
       <div className="w-full">
@@ -49,32 +68,42 @@ function DetallesDarCola({ detalles, usuarios }) {
               </p>
             </div>
             <div className="shadow rounded-lg mt-3 ">
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow className="font-semibold">
-                    <TableCell align="left">Nombre</TableCell>
-                    <TableCell align="left">correo</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {usuarios.map((row) => (
-                    <TableRow
-                      key={row._id}
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="left">{row.email}</TableCell>
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow className="font-semibold">
+                      <TableCell align="left">Nombre</TableCell>
+                      <TableCell align="left">correo</TableCell>
+                      <TableCell align="right">Acciones</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-
+                  </TableHead>
+                  <TableBody>
+                    {usuarios.map((row) => (
+                      <TableRow
+                        key={row._id}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {row.name}
+                        </TableCell>
+                        <TableCell align="left">{row.email}</TableCell>
+                        <TableCell align="right">
+                          <button
+                            onClick={() => {
+                              rechazar(row);
+                            }}
+                            className="p-2 ml-1 bg-red-600 font-bold text-white rounded-lg shadow"
+                          >
+                            {eliminar}
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </div>
           </div>
         </div>

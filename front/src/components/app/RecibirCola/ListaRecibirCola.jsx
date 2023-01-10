@@ -177,7 +177,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
                 }}
               >
                 te dejaran a {row.distancia} metros -{" "}
-                {row.asientos - row.usuarios.length} asientos disponibles
+                {row.asientos} asientos disponibles
               </li>
             ))}
 

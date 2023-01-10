@@ -10,6 +10,7 @@ function ColaAbierta({user, access_token }) {
   const [detalles, setDetalles] = useState(null);
   const [usuarios, setUsuarios] = useState(null);
   user=JSON.parse(user)
+  
   useEffect(() => {
     function detalles_orden() {
       axios
@@ -34,7 +35,7 @@ function ColaAbierta({user, access_token }) {
         });
     }
     detalles_orden();
-  }, [usuarios]);
+  }, [usuarios,detalles]);
 
   return (
     <>

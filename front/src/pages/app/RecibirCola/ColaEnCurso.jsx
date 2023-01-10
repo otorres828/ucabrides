@@ -9,13 +9,15 @@ import { useSnackbar } from "notistack";
 import DetallesCola from "../../../components/app/RecibirCola/DetallesCola";
 import Rsidebar from "../../../components/app/Rsidebar";
 
-function ColaEnCurso({ access_token }) {
+function ColaEnCurso({ user, access_token }) {
+  user = JSON.parse(user);
   const [open, setOpen] = React.useState(false);
   const [bandera, setBandera] = useState(false);
+  const [piloto, setPiloto] = useState(null);
   const orden_ruta_id = localStorage.getItem("ucabrides_orden_ruta_id");
   const [detalles_orden, setDetalles_orden] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
-  const [estatus,setEstatus]= useState(null);
+  const [estatus, setEstatus] = useState(null);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -24,6 +26,52 @@ function ColaEnCurso({ access_token }) {
   };
 
   const handleCancelar = async () => {
+    if (estatus !== "true") {
+      const enviar = {
+        messaging_product: "whatsapp",
+        recipient_type: "individual",
+        to: piloto.telefono,
+        type: "template",
+        template: {
+          name: "cancelar_cola",
+          language: {
+            code: "es",
+          },
+          components: [
+            {
+              type: "body",
+              parameters: [
+                {
+                  type: "text",
+                  text: piloto.name,
+                },
+                {
+                  type: "text",
+                  text: user.name,
+                },
+              ],
+            },
+          ],
+        },
+      };
+       axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles_orden.id,user_id:user._id},
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      });
+      // axios.post(
+      //   "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${process.env.REACT_APP_WHATSAPP_CLOUD}`,
+      //       Accept: "application/json",
+      //       "Content-Type": "application/json",
+      //     },
+      //   },
+      // );
+    }
     await axios.get("cambiar_estatus_usuario_cancelar", {
       headers: {
         Authorization: `Bearer ${access_token}`,
@@ -78,7 +126,7 @@ function ColaEnCurso({ access_token }) {
           setDireccion_usuario(response.data);
         });
 
-      axios  
+      axios
         .get("me", {
           headers: {
             Authorization: `Bearer ${access_token}`,
@@ -110,8 +158,20 @@ function ColaEnCurso({ access_token }) {
               >
                 te dejaran a metros - 2 asientos disponibles
               </li>
-              <div className={`-mt-5 mx-3 rounded-lg flex-1 ${estatus ? (estatus.cola==='true' ? 'bg-red-500' : 'bg-green-500') : "bg-slate-500"} text-white font-semibold text-center`}>
-                {estatus ? (estatus.cola==='true' ? 'Pendiente' : 'Aprobado') : "Cargando"}
+              <div
+                className={`-mt-5 mx-3 rounded-lg flex-1 ${
+                  estatus
+                    ? estatus.cola === "true"
+                      ? "bg-red-500"
+                      : "bg-green-500"
+                    : "bg-slate-500"
+                } text-white font-semibold text-center`}
+              >
+                {estatus
+                  ? estatus.cola === "true"
+                    ? "Pendiente"
+                    : "Aprobado"
+                  : "Cargando"}
               </div>
 
               <Dialog
@@ -131,6 +191,7 @@ function ColaEnCurso({ access_token }) {
                     <DetallesCola
                       detalles_orden={detalles_orden}
                       localizacion_usuario={direccion_usuario}
+                      setPiloto={setPiloto}
                     />
                   )}
                 </DialogContent>
