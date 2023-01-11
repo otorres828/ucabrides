@@ -23,7 +23,6 @@ function ListadoColas({user}) {
       listado_rutas_disponibles().then((result) => {
         //LISTADO DE RUTAS DISPONIBLES
         setRutas(result);
-        console.log(result)
       });
       axios
         .get("distancia_dispuesto_caminar")
