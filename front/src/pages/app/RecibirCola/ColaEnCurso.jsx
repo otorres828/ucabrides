@@ -13,6 +13,7 @@ function ColaEnCurso({ user }) {
   user = JSON.parse(user);
   const [open, setOpen] = React.useState(false);
   const [bandera, setBandera] = useState(false);
+  const [aprobacion, setAprobacion] = useState("");
   const [piloto, setPiloto] = useState(null);
   const orden_ruta_id = localStorage.getItem("ucabrides_orden_ruta_id");
   const [detalles_orden, setDetalles_orden] = useState(null);
@@ -24,9 +25,21 @@ function ColaEnCurso({ user }) {
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleCancelar = async () => {
+    if (estatus.cola === "true") setAprobacion("sinaprobar");
+    else setAprobacion("aprobado");
+
     if (estatus !== "true") {
+      axios
+        .post("cancelar_cola_usuario", {
+          orden_ruta_id: detalles_orden.id,
+          user_id: user._id,
+          bandera: "aprobado",
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+
       const enviar = {
         messaging_product: "whatsapp",
         recipient_type: "individual",
@@ -54,7 +67,6 @@ function ColaEnCurso({ user }) {
           ],
         },
       };
-       axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles_orden.id,user_id:user._id});
       // axios.post(
       //   "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
       //   {
@@ -65,13 +77,18 @@ function ColaEnCurso({ user }) {
       //     },
       //   },
       // );
+      localStorage.removeItem("ucabrides_orden_ruta_id");
+      localStorage.removeItem("ucabrides_puntomascerca");
+    } else {
+      await axios.post("cambiar_estatus_usuario_cancelar", {
+        orden_ruta_id: detalles_orden.id,
+        user_id: user._id,
+        bandera: aprobacion,
+      });
     }
-    await axios.get("cambiar_estatus_usuario_cancelar");
-    localStorage.removeItem("ucabrides_orden_ruta_id");
-    localStorage.removeItem("ucabrides_puntomascerca");
     setOpen(false);
     setBandera(true);
-    enqueueSnackbar("Cola cancelada correctamente", { variant: "warning" });
+    enqueueSnackbar("Cola cancelada correctamente", { variant: "success" });
   };
 
   useEffect(() => {
@@ -98,18 +115,14 @@ function ColaEnCurso({ user }) {
           });
         });
 
-      axios
-        .get("perfil_direccion")
-        .then((response) => {
-          //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
-          setDireccion_usuario(response.data);
-        });
+      axios.get("perfil_direccion").then((response) => {
+        //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+        setDireccion_usuario(response.data);
+      });
 
-      axios
-        .get("me")
-        .then((response) => {
-          setEstatus(response.data);
-        });
+      axios.get("me").then((response) => {
+        setEstatus(response.data);
+      });
     }
     obtener_detalles();
   }, []);
@@ -130,7 +143,7 @@ function ColaEnCurso({ user }) {
                   setOpen(true);
                 }}
               >
-                te dejaran a metros - 2 asientos disponibles
+                te dejaran a metros - asientos disponibles
               </li>
               <div
                 className={`-mt-5 mx-3 rounded-lg flex-1 ${
@@ -172,7 +185,9 @@ function ColaEnCurso({ user }) {
                 <DialogActions>
                   <div
                     className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
-                    onClick={handleCancelar}
+                    onClick={() => {
+                      handleCancelar();
+                    }}
                   >
                     Cancelar Cola
                   </div>

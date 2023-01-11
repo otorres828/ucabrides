@@ -44,16 +44,16 @@ function UsuariosPorAceptar({ usuarios, orden_ruta_id,conductor }) {
            ]
        }
     }
-    axios.post(
-      "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_WHATSAPP_CLOUD}`,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      },
-    );
+    // axios.post(
+    //   "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.REACT_APP_WHATSAPP_CLOUD}`,
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //   },
+    // );
     axios
       .post(
         "agregar_usuario_orden",

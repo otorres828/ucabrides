@@ -14,8 +14,8 @@ function DetallesDarCola({ detalles, usuarios }) {
   const eliminar = <FontAwesomeIcon icon={faTrash} />;
   const { enqueueSnackbar } = useSnackbar();
 
-  const rechazar = (user) => {
-    axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles._id,user_id:user._id},
+  const sacar = (user) => {
+    axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles._id,user_id:user._id,bandera:'aprobado'},
  );
     enqueueSnackbar("usuario sacado de la cola exito", { variant: "success" });    
   };
@@ -86,7 +86,7 @@ function DetallesDarCola({ detalles, usuarios }) {
                         <TableCell align="right">
                           <button
                             onClick={() => {
-                              rechazar(row);
+                              sacar(row);
                             }}
                             className="p-2 ml-1 bg-red-600 font-bold text-white rounded-lg shadow"
                           >

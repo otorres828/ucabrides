@@ -205,7 +205,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
                 <div 
                   className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
                   onClick={(()=>{
-                    if(desactivar)
+                    if(piloto && desactivar)
                       handleContinuar()
                   })}
                 >

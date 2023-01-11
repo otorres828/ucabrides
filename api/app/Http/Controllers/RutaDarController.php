@@ -121,9 +121,16 @@ class RutaDarController extends Controller
             $newArray[$key] = $value; 
         } 
         $ordenes->usuarios=$newArray;
-        $ordenes->asientos=$ordenes->asientos+1;
-        $ordenes->save();
         $user->update(['estatus'=>['cola'=>false,'orden_ruta_id'=>null]]);
+        if($request->bandera=='aprobado'){
+            $ordenes->asientos=$ordenes->asientos+1;
+        }else{
+            //ELIMINAR USUARIO DE USUARIOS POR ACEPTAR
+            $usuariosporaceptar = UsuariosPorAceptar::where('user_recibe_id',$user->_id)->first();
+            $usuariosporaceptar->delete();
+        }
+        $ordenes->save();
+
         return $ordenes;
     }
 
