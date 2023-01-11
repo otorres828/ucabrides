@@ -8,6 +8,7 @@ import axios from "../../../api/axios";
 import { useSnackbar } from "notistack";
 import DetallesCola from "../../../components/app/RecibirCola/DetallesCola";
 import Rsidebar from "../../../components/app/Rsidebar";
+import { useNavigate } from "react-router-dom";
 
 function ColaEnCurso({ user }) {
   user = JSON.parse(user);
@@ -19,7 +20,7 @@ function ColaEnCurso({ user }) {
   const [detalles_orden, setDetalles_orden] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
   const [estatus, setEstatus] = useState(null);
-
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
@@ -88,6 +89,7 @@ function ColaEnCurso({ user }) {
     }
     setOpen(false);
     setBandera(true);
+    navigate("/listado/colas");
     enqueueSnackbar("Cola cancelada correctamente", { variant: "success" });
   };
 
