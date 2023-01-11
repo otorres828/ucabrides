@@ -16,6 +16,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
   const [detalles_orden, setDetalles_orden] = useState({});
   const [bandera, setBandera] = useState(false);
   const [open, setOpen] = React.useState(false);
+  const [desactivar, setDesactivar] = React.useState(true);
   const [piloto, setPiloto] = React.useState(null);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -29,6 +30,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
   };
 
   const handleContinuar = () => {
+    setDesactivar(false)
     const enviar = { 
       "messaging_product": "whatsapp",
        "recipient_type": "individual",
@@ -200,9 +202,12 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
                 />
               </DialogContent>
               <DialogActions>
-                <div disabled={true}
+                <div 
                   className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
-                  onClick={handleContinuar}
+                  onClick={(()=>{
+                    if(desactivar)
+                      handleContinuar()
+                  })}
                 >
                   Continuar
                 </div>
