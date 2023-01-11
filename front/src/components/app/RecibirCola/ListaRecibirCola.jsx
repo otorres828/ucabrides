@@ -12,7 +12,6 @@ import AlertaSinColas from "./AlertaSinColas";
 
 function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
   const usuario=(JSON.parse(user))
-  const access_token = localStorage.getItem("access_token");
   const [rutas_disponibles, setRutas_disponibles] = useState([]);
   const [detalles_orden, setDetalles_orden] = useState({});
   const [bandera, setBandera] = useState(false);
@@ -71,7 +70,6 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
     axios
       .get(`cambiar_estatus_usuario_activo/` + true + `/` + detalles_orden.id, {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       })

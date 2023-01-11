@@ -14,14 +14,14 @@ import usePlacesAutocomplete, {
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
 
-export default function ConfigurarUbicacion({ access_token }) {
+export default function ConfigurarUbicacion() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
   });
 
   return isLoaded ? (
-    <Map access_token={access_token} />
+    <Map  />
   ) : (
     <div className="flex h-screen justify-center items-center  rounded-lg">
       <img src={logo} className="App-logo" alt="logo" />
@@ -29,7 +29,7 @@ export default function ConfigurarUbicacion({ access_token }) {
   );
 }
 
-function Map({ access_token }) {
+function Map() {
   const [selected, setSelected] = useState(null);
   const [ubicacion, setUbicacion] = useState(null);
   const [map, setMap] = useState(null);
@@ -48,7 +48,7 @@ function Map({ access_token }) {
 
   const handlecambiar = async () => {
     try {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+      // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
       const res = await axios.post(`cambiar_ubicacion`, {
         LatLng: ubicacion,
       });
@@ -93,7 +93,6 @@ function Map({ access_token }) {
     axios
       .get("perfil_direccion", {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       })

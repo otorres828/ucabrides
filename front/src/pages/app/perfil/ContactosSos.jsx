@@ -10,14 +10,13 @@ import TableContainer from "@mui/material/TableContainer";
 import AgregarContactoSos from "../../../utils/AgregarContactoSos";
 import DropdownContactoSos from "../../../utils/DropdownContactoSos";
 
-function ContactosSos({ access_token }) {
+function ContactosSos() {
   const [contactos, setContactos] = useState(null);
 
   useEffect(() => {
     function obtener_contactos() {  
       axios
         .get("contactosos", {headers :{
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         }})
         .then((response) => {
@@ -26,7 +25,7 @@ function ContactosSos({ access_token }) {
     }
 
     obtener_contactos();
-  }, [contactos,access_token]);
+  }, [contactos]);
 
   return (
     <>
@@ -36,7 +35,7 @@ function ContactosSos({ access_token }) {
             <h1 className="text-left block pt-5 pb-2 font-bold  text-xl sm:text-3xl text-gray-900">
               Contactos de emergencia
             </h1>
-            <AgregarContactoSos access_token={access_token} />
+            <AgregarContactoSos />
           </div>
           <div className="flex justify-between items-center my-5 px-6">
             {contactos === null ? (
@@ -62,7 +61,7 @@ function ContactosSos({ access_token }) {
                         <TableCell component="th" scope="row">{row.nombre}</TableCell>
                         <TableCell align="left">{row.telefono}</TableCell>
                         <TableCell align="right">
-                          <DropdownContactoSos contacto={row} access_token={access_token} />
+                          <DropdownContactoSos contacto={row}  />
                         </TableCell>
                       </TableRow>
                     ))}

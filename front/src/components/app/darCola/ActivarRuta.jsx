@@ -12,7 +12,6 @@ export default function ActivarRuta({
   setFalse,
   setDetalle,
   ruta_id,
-  access_token,
   vehiculos
 }) {
   const [open, setOpen] = React.useState(true);
@@ -43,7 +42,6 @@ export default function ActivarRuta({
         { vehiculo_id:vehiculoSeleccionado,ruta_id:ruta_id,asientos:asientos},
         {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         }

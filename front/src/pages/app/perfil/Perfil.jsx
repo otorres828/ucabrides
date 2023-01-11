@@ -80,11 +80,11 @@ function Perfil({ user ,access_token}) {
                 CONFIGURACIONES
               </h3>
               <div className="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
-              <Clave access_token={access_token} />
-              <MiUbicacion access_token={access_token}/>
-              <DistanciaCaminar access_token={access_token} />
-              <ContactosSos access_token={access_token} />
-              <Telefono access_token={access_token} />
+              <Clave />
+              <MiUbicacion />
+              <DistanciaCaminar  />
+              <ContactosSos  />
+              <Telefono  />
 
                 <a
                   href="/"

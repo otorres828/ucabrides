@@ -6,8 +6,9 @@ import UsuariosPorAceptar from "../../../components/app/darCola/UsuariosPorAcept
 import logo from "../../../images/fondo_logo432x460.png";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
+import { refresh } from "aos";
 
-function ColaAbierta({user, access_token }) {
+function ColaAbierta({user}) {
   const [isMensaje, setIsMensaje] = useState(true);
   const [detalles, setDetalles] = useState(null);
   const [usuarios, setUsuarios] = useState(null);
@@ -25,7 +26,6 @@ function ColaAbierta({user, access_token }) {
         { orden_ruta_id: detalles._id, ruta_id: detalles.ruta_id },
         {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         }
@@ -36,7 +36,6 @@ function ColaAbierta({user, access_token }) {
       axios.post('modificar_cola_conductor',{orden_ruta_id:detalles._id,bandera:'cancelado'},
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }).then((response)=>{
@@ -57,7 +56,6 @@ function ColaAbierta({user, access_token }) {
       axios.post('modificar_cola_conductor',{orden_ruta_id:detalles._id,bandera:'completado'},
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }).then((response)=>{
@@ -73,7 +71,6 @@ function ColaAbierta({user, access_token }) {
       axios
         .get("detalles_orden_activa", {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         })
@@ -82,7 +79,6 @@ function ColaAbierta({user, access_token }) {
           axios
             .get(`obtener_usuarios_por_aceptar/` + response.data._id, {
               headers: {
-                Authorization: `Bearer ${access_token}`,
                 Accept: "application/json",
               },
             })
@@ -138,7 +134,6 @@ function ColaAbierta({user, access_token }) {
                 <UsuariosPorAceptar
                   usuarios={usuarios}
                   orden_ruta_id={detalles._id}
-                  access_token={access_token}
                   conductor={user}
                 />
               )}

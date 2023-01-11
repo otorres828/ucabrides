@@ -51,7 +51,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-function DropdownVehiculo({ vehiculo, access_token }) {
+function DropdownVehiculo({ vehiculo }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { enqueueSnackbar } = useSnackbar();
@@ -82,7 +82,6 @@ function DropdownVehiculo({ vehiculo, access_token }) {
       { marca: marca, color: color, placa: placa },
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }
@@ -98,7 +97,6 @@ function DropdownVehiculo({ vehiculo, access_token }) {
       
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }

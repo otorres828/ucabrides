@@ -1,6 +1,4 @@
 import axios from "../api/axios";
-const access_token = localStorage.getItem("access_token");
-axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
 const gradosARadianes = (grados) => {
   return (grados * Math.PI) / 180;
@@ -27,7 +25,6 @@ const distancia = (lat1, lon1, lat2, lon2) => {
 export const obtener_direccion_usuario = async () => {
     const localizacion=await axios.get("perfil_direccion", {
       headers: {
-        Authorization: `Bearer ${access_token}`,
         Accept: "application/json",
       },
     });
@@ -62,7 +59,6 @@ export const DistanciaMasCorta = (direccion,localizacion_usuario) => {
 export const listado_rutas_disponibles = async ()=>{
   const res = await axios.get("listado_rutas_disponibles", {
     headers: {
-      Authorization: `Bearer ${access_token}`,
       Accept: "application/json",
     },
   });
@@ -73,7 +69,6 @@ export const distancia_a_caminar = async ()=>{
   
   const res = await axios.get("distancia_dispuesto_caminar", {
     headers: {
-      Authorization: `Bearer ${access_token}`,
       Accept: "application/json",
     },
   });
@@ -83,7 +78,6 @@ export const distancia_a_caminar = async ()=>{
 export const me = async ()=>{
   const res = await axios.get("me", {
     headers: {
-      Authorization: `Bearer ${access_token}`,
       Accept: "application/json",
     },
   });

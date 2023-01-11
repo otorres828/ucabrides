@@ -16,18 +16,17 @@ export const RedirectLogin = ({ user, access_token,children, redirectTo = "/logi
   return <Outlet />;
 };
 
-export const EstaEnCola = ({access_token,children,redirectTo = "/cola/curso"}) => {
+export const EstaEnCola = ({children,redirectTo = "/cola/curso"}) => {
     const [estatus,setEstatus]= useState(null);
     useEffect(()=>{
       axios.get("me", {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }).then((response) => {
         setEstatus(response.data);
       });
-    },[access_token])
+    },[])
 
     if(estatus!==null){
       if(estatus.cola==='true' || estatus.cola==='aprobado'){

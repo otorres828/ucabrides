@@ -9,7 +9,7 @@ import { useSnackbar } from "notistack";
 import DetallesCola from "../../../components/app/RecibirCola/DetallesCola";
 import Rsidebar from "../../../components/app/Rsidebar";
 
-function ColaEnCurso({ user, access_token }) {
+function ColaEnCurso({ user }) {
   user = JSON.parse(user);
   const [open, setOpen] = React.useState(false);
   const [bandera, setBandera] = useState(false);
@@ -57,7 +57,6 @@ function ColaEnCurso({ user, access_token }) {
        axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles_orden.id,user_id:user._id},
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       });
@@ -74,7 +73,6 @@ function ColaEnCurso({ user, access_token }) {
     }
     await axios.get("cambiar_estatus_usuario_cancelar", {
       headers: {
-        Authorization: `Bearer ${access_token}`,
         Accept: "application/json",
       },
     });
@@ -90,7 +88,6 @@ function ColaEnCurso({ user, access_token }) {
       axios
         .get(`obtener_detalles_orden_abierta/` + orden_ruta_id, {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         })
@@ -117,7 +114,6 @@ function ColaEnCurso({ user, access_token }) {
       axios
         .get("perfil_direccion", {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         })
@@ -129,7 +125,6 @@ function ColaEnCurso({ user, access_token }) {
       axios
         .get("me", {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         })

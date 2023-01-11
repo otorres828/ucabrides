@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useSnackbar } from "notistack";
@@ -9,7 +8,7 @@ import icono from "../../../images/icono_perfil.png";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
-function Telefono({ access_token }) {
+function Telefono() {
   const [open, setOpen] = useState(false);
   const [numero, setNumero] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -34,7 +33,6 @@ function Telefono({ access_token }) {
           { telefono: telefono },
           {
             headers: {
-              Authorization: `Bearer ${access_token}`,
               Accept: "application/json",
             },
           })
@@ -54,7 +52,6 @@ function Telefono({ access_token }) {
       { telefono: telefono },
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }

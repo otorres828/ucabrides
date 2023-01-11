@@ -53,7 +53,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-function DropdownContactoSos({ contacto, access_token }) {
+function DropdownContactoSos({ contacto }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { enqueueSnackbar } = useSnackbar();
@@ -82,7 +82,6 @@ function DropdownContactoSos({ contacto, access_token }) {
       { nombre: nombre, telefono: telefono },
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }
@@ -95,10 +94,8 @@ function DropdownContactoSos({ contacto, access_token }) {
     setOpen_modal(false);
     axios.delete(
       `contactosos/` + contacto._id,
-      
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }

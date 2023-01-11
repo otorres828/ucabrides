@@ -5,7 +5,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useSnackbar } from "notistack";
 import axios from "../api/axios";
 
-function AgregarVehiculo({access_token}) {
+function AgregarVehiculo() {
   const [open, setOpen] = useState(false);
   const [marca, setMarca] = useState(null);
   const [color, setColor] = useState(null);
@@ -24,7 +24,6 @@ function AgregarVehiculo({access_token}) {
       { marca: marca, color: color, placa: placa },
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }

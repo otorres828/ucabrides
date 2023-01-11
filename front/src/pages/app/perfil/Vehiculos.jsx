@@ -12,7 +12,7 @@ import DropdownVehiculo from "../../../utils/DropdownVehiculo";
 
 import AgregarVehiculo from "../../../utils/AgregarVehiculo";
 
-function Vehiculos({access_token }) {
+function Vehiculos() {
   const [vehiculos, setVehiculos] = useState(null);
   
   useEffect(() => {
@@ -20,7 +20,6 @@ function Vehiculos({access_token }) {
       axios
         .get("vehiculos", {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         })
@@ -29,7 +28,7 @@ function Vehiculos({access_token }) {
         });
     }
     obtener_vehiculos();
-  }, [vehiculos,access_token]);
+  }, [vehiculos]);
 
   return (
     <>
@@ -39,7 +38,7 @@ function Vehiculos({access_token }) {
             <h1 className="text-left block pt-5 pb-2 font-bold  text-xl sm:text-3xl text-gray-900">
               Listado de Vehiculos
             </h1>
-            <AgregarVehiculo access_token={access_token} />
+            <AgregarVehiculo />
           </div>
           <div className="flex justify-between items-center my-5 px-6">
             {vehiculos === null ? (
@@ -74,7 +73,7 @@ function Vehiculos({access_token }) {
                             <p className="text-red-600">SIN PLACA</p>
                           )}
                         </TableCell>
-                        <TableCell align="right"><DropdownVehiculo vehiculo={row} access_token={access_token} /></TableCell>
+                        <TableCell align="right"><DropdownVehiculo vehiculo={row} /></TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

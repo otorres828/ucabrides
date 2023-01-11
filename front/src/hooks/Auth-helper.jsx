@@ -1,0 +1,26 @@
+import axios from "../api/axios"
+
+export function getToken(){
+    return localStorage.getItem('access_token')
+}
+
+export function initAxiosInterceptors(){
+    axios.interceptors.request.use(function(config){
+        const token = getToken();
+        if(token){
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    })
+
+    axios.interceptors.response.use(
+        function(response){
+            return response;
+        },
+        function(error){
+            if(error.response.status===401){
+                console.log(error)
+            }
+        },
+    )
+}

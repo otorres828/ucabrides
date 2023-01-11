@@ -12,14 +12,12 @@ import { useSnackbar } from "notistack";
 
 function DetallesDarCola({ detalles, usuarios }) {
   const eliminar = <FontAwesomeIcon icon={faTrash} />;
-  const access_token = localStorage.getItem('access_token');
   const { enqueueSnackbar } = useSnackbar();
 
   const rechazar = (user) => {
     axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles._id,user_id:user._id},
     {
       headers: {
-        Authorization: `Bearer ${access_token}`,
         Accept: "application/json",
       },
     });

@@ -51,7 +51,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-function CustomizedMenus({ vehiculo, access_token }) {
+function CustomizedMenus({ vehiculo }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { enqueueSnackbar } = useSnackbar();
@@ -82,7 +82,6 @@ function CustomizedMenus({ vehiculo, access_token }) {
       { marca: marca, color: color, placa: placa },
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       }

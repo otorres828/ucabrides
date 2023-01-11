@@ -24,7 +24,9 @@ import ContactosSos from "./pages/app/perfil/ContactosSos";
 import ListadoRutas from "../src/pages/app/DarCola/ListadoRutas"
 import ColaAbierta from "../src/pages/app/DarCola/ColaAbierta"
 import PerfilConductor from "./pages/app/perfil/PerfilConductor";
-import axios from "./api/axios";
+import {initAxiosInterceptors} from './hooks/Auth-helper'
+
+initAxiosInterceptors();
 
 function App() {
   const access_token = localStorage.getItem("access_token");
@@ -50,6 +52,7 @@ function App() {
     document.querySelector("html").style.scrollBehavior = "auto";
     window.scroll({ top: 0 });
     document.querySelector("html").style.scrollBehavior = "";
+
   }, [location.pathname]); // triggered on route change
 
   return (
@@ -63,26 +66,26 @@ function App() {
         {/* PARA ACCEDER DEBE DE EXISTIR UN UNSUARIO LOGUEADO */}
         <Route element={<RedirectLogin user={user} access_token={access_token}/>}>
           <Route path="/mapa" element={<MapView />} />
-          <Route path="/perfil"  element={<Perfil user={user} access_token={access_token}/>} />
-          <Route path="/perfil/conductor"  element={<PerfilConductor user={user} access_token={access_token}/>} />
+          <Route path="/perfil"  element={<Perfil user={user} />} />
+          <Route path="/perfil/conductor"  element={<PerfilConductor user={user} />} />
           <Route path="/rol"  element={<Rol user={user} />} />
           <Route path="/mensajes"  element={<Mensajes user={user} />} />
-          <Route path="/configurar/ubicacion"  element={<ConfigurarUbicacion user={user} access_token={access_token}/>} />
+          <Route path="/configurar/ubicacion"  element={<ConfigurarUbicacion user={user} />} />
 
           <Route element={<EstaEnCola access_token={access_token}/>}>
             <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
           </Route>
 
           <Route element={<SalioDeCola access_token={access_token}/>}>
-            <Route path="/cola/curso"  element={<ColaEnCurso user={user} access_token={access_token} />} />
+            <Route path="/cola/curso"  element={<ColaEnCurso user={user}  />} />
           </Route>
 
-          <Route path="/vehiculos"  element={<Vehiculos access_token={access_token} />} />
-          <Route path="/contactos"  element={<ContactosSos access_token={access_token} />} />
+          <Route path="/vehiculos"  element={<Vehiculos />} />
+          <Route path="/contactos"  element={<ContactosSos  />} />
           
           {/* DAR COLA */}
-          <Route path="/listado/rutas"  element={<ListadoRutas access_token={access_token} />} />
-          <Route path="/conductor/cola/curso"  element={<ColaAbierta user={user} access_token={access_token} />} />
+          <Route path="/listado/rutas"  element={<ListadoRutas  />} />
+          <Route path="/conductor/cola/curso"  element={<ColaAbierta user={user}/>} />
         </Route>
       </Routes>
     </>

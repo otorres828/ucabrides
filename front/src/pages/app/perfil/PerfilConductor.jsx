@@ -52,8 +52,8 @@ function PerfilConductor({ user ,access_token}) {
                 CONFIGURACIONES
               </h3>
               <div className="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
-              <Clave access_token={access_token} />
-              <ContactosSos access_token={access_token} />
+              <Clave  />
+              <ContactosSos  />
 
                <Link to="/vehiculos"
                   className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
@@ -65,7 +65,7 @@ function PerfilConductor({ user ,access_token}) {
                   />
                   Vehiculos frecuentes
                 </Link>
-                <Telefono access_token={access_token} />
+                <Telefono />
 
                 <a
                   href="/"

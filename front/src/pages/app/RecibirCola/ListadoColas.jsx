@@ -18,7 +18,6 @@ function ListadoColas({user}) {
   // const [estatus, setEstatus] = useState(null);
 
   useEffect(() => {
-    const access_token = localStorage.getItem("access_token");
     
     function inicializar() {
       listado_rutas_disponibles().then((result) => {
@@ -29,7 +28,6 @@ function ListadoColas({user}) {
       axios
         .get("distancia_dispuesto_caminar", {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         })
@@ -40,7 +38,6 @@ function ListadoColas({user}) {
       axios
         .get("perfil_direccion", {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         })
@@ -52,7 +49,6 @@ function ListadoColas({user}) {
       axios
         .get("telefono", {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         })

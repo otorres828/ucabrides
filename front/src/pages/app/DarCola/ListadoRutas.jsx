@@ -13,7 +13,7 @@ import Dsidebar from "../../../components/app/Dsidebar";
 import { useSnackbar } from "notistack";
 import RedirigirPerfilTelefono from "../../../components/app/RecibirCola/RedirigirPerfilTelefono";
 
-function ListadoRutas({ access_token}) {
+function ListadoRutas() {
   const [rutas, setRutas] = React.useState(null);
   const [checkedState, setCheckedState] = React.useState([]);
   const [modalHandler, setmodalHandler] = React.useState(false);
@@ -30,7 +30,6 @@ function ListadoRutas({ access_token}) {
     axios
       .get("rutas", {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       })
@@ -43,7 +42,6 @@ function ListadoRutas({ access_token}) {
     axios
       .get("ordenes_rutas", {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           Accept: "application/json",
         },
       })
@@ -55,7 +53,6 @@ function ListadoRutas({ access_token}) {
   const obtenerVehiculos = async () => {
     const { data } = await axios.get("vehiculos", {
       headers: {
-        Authorization: `Bearer ${access_token}`,
         Accept: "application/json",
       },
     });
@@ -96,7 +93,6 @@ function ListadoRutas({ access_token}) {
         { orden_ruta_id: iddeorden, ruta_id: id },
         {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         }
@@ -119,7 +115,6 @@ function ListadoRutas({ access_token}) {
     axios
     .get("telefono", {
       headers: {
-        Authorization: `Bearer ${access_token}`,
         Accept: "application/json",
       },
     })
@@ -129,7 +124,6 @@ function ListadoRutas({ access_token}) {
     });
     axios
     .get("contactosos", {headers :{
-      Authorization: `Bearer ${access_token}`,
       Accept: "application/json",
     }})
   }, []);
@@ -199,7 +193,6 @@ function ListadoRutas({ access_token}) {
               cambiarModal={() => setmodalHandler(false)}
               setFalse={() => sethandleFalse()}
               ruta_id={rutaseleccionada._id}
-              access_token={access_token}
               vehiculos={vehiculos}
             />
           )}

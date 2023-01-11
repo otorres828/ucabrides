@@ -6,11 +6,9 @@ function InformacionCola({ detalles_orden,setPiloto }) {
 
   useEffect(() => {
     function obtener_conductor() {
-      const access_token = localStorage.getItem("access_token");
       axios
         .get(`obtener_conductor/` + detalles_orden.id, {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         })

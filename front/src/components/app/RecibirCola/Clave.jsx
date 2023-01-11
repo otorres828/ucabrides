@@ -7,7 +7,7 @@ import { useSnackbar } from "notistack";
 import axios from "../../../api/axios";
 import icono from "../../../images/icono_perfil.png";
 
-function Clave({access_token}) {
+function Clave() {
   const [open, setOpen] = useState(false);
   const [clave, setClave] = useState("");
   const [repetirclave, setRepetirclave] = useState("");
@@ -16,9 +16,9 @@ function Clave({access_token}) {
   const handlecambiar = async () => {
     if (clave !== "" && clave === repetirclave) {
       try {
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${access_token}`;
+        // axios.defaults.headers.common[
+        //   "Authorization"
+        // ] = `Bearer ${access_token}`;
         const res = await axios.post(`cambiarclave`, {
           clave: clave,
         });

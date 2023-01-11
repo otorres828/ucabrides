@@ -7,7 +7,7 @@ import axios from "../api/axios";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
-function AgregarContactoSos({ access_token }) {
+function AgregarContactoSos() {
   const [open, setOpen] = useState(false);
   const [nombre, setNombre] = useState(null);
   const [numero, setNumero] = useState(null);
@@ -26,7 +26,6 @@ function AgregarContactoSos({ access_token }) {
         { nombre: nombre, telefono: numero },
         {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         }

@@ -11,7 +11,7 @@ import { useSnackbar } from "notistack";
 
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function UsuariosPorAceptar({ usuarios, orden_ruta_id, access_token,conductor }) {
+function UsuariosPorAceptar({ usuarios, orden_ruta_id,conductor }) {
   const check = <FontAwesomeIcon icon={faCheck} />;
   const eliminar = <FontAwesomeIcon icon={faTrash} />;
   const { enqueueSnackbar } = useSnackbar();
@@ -60,7 +60,6 @@ function UsuariosPorAceptar({ usuarios, orden_ruta_id, access_token,conductor })
         { user: user, orden_ruta_id: orden_ruta_id },
         {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         }
@@ -80,7 +79,6 @@ function UsuariosPorAceptar({ usuarios, orden_ruta_id, access_token,conductor })
         { user: user, orden_ruta_id: orden_ruta_id },
         {
           headers: {
-            Authorization: `Bearer ${access_token}`,
             Accept: "application/json",
           },
         }
