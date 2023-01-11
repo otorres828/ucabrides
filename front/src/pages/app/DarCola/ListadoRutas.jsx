@@ -13,7 +13,7 @@ import Dsidebar from "../../../components/app/Dsidebar";
 import { useSnackbar } from "notistack";
 import RedirigirPerfilTelefono from "../../../components/app/RecibirCola/RedirigirPerfilTelefono";
 
-function ListadoRutas({ access_token,telefono,contactos}) {
+function ListadoRutas({ access_token}) {
   const [rutas, setRutas] = React.useState(null);
   const [checkedState, setCheckedState] = React.useState([]);
   const [modalHandler, setmodalHandler] = React.useState(false);
@@ -23,6 +23,8 @@ function ListadoRutas({ access_token,telefono,contactos}) {
   const { enqueueSnackbar } = useSnackbar();
   const [vehiculos, setVehiculos] = React.useState(null);
   const refresh = () => window.location.reload(true);
+  const [telefono,setTelefono]=React.useState(); 
+  const [contactos, setContactos] = React.useState(null);
 
   const obtenerRutas = () => {
     axios
@@ -114,6 +116,22 @@ function ListadoRutas({ access_token,telefono,contactos}) {
     obtenerRutas();
     obtenerOrdenes();
     obtenerVehiculos();
+    axios
+    .get("telefono", {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        Accept: "application/json",
+      },
+    })
+    .then((response) => {
+      //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+      setTelefono(response.data);
+    });
+    axios
+    .get("contactosos", {headers :{
+      Authorization: `Bearer ${access_token}`,
+      Accept: "application/json",
+    }})
   }, []);
 
   return (

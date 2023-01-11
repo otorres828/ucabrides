@@ -4,13 +4,70 @@ import DetallesDarCola from "../../../components/app/darCola/DetallesDarCola";
 import Dsidebar from "../../../components/app/Dsidebar";
 import UsuariosPorAceptar from "../../../components/app/darCola/UsuariosPorAceptar";
 import logo from "../../../images/fondo_logo432x460.png";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 function ColaAbierta({user, access_token }) {
   const [isMensaje, setIsMensaje] = useState(true);
   const [detalles, setDetalles] = useState(null);
   const [usuarios, setUsuarios] = useState(null);
   user=JSON.parse(user)
-  
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+
+  const cancelar_cola=()=>{
+    if(usuarios.length>0)
+      enqueueSnackbar("No se puede cancelar, primero elimina los usuario por aceptar", { variant: "warning" });
+
+    else if(detalles.usuarios.length===0){ 
+      axios.post(
+        `desactivar`,
+        { orden_ruta_id: detalles._id, ruta_id: detalles.ruta_id },
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            Accept: "application/json",
+          },
+        }
+      );
+      navigate("/listado/rutas");
+      enqueueSnackbar("ruta desactivada con exito", { variant: "success" });
+    }else{
+      axios.post('modificar_cola_conductor',{orden_ruta_id:detalles._id,bandera:'cancelado'},
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      }).then((response)=>{
+        console.log(response.data)
+      })
+      navigate("/listado/rutas");
+      enqueueSnackbar("ruta desactivada con exito", { variant: "success" });
+    }
+  }
+
+  const completar_cola=()=>{
+    if(usuarios.length>0)
+    enqueueSnackbar("No se puede cancelar, primero elimina los usuario por aceptar", { variant: "warning" });
+
+    else if(detalles.usuarios.length===0){ 
+      enqueueSnackbar("No puedes completar la cola sin usuarios", { variant: "error" });
+    }else{
+      axios.post('modificar_cola_conductor',{orden_ruta_id:detalles._id,bandera:'completado'},
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          Accept: "application/json",
+        },
+      }).then((response)=>{
+        console.log(response.data)
+      })
+      navigate("/listado/rutas");
+      enqueueSnackbar("Cola completada con exito", { variant: "success" });
+    }
+  }
+
   useEffect(() => {
     function detalles_orden() {
       axios
@@ -35,7 +92,7 @@ function ColaAbierta({user, access_token }) {
         });
     }
     detalles_orden();
-  }, [usuarios,detalles]);
+  }, [usuarios]);
 
   return (
     <>
@@ -86,10 +143,18 @@ function ColaAbierta({user, access_token }) {
                 />
               )}
               <center className="pb-5">
-                <button className="p-2  bg-blue-600 rounded-lg shadow text-white font-semibold flex-1">
+                <button 
+                     onClick={(()=>{
+                  completar_cola()
+                })}
+                className="p-2  bg-blue-600 rounded-lg shadow text-white font-semibold flex-1">
                   Completar Cola
                 </button>
-                <button className="p-2 ml-2 bg-red-600 rounded-lg shadow text-white font-semibold flex-1">
+                <button 
+                onClick={(()=>{
+                  cancelar_cola()
+                })}
+                className="p-2 ml-2 bg-red-600 rounded-lg shadow text-white font-semibold flex-1">
                   Cancelar Cola
                 </button>
               </center>

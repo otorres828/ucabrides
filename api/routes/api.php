@@ -60,5 +60,6 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('agregar_usuario_orden',[RutaDarController::class,'agregar_usuario_orden']);
     Route::post('rechazar_usuario_orden',[RutaDarController::class,'rechazar_usuario_orden']);
     Route::post('cancelar_cola_usuario',[RutaDarController::class,'cancelar_cola_usuario']);
+    Route::post('modificar_cola_conductor',[RutaDarController::class,'modificar_cola_conductor']);
 
 });

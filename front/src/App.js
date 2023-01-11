@@ -29,8 +29,6 @@ import axios from "./api/axios";
 function App() {
   const access_token = localStorage.getItem("access_token");
   const user = localStorage.getItem("user");
-  const [telefono,setTelefono]=useState(); 
-  const [contactos, setContactos] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
   const status = useNetwork();
   if (!status) {
@@ -52,26 +50,6 @@ function App() {
     document.querySelector("html").style.scrollBehavior = "auto";
     window.scroll({ top: 0 });
     document.querySelector("html").style.scrollBehavior = "";
-
-    axios
-    .get("telefono", {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-        Accept: "application/json",
-      },
-    })
-    .then((response) => {
-      //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
-      setTelefono(response.data);
-    });
-    axios
-    .get("contactosos", {headers :{
-      Authorization: `Bearer ${access_token}`,
-      Accept: "application/json",
-    }})
-    .then((response) => {
-      setContactos(response.data);
-    });
   }, [location.pathname]); // triggered on route change
 
   return (
@@ -92,7 +70,7 @@ function App() {
           <Route path="/configurar/ubicacion"  element={<ConfigurarUbicacion user={user} access_token={access_token}/>} />
 
           <Route element={<EstaEnCola access_token={access_token}/>}>
-            <Route path="/listado/colas"  element={<ListadoColas user={user} contactos={contactos}/>} />
+            <Route path="/listado/colas"  element={<ListadoColas user={user} />} />
           </Route>
 
           <Route element={<SalioDeCola access_token={access_token}/>}>
@@ -103,7 +81,7 @@ function App() {
           <Route path="/contactos"  element={<ContactosSos access_token={access_token} />} />
           
           {/* DAR COLA */}
-          <Route path="/listado/rutas"  element={<ListadoRutas access_token={access_token} telefono={telefono} contactos={contactos}/>} />
+          <Route path="/listado/rutas"  element={<ListadoRutas access_token={access_token} />} />
           <Route path="/conductor/cola/curso"  element={<ColaAbierta user={user} access_token={access_token} />} />
         </Route>
       </Routes>

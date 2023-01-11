@@ -66,7 +66,6 @@ function UsuariosPorAceptar({ usuarios, orden_ruta_id, access_token,conductor })
         }
       )
       .then((response) => {
-        console.log(response.data);
         if (response.data.error)
           enqueueSnackbar(response.data.error, { variant: "error" });
         else
