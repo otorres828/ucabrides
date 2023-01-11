@@ -6,15 +6,14 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RutaController;
 use App\Http\Controllers\RutaDarController;
 use App\Http\Controllers\TelefonoController;
-use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VehiculoController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
 Route::post('register', [AuthController::class,'register']);
 Route::post('register/gmail', [AuthController::class,'register_gmail']);
 Route::post('login', [AuthController::class,'login']);
+Route::get('conductores', [RutaController::class,'conductores']);
 
 
 Route::get('listado_rutas_disponibles', [RutaController::class,'listado_rutas_disponibles']);

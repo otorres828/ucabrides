@@ -4,17 +4,17 @@ import Luis from "../../images/team/luis.jpeg";
 import Wladimir from "../../images/team/wladimir.jpg";
 import Fady from "../../images/team/fady.jpg";
 import Lorenzo from "../../images/team/lorenzo.jpg";
+import { Navigation } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
 function Team() {
   return (
     <>
       <Swiper
-        navigation
+        modules={[Navigation]}
+        navigation={{ clickable: true }}
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         className="justify-center flex"
@@ -39,13 +39,12 @@ function Team() {
         }}
       >
         <SwiperSlide>
-          <div className="relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
-          <img
-              className="rounded-full"
+          <div className="relative flex flex-col items-center p-6 bg-slate-50 rounded">
+            <img
               src={Luis}
               width="96"
               height="96"
-              alt="Testimonial 01"
+              className="rounded-full mx-auto shadow-md border-2 border-white transition duration-200 transform hover:scale-110"
             />
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Luis C. Somoza
@@ -89,7 +88,7 @@ function Team() {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Cesar Sotillo
             </h4>
-            <p className="text-gray-600 text-center">DB Developer</p>
+            <p className="text-gray-600 text-center">Database</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
@@ -105,7 +104,7 @@ function Team() {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Oliver Torres
             </h4>
-            <p className="text-gray-600 text-center">Back-End Developer</p>
+            <p className="text-gray-600 text-center">Developer</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
@@ -150,12 +149,12 @@ function Team() {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Rafael Muñoz
             </h4>
-            <p className="text-gray-600 text-center">Back-End Developer</p>
+            <p className="text-gray-600 text-center">Documenter</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className=" relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
-          <img
+            <img
               className="rounded-full"
               src={Lorenzo}
               width="96"
@@ -165,7 +164,7 @@ function Team() {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Cesar Lorenzo
             </h4>
-            <p className="text-gray-600 text-center">Front-End Developer</p>
+            <p className="text-gray-600 text-center">Documenter</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
@@ -181,12 +180,12 @@ function Team() {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Wladimir SanVicente
             </h4>
-            <p className="text-gray-600 text-center">Front-End Developer</p>
+            <p className="text-gray-600 text-center">Documenter</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className=" relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
-          <img
+            <img
               className="rounded-full"
               src={Fady}
               width="96"

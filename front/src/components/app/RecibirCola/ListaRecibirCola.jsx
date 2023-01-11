@@ -134,10 +134,10 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
         usuarios: destino.usuarios,
         vehiculo: destino.vehiculo,
       };
+
       setRutas_disponibles((rutas_disponibles) => {
         return [...rutas_disponibles, obj];
       }); //SE AÑADE EL OBJETO FILTRADO A UN NUEVO ARRAY
-      setRutas_disponibles(rutas_disponibles.sort((x, y) => x.distancia - y.distancia)));
     }
   };
 

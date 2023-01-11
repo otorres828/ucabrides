@@ -109,7 +109,11 @@ class RutaController extends Controller
 
     public function obtener_puntomascerca(Request $request){
         return $puntomascerca= PuntoCercano::where('user_id',$request->user_id)->first();
+    }
 
+    public function conductores(){
+        return User::select(['name','avatar','puntos'])->orderBy('puntos', 'desc')
+        ->take(7)->get();
     }
 
 }

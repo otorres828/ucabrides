@@ -17,11 +17,12 @@ function FeaturesBlocks() {
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 mb-4">Equipo de Trabajo</h2>
             <p className="text-xl text-gray-600">
-              Conoce a cada integrante del equipo de trabajo que logro desarrolar esta increible app
+              Conoce a cada integrante del equipo de trabajo que logro
+              desarrolar esta increible app
             </p>
           </div>
           <div className="justify-center">
-          <Team/>
+            <Team />
           </div>
         </div>
       </div>
