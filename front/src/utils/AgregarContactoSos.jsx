@@ -23,12 +23,7 @@ function AgregarContactoSos() {
     axios
       .post(
         `contactosos`,
-        { nombre: nombre, telefono: numero },
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
+        { nombre: nombre, telefono: numero }
       )
       .then((response) => {
         if(response.data.error)

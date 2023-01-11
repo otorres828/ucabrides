@@ -91,11 +91,7 @@ function Map() {
 
   useEffect(() => {
     axios
-      .get("perfil_direccion", {
-        headers: {
-          Accept: "application/json",
-        },
-      })
+      .get("perfil_direccion")
       .then((response) => {
         //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
         setDireccion_usuario(response.data);

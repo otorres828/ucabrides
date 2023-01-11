@@ -48,11 +48,7 @@ function DistanciaCaminar() {
 
   function obtener_distancia() {
     // CANTIDAD EN MT QUE EL USUARIO ESTA DISPUESTO A CAMINAR
-      axios.get("distancia_dispuesto_caminar",{
-        headers: {
-          Accept: "application/json",
-        },
-      }).then((response) => {
+      axios.get("distancia_dispuesto_caminar").then((response) => {
         setActual(response.data);
       });
   }

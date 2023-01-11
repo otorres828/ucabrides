@@ -16,9 +16,7 @@ function ContactosSos() {
   useEffect(() => {
     function obtener_contactos() {  
       axios
-        .get("contactosos", {headers :{
-          Accept: "application/json",
-        }})
+        .get("contactosos")
         .then((response) => {
           setContactos(response.data);
         });

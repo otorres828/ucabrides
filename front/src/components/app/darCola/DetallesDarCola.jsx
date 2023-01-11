@@ -16,11 +16,7 @@ function DetallesDarCola({ detalles, usuarios }) {
 
   const rechazar = (user) => {
     axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles._id,user_id:user._id},
-    {
-      headers: {
-        Accept: "application/json",
-      },
-    });
+ );
     enqueueSnackbar("usuario sacado de la cola exito", { variant: "success" });    
   };
 

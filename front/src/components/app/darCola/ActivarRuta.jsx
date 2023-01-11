@@ -40,11 +40,6 @@ export default function ActivarRuta({
       axios.post(
         `crear_orden`,
         { vehiculo_id:vehiculoSeleccionado,ruta_id:ruta_id,asientos:asientos},
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
       ).then((response)=>{
         if(response.data.error)
         enqueueSnackbar(response.data.error,{ variant: "success" })

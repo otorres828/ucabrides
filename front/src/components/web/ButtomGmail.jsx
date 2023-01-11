@@ -20,12 +20,7 @@ function ButtomGmail() {
       const res = await axios.post(
         "register/gmail",
         { email: email, name: name, external_id: external_id, avatar: avatar },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
+      
       );
 
       if (res.data.error)

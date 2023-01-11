@@ -200,7 +200,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
                 />
               </DialogContent>
               <DialogActions>
-                <div
+                <div disabled={true}
                   className="bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"
                   onClick={handleContinuar}
                 >

@@ -21,12 +21,7 @@ function AgregarVehiculo() {
     e.preventDefault();
     axios.post(
       `vehiculos`,
-      { marca: marca, color: color, placa: placa },
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
+      { marca: marca, color: color, placa: placa }
     ).then(()=>{
       enqueueSnackbar('Vehiculo agregado con exito',{ variant: "success" })
     });  

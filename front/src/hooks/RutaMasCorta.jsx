@@ -23,11 +23,7 @@ const distancia = (lat1, lon1, lat2, lon2) => {
 };
 
 export const obtener_direccion_usuario = async () => {
-    const localizacion=await axios.get("perfil_direccion", {
-      headers: {
-        Accept: "application/json",
-      },
-    });
+    const localizacion=await axios.get("perfil_direccion");
     return localizacion.data;
 }
 
@@ -57,29 +53,17 @@ export const DistanciaMasCorta = (direccion,localizacion_usuario) => {
 };
 
 export const listado_rutas_disponibles = async ()=>{
-  const res = await axios.get("listado_rutas_disponibles", {
-    headers: {
-      Accept: "application/json",
-    },
-  });
+  const res = await axios.get("listado_rutas_disponibles");
   return res.data.rutas;
 }
 
 export const distancia_a_caminar = async ()=>{
   
-  const res = await axios.get("distancia_dispuesto_caminar", {
-    headers: {
-      Accept: "application/json",
-    },
-  });
+  const res = await axios.get("distancia_dispuesto_caminar");
   return res.data;  
 }
 
 export const me = async ()=>{
-  const res = await axios.get("me", {
-    headers: {
-      Accept: "application/json",
-    },
-  });
+  const res = await axios.get("me");
   return res;
 }

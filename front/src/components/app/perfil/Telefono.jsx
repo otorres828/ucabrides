@@ -31,11 +31,7 @@ function Telefono() {
         .post(
           `telefono`,
           { telefono: telefono },
-          {
-            headers: {
-              Accept: "application/json",
-            },
-          })
+    )
           enqueueSnackbar('Telefono modificado con exito',{ variant: "success" })
 
       } catch (error) {
@@ -50,11 +46,7 @@ function Telefono() {
     .get(
       `telefono`,
       { telefono: telefono },
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
+    
     )
     .then((response) => {
       setNumero(response.data)

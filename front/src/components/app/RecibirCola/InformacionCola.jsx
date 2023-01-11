@@ -7,11 +7,7 @@ function InformacionCola({ detalles_orden,setPiloto }) {
   useEffect(() => {
     function obtener_conductor() {
       axios
-        .get(`obtener_conductor/` + detalles_orden.id, {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        .get(`obtener_conductor/` + detalles_orden.id)
         .then((response) => {
           setConductor(response.data);
           setPiloto(response.data)

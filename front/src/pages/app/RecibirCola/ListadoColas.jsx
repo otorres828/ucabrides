@@ -26,32 +26,20 @@ function ListadoColas({user}) {
         console.log(result)
       });
       axios
-        .get("distancia_dispuesto_caminar", {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        .get("distancia_dispuesto_caminar")
         .then((response) => {
           setDistancia(response.data);
         });
 
       axios
-        .get("perfil_direccion", {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        .get("perfil_direccion")
         .then((response) => {
           //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
           setDireccion_usuario(response.data);
         });
 
       axios
-        .get("telefono", {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        .get("telefono")
         .then((response) => {
           //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
           setTelefono(response.data);

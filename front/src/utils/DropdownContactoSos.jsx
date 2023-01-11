@@ -79,12 +79,7 @@ function DropdownContactoSos({ contacto }) {
     e.preventDefault();
     axios.put(
       `contactosos/` + contacto._id,
-      { nombre: nombre, telefono: telefono },
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
+      { nombre: nombre, telefono: telefono }
     ).then(()=>{
       enqueueSnackbar('Contacto Modificado con exito',{ variant: "success" })
     });
@@ -93,12 +88,7 @@ function DropdownContactoSos({ contacto }) {
   const eliminar_vehiculo =  () => {
     setOpen_modal(false);
     axios.delete(
-      `contactosos/` + contacto._id,
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
+      `contactosos/` + contacto._id
     ).then(()=>{
       enqueueSnackbar('Contacto eliminado con exito',{ variant: "warning" })
     });

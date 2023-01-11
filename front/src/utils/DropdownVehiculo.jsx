@@ -79,12 +79,7 @@ function DropdownVehiculo({ vehiculo }) {
     e.preventDefault();
     axios.put(
       `vehiculos/` + vehiculo._id,
-      { marca: marca, color: color, placa: placa },
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
+      { marca: marca, color: color, placa: placa }
     ).then(()=>{
       enqueueSnackbar('Vehiculo Modificado con exito',{ variant: "success" })
     });
@@ -93,13 +88,7 @@ function DropdownVehiculo({ vehiculo }) {
   const eliminar_vehiculo =  () => {
     setOpen_modal(false);
     axios.delete(
-      `vehiculos/` + vehiculo._id,
-      
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
+      `vehiculos/` + vehiculo._id
     ).then(()=>{
       enqueueSnackbar('Vehiculo eliminado con exito',{ variant: "warning" })
     });

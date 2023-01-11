@@ -24,21 +24,13 @@ function ColaAbierta({user}) {
       axios.post(
         `desactivar`,
         { orden_ruta_id: detalles._id, ruta_id: detalles.ruta_id },
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
+       
       );
       navigate("/listado/rutas");
       enqueueSnackbar("ruta desactivada con exito", { variant: "success" });
     }else{
       axios.post('modificar_cola_conductor',{orden_ruta_id:detalles._id,bandera:'cancelado'},
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }).then((response)=>{
+     ).then((response)=>{
         console.log(response.data)
       })
       navigate("/listado/rutas");
@@ -54,11 +46,7 @@ function ColaAbierta({user}) {
       enqueueSnackbar("No puedes completar la cola sin usuarios", { variant: "error" });
     }else{
       axios.post('modificar_cola_conductor',{orden_ruta_id:detalles._id,bandera:'completado'},
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }).then((response)=>{
+      ).then((response)=>{
         console.log(response.data)
       })
       navigate("/listado/rutas");
@@ -69,19 +57,11 @@ function ColaAbierta({user}) {
   useEffect(() => {
     function detalles_orden() {
       axios
-        .get("detalles_orden_activa", {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        .get("detalles_orden_activa")
         .then((response) => {
           setDetalles(response.data);
           axios
-            .get(`obtener_usuarios_por_aceptar/` + response.data._id, {
-              headers: {
-                Accept: "application/json",
-              },
-            })
+            .get(`obtener_usuarios_por_aceptar/` + response.data._id)
             .then((respuesta) => {
               setUsuarios(respuesta.data);
             });

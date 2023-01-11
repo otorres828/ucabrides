@@ -54,12 +54,7 @@ function ColaEnCurso({ user }) {
           ],
         },
       };
-       axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles_orden.id,user_id:user._id},
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      });
+       axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles_orden.id,user_id:user._id});
       // axios.post(
       //   "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
       //   {
@@ -71,11 +66,7 @@ function ColaEnCurso({ user }) {
       //   },
       // );
     }
-    await axios.get("cambiar_estatus_usuario_cancelar", {
-      headers: {
-        Accept: "application/json",
-      },
-    });
+    await axios.get("cambiar_estatus_usuario_cancelar");
     localStorage.removeItem("ucabrides_orden_ruta_id");
     localStorage.removeItem("ucabrides_puntomascerca");
     setOpen(false);
@@ -86,11 +77,7 @@ function ColaEnCurso({ user }) {
   useEffect(() => {
     function obtener_detalles() {
       axios
-        .get(`obtener_detalles_orden_abierta/` + orden_ruta_id, {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        .get(`obtener_detalles_orden_abierta/` + orden_ruta_id)
         .then((response) => {
           var puntomascerca = JSON.parse(
             localStorage.getItem("ucabrides_puntomascerca")
@@ -112,22 +99,14 @@ function ColaEnCurso({ user }) {
         });
 
       axios
-        .get("perfil_direccion", {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        .get("perfil_direccion")
         .then((response) => {
           //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
           setDireccion_usuario(response.data);
         });
 
       axios
-        .get("me", {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        .get("me")
         .then((response) => {
           setEstatus(response.data);
         });

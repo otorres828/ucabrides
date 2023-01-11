@@ -9,6 +9,7 @@ export function initAxiosInterceptors(){
         const token = getToken();
         if(token){
             config.headers.Authorization = `Bearer ${token}`;
+            config.headers.Accept = 'application/json';
         }
         return config;
     })

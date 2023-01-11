@@ -28,11 +28,7 @@ function ListadoRutas() {
 
   const obtenerRutas = () => {
     axios
-      .get("rutas", {
-        headers: {
-          Accept: "application/json",
-        },
-      })
+      .get("rutas")
       .then((res) => {
         setRutas(res.data);
       });
@@ -40,22 +36,14 @@ function ListadoRutas() {
 
   const obtenerOrdenes = () => {
     axios
-      .get("ordenes_rutas", {
-        headers: {
-          Accept: "application/json",
-        },
-      })
+      .get("ordenes_rutas")
       .then((response) => {
         setOrdenes(response.data);
       });
   };
 
   const obtenerVehiculos = async () => {
-    const { data } = await axios.get("vehiculos", {
-      headers: {
-        Accept: "application/json",
-      },
-    });
+    const { data } = await axios.get("vehiculos");
     setVehiculos(data);
   };
 
@@ -90,12 +78,7 @@ function ListadoRutas() {
       iddeorden = ordenes._id;
       const r = await axios.post(
         `desactivar`,
-        { orden_ruta_id: iddeorden, ruta_id: id },
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
+        { orden_ruta_id: iddeorden, ruta_id: id }
       );
       refresh();
     }
@@ -113,19 +96,13 @@ function ListadoRutas() {
     obtenerOrdenes();
     obtenerVehiculos();
     axios
-    .get("telefono", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
+    .get("telefono")
     .then((response) => {
       //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
       setTelefono(response.data);
     });
     axios
-    .get("contactosos", {headers :{
-      Accept: "application/json",
-    }})
+    .get("contactosos")
   }, []);
 
   return (

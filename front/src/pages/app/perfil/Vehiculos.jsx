@@ -18,11 +18,7 @@ function Vehiculos() {
   useEffect(() => {
     function obtener_vehiculos() {
       axios
-        .get("vehiculos", {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        .get("vehiculos")
         .then((response) => {
           setVehiculos(response.data);
         });

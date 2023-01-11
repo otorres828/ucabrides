@@ -57,12 +57,7 @@ function UsuariosPorAceptar({ usuarios, orden_ruta_id,conductor }) {
     axios
       .post(
         "agregar_usuario_orden",
-        { user: user, orden_ruta_id: orden_ruta_id },
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
+        { user: user, orden_ruta_id: orden_ruta_id }
       )
       .then((response) => {
         if (response.data.error)
