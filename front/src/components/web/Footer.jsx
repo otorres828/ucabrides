@@ -13,11 +13,11 @@ function Footer() {
               {/* Logo */}
               <Link to="/" className="inline-block" aria-label="Cruip">
                 <div
-                  class="hidden sm:block  items-right text-yellow-300 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+                  class="hidden sm:block  items-right text-blue-300 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
                   href="/"
                 >
                   UCAB
-                  <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-300">
+                  <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-400 to-blue-300">
                     RIDES
                   </span>
                 </div>
