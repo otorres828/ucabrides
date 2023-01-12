@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: process.env.REACT_APP_URL_AXIOS
+    baseURL: 'https://ucabrides-api-sjd77.ondigitalocean.app/api'
 });
