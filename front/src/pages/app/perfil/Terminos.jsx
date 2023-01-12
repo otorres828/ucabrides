@@ -9,8 +9,8 @@ function Terminos() {
       <div class=" py-20 bg-gray-100">
         <div class="container grid grid-cols-12 py-22 px-6 sm:px-6 lg:px-28 mx-auto   ">
           <div class=" text-justify col-span-12 lg:col-span-7 mt-6 p-10 shadow-md  sm:rounded-lg bg-white prose">
-            <h1 class="text-2xl ">Terminos y Condiciones</h1>
-            <h1 class="text-xl pt-3">1. LOS SERVICIOS</h1>
+            <h1 class="text-2xl  font-semibold">TERMINOS Y CONDICIONES</h1>
+            <h1 class="text-xl pt-4">1. LOS SERVICIOS</h1>
             Ucab Rides opera como un intermediario que solo conecta a los
             Pasajeros con los Conductores disponibles.
             <h1 class="text-xl pt-3">2. AVISO PARA LOS USUARIOS CLIENTES</h1>
