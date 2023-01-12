@@ -17,9 +17,7 @@ function DistanciaCaminar() {
   const handlecambiar = async () => {
     if (distancia>0) {
       try {
-        // axios.defaults.headers.common[
-        //   "Authorization"
-        // ] = `Bearer ${access_token}`;
+
         const res = await axios.post(`cambiar_distancia_caminar`, {
           distancia: distancia,
         });
@@ -32,7 +30,6 @@ function DistanciaCaminar() {
           enqueueSnackbar("Distancia cambiada exitosamente :D ", {
             variant: "success",
           });
-          delete axios.defaults.headers.common["Authorization"];
         }
       } catch (error) {
         enqueueSnackbar("Error de conexion", { variant: "error" });

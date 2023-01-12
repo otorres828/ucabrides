@@ -30,7 +30,6 @@ function Clave() {
           enqueueSnackbar("Clave cambiada exitosamente :D ", {
             variant: "success",
           });
-          delete axios.defaults.headers.common["Authorization"];
         }
       } catch (error) {
         enqueueSnackbar("Error de conexion", { variant: "error" });

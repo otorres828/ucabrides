@@ -19,7 +19,6 @@ class RutaDarController extends Controller
         return response()->json(Rutas::where('user_id',auth()->user()->_id)->get());
     }
 
-
     public function ordenes_rutas(){
         $ruta = Rutas::where('user_id',auth()->user()->_id)->where('estatus',true)->first();
         if($ruta){
@@ -170,6 +169,17 @@ class RutaDarController extends Controller
         $conductor->save();
         
         return $orden;
+    }
+
+    public function crear_ruta(Request $request){ 
+        $ruta = new Rutas();
+        $ruta->estatus=false;
+        $ruta->nombre=$request->nombre;
+        $ruta->lat=$request->lat;
+        $ruta->lng=$request->lng;
+        $ruta->user_id=auth()->user()->_id;
+        $ruta->save();
+        return $ruta;
     }
 }
 

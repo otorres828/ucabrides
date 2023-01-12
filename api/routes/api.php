@@ -62,4 +62,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('cambiar_estatus_usuario_cancelar',[RutaController::class,'cambiar_estatus_usuario_cancelar']);
     Route::post('modificar_cola_conductor',[RutaDarController::class,'modificar_cola_conductor']);
 
+    //CREAR RUTA
+    Route::post('crear_ruta',[RutaDarController::class,'crear_ruta']);
+
 });
