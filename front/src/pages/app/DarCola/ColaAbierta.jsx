@@ -30,8 +30,7 @@ function ColaAbierta({user}) {
       enqueueSnackbar("ruta desactivada con exito", { variant: "success" });
     }else{
       axios.post('modificar_cola_conductor',{orden_ruta_id:detalles._id,bandera:'cancelado'},
-     ).then((response)=>{
-      })
+     )
       navigate("/listado/rutas");
       enqueueSnackbar("ruta desactivada con exito", { variant: "success" });
     }

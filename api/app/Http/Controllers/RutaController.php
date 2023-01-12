@@ -56,19 +56,6 @@ class RutaController extends Controller
         if($usuario_por_aceptar)
             UsuariosPorAceptar::destroy($usuario_por_aceptar->_id);
         $user->update(['estatus'=>['cola'=>false,'orden_ruta_id'=>null]]);
-
-        //SACAR AL USUARIO DE LA ORDEN
-        if($request->bandera=='aprobado'){
-            $ordenes=OrdenesRutas::where('_id',$request->orden_ruta_id)->first();
-            $newArray = array(); 
-            foreach($ordenes->usuarios as $key => $value) { 
-                if($value['_id']!=$user->_id)
-                $newArray[$key] = $value; 
-            } 
-            $ordenes->asientos=$ordenes->asientos+1;
-            $ordenes->usuarios=$newArray;
-            $ordenes->save();
-        }
         return response()->json([$user->estatus],200);
     }
 

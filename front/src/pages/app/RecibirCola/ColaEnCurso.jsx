@@ -30,56 +30,53 @@ function ColaEnCurso({ user }) {
     if (estatus.cola === "true") setAprobacion("sinaprobar");
     else setAprobacion("aprobado");
 
-    if (estatus === "aprobado") {
+    if (estatus.cola === "aprobado") { 
       axios
-        .post("cancelar_cola_usuario", {
+        .post("cancelar_cola_pasajero_aprobado", {
           orden_ruta_id: detalles_orden.id,
           user_id: user._id,
           bandera: "aprobado",
         })
-        .then((response) => {
-          console.log(response.data);
-        });
 
-      const enviar = {
-        messaging_product: "whatsapp",
-        recipient_type: "individual",
-        to: piloto.telefono,
-        type: "template",
-        template: {
-          name: "cancelar_cola",
-          language: {
-            code: "es",
-          },
-          components: [
-            {
-              type: "body",
-              parameters: [
-                {
-                  type: "text",
-                  text: piloto.name,
-                },
-                {
-                  type: "text",
-                  text: user.name,
-                },
-              ],
+        const enviar = {
+          messaging_product: "whatsapp",
+          recipient_type: "individual",
+          to: piloto.telefono,
+          type: "template",
+          template: {
+            name: "cancelar_cola",
+            language: {
+              code: "es",
             },
-          ],
-        },
-      };
-      // axios.post(
-      //   "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${process.env.REACT_APP_WHATSAPP_CLOUD}`,
-      //       Accept: "application/json",
-      //       "Content-Type": "application/json",
-      //     },
-      //   },
-      // );
-      localStorage.removeItem("ucabrides_orden_ruta_id");
-      localStorage.removeItem("ucabrides_puntomascerca");
+            components: [
+              {
+                type: "body",
+                parameters: [
+                  {
+                    type: "text",
+                    text: piloto.name,
+                  },
+                  {
+                    type: "text",
+                    text: user.name,
+                  },
+                ],
+              },
+            ],
+          },
+        };
+        // axios.post(
+        //   "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${process.env.REACT_APP_WHATSAPP_CLOUD}`,
+        //       Accept: "application/json",
+        //       "Content-Type": "application/json",
+        //     },
+        //   },
+        // );
+        localStorage.removeItem("ucabrides_orden_ruta_id");
+        localStorage.removeItem("ucabrides_puntomascerca");
     } else {
       await axios.post("cambiar_estatus_usuario_cancelar", {
         orden_ruta_id: detalles_orden.id,

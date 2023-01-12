@@ -15,7 +15,7 @@ function DetallesDarCola({ detalles, usuarios }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const sacar = (user) => {
-    axios.post("cancelar_cola_usuario", {orden_ruta_id:detalles._id,user_id:user._id,bandera:'aprobado'},
+    axios.post("cancelarle_cola_usuario", {orden_ruta_id:detalles._id,user_id:user._id,bandera:'aprobado'},
  );
     enqueueSnackbar("usuario sacado de la cola exito", { variant: "success" });    
   };

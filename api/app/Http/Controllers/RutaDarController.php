@@ -112,7 +112,7 @@ class RutaDarController extends Controller
         return $usuariosporaceptar;
     }
 
-    public function cancelar_cola_usuario(Request $request){
+    public function cancelarle_cola_usuario(Request $request){ //EL CONDUCTOR DECIDE SACAR AL USUARIO DE LA COLA
         $ordenes=OrdenesRutas::where('_id',$request->orden_ruta_id)->first();
         $user=User::where('_id',$request->user_id)->first();
         $newArray = array(); 
@@ -122,13 +122,23 @@ class RutaDarController extends Controller
         } 
         $ordenes->usuarios=$newArray;
         $user->update(['estatus'=>['cola'=>false,'orden_ruta_id'=>null]]);
-        if($request->bandera=='aprobado'){
-            $ordenes->asientos=$ordenes->asientos+1;
-        }else{
-            //ELIMINAR USUARIO DE USUARIOS POR ACEPTAR
-            $usuariosporaceptar = UsuariosPorAceptar::where('user_recibe_id',$user->_id)->first();
-            $usuariosporaceptar->delete();
-        }
+        $ordenes->asientos=$ordenes->asientos+1;
+        $ordenes->save();
+
+        return $ordenes;
+    }
+
+    public function cancelar_cola_pasajero_aprobado(Request $request){ //EL USUARIO APROBADO DECIDE CANCELAR LA COLA
+        $ordenes=OrdenesRutas::where('_id',$request->orden_ruta_id)->first();
+        $user=User::where('_id',$request->user_id)->first();
+        $newArray = array(); 
+        foreach($ordenes->usuarios as $key => $value) { 
+            if($value['_id']!=$user->_id)
+            $newArray[$key] = $value; 
+        } 
+        $ordenes->usuarios=$newArray;
+        $user->update(['estatus'=>['cola'=>false,'orden_ruta_id'=>null]]);
+        $ordenes->asientos=$ordenes->asientos+1;
         $ordenes->save();
 
         return $ordenes;
