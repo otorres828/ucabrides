@@ -61,7 +61,7 @@ function InformacionCola({ detalles_orden,setPiloto }) {
         </p>
         <p>
           <small className="font-bold">hora de salida:</small>{" "}
-          {detalles_orden.hora === null
+          {detalles_orden.hora
             ? detalles_orden.hora
             : "Sin hora programada"}
         </p>

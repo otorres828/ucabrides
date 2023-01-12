@@ -26,6 +26,7 @@ function ColaEnCurso({ user }) {
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleCancelar = async () => {
     if (estatus.cola === "true") setAprobacion("sinaprobar");
     else setAprobacion("aprobado");
@@ -103,6 +104,7 @@ function ColaEnCurso({ user }) {
             asientos: response.data.detalles_orden.asientos,
             lat: response.data.detalles_orden.rutas.lat,
             lng: response.data.detalles_orden.rutas.lng,
+            hora:response.data.detalles_orden.rutas.hora,
             usuarios: response.data.detalles_orden.usuarios,
             vehiculo: response.data.detalles_orden.vehiculo,
             distancia: puntomascerca.distancia,
@@ -111,6 +113,7 @@ function ColaEnCurso({ user }) {
               puntomascerca.lat,
               puntomascerca.lng,
             ],
+            
           });
         });
 
@@ -160,7 +163,8 @@ function ColaEnCurso({ user }) {
                   : "Cargando"}
               </div>
 
-              <Dialog
+              {open &&
+                <Dialog
                 fullWidth={true}
                 open={open}
                 onClose={handleClose}
@@ -197,7 +201,7 @@ function ColaEnCurso({ user }) {
                     Cerrar
                   </div>
                 </DialogActions>
-              </Dialog>
+              </Dialog>}
             </ul>
           </div>
         </div>

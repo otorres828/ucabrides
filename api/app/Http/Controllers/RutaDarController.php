@@ -177,6 +177,7 @@ class RutaDarController extends Controller
         $ruta->nombre=$request->nombre;
         $ruta->lat=$request->lat;
         $ruta->lng=$request->lng;
+        $ruta->hora=$request->hora;
         $ruta->user_id=auth()->user()->_id;
         $ruta->save();
         return $ruta;

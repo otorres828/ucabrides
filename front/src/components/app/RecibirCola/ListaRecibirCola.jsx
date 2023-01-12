@@ -134,6 +134,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
         asientos: destino.asientos,
         usuarios: destino.usuarios,
         vehiculo: destino.vehiculo,
+        hora:destino.hora,
       };
 
       setRutas_disponibles((rutas_disponibles) => {
@@ -152,6 +153,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
           asientos: ruta.asientos, //ASIENTOS DISPONIBLES - ORDEN DE RUTA
           usuarios: ruta.usuarios, //USUARIOS QUE PERTENECEN A LA ORDEN DE RUTA
           vehiculo: ruta.vehiculo,
+          hora:ruta.rutas.hora      //obtiene la hora programada
         });
       });
     }
@@ -183,13 +185,14 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
               </li>
             ))}
 
-            <Dialog
+           {open &&
+             <Dialog
               fullWidth={true}
               open={open}
               onClose={handleClose}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
-            >
+            > 
               <DialogTitle id="alert-dialog-title">
                 <div className="text-2xl text-teal-900 font-bold text-center">
                   Detalles de la Cola
@@ -220,7 +223,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
                   Cerrar
                 </div>
               </DialogActions>
-            </Dialog>
+            </Dialog>}
           </ul>
         </div>
        : <AlertaSinColas user={user} />

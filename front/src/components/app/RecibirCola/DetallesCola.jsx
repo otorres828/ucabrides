@@ -6,6 +6,7 @@ import InformacionCola from "./InformacionCola";
 import MapaCola from "../../../pages/app/RecibirCola/MapaCola";
 
 function DetallesCola({ detalles_orden, localizacion_usuario,setPiloto }) {
+  
   return (
     <>
       <Carousel
@@ -13,7 +14,7 @@ function DetallesCola({ detalles_orden, localizacion_usuario,setPiloto }) {
         emulateTouch={false}
         showThumbs={false}
         swipeable={false}
-      >
+      > 
         <InformacionCola detalles_orden={detalles_orden} setPiloto={setPiloto} />
         <MapaCola
           detalles_orden={detalles_orden}

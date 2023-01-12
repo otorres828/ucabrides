@@ -19,7 +19,6 @@ function DetallesDarCola({ detalles, usuarios }) {
  );
     enqueueSnackbar("usuario sacado de la cola exito", { variant: "success" });    
   };
-
   return (
     <>
       <div className="w-full">
@@ -48,10 +47,13 @@ function DetallesDarCola({ detalles, usuarios }) {
             <h1 className="pt-3 font-medium text-gray-900 text-left">
               Informacion de la Cola
             </h1>
-
+            <p>
+              <small className="font-bold">Nombre de la ruta:</small>{" "}
+              {detalles.rutas.hora ? detalles.rutas.nombre : "Sin hora programada"}
+            </p>
             <p>
               <small className="font-bold">hora de salida:</small>{" "}
-              {detalles.hora === null ? detalles.hora : "Sin hora programada"}
+              {detalles.rutas.hora ? detalles.rutas.hora : "Sin hora programada"}
             </p>
             <div className="flex">
               <h1 className="pt-3 font-medium text-gray-900 text-left">
