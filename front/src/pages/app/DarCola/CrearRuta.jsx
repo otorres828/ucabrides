@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker, DirectionsRenderer } from "@react-google-maps/api";
 import logo from "../../../images/fondo_logos.png";
 import useOnclickOutside from "react-cool-onclickoutside";
 import Dsidebar from "../../../components/app/Dsidebar";
@@ -34,6 +34,7 @@ export default function CrearRuta() {
 function Map() {
   const [selected, setSelected] = useState(null);
   const [ubicacion, setUbicacion] = useState(null);
+  const [direccion, setDireccion] = useState(null);
   const [map, setMap] = useState(null);
   const [direccion_usuario, setDireccion_usuario] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
@@ -82,6 +83,17 @@ function Map() {
     });
   }
 
+  const calcular_ruta= async()=>{
+    const google = window.google;
+    const directionsService = new google.maps.DirectionsService();
+    const results = await directionsService.route({
+      origin: ucab,
+      destination: ubicacion ? ubicacion : selected,
+      travelMode: google.maps.TravelMode.DRIVING,
+    });
+    setDireccion(results)
+  }
+
   useEffect(() => {
     function panto() {
       if (selected !== null)
@@ -120,7 +132,7 @@ function Map() {
             onLoad={(map) => setMap(map)}
             mapContainerStyle={containerStyle}
             center={direccion_usuario ? direccion_usuario : ucab}
-            zoom={15}
+            zoom={17}
             options={{
               zoomControl: false,
               streetViewControl: false,
@@ -138,16 +150,20 @@ function Map() {
             )}
             <div className="pt-5 flex absolute inset-x-0 shadow-xl w-3/4 md:w-2/5 mx-auto -mt-1 rounded-lg rounded-t-none">
               <PlacesAutocomplete setSelected={setSelected} />
-              <Button
-                onClick={() => {
-                  console.log(selected);
-                }}
-                className=""
-                variant="contained"
-              >
-                Calcular
-              </Button>
+              {selected && (
+                <Button
+                  onClick={() => {
+                    calcular_ruta()
+                  }}
+                  className=""
+                  variant="contained"
+                >
+                  Calcular
+                </Button>
+              )}
             </div>
+
+            {direccion && <DirectionsRenderer directions={direccion}/>}
           </GoogleMap>
         )}
       </Flex>

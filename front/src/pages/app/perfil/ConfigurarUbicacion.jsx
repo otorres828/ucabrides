@@ -3,7 +3,8 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import logo from "../../../images/fondo_logos.png";
 import useOnclickOutside from "react-cool-onclickoutside";
 import Rsidebar from "../../../components/app/Rsidebar";
-import { Box, Flex } from "@chakra-ui/react";
+import {  Flex } from "@chakra-ui/react";
+import Button from "@mui/material/Button";
 import axios from "../../../api/axios";
 import { useSnackbar } from "notistack";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -50,7 +51,7 @@ function Map() {
     try {
       // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
       const res = await axios.post(`cambiar_ubicacion`, {
-        LatLng: ubicacion,
+        LatLng:  ubicacion ? ubicacion : selected,
       });
 
       if (res.data.error) enqueueSnackbar(res.data.error, { variant: "error" });
@@ -120,7 +121,7 @@ function Map() {
             onLoad={(map) => setMap(map)}
             mapContainerStyle={containerStyle}
             center={direccion_usuario ? direccion_usuario : ucab}
-            zoom={15}
+            zoom={17}
             options={{
               zoomControl: false,
               streetViewControl: false,
@@ -128,41 +129,33 @@ function Map() {
               fullscreenControl: false,
             }}
           >
+            <Marker position={ucab} />
             {selected && (
               <Marker
-                position={selected }
+                position={selected}
                 draggable={true}
                 onDragEnd={(e) => setUbicacion(e.latLng)}
               />
             )}
-          </GoogleMap>
-        )}
-        <Box
-          p={4}
-          borderRadius="lg"
-          m={4}
-          bgColor="white"
-          shadow="base"
-          zIndex="1"
-          className="w-96 mt-10 absolute z-30 "
-        >
-          <PlacesAutocomplete setSelected={setSelected} />
-        </Box>
-      </Flex>
-      {selected && (
-        <div className="fixed bottom-20 z-30 rounded-lg mx-auto">
-          <div className="content-center   justify-between">
-            <div className="m-3 rounded-lg bg-gradient-to-l  vh-100 flex flex-row md:flex-col pt-3 md:py-3  px-2 text-center ">
-              <button
-                className=" bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded "
-                onClick={handlecambiar}
+            <div className="pt-5 flex absolute inset-x-0 shadow-xl w-3/4 md:w-2/5 mx-auto -mt-1 rounded-lg rounded-t-none">
+              <PlacesAutocomplete setSelected={setSelected} />
+              {selected &&
+              <Button
+                onClick={() => {
+                  handlecambiar()
+                }}
+                className=""
+                variant="contained"
               >
                 Guardar
-              </button>
+              </Button>
+              }
             </div>
-          </div>
-        </div>
-      )}
+          </GoogleMap>
+        )}
+    
+      </Flex>
+
       <div
         onClick={obtener_mi_ubicacion}
         className="z-20  xl:w-96 mx-auto absolute right-2 bottom-20 mr-9  sm:justify-center flex"
@@ -236,7 +229,7 @@ const PlacesAutocomplete = ({ setSelected }) => {
     });
 
   return (
-    <div ref={ref} className="">
+    <>
       <input
         value={value}
         onChange={handleInput}
@@ -244,7 +237,9 @@ const PlacesAutocomplete = ({ setSelected }) => {
         placeholder="Ingrese su Zona"
         className="p-2 border bg-slate-50  w-full border-blue-400"
       />
-      {status === "OK" && <ul>{renderSuggestions()}</ul>}
-    </div>
+      {status === "OK" && (
+        <ul className="absolute mt-11 w-full">{renderSuggestions()}</ul>
+      )}
+    </>
   );
 };
