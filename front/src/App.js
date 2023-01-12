@@ -31,6 +31,7 @@ import ColaAbierta from "../src/pages/app/DarCola/ColaAbierta";
 import PerfilConductor from "./pages/app/perfil/PerfilConductor";
 import { initAxiosInterceptors } from "./hooks/Auth-helper";
 import Terminos from "./pages/app/perfil/Terminos";
+import CrearRuta from "./pages/app/DarCola/CrearRuta";
 
 initAxiosInterceptors();
 
@@ -108,6 +109,8 @@ function App() {
             path="/conductor/cola/curso"
             element={<ColaAbierta user={user} />}
           />
+          <Route path="/crear/ruta" element={<CrearRuta />} />
+
         </Route>
       </Routes>
     </>

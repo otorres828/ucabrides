@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Dsidebar from "../../../components/app/Dsidebar";
 import { useSnackbar } from "notistack";
 import RedirigirPerfilTelefono from "../../../components/app/RecibirCola/RedirigirPerfilTelefono";
+import { Link } from "react-router-dom";
 
 function ListadoRutas() {
   const [rutas, setRutas] = React.useState(null);
@@ -114,9 +115,10 @@ function ListadoRutas() {
             <h1 className="text-left block pt-5 pb-2 font-bold  text-xl sm:text-3xl text-gray-900">
               Listado de Rutas
             </h1>
-            <div className="bg-blue-600 m-2.5 p-2 rounded-lg circle cursor-pointer">
+            <Link className="bg-blue-600 m-2.5 p-2 rounded-lg circle cursor-pointer"
+            to="/crear/ruta">
               ➕
-            </div>
+            </Link>
           </div>
           
           <div className="flex justify-between items-center my-5 px-6">
