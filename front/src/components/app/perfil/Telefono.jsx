@@ -10,7 +10,7 @@ import PhoneInput from "react-phone-number-input";
 
 function Telefono() {
   const [open, setOpen] = useState(false);
-  const [numero, setNumero] = useState();
+  const [numero, setNumero] = useState(null);
   const [telefono, setTelefono] = useState();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -40,6 +40,7 @@ function Telefono() {
   useEffect(() => {
     axios.get("telefono").then((response) => {
       setNumero(response.data);
+      console.log(response.data)
     });
   }, [telefono]);
 
@@ -73,7 +74,7 @@ function Telefono() {
           <DialogContent>
             <form onSubmit={modificar_telefono}>
               <label>Escriba tu numero telefono *</label>
-              {numero &&
+              {numero!==null &&
               <PhoneInput
                 placeholder="INGRESA EL NUMERO DE TELEFONO"
                 onChange={setTelefono}

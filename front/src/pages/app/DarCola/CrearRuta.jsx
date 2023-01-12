@@ -11,7 +11,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
@@ -23,7 +23,7 @@ export default function CrearRuta() {
   });
 
   return isLoaded ? (
-    <Map  />
+    <Map />
   ) : (
     <div className="flex h-screen justify-center items-center  rounded-lg">
       <img src={logo} className="App-logo" alt="logo" />
@@ -91,12 +91,10 @@ function Map() {
   }, [selected]);
 
   useEffect(() => {
-    axios
-      .get("perfil_direccion")
-      .then((response) => {
-        //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
-        setDireccion_usuario(response.data);
-      });
+    axios.get("perfil_direccion").then((response) => {
+      //OBTENER LOCALIZACION DE LA ZONA DEL USUARIO
+      setDireccion_usuario(response.data);
+    });
   }, []);
 
   useEffect(() => {
@@ -130,32 +128,28 @@ function Map() {
               fullscreenControl: false,
             }}
           >
-            <Marker
-                position={ucab}
-              />
+            <Marker position={ucab} />
             {selected && (
               <Marker
-                position={selected }
+                position={selected}
                 draggable={true}
                 onDragEnd={(e) => setUbicacion(e.latLng)}
               />
             )}
+            <div className="pt-5 flex absolute inset-x-0 shadow-xl w-3/4 md:w-2/5 mx-auto -mt-1 rounded-lg rounded-t-none">
+              <PlacesAutocomplete setSelected={setSelected} />
+              <Button
+                onClick={() => {
+                  console.log(selected);
+                }}
+                className=""
+                variant="contained"
+              >
+                Calcular
+              </Button>
+            </div>
           </GoogleMap>
         )}
-        <Box
-          p={4}
-          borderRadius="lg"
-          m={4}
-          shadow="base"
-          zIndex="1"
-          className="w-96 mt-10 absolute z-30 "
-        >
-          
-          <PlacesAutocomplete setSelected={setSelected} />
-          <div className="flex"><Button className="relative" variant="contained">Calcular</Button></div>
-        </Box>
-      
-
       </Flex>
       {selected && (
         <div className="fixed bottom-20 z-30 rounded-lg mx-auto">
@@ -244,7 +238,7 @@ const PlacesAutocomplete = ({ setSelected }) => {
     });
 
   return (
-    <div ref={ref} className="">
+    <>
       <input
         value={value}
         onChange={handleInput}
@@ -252,7 +246,10 @@ const PlacesAutocomplete = ({ setSelected }) => {
         placeholder="Ingrese su Zona"
         className="p-2 border bg-slate-50  w-full border-blue-400"
       />
-      {status === "OK" && <ul>{renderSuggestions()}</ul>}
-    </div>
+
+      {status === "OK" && (
+        <ul className="absolute mt-11 w-full">{renderSuggestions()}</ul>
+      )}
+    </>
   );
 };
