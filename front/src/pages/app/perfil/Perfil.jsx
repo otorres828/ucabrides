@@ -7,6 +7,7 @@ import MiUbicacion from "../../../components/app/perfil/MiUbicacion";
 import icono from "../../../images/icono_perfil.png";
 import ContactosSos from "../../../components/app/perfil/ContactosSos";
 import Telefono from "../../../components/app/perfil/Telefono";
+import { Link } from "react-router-dom";
 
 function Perfil({ user ,access_token}) {
   user = JSON.parse(user);
@@ -17,7 +18,6 @@ function Perfil({ user ,access_token}) {
         <div className=" bg-gradient-to-r from-blue-400 via-blue-500 to-blue-500 relative shadow rounded-lg w-5/6 md:w-4/6  lg:w-3/6 xl:w-2/6 mx-auto">
           <div className="flex justify-center">
             <img
-            
               src={user.avatar}
               alt=""
               className="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
@@ -97,7 +97,7 @@ function Perfil({ user ,access_token}) {
                   />
                   Preguntas Frecuentes
                 </a>
-                <a
+                <Link to="/terminos"
                   href="/"
                   className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
@@ -107,7 +107,7 @@ function Perfil({ user ,access_token}) {
                     className="rounded-full h-6 shadow-md inline-block mr-2"
                   />
                   Terminos y Conficiones
-                </a>
+                </Link>
                 <a
                   href="/"
                   className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"

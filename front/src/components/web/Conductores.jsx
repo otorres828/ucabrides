@@ -51,7 +51,7 @@ function Conductores() {
               <img
               src={row.avatar}
               width="96"
-                  height="96"
+              height="96"
               className="rounded-full mx-auto shadow-md border-2 border-white transition duration-200 transform hover:scale-110"
             />
                 <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
