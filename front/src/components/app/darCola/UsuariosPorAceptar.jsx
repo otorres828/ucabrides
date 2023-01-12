@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSnackbar } from "notistack";
 
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
+import  Axios  from "axios";
 
 function UsuariosPorAceptar({ usuarios, orden_ruta_id,conductor }) {
   const check = <FontAwesomeIcon icon={faCheck} />;
@@ -44,16 +45,16 @@ function UsuariosPorAceptar({ usuarios, orden_ruta_id,conductor }) {
            ]
        }
     }
-    // axios.post(
-    //   "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${process.env.REACT_APP_WHATSAPP_CLOUD}`,
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //   },
-    // );
+    Axios.post(
+      "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_WHATSAPP_CLOUD}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      },
+    );
     axios
       .post(
         "agregar_usuario_orden",
@@ -79,7 +80,6 @@ function UsuariosPorAceptar({ usuarios, orden_ruta_id,conductor }) {
         }
       )
       .then((response) => {
-        console.log(response.data);
         if (response.data.error)
           enqueueSnackbar(response.data.error, { variant: "error" });
         else

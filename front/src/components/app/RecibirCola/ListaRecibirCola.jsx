@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../../api/axios";
+import  Axios  from "axios";
 import { Navigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { DistanciaMasCorta } from "../../../hooks/RutaMasCorta";
@@ -58,7 +59,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
            ]
        }
     }
-    axios.post(
+    Axios.post(
       "https://graph.facebook.com/v15.0/113153664990755/messages",enviar,
       {
         headers: {

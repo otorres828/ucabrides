@@ -55,7 +55,6 @@ function Map() {
 
       if (res.data.error) enqueueSnackbar(res.data.error, { variant: "error" });
       else {
-        console.log(res.data);
         enqueueSnackbar("Ubicacion cambiada exitosamente :D ", {
           variant: "success",
         });

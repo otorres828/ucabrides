@@ -10,8 +10,8 @@ import PhoneInput from "react-phone-number-input";
 
 function Telefono() {
   const [open, setOpen] = useState(false);
-  const [numero, setNumero] = useState("");
-  const [telefono, setTelefono] = useState("");
+  const [numero, setNumero] = useState();
+  const [telefono, setTelefono] = useState();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleClose = () => {
@@ -20,39 +20,28 @@ function Telefono() {
 
   const modificar_telefono = (e) => {
     e.preventDefault();
-    if(!telefono)
-    enqueueSnackbar('No puede dejar el campo vacio',{ variant: "error" })
-    else{
+    if (!telefono)
+      enqueueSnackbar("No puede dejar el campo vacio", { variant: "error" });
+    else {
       setOpen(false);
-      setTelefono(telefono.trim());setTelefono(telefono.replace('+',''))
-      console.log(telefono)
+      setTelefono(telefono.trim());
+      setTelefono(telefono.replace("+", ""));
       try {
-        axios
-        .post(
-          `telefono`,
-          { telefono: telefono },
-    )
-          enqueueSnackbar('Telefono modificado con exito',{ variant: "success" })
-
+        axios.post(`telefono`, { telefono: telefono });
+        enqueueSnackbar("Telefono modificado con exito", {
+          variant: "success",
+        });
       } catch (error) {
-        enqueueSnackbar('Error de conexion',{ variant: "error" }) 
+        enqueueSnackbar("Error de conexion", { variant: "error" });
       }
     }
-
   };
 
-  useEffect(()=>{
-    axios
-    .get(
-      `telefono`,
-      { telefono: telefono },
-    
-    )
-    .then((response) => {
-      setNumero(response.data)
-      setTelefono(response.data.replace('+',''))
-    })
-  },[telefono])
+  useEffect(() => {
+    axios.get("telefono").then((response) => {
+      setNumero(response.data);
+    });
+  }, [telefono]);
 
   return (
     <>
@@ -82,17 +71,16 @@ function Telefono() {
             </div>
           </DialogTitle>
           <DialogContent>
-            <label className="font-semibold">
-              Ingrese la cantidad de metros que esta dispuesto a caminar
-            </label>
             <form onSubmit={modificar_telefono}>
               <label>Escriba tu numero telefono *</label>
+              {numero &&
               <PhoneInput
                 placeholder="INGRESA EL NUMERO DE TELEFONO"
-                value={numero}
                 onChange={setTelefono}
+                value={numero.toString()}
                 className=" border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
+              }
 
               <div className="flex justify-center mt-4">
                 <button

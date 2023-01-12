@@ -31,7 +31,6 @@ function ColaAbierta({user}) {
     }else{
       axios.post('modificar_cola_conductor',{orden_ruta_id:detalles._id,bandera:'cancelado'},
      ).then((response)=>{
-        console.log(response.data)
       })
       navigate("/listado/rutas");
       enqueueSnackbar("ruta desactivada con exito", { variant: "success" });
@@ -47,7 +46,6 @@ function ColaAbierta({user}) {
     }else{
       axios.post('modificar_cola_conductor',{orden_ruta_id:detalles._id,bandera:'completado'},
       ).then((response)=>{
-        console.log(response.data)
       })
       navigate("/listado/rutas");
       enqueueSnackbar("Cola completada con exito", { variant: "success" });
