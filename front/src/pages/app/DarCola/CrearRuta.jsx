@@ -11,6 +11,8 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import Button from '@mui/material/Button';
+
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 const location = <FontAwesomeIcon icon={faLocationCrosshairs} />;
 
@@ -144,13 +146,16 @@ function Map() {
           p={4}
           borderRadius="lg"
           m={4}
-          bgColor="white"
           shadow="base"
           zIndex="1"
           className="w-96 mt-10 absolute z-30 "
         >
+          
           <PlacesAutocomplete setSelected={setSelected} />
+          <div className="flex"><Button className="relative" variant="contained">Calcular</Button></div>
         </Box>
+      
+
       </Flex>
       {selected && (
         <div className="fixed bottom-20 z-30 rounded-lg mx-auto">
