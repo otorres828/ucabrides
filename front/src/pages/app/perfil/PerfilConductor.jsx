@@ -67,8 +67,8 @@ function PerfilConductor({ user ,access_token}) {
                 </Link>
                 <Telefono />
 
-                <a
-                  href="/"
+                <Link
+                  to="/preguntas"
                   className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
                   <img
@@ -77,7 +77,7 @@ function PerfilConductor({ user ,access_token}) {
                     className="rounded-full h-6 shadow-md inline-block mr-2"
                   />
                   Preguntas Frecuentes
-                </a>
+                </Link>
                 <Link
                   to='/terminos'
                   className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
@@ -89,8 +89,8 @@ function PerfilConductor({ user ,access_token}) {
                   />
                   Terminos y Conficiones
                 </Link>
-                <a
-                  href="/"
+                <Link
+                  to="/politicas"
                   className="w-full border-t border-gray-100 text-gray-50 hover:text-gray-600 py-4 pl-6 pr-3  block hover:bg-gray-100 transition duration-150"
                 >
                   <img
@@ -99,7 +99,7 @@ function PerfilConductor({ user ,access_token}) {
                     className="rounded-full h-6 shadow-md inline-block mr-2"
                   />
                   Politicas de Privacidad
-                </a>
+                </Link>
               </div>
             </div>
           </div>

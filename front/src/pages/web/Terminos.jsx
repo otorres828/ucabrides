@@ -1,7 +1,6 @@
 import React from "react";
-import Header from "../../../components/web/Header";
-import Footer from "../../../components/web/Footer";
-import logo from "../../../images/fondo_logos.png";
+import Header from "../../components/web/Header";
+import Footer from "../../components/web/Footer";
 
 function Terminos() {
   return (
@@ -141,10 +140,14 @@ function Terminos() {
       </div>
       <div class="w-full col-span-5 relative hidden sm:block">
         <div class="fixed">
-          <img src="../../../images/fondo_logo.png" alt="Ucab Rides" class="h-96" />
+          <img
+            src="../../../images/fondo_logo.png"
+            alt="Ucab Rides"
+            class="h-96"
+          />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

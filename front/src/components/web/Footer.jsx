@@ -38,7 +38,7 @@ function Footer() {
           <div className=" md:col-span-3 lg:col-span-2">
             <div className="text-sm text-gray-600">
               <Link
-                to="#"
+                to="/politicas"
                 className="text-gray-600 hover:text-gray-900 hover:underline transition duration-150 ease-in-out"
               >
                 Politicas de Privacidad
@@ -47,9 +47,11 @@ function Footer() {
             </div>
           </div>
           <div className=" md:col-span-3 lg:col-span-2">
+          <Link to="/preguntas">
             <h6 className="text-gray-800 font-medium mb-2">
               Preguntas Frecuentes
             </h6>
+            </Link>
           </div>
         </div>
       </div>

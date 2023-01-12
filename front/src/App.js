@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import "./css/style.css";
@@ -30,8 +30,10 @@ import ListadoRutas from "../src/pages/app/DarCola/ListadoRutas";
 import ColaAbierta from "../src/pages/app/DarCola/ColaAbierta";
 import PerfilConductor from "./pages/app/perfil/PerfilConductor";
 import { initAxiosInterceptors } from "./hooks/Auth-helper";
-import Terminos from "./pages/app/perfil/Terminos";
+import Terminos from "./pages/web/Terminos";
+import Preguntas from "./pages/web/Preguntas";
 import CrearRuta from "./pages/app/DarCola/CrearRuta";
+import Politicas from "./pages/web/Politicas";
 
 initAxiosInterceptors();
 
@@ -66,6 +68,8 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/terminos" element={<Terminos />} />
+        <Route path="/preguntas" element={<Preguntas />} />
+        <Route path="/politicas" element={<Politicas />} />
         {/* REDIRIGE AL PANEL DE CONTROL SI HAY UN USUARIO LOGUEADO */}
         <Route
           element={<RedirectPanel user={user} access_token={access_token} />}
