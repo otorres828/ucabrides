@@ -139,9 +139,9 @@ function Terminos() {
           </div>
         </div>
       </div>
-      <div class="w-full col-span-5 relative hidden sm:block ">
+      <div class="w-full col-span-5 relative hidden sm:block">
         <div class="fixed">
-          <img src={logo} alt="Ucab Rides" class="h-96" />
+          <img src="../../../images/fondo_logo.png" alt="Ucab Rides" class="h-96" />
         </div>
       </div>
       <Footer/>
