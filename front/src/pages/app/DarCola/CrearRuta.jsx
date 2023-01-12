@@ -59,16 +59,22 @@ function Map() {
     setOpen(false);
   };
   const handlecambiar = async () => {
-    axios.post("crear_ruta", {
-      lat: ubicacion.lat(),
-      lng: ubicacion.lng(),
-      nombre: nombre,
-    });
-    enqueueSnackbar("Ruta creada exitosamente :D ", {
-      variant: "success",
-    });
-
-    navigate('../../listado/rutas');
+    if(nombre){
+      axios.post("crear_ruta", {
+        lat: ubicacion.lat(),
+        lng: ubicacion.lng(),
+        nombre: nombre,
+      });
+      enqueueSnackbar("Ruta creada exitosamente :D ", {
+        variant: "success",
+      });
+      setOpen(false);
+      navigate('../../listado/rutas');
+    }else{
+      enqueueSnackbar("No puede dejar el campo vacio ", {
+        variant: "error",
+      });
+    }
   };
 
   function obtener_mi_ubicacion() {
@@ -208,7 +214,7 @@ function Map() {
               onChange={(e) => {
                 setNombre(e.target.value);
               }}
-              required
+             
               className="pt-2 mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Ingresar nombre de la ruta"
