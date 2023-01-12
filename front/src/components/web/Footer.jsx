@@ -6,7 +6,7 @@ function Footer() {
     <footer>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Top area: Blocks */}
-        <div className="grid sm:grid-cols-12 gap-8 py-8 md:py-12 border-t border-gray-200">
+        <div className="flex  sm:grid-cols-12 gap-8 py-8 md:py-12 border-t border-gray-200">
           {/* 1st block */}
           <div className="sm:col-span-12 lg:col-span-3">
             <div className="mb-2">
@@ -24,7 +24,7 @@ function Footer() {
               </Link>
             </div>
           </div>
-          <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
+          <div className="md:col-span-3 lg:col-span-2">
             <div className="text-sm text-gray-600">
               <Link
                 to="/terminos"
@@ -35,19 +35,20 @@ function Footer() {
               ·{" "}
             </div>
           </div>
-          <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
+          <div className=" md:col-span-3 lg:col-span-2">
             <div className="text-sm text-gray-600">
               <Link
                 to="#"
                 className="text-gray-600 hover:text-gray-900 hover:underline transition duration-150 ease-in-out"
               >
                 Politicas de Privacidad
-              </Link> ·{" "}
+              </Link>{" "}
+              ·{" "}
             </div>
           </div>
-          <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
+          <div className=" md:col-span-3 lg:col-span-2">
             <h6 className="text-gray-800 font-medium mb-2">
-              Preguntas Frecuentes ·{" "}
+              Preguntas Frecuentes
             </h6>
           </div>
         </div>
