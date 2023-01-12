@@ -30,7 +30,7 @@ function ColaEnCurso({ user }) {
     if (estatus.cola === "true") setAprobacion("sinaprobar");
     else setAprobacion("aprobado");
 
-    if (estatus !== "true") {
+    if (estatus === "aprobado") {
       axios
         .post("cancelar_cola_usuario", {
           orden_ruta_id: detalles_orden.id,
