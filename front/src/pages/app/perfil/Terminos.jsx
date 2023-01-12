@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../../../components/web/Header";
+import Footer from "../../../components/web/Footer";
 import logo from "../../../images/fondo_logos.png";
 
 function Terminos() {
@@ -143,6 +144,7 @@ function Terminos() {
           <img src={logo} alt="Ucab Rides" class="h-96" />
         </div>
       </div>
+      <Footer/>
     </>
   );
 }
