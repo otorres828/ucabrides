@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from '../../utils/Modal';
 import HeroImage from '../../images/hero-image.png';
+import apk from "../../base.apk";
 
 function HeroHome() {
 
@@ -38,7 +39,7 @@ function HeroHome() {
               <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">Asistir a clases nunca fue tan facil, economico y seguro que con esta increible app. ¿Que esperas? Ven y asiste a clases con Ucab Rides</p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
                 <div>
-                  <a className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">Descargar para Android</a>
+                  <a download className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href={apk}>Descargar para Android</a>
                 </div>
                 <div>
                   <a className="btn text-white bg-gray-900 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">Descargar para IOS</a>
