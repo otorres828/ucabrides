@@ -54,6 +54,22 @@ function Team() {
         </SwiperSlide>
         <SwiperSlide>
           <div className=" relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
+            <img
+              className="rounded-full"
+              src={Oliver}
+              width="96"
+              height="96"
+              alt="Testimonial 01"
+            />
+
+            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
+              Oliver Torres
+            </h4>
+            <p className="text-gray-600 text-center">Developer</p>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className=" relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
             <svg
               className="w-16 h-16 p-1 -mt-1 mb-2"
               viewBox="0 0 64 64"
@@ -91,22 +107,7 @@ function Team() {
             <p className="text-gray-600 text-center">Database</p>
           </div>
         </SwiperSlide>
-        <SwiperSlide>
-          <div className=" relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
-            <img
-              className="rounded-full"
-              src={Oliver}
-              width="96"
-              height="96"
-              alt="Testimonial 01"
-            />
-
-            <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
-              Oliver Torres
-            </h4>
-            <p className="text-gray-600 text-center">Developer</p>
-          </div>
-        </SwiperSlide>
+    
         <SwiperSlide>
           <div className=" relative flex flex-col items-center p-6 bg-slate-50 rounded shadow-xl">
             <svg
@@ -149,7 +150,7 @@ function Team() {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Rafael Muñoz
             </h4>
-            <p className="text-gray-600 text-center">Documenter</p>
+            <p className="text-gray-600 text-center">Developer chat</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
@@ -164,7 +165,7 @@ function Team() {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Cesar Lorenzo
             </h4>
-            <p className="text-gray-600 text-center">Documenter</p>
+            <p className="text-gray-600 text-center">Developer chat</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
@@ -180,7 +181,7 @@ function Team() {
             <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">
               Wladimir SanVicente
             </h4>
-            <p className="text-gray-600 text-center">Documenter</p>
+            <p className="text-gray-600 text-center">UI</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
