@@ -52,6 +52,7 @@ class AuthController extends Controller
                     'distancia'=>0,
                     'direccion'=>null,
                     'estatus'=>['cola'=>false,'orden_ruta_id'=>null],
+                    'puntos'=>0
                 ]);
             }else{
                 return response()->json(['error' => 'Credenciales Incorrectas',401]);
