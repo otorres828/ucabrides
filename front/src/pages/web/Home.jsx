@@ -5,7 +5,7 @@ import HeroHome from '../../components/web/HeroHome';
 import FeaturesHome from '../../components/web/Features';
 import FeaturesBlocks from '../../components/web/FeaturesBlocks';
 import Testimonials from '../../components/web/Testimonials';
-import Newsletter from '../../components/web/Newsletter';
+// import Newsletter from '../../components/web/Newsletter';
 import Footer from '../../components/web/Footer';
 
 function Home() {
@@ -23,7 +23,7 @@ function Home() {
         <FeaturesHome />
         <FeaturesBlocks />
         <Testimonials />
-        <Newsletter />
+        {/* <Newsletter /> */}
 
       </main>
 
