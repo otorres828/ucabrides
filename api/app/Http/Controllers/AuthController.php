@@ -39,7 +39,7 @@ class AuthController extends Controller
        $user= User::where('email',$request['email'])->first();
        if(!$user){     
             $correo=$request['email'];
-            $sub='.ucab.edu.ve';
+            $sub='ucab.edu';
 
             if (strpos($correo, $sub)) {
                 $username = strstr($request['email'], '@', true);

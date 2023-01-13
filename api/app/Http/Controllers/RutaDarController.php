@@ -39,6 +39,7 @@ class RutaDarController extends Controller
         $ordenderuta->asientos=(int)$request->asientos;
         $ordenderuta->vehiculo_id=$request->vehiculo_id;
         $ordenderuta->usuarios=[];
+        $ordenderuta->hora=$request->hora;
         $ordenderuta->save();
         return $ordenderuta;
     }
@@ -177,7 +178,6 @@ class RutaDarController extends Controller
         $ruta->nombre=$request->nombre;
         $ruta->lat=$request->lat;
         $ruta->lng=$request->lng;
-        $ruta->hora=$request->hora;
         $ruta->user_id=auth()->user()->_id;
         $ruta->save();
         return $ruta;

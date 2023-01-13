@@ -145,7 +145,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
 
   useEffect(() => {
     function calcularRutas() {
-      rutas.map((ruta) => {
+      rutas.map((ruta) => { 
         return verificar_distancia({
           lat: ruta.rutas.lat, //LONGITUD DE LA RUTA
           lng: ruta.rutas.lng, //LATITUD DE LA RUTA
@@ -153,7 +153,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
           asientos: ruta.asientos, //ASIENTOS DISPONIBLES - ORDEN DE RUTA
           usuarios: ruta.usuarios, //USUARIOS QUE PERTENECEN A LA ORDEN DE RUTA
           vehiculo: ruta.vehiculo,
-          hora:ruta.rutas.hora      //obtiene la hora programada
+          hora:ruta.hora      //obtiene la hora programada
         });
       });
     }

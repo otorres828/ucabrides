@@ -13,7 +13,6 @@ import { useSnackbar } from "notistack";
 function DetallesDarCola({ detalles, usuarios }) {
   const eliminar = <FontAwesomeIcon icon={faTrash} />;
   const { enqueueSnackbar } = useSnackbar();
-
   const sacar = (user) => {
     axios.post("cancelarle_cola_usuario", {orden_ruta_id:detalles._id,user_id:user._id,bandera:'aprobado'},
  );
@@ -49,11 +48,11 @@ function DetallesDarCola({ detalles, usuarios }) {
             </h1>
             <p>
               <small className="font-bold">Nombre de la ruta:</small>{" "}
-              {detalles.rutas.hora ? detalles.rutas.nombre : "Sin hora programada"}
+              {detalles.rutas.nombre ? detalles.rutas.nombre : "Sin hora programada"}
             </p>
             <p>
               <small className="font-bold">hora de salida:</small>{" "}
-              {detalles.rutas.hora ? detalles.rutas.hora : "Sin hora programada"}
+              {detalles.hora ? detalles.hora : "Sin hora programada"}
             </p>
             <div className="flex">
               <h1 className="pt-3 font-medium text-gray-900 text-left">

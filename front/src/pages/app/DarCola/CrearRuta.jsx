@@ -40,7 +40,6 @@ function Map() {
   const [ubicacion, setUbicacion] = useState(null);
   const [direccion, setDireccion] = useState(null);
   const [nombre, setNombre] = useState(null);
-  const [hora, setHora] = useState(null);
   const [map, setMap] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
   const google = window.google;
@@ -59,14 +58,12 @@ function Map() {
   const handleClose = () => {
     setOpen(false);
   };
-  
   const handlecrear = async () => {
     if(nombre){
       axios.post("crear_ruta", {
         lat: ubicacion.lat(),
         lng: ubicacion.lng(),
         nombre: nombre,
-        hora:hora,
       });
       enqueueSnackbar("Ruta creada exitosamente :D ", {
         variant: "success",
@@ -221,15 +218,7 @@ function Map() {
               type="text"
               placeholder="Ingresar nombre de la ruta"
             />
-            <label>Hora de salida (opcional)</label>
-            <input
-              onChange={(e) => {
-                setHora(e.target.value);
-              }} 
-              className="pt-2 mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="time"
-              placeholder="Ingresar nombre de la ruta"
-            />
+          
             <div className="flex justify-center">
               <div
                 className="mr-2 bg-blue-500 font-semibold rounded-lg p-3 text-white cursor-pointer"

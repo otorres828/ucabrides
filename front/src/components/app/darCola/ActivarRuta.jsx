@@ -14,6 +14,7 @@ export default function ActivarRuta({
   ruta_id,
   vehiculos
 }) {
+  const [hora, setHora] = useState(null);
   const [open, setOpen] = React.useState(true);
   const [selected, setSelected] = React.useState({});
   const [asientos, setAsientos] = React.useState(1)
@@ -39,7 +40,7 @@ export default function ActivarRuta({
       setOpen(false);
       axios.post(
         `crear_orden`,
-        { vehiculo_id:vehiculoSeleccionado,ruta_id:ruta_id,asientos:asientos},
+        { vehiculo_id:vehiculoSeleccionado,ruta_id:ruta_id,asientos:asientos,hora:hora},
       ).then((response)=>{
         if(response.data.error)
         enqueueSnackbar(response.data.error,{ variant: "success" })
@@ -76,7 +77,16 @@ export default function ActivarRuta({
           <input type="number" value={asientos} 
           onChange={(e)=>{
             setAsientos(e.target.value)
-          }} className="mt-2 p-2 w-full shadow py-2"></input>
+          }} className="mt-3 p-2 w-full shadow py-2"></input>
+            <label className="pt-3">Hora de salida (opcional)</label>
+            <input
+              onChange={(e) => {
+                setHora(e.target.value);
+              }} 
+              className="mt-2 mb-3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="time"
+              placeholder="Ingresar nombre de la ruta"
+            />
         </DialogContent>
         <DialogActions>
           <div
