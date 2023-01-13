@@ -182,6 +182,12 @@ class RutaDarController extends Controller
         $ruta->save();
         return $ruta;
     }
+
+    public function eliminar_ruta(Request $request){
+        $ruta = Rutas::where('_id',$request->ruta_id)->first();
+        $ruta->delete();
+        return Rutas::where('user_id',auth()->user()->_id)->get();
+    }
 }
 
 

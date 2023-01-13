@@ -64,5 +64,6 @@ Route::group(['middleware'=>'auth'],function(){
 
     //CREAR RUTA
     Route::post('crear_ruta',[RutaDarController::class,'crear_ruta']);
+    Route::post('eliminar_ruta',[RutaDarController::class,'eliminar_ruta']);
 
 });
