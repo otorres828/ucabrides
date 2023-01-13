@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 
 import axios from "../../../api/axios";
-import Rsidebar from "../../../components/app/Rsidebar";
+import Dsidebar from "../../../components/app/Dsidebar";
 import DropdownVehiculo from "../../../utils/DropdownVehiculo";
 
 import AgregarVehiculo from "../../../utils/AgregarVehiculo";
@@ -79,7 +79,7 @@ function Vehiculos() {
           </div>
         </div>
       </div>
-      <Rsidebar />
+      <Dsidebar />
     </>
   );
 }
