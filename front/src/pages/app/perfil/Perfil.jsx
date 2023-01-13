@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Rsidebar from "../../../components/app/Rsidebar";
 import CerrarSesion from "../../../components/app/perfil/CerrarSesion";
 import Clave from "../../../components/app/perfil/Clave";
@@ -8,9 +8,17 @@ import icono from "../../../images/icono_perfil.png";
 import ContactosSos from "../../../components/app/perfil/ContactosSos";
 import Telefono from "../../../components/app/perfil/Telefono";
 import { Link } from "react-router-dom";
+import axios from "../../../api/axios";
 
 function Perfil({ user ,access_token}) {
   user = JSON.parse(user);
+  const [mis_puntos,setMis_puntos]=useState();
+
+  useEffect(()=>{
+    axios.get('mis_puntos').then((response)=>{
+      setMis_puntos(response.data)
+    })
+  },[])
 
   return (
     <>
@@ -43,7 +51,7 @@ function Perfil({ user ,access_token}) {
               </div>
               <ul className="flex justify-center">
                 <li className="text-white font-bold text-xl">
-                puntos: {user.puntos}
+                puntos: {mis_puntos ? mis_puntos : 'cargando...'}
                 </li>
               </ul>
             </div>

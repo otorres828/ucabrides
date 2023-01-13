@@ -29,6 +29,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('telefono',[TelefonoController::class,'update']);
 
     Route::get('me',[AuthController::class,'me']);
+    Route::get('mis_puntos',[AuthController::class,'mis_puntos']);
     Route::get('cambiar_estatus_usuario_activo/{cola}/{orden_ruta_id}',[RutaController::class,'cambiar_estatus_usuario_activo']);
     Route::get('usuarios_por_aceptar',[RutaController::class,'usuarios_por_aceptar']);
     Route::get('obtener_conductor/{orden_ruta_id}',[RutaController::class,'obtener_conductor']);

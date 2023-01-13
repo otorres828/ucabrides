@@ -106,4 +106,8 @@ class AuthController extends Controller
     public function me(){
         return response()->json(auth()->user()->estatus);
     }
+
+    public function mis_puntos(){
+        return auth()->user()->puntos;
+    }
 }
