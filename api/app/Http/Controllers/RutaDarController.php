@@ -57,7 +57,7 @@ class RutaDarController extends Controller
     public function detalles_orden_activa(){
         $ruta = Rutas::where('user_id',auth()->user()->_id)->where('estatus',true)->first();
         if($ruta){
-            return $ordenderuta= OrdenesRutas::with('rutas')->with('vehiculo')->where('ruta_id',$ruta->_id)->first();
+            return $ordenderuta= OrdenesRutas::with('rutas')->with('vehiculo')->where('ruta_id',$ruta->_id)->where('estatus','=','activo')->first();
         }
     }
 
