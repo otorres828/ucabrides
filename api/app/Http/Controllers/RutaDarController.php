@@ -175,7 +175,7 @@ class RutaDarController extends Controller
         }
         
         $conductor = User::where('_id',$ruta->user_id)->first();
-        $conductor->puntos=$conductor->puntos+1;
+        $conductor->puntos=$conductor->puntos+3;
         $conductor->save();
         
         return $orden;
