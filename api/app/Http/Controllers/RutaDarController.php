@@ -46,11 +46,20 @@ class RutaDarController extends Controller
 
     public function desactivar(Request $request){
         $ordenderuta=OrdenesRutas::where('_id',$request->orden_ruta_id)->first();
+        $usuariosporaceptar=UsuariosPorAceptar::where('orden_ruta_id',$request->orden_ruta_id)->get();
         $ordenderuta->delete();
         
         $ruta = Rutas::where('_id',$request->ruta_id)->first();
         $ruta->estatus=false;
         $ruta->save();
+
+        foreach($usuariosporaceptar as $usuario){
+            $aceptar= UsuariosPorAceptar::where('_id',$usuario->_id)->first();
+            $user = User::where('_id',$usuario->user_recibe_id)->first();
+            $user->update(['estatus'=>['cola'=>false,'orden_ruta_id'=>null]]);
+
+            $aceptar->delete();
+        }
         return $ruta;
     }
 
@@ -140,7 +149,7 @@ class RutaDarController extends Controller
         $user->update(['estatus'=>['cola'=>false,'orden_ruta_id'=>null]]);
         $ordenes->asientos=$ordenes->asientos+1;
         $ordenes->save();
-
+        
         return $ordenes;
     }
 
