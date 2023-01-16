@@ -53,8 +53,8 @@ function ListadoColas({user}) {
     :
     rutas.length > 0 ? ( 
       <>
-        <div className="container mx-auto">
-          <div className="p-5 pt-12 mb-10 sm:px-40">
+        <div className=" w-5/5 md:w-5/6  lg:w-4/6 mx-auto">
+          <div className="p-5 pt-12 mb-10">
             <ListaRecibirCola
               rutas={rutas}
               localizacion_usuario={direccion_usuario}
