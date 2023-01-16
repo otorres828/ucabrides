@@ -33,6 +33,7 @@ function ListadoRutas() {
   const eliminar = <FontAwesomeIcon icon={faTrash} />;
   const [open, setOpen] = React.useState(false);
   const [ruta_eliminar, setRuta_eliminar] = React.useState(false);
+  const [usuarios, setUsuarios] = React.useState(null);
 
   const obtenerRutas = () => {
     axios.get("rutas").then((res) => {
@@ -71,7 +72,8 @@ function ListadoRutas() {
 
   const desactivarRuta = async (id) => {
     var iddeorden;
-    if (ordenes.usuarios.length > 0) {
+
+    if (ordenes.usuarios.length > 0 ) {
       enqueueSnackbar(
         "Esta ruta tiene usuarios asignados, debes de cancelarla o completarla",
         { variant: "error" }
@@ -118,7 +120,7 @@ function ListadoRutas() {
       setTelefono(response.data);
     });
     axios.get("contactosos");
-  }, [rutas]);
+  }, []);
 
   return (
     <>
