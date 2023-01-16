@@ -27,7 +27,7 @@ function DistanciaCaminar() {
         else {
           setOpen(false)
           obtener_distancia()
-          enqueueSnackbar("Distancia cambiada exitosamente :D ", {
+          enqueueSnackbar("Distancia cambiada exitosamente 😊 ", {
             variant: "success",
           });
         }

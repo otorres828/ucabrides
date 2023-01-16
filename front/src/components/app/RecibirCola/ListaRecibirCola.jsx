@@ -96,7 +96,7 @@ function ListaRecibirCola({ rutas, localizacion_usuario, distancia,user}) {
 
         setOpen(false);
         setBandera(true);
-        enqueueSnackbar("Peticion de cola enviada al conductor", {
+        enqueueSnackbar("Peticion de cola enviada al conductor 😊", {
           variant: "success",
         });
       });

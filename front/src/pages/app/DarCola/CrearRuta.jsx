@@ -65,7 +65,7 @@ function Map() {
         lng: ubicacion.lng(),
         nombre: nombre,
       });
-      enqueueSnackbar("Ruta creada exitosamente :D ", {
+      enqueueSnackbar("Ruta creada exitosamente 😊 ", {
         variant: "success",
       });
       setOpen(false);

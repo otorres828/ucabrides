@@ -45,7 +45,7 @@ export default function ActivarRuta({
         if(response.data.error)
         enqueueSnackbar(response.data.error,{ variant: "success" })
         else{
-          enqueueSnackbar('Ruta activada con exito',{ variant: "success" })
+          enqueueSnackbar('Ruta activada con exito 😊',{ variant: "success" })
           refresh();
 
         }

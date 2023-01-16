@@ -80,7 +80,7 @@ function ListadoRutas() {
       );
     } else {
       //DESACTIVAR ORDEN Y RUTA
-      enqueueSnackbar("Ruta desactivada con exito", { variant: "success" });
+      enqueueSnackbar("Ruta desactivada con exito 😊", { variant: "success" });
       iddeorden = ordenes._id;
       const r = await axios.post(`desactivar`, {
         orden_ruta_id: iddeorden,
@@ -97,14 +97,24 @@ function ListadoRutas() {
     setCheckedState(buscando);
   };
 
-  const sacar =()=>{
-    
-    axios.post('eliminar_ruta',{ruta_id:ruta_eliminar._id})
-   
-    enqueueSnackbar("Ruta eliminada exitosamente :D ", {
-      variant: "success",
-    });
+  const sacar =async()=>{
     setOpen(false);
+    if(ordenes.usuarios?.length > 0){
+      enqueueSnackbar("No puede eliminar con usuarios adentro 😞", {
+        variant: "info",
+      });
+    }else{
+      const res=await axios.post('eliminar_ruta',{ruta_id:ruta_eliminar._id})
+      if(res.data.error)
+      enqueueSnackbar("No se puede eliminar, tiene una orden de ruta abierta 😞 ", {
+        variant: "info",
+      });
+      else{
+        enqueueSnackbar("Ruta eliminada exitosamente 😊 ", {
+          variant: "success",
+        });
+      }
+    }
   }
 
   const handleClose = () => {

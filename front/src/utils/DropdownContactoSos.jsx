@@ -90,7 +90,7 @@ function DropdownContactoSos({ contacto }) {
     axios.delete(
       `contactosos/` + contacto._id
     ).then(()=>{
-      enqueueSnackbar('Contacto eliminado con exito',{ variant: "warning" })
+      enqueueSnackbar('Contacto eliminado con exito 😞',{ variant: "info" })
     });
   };
 

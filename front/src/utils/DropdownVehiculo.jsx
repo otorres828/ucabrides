@@ -90,7 +90,7 @@ function DropdownVehiculo({ vehiculo }) {
     axios.delete(
       `vehiculos/` + vehiculo._id
     ).then(()=>{
-      enqueueSnackbar('Vehiculo eliminado con exito',{ variant: "warning" })
+      enqueueSnackbar('Vehiculo eliminado con exito 😞',{ variant: "info" })
     });
   };
 

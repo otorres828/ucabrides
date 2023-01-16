@@ -52,7 +52,7 @@ function Map() {
 
       if (res.data.error) enqueueSnackbar(res.data.error, { variant: "error" });
       else {
-        enqueueSnackbar("Ubicacion cambiada exitosamente :D ", {
+        enqueueSnackbar("Ubicacion cambiada exitosamente 😊 ", {
           variant: "success",
         });
       }

@@ -18,7 +18,7 @@ function ColaAbierta({user}) {
 
   const cancelar_cola=()=>{
     if(usuarios.length>0)
-      enqueueSnackbar("No se puede cancelar, primero elimina los usuario por aceptar", { variant: "warning" });
+      enqueueSnackbar("No se puede cancelar, primero elimina los usuario por acepta 😞", { variant: "info" });
 
     else if(detalles.usuarios.length===0){ 
       axios.post(
@@ -38,7 +38,7 @@ function ColaAbierta({user}) {
 
   const completar_cola=()=>{
     if(usuarios.length>0)
-    enqueueSnackbar("No se puede cancelar, primero elimina los usuario por aceptar", { variant: "warning" });
+    enqueueSnackbar("No se puede cancelar, primero elimina los usuario por aceptar 😞", { variant: "info" });
 
     else if(detalles.usuarios.length===0){ 
       enqueueSnackbar("No puedes completar la cola sin usuarios", { variant: "error" });

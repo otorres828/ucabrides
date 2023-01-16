@@ -27,7 +27,7 @@ function AgregarContactoSos() {
       )
       .then((response) => {
         if(response.data.error)
-          enqueueSnackbar(response.data.error, { variant: "warning" });
+          enqueueSnackbar(response.data.error, { variant: "info" });
         else
         enqueueSnackbar("Contacto agregado con exito", { variant: "success" });
       });

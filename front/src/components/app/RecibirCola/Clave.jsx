@@ -27,7 +27,7 @@ function Clave() {
           enqueueSnackbar(res.data.error, { variant: "error" });
         else {
           setOpen(false)
-          enqueueSnackbar("Clave cambiada exitosamente :D ", {
+          enqueueSnackbar("Clave cambiada exitosamente 😊 ", {
             variant: "success",
           });
         }
