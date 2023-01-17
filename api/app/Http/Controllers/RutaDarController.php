@@ -194,8 +194,8 @@ class RutaDarController extends Controller
 
     public function eliminar_ruta(Request $request){
         $ruta = Rutas::where('_id',$request->ruta_id)->first();
-        $ordenderuta = OrdenesRutas::where('ruta_id',$ruta->_id)->where('activo')->first();
-        if(count($ordenderuta)>0)
+       $ordenderuta = OrdenesRutas::where('ruta_id',$ruta->_id)->where('estatus','=','activo')->first();
+        if($ordenderuta)
             return response()->json(['error'=>"No puede eliminar, tiene una orden de ruta abierta"]);
         $ruta->delete();
         return Rutas::where('user_id',auth()->user()->_id)->get();
